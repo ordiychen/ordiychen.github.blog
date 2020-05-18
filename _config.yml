@@ -1,0 +1,93 @@
+# Permalinks
+#
+# Use of `relative_permalinks` ensures post links from the index work properly.
+permalink:           pretty
+#relative_permalinks: true
+
+# Setup
+title:               Ordiy's blog
+tagline:             '  Pain + Reflection = Progress  '
+description:         '  I am a developer and tech enthusiast,enjoy life and looking at the stars!  '
+url:                 https://ordiychen.github.io
+#port:    4000
+#host:    127.0.0.1
+#baseurl:             ''
+plugins: [jekyll-paginate,jekyll-coffeescript]
+paginate:            10
+paginate_path:       "page:num"
+
+# Where are tags and categories displayed
+page_list:
+  tag_page:  '/blog/tags/'
+  category_page:  '/blog/categories/'
+  about_page:  '/blog/about/'
+  Feed: '/atom.xml'
+
+timezone:  "Asia/Hong_Kong"
+
+highlighter: rouge
+lsi:         false
+incremental: false
+
+
+# About/contact
+author:
+  name:              Ordiy
+  description:       Kep
+  gravatar:          873358dd780559e23b78ea69efa26942
+  url:               https://github.com
+  email:             12695045+ordiychen@users.noreply.github.com
+
+# Custom vars
+version:             1.0.0
+
+# Google Analytics example
+ga_analytics: UA-000000-0
+
+#你想使用的分隔字串(這個字串會在md中被你使用)
+excerpt_separator:  '<!-- more -->'
+
+theme:
+# Markdown 处理器
+rdiscount:
+  extensions: []
+
+redcarpet:
+  extensions: []
+
+#markdown
+markdown: kramdown
+kramdown:
+  input:     GFM
+  auto_ids:       true
+  syntax_highlighter: rouge
+  footnote_nr:    1
+  entity_output:  as_char
+  toc_levels:     1..6
+  smart_quotes:   lsquo,rsquo,ldquo,rdquo
+  enable_coderay: true
+
+#  coderay:
+#    coderay_wrap:              div
+#    coderay_line_numbers:      inline
+#    coderay_line_number_start: 1
+#    coderay_tab_width:         4
+#    coderay_bold_every:        10
+#    coderay_css:               style
+
+
+sass:
+  sass_dir:       /public/sass
+  style:          compressed
+
+#压缩
+compress_html:
+  clippings:      all
+  comments:       ["<!--", "-->"]
+  endings:        all
+  startings:      [html, head, body]
+
+# Github
+github:
+  repo:           https://github.com/ordiychen/ordiychen.github.io
+  feedback:       https://github.com/ordiychen/ordiychen.github.io/issues/new
