@@ -1,16 +1,15 @@
 ---
 layout:  post
-title:  IEEE 守则
+title:  IEEE Code of Ethics
 date:  2015-01-21 19:04 +08:00
 categories:  [values]
 tags:  [IEEE,Ethics,Values]
-excerpt:  IEEE 工程师职业守则.
+excerpt:  IEEE,Ethics.
 ---
 
 
 * content
 {:toc}
-
 
 
 ## IEEE Code of Ethics
@@ -38,20 +37,8 @@ Changes to the IEEE Code of Ethics will be made only after the following conditi
 <br/>
 <br/>
 
-## IEEE 道德准则
-  我们作为IEEE的会员，认识到我们所开发的技术在世界各地可以影响生活质量，并承担对我们的职业及其从业人员和我们所服务的社区应尽的个人义务，在此承诺遵守最高的道德和职业操守，并同意：
-  - 有责任使决策有益于公众的安全，健康与福利，并及时披露可能危及公众或环境的因素；
-  - 尽可能避免实际的或可以预见到的利益冲突，并告知在现实中存在的受影响者；
-  - 根据现有信息，诚实和现实地提出收费金额和报价；
-  - 拒绝一切形式的贿赂；
-  - 提高对技术、其适当应用以及潜在后果的了解；
-  - 保持和提高自己的技术能力，只有当自己通过培训或实践经验具备了能力，或已充分披露相关局限性后才承担他人的技术工作；
-  - 寻求、接受并提供对技术工作的诚实的批评，承认并改正错误，并适当承认他人的贡献；
-  - 公平地对待所有人，不论其种族，宗教，性别，残疾，年龄或所来自国家等因素；
-  - 避免因为失误或恶意行为伤及他人以及损害他们的财产、声誉或就业；
-  - 为同行和同事在专业上的发展提供帮助，并支持他们遵守本道德守则。
-
-**From IRCIP**  :   [http://www.ircip.cn](http://www.ircip.cn/web/993896-993906.html?id=26645&newsid=649690)
+# I come from Cyberspace, the new home of Mind #
+ `- John Perry Barlow, "A Declaration of the Independence of Cyberspace" `
 
 
 ## IEEE 介绍
