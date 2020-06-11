@@ -8,9 +8,8 @@ excerpt:  记一次DNS异常导致的 `ECONNREFUSED`  问题
 ---
 
 
-* content
-{:toc}
-
+使用`dig` 排查网络问题的经验记录
+<!-- more -->
 
 ### 问题描述
 `node.js` 程序出现 ` Error: connect ECONNREFUSED`  和 `getaddrinfo ENOTFOUND` 。
@@ -94,11 +93,15 @@ date: Tue, 19 May 2020 01:57:31 GMT
 content-type: application/json; charset=utf-8
 ```
 
-
 ### 后续
 DNS有问题，排查起来比较耗时间，Mianland CN , 建议使用 119.29.29.29 （ 腾讯） ， 海外用google DNS：8.8.8.8很稳妥。
 另外家中的路由器也建议不要使用ISP提供的默认DNS，减少ISP广告的也更稳定。
 
+### 补充命令
+使用`traceroute` 可以进行路由跟踪，产看完成的路由表
+```
+$ traceroute api.github.com
+```
 
 ### 参考
 [node.jd Document Error List]([https://nodejs.org/api/fs.html)

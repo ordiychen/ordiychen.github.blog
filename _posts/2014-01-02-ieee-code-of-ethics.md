@@ -1,15 +1,18 @@
 ---
 layout:  post
 title:  IEEE Code of Ethics
-date:  2015-01-21 19:04 +08:00
+date:  2015-06-21 19:04 +08:00
 categories:  [values]
 tags:  [IEEE,Ethics,Values]
 excerpt:  IEEE,Ethics.
+toc: true
 ---
-
 
 * content
 {:toc}
+
+Code of Ethics
+<!-- more -->
 
 
 ## IEEE Code of Ethics
@@ -37,7 +40,7 @@ Changes to the IEEE Code of Ethics will be made only after the following conditi
 <br/>
 <br/>
 
-# I come from Cyberspace, the new home of Mind #
+** I come from Cyberspace, the new home of Mind **
  `- John Perry Barlow, "A Declaration of the Independence of Cyberspace" `
 
 

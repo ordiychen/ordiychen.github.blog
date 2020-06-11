@@ -10,8 +10,7 @@ tags:  [Elasticsearch,NoSQL,分布式]
 {:toc}
 
 
-Elasticsearch5.2性能测试
-====
+
 Elasicseach是当前非常流行的分布式搜索引擎框架,是大数据处分析领域的一把利器。但是Elasticsearch使用传统的HDD存储的搜索性能并不出色,使用SSD存储数据可以大幅提升性能,搜索一个1亿文档(存储空间约40G)的索引在5k,1w QPS下50ms内完成查询的保证率分别可以达到99.75%和96.0%,相对于使用HDD存储来说性能提升了一个数据量级。
 
 <!-- more -->
@@ -96,7 +95,7 @@ Elsticesearch使用了netty作为通信框架，很好的支持了非阻塞异�
 ### 测试结果
 接入promethesu监控请求耗时和QPS
 
-* 1000 QPS 5min,50ms内完成的保证率99.76%   
+* 1000 QPS 5min,50ms内完成的保证率99.76%
 ```bash
 #原始记录
 micro_service_latency_seconds_bucket{api="get_doc_id",le="0.001",} 97577.0
@@ -124,7 +123,7 @@ micro_service_latency_seconds_bucket{api="get_doc_id",le="0.1",} 299937.0
 ```
 
 
-  * 5000 QPS 5min,50ms内完成的保证率99.76%   
+  * 5000 QPS 5min,50ms内完成的保证率99.76%
 ```bash
 #原始数据
 micro_service_latency_seconds_bucket{api="get_doc_id",le="0.001",} 507148.0
@@ -153,8 +152,8 @@ micro_service_latency_seconds_bucket{api="get_doc_id",le="0.5",} 1500000.0
 50ms内获得99.09%
 ```
 
-  * 10000QPS 压测5min,50ms内完成的保证率97.0307%  
-  
+  * 10000QPS 压测5min,50ms内完成的保证率97.0307%
+
 ```shell script
 micro_service_latency_seconds_bucket{api="get_doc_id",le="0.001",} 634865.0
 micro_service_latency_seconds_bucket{api="get_doc_id",le="0.002",} 2409485.0

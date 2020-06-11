@@ -1,7 +1,7 @@
 ---
 layout:  post
 title:  Centos7 设置时间
-date:  2019-02-02 19:04 +08:00
+date:  2015-02-02 19:04 +08:00
 categories:  [tech]
 tags:  [OS,Centos,NTP]
 ---
@@ -9,6 +9,8 @@ tags:  [OS,Centos,NTP]
 * content
 {:toc}
 
+Centos NTP 时间校准
+<!-- more -->
 
 ### 设置时间
 ```
