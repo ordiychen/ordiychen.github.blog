@@ -6,13 +6,13 @@ permalink:           pretty
 
 # Setup
 title:               Ordiy's blog
-tagline:             '  Pain + Reflection = Progress  '
-description:         '  I am a developer and tech enthusiast,enjoy life and looking at the stars!  '
+tagline:             '  Keep Naive,Keep  Searching! '
+description:         ' Computer engineer, enjoy coding and hacker.'
 url:                 https://ordiychen.github.io
 #port:    4000
 #host:    127.0.0.1
 #baseurl:             ''
-plugins: [jekyll-paginate,jekyll-coffeescript]
+plugins: [jekyll-paginate,jekyll-coffeescript,jekyll-toc]
 paginate:            10
 paginate_path:       "page:num"
 
@@ -48,12 +48,13 @@ ga_analytics: UA-000000-0
 excerpt_separator:  '<!-- more -->'
 
 theme:
-# Markdown 处理器
+# Markdown 处理器rdiscount
 rdiscount:
-  extensions: []
+  extensions:
+    - generate_toc
 
 redcarpet:
-  extensions: []
+  extensions: [with_toc_data]
 
 #markdown
 markdown: kramdown
@@ -67,6 +68,9 @@ kramdown:
   smart_quotes:   lsquo,rsquo,ldquo,rdquo
   enable_coderay: true
 
+toc:
+  min_level: 2 # default: 1
+  max_level: 5 # default: 6
 #  coderay:
 #    coderay_wrap:              div
 #    coderay_line_numbers:      inline
@@ -79,6 +83,8 @@ kramdown:
 sass:
   sass_dir:       /public/sass
   style:          compressed
+  no-source-map: true
+  sourcemap: never
 
 #压缩
 compress_html:
