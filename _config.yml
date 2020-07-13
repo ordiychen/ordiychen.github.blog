@@ -2,14 +2,14 @@
 ###################### Hexo Configuration #######################
 #################################################################
 
-title: NexT
+title: Blog
 
-keywords: "Hexo, NexT"
+keywords: "Ordiy Blog"
 
-language: en
+language: zh-cn
 
 index_generator:
-  per_page: 4
+  per_page: 12
   order_by: -date
 
 archive_generator:
@@ -19,15 +19,15 @@ archive_generator:
   daily: false
 
 category_generator:
-  per_page: 5
+  per_page: 12
 
 tag_generator:
-  per_page: 5
+  per_page: 12
   enable_index_page: false
 
 timezone: UTC
 
-url: https://theme-next.org
+url: https://17xyx.app/blog
 root: /
 permalink: :title/
 permalink_defaults:
@@ -72,7 +72,7 @@ theme: next
 
 deploy:
   type: git
-  repo: https://github.com/theme-next/theme-next.org.git
+  repo: https://github.com/ordiychen/ordiychen.github.io
   branch: gh-pages
   message: "Updated: {{ now('YYYY-MM-DD HH:mm:ss') }}"
 
@@ -87,10 +87,11 @@ search:
   path: search.json
   field: all
 
+## 阅读时长
 symbols_count_time:
-  symbols: false
+  symbols: true
   time: false
-  total_symbols: false
+  total_symbols: true
   total_time: false
   awl: 4
   wpm: 275
@@ -100,6 +101,17 @@ symbols_count_time:
 ###################### NexT Configuration #######################
 #################################################################
 
+favicon:
+    small: /images/favicon-16x16-next.png
+    medium: /images/favicon-32x32-next.png
+    apple_touch_icon: /images/apple-touch-icon-next.png
+    safari_pinned_tab: /images/logo.svg
+    android_manifest: /images/site.webmanifest
+    ms_browserconfig: /images/browserconfig.xml
+
+author: ordiy
+description: Blog
+
 theme_config:
 
   # ============================================================= #
@@ -107,7 +119,7 @@ theme_config:
   # ============================================================= #
 
   custom_file_path:
-    sidebar: source/_data/sidebar.swig
+#    sidebar: source/_data/sidebar.swig
     footer: source/_data/footer.swig
     variable: source/_data/variables.styl
     style: source/_data/styles.styl
@@ -118,12 +130,12 @@ theme_config:
   # ============================================================= #
 
   footer:
-    since: 2014
+    since: 2016
     icon:
       name: fa fa-heart
       animated: true
       color: "#808080"
-    copyright: NexT
+    copyright: Ordiy
     powered: false
 
   creative_commons:
@@ -149,36 +161,11 @@ theme_config:
 
   menu:
     home: / || fa fa-bullhorn
+    archives: /archives/ || fa fa-archive
+    categories: /categories/ || fa fa-th
 
     Docs:
       default: /docs/ || fa fa-book
-
-      Getting Started:
-        default: /getting-started/ || fa fa-flag
-        Installation: /installation.html || fa fa-download
-        Deployment: /deployment.html || fa fa-upload
-        Configuration: /configuration.html || fa fa-wrench
-        Update from 5.x: /update-from-v5.html || fa fa-retweet
-
-      Theme Settings:
-        default: /theme-settings/ || fa fa-star
-        Footer: /footer.html || far fa-sun
-        Sidebar: /sidebar.html || fa fa-bars
-        Posts: /posts.html || far fa-edit
-        Custom Pages: /custom-pages.html || far fa-file-alt
-        Custom Files: /custom-files.html || far fa-file
-        SEO: /seo.html || fa fa-external-link-square-alt
-        Front Matter: /front-matter.html || fa fa-heading
-
-      Third Party Services:
-        default: /third-party-services/ || fa fa-plug
-        Math Equations: /math-equations.html || fa fa-superscript
-        Comment Systems: /comments.html || far fa-comments
-        Statistics and Analytics: /statistics-and-analytics.html || fa fa-chart-bar
-        Post Widgets: /post-widgets.html || fa fa-share-square
-        Search Services: /search-services.html || fa fa-search-plus
-        Chat Services: /chat-services.html || fa fa-comment
-        External Libraries: /external-libraries.html || fa fa-puzzle-piece
 
       Tag Plugins:
         default: /tag-plugins/ || fa fa-rocket
@@ -195,7 +182,6 @@ theme_config:
       Advanced Settings: /advanced-settings.html || fa fa-cogs
       FAQ's: /faqs.html || fa fa-life-ring
       Troubleshooting: /troubleshooting.html || fa fa-bug
-    archives: /archives/ || fa fa-archive
     #sitemap: /sitemap.xml || fa fa-sitemap
     #commonweal: /404/ || fa fa-heartbeat
 
@@ -209,28 +195,27 @@ theme_config:
   # ============================================================= #
 
   sidebar:
-    position: left
-    display: post
+    position: right
+#    display: post
     padding: 18
     offset: 12
     onmobile: true
 
   avatar:
-    url: /images/apple-touch-icon-next.png
+    url: /images/apple-touch-icon.png
     rounded: true
 
   social:
-    GitHub: https://github.com/theme-next || fab fa-github
-    E-Mail: mailto:support@theme-next.org || fa fa-envelope
+    GitHub: https://github.com/ordiychen || fab fa-github
+    E-Mail: mailto:12695045+ordiychen@users.noreply.github.com || fa fa-envelope
     RSS: /atom.xml || fa fa-rss
 
-    Gitter: https://gitter.im/theme-next || fab fa-github-alt
-    Riot: https://riot.im/app/#/room/#NexT:matrix.org || fa fa-comment-dots
-
-    Telegram: https://t.me/theme_next || fab fa-telegram
+#    Gitter: https://gitter.im/theme-next || fab fa-github-alt
+#    Riot: https://riot.im/app/#/room/#NexT:matrix.org || fa fa-comment-dots
+#    Telegram: https://t.me/theme_next || fab fa-telegram
 
   social_icons:
-    enable: true
+    enable: false
     icons_only: true
     transition: true
 
@@ -246,16 +231,16 @@ theme_config:
 
   post_meta:
     updated_at:
-      enable: false
+      enable: true
 
   symbols_count_time:
     separated_meta: true
     item_text_post: true
     item_text_total: true
 
-  post_edit:
-    enable: true
-    url: https://github.com/theme-next/theme-next.org/edit/source/source/
+#  post_edit:
+#    enable: true
+#    url: https://github.com/theme-next/theme-next.org/edit/source/source/
 
 
   # ============================================================= #
@@ -265,7 +250,7 @@ theme_config:
   mobile_layout_economy: true
 
   codeblock:
-    highlight_theme: night bright
+    highlight_theme: night eighties
     copy_button:
       enable: true
       show_result: true
@@ -278,7 +263,7 @@ theme_config:
 
   github_banner:
     enable: true
-    permalink: https://github.com/theme-next/hexo-theme-next
+    permalink: https://github.com/ordiychen/ordiychen.github.io
     title: Fork NexT on GitHub
 
 
@@ -286,11 +271,11 @@ theme_config:
   # ======================= SEO Settings ======================== #
   # ============================================================= #
 
-  index_with_subtitle: true
-
-  exturl: true
-
-  yandex_site_verification: 3ac9ae36ddebb425
+#  index_with_subtitle: true
+#
+#  exturl: true
+#
+#  yandex_site_verification: 3ac9ae36ddebb425
 
 
   # ============================================================= #
@@ -314,10 +299,10 @@ theme_config:
   # ============================================================= #
 
   comments:
-    lazyload: true
+    lazyload: false
 
   disqus:
-    enable: true
+    enable: false
     shortname: theme-next
     count: true
 
