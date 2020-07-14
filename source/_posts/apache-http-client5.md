@@ -1,15 +1,16 @@
 ---
 layout:  post
-title:  Apache Http-Client5 使用
+title:  Apache Http-Client5 基本使用
 date:  2020-01-01 00:00 +08:00
 categories:  [tech]
 tags:  [Java,JavaWeb,Http,Apache]
+keyWord: HttpComponents,I/O Reactor
 toc: true
 ---
 
-HttpClient提供一个高效，最新且功能丰富的软件包来实现这一空白，以实现最新HTTP标准和建议的客户端。
-`Apache http client 5.0`支持了`HTTP/2`的大部分特性，并对之前版本进行了一些列优化。
+  Apache HttpComponents项目负责创建和维护专注于HTTP和相关协议的低级Java组件的工具集。超文本传输​​协议（HTTP）可能是当今Internet上使用的最重要的协议。 Web服务，支持网络的设备以及网络计算的增长继续将HTTP协议的作用扩展到用户驱动的Web浏览器之外，同时增加了需要HTTP支持的应用程序的数量。HttpComponents是为扩展而设计的，同时提供了对基本HTTP协议的强大支持，对于构建HTTP感知的客户端和服务器应用程序（例如Web浏览器，Web Spider，HTTP代理，Web服务传输库或利用或 扩展HTTP协议以进行分布式通信。Apache HttpComponents由HttpComponentsCore、HttpComponentsClient、HttpComponentsAysyncClient等部分组成。(引于[appache](https://hc.apache.org/index.html))
 <!--more-->
+
 
 # Apache http client 5.0 简介
 `Apache http client 5.0`支持了`HTTP/2`的大部分特性，并对之前版本进行了一些列优化，具体如下：
@@ -19,9 +20,7 @@ Notable changes and features included in the 5.0 series are:
 * Support for the HTTP/2 protocol and conformance to requirements and
   recommendations of the latest HTTP/2 protocol specification documents
   (RFC 7540, RFC 7541.)
-
   Supported features:
-
     ** HPACK header compression
     ** Stream multiplexing (client and server)
     ** Flow control
@@ -31,17 +30,12 @@ Notable changes and features included in the 5.0 series are:
     ** Connection validation (ping)
     ** Application-layer protocol negotiation (ALPN)
     ** TLS 1.2 security features
-
 * Improved conformance to requirements and recommendations of the latest HTTP/1.1 protocol
   specification documents (RFC 7230, RFC 7231.)
-
 * New connection pool implementation with lax connection limit guarantees and better
   performance under higher concurrency due to absence of a global pool lock.
-
 * Support for Reactive Streams API [http://www.reactive-streams.org/]
-
 * Package name space changed to 'org.apache.hc.client5'.
-
 * Maven group id changed to 'org.apache.httpcomponents.client5'.
 
 HttpClient 5.0 releases can be co-located with earlier major versions on the same classpath
@@ -103,10 +97,8 @@ due to the change in package names and Maven module coordinates.
          HttpGet httpget = new HttpGet(hostUrl);
         try (final CloseableHttpResponse response1 = httpClient.execute(httpget)) {
             final HttpEntity entity = response1.getEntity();
-
             log.debug("Login form get: " + response1.getCode() + " " + response1.getReasonPhrase());
             EntityUtils.consume(entity);
-
             log.debug("Initial set of cookies:");
             final List<Cookie> cookies = cookieStore.getCookies();
             if (cookies.isEmpty()) {
@@ -165,32 +157,22 @@ due to the change in package names and Maven module coordinates.
 ```
 public static void main(final String[] args) throws Exception {
         try (final CloseableHttpClient httpclient = HttpClients.custom()
-
                 // Add a simple request ID to each outgoing request
-
                 .addRequestInterceptorFirst(new HttpRequestInterceptor() {
-
                     private final AtomicLong count = new AtomicLong(0);
-
                     @Override
-                    public void process(
-                            final HttpRequest request,
-                            final EntityDetails entity,
+                    public void process(final HttpRequest request,final EntityDetails entity,
                             final HttpContext context) throws HttpException, IOException {
                         request.setHeader("request-id", Long.toString(count.incrementAndGet()));
                     }
                 })
-
-                // Simulate a 404 response for some requests without passing the message down to the backend
-
+                // Simulate a 404 response for some requests without passing //the message down to the backend
                 .addExecInterceptorAfter(ChainElement.PROTOCOL.name(), "custom", new ExecChainHandler() {
-
                     @Override
                     public ClassicHttpResponse execute(
                             final ClassicHttpRequest request,
                             final ExecChain.Scope scope,
                             final ExecChain chain) throws IOException, HttpException {
-
                         final Header idHeader = request.getFirstHeader("request-id");
                         if (idHeader != null && "13".equalsIgnoreCase(idHeader.getValue())) {
                             final ClassicHttpResponse response = new BasicClassicHttpResponse(HttpStatus.SC_NOT_FOUND, "Oppsie");
@@ -200,15 +182,11 @@ public static void main(final String[] args) throws Exception {
                             return chain.proceed(request, scope);
                         }
                     }
-
                 })
                 .build()) {
-
             for (int i = 0; i < 20; i++) {
                 final HttpGet httpget = new HttpGet("http://httpbin.org/get");
-
                 System.out.println("Executing request " + httpget.getMethod() + " " + httpget.getUri());
-
                 try (final CloseableHttpResponse response = httpclient.execute(httpget)) {
                     System.out.println("----------------------------------------");
                     System.out.println(response.getCode() + " " + response.getReasonPhrase());
@@ -223,12 +201,11 @@ public static void main(final String[] args) throws Exception {
 ### 线程池
 使用`PoolingHttpClientConnectionManager`可以实现多线程并发访问，在并发场景下推荐使用异步模式。
 ```
-// Create an HttpClient with the PoolingHttpClientConnectionManager.
+       // Create an HttpClient with the PoolingHttpClientConnectionManager.
         // This connection manager must be used if more than one thread will
         // be using the HttpClient.
         final PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager();
         cm.setMaxTotal(100);
-
         try (final CloseableHttpClient httpclient = HttpClients.custom()
                 .setConnectionManager(cm)
                 .build()) {
@@ -238,19 +215,16 @@ public static void main(final String[] args) throws Exception {
                     "http://hc.apache.org/httpcomponents-core-ga/",
                     "http://hc.apache.org/httpcomponents-client-ga/",
             };
-
             // create a thread for each URI
             final GetThread[] threads = new GetThread[urisToGet.length];
             for (int i = 0; i < threads.length; i++) {
                 final HttpGet httpget = new HttpGet(urisToGet[i]);
                 threads[i] = new GetThread(httpclient, httpget, i + 1);
             }
-
             // start the threads
             for (final GetThread thread : threads) {
                 thread.start();
             }
-
             // join the threads
             for (final GetThread thread : threads) {
                 thread.join();
@@ -260,28 +234,18 @@ public static void main(final String[] args) throws Exception {
 ### 发送多个部分的参数
 使用`MultipartEntityBuilder`可以实现发送多个不同的种类的请求参数：
 ```
- if (args.length != 1)  {
-            System.out.println("File path not given");
-            System.exit(1);
-        }
         try (final CloseableHttpClient httpclient = HttpClients.createDefault()) {
             final HttpPost httppost = new HttpPost("http://localhost:8080" +
                     "/servlets-examples/servlet/RequestInfoExample");
-
             final FileBody bin = new FileBody(new File(args[0]));
             final StringBody comment = new StringBody("A binary file of some kind", ContentType.TEXT_PLAIN);
-
             final HttpEntity reqEntity = MultipartEntityBuilder.create()
                     .addPart("bin", bin)
                     .addPart("comment", comment)
                     .build();
-
-
             httppost.setEntity(reqEntity);
-
             System.out.println("executing request " + httppost);
             try (final CloseableHttpResponse response = httpclient.execute(httppost)) {
-                System.out.println("----------------------------------------");
                 System.out.println(response);
                 final HttpEntity resEntity = response.getEntity();
                 if (resEntity != null) {
@@ -300,35 +264,29 @@ public static void main(final String[] args) throws Exception {
  final IOReactorConfig ioReactorConfig = IOReactorConfig.custom()
                 .setSoTimeout(Timeout.ofSeconds(5))
                 .build();
-
         final CloseableHttpAsyncClient client = HttpAsyncClients.custom()
                 .setIOReactorConfig(ioReactorConfig)
                 .build();
         client.start();
-
         final String requestUri = "http://httpbin.org/post";
         final AsyncRequestProducer requestProducer = AsyncRequestBuilder.post(requestUri)
                 .setEntity(new StringAsyncEntityProducer("some stuff", ContentType.TEXT_PLAIN))
                 .build();
         final Future<SimpleHttpResponse> future = client.execute(requestProducer, SimpleResponseConsumer.create(),
                 new FutureCallback<SimpleHttpResponse>() {
-
                     @Override
                     public void completed(final SimpleHttpResponse response) {
                         System.out.println(requestUri + "->" + response.getCode());
                         System.out.println(response.getBody());
                     }
-
                     @Override
                     public void failed(final Exception ex) {
                         System.out.println(requestUri + "->" + ex);
                     }
-
                     @Override
                     public void cancelled() {
                         System.out.println(requestUri + " cancelled");
                     }
-
                 });
         try {
             future.get();
@@ -337,7 +295,6 @@ public static void main(final String[] args) throws Exception {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-
         System.out.println("Shutting down");
         client.close(CloseMode.GRACEFUL);
 ```
@@ -384,6 +341,23 @@ public static void main(final String[] args) throws Exception {
 </Configuration>
 ```
 官方配置说明 [logger guide](https://hc.apache.org/httpcomponents-client-5.0.x/logging.html)
+
+# HttpComponents的NIO实现——I/O reactor
+chrome-extension://cdonnmffkdaoajfknoeeecmchibpmkmg/assets/pdf/web/viewer.html?file=https%3A%2F%2Fhc.apache.org%2Fhttpcomponents-core-ga%2Ftutorial%2Fpdf%2Fhttpcore-tutorial.pdf
+
+官方的说明`HttpCore NIO is based on the Reactor pattern as described by Doug Lea. The purpose of I/O reactorsis  to  react  to  I/O  events  and  to  dispatch  event  notifications  to  individual  I/O  sessions.  The  mainidea  of  I/O  reactor  pattern  is  to  break  away  from  the  one  thread  per  connection  model  imposedby  the  classic  blocking  I/O  model. `
+基于[Doug Lea](https://en.wikipedia.org/wiki/Doug_Lea)原子模型的实现的NIO(netty 已经采用Reactor pattern很多年了)，关于Doug Lea的这篇文章[Scalable IO in Java - Doug Lea](http://gee.cs.oswego.edu/dl/cpjslides/nio.pdf)
+
+![](https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200713183251.png)
+
+![](https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200713183446.png)
+
+
+
+
+
+
+
 
 ## 参考
 [apache HttpComponents](https://hc.apache.org/httpcomponents-client-5.0.x/quickstart.html)

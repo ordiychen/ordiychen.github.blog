@@ -77,3 +77,16 @@ symbols_count_time:
   total_symbols: true 
   total_time: true 
 ```
+
+```shell script
+#监听文件状态 能够监视文件变动并立即重新生成静态文件。在生成时会比对文件的 SHA1 checksum
+hexo generate --watch
+```
+
+```shell script
+完成后部署
+ hexo generate --deploy
+
+#一件部署
+hexo clean && hexo deploy
+```

@@ -27,8 +27,8 @@ tag_generator:
 
 timezone: UTC
 
-url: https://17xyx.app/blog
-root: /
+url: https://ordiychen.github.io/ordiychen.github.io
+root: /ordiychen.github.io
 permalink: :title/
 permalink_defaults:
 
@@ -65,7 +65,7 @@ tag_map:
 date_format: YYYY-MM-DD
 time_format: HH:mm:ss
 
-per_page: 5
+per_page: 8
 pagination_dir: page
 
 theme: next
@@ -73,7 +73,7 @@ theme: next
 deploy:
   type: git
   repo: https://github.com/ordiychen/ordiychen.github.io
-  branch: gh-pages
+  branch: master
   message: "Updated: {{ now('YYYY-MM-DD HH:mm:ss') }}"
 
 server:

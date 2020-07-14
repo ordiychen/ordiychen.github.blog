@@ -1,19 +1,15 @@
 ---
 layout:  post
 title:  IEEE Code of Ethics
-date:  2015-06-21 19:04 +08:00
-categories:  [values]
-tags:  [IEEE,Ethics,Values]
-excerpt:  IEEE,Ethics.
+date:  2014-01-01 11:04 +08:00
+categories:  [tech]
+tags:  [Enginner,IEEE,Ethics,Values]
+excerpt:  工程师的价值，恪守的行为准则。
 toc: true
 ---
 
 
-工程师的价值，恪守的行为准则。
-<!-- more -->
-
-
-## IEEE Code of Ethics
+# IEEE Code of Ethics
 We, the members of the IEEE, in recognition of the importance of our technologies in affecting the quality of life throughout the world, and in accepting a personal obligation to our profession, its members, and the communities we serve, do hereby commit ourselves to the highest ethical and professional conduct and agree:
 
 - to hold paramount the safety, health, and welfare of the public, to strive to comply with ethical design and sustainable development practices, and to disclose promptly factors that might endanger the public or the environment;
@@ -33,15 +29,8 @@ Changes to the IEEE Code of Ethics will be made only after the following conditi
 - An affirmative vote of two-thirds of the votes of the members of the Board of Directors present at the time of the vote, provided a quorum is present, shall be required for changes to be made.
 
 **From IEEE**: [https://www.ieee.org](https://www.ieee.org/about/corporate/governance/p7-8.html)
-`IEEE Policies, Section 7 - Professional Activities (Part A - IEEE Policies). 7.8 IEEE Code of Ethics `
-
-<br/>
-<br/>
-
-** I come from Cyberspace, the new home of Mind **
- `- John Perry Barlow, "A Declaration of the Independence of Cyberspace" `
 
 
-## IEEE 介绍
+# About IEEE 
 [IEEE 资源中心](https://www.ieee.org/communities/ieee-resource-centers/find-your-ieee-resource-center.html)
 [IEEE](https://en.wikipedia.org/wiki/Institute_of_Electrical_and_Electronics_Engineers)
