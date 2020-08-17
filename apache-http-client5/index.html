@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="zh-cn,en,default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.0.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/images/site.webmanifest">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"ordiychen.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"buttons","active":"gitalk","storage":true,"lazyload":false,"nav":null,"gitalk":{"order":1},"activeClass":"gitalk"},"algolia":{"hits":{"per_page":12},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="Apache HttpComponents项目进行Http API使用及I&#x2F;O Reactor">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Apache Http-Client5 基本使用">
+<meta property="og:url" content="https://ordiychen.github.io/ordiychen.github.io/apache-http-client5/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Apache HttpComponents项目进行Http API使用及I&#x2F;O Reactor">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200713183251.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200713183446.png">
+<meta property="article:published_time" content="2020-01-01T00:00:00.000Z">
+<meta property="article:modified_time" content="2020-07-19T13:53:00.006Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="JavaWeb">
+<meta property="article:tag" content="Http">
+<meta property="article:tag" content="Apache">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200713183251.png">
+
+<link rel="canonical" href="https://ordiychen.github.io/ordiychen.github.io/apache-http-client5/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-cn'
+  };
+</script>
+
+  <title>Apache Http-Client5 基本使用 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+      
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/ordiychen/ordiychen.github.io" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://ordiychen.github.io/ordiychen.github.io/apache-http-client5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/apple-touch-icon.png">
+      <meta itemprop="name" content="Ordiy">
+      <meta itemprop="description" content="Stay hangury.Stay foolish.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Apache Http-Client5 基本使用
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-01-01 00:00:00" itemprop="dateCreated datePublished" datetime="2020-01-01T00:00:00Z">2020-01-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tech/" itemprop="url" rel="index"><span itemprop="name">tech</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>12k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>11 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Apache HttpComponents项目进行Http API使用及<code>I/O Reactor</code></p>
+<a id="more"></a>
+
+<h1 id="Apache-http-client-5-0-简介"><a href="#Apache-http-client-5-0-简介" class="headerlink" title="Apache http client 5.0 简介"></a>Apache http client 5.0 简介</h1><p><code>Apache http client 5.0</code>支持了<code>HTTP/2</code>的大部分特性，并对之前版本进行了一些列优化，具体如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">Notable changes and features included <span class="keyword">in</span> the 5.0 series are:</span><br><span class="line"></span><br><span class="line">* Support <span class="keyword">for</span> the HTTP/2 protocol and conformance to requirements and</span><br><span class="line">  recommendations of the latest HTTP/2 protocol specification documents</span><br><span class="line">  (RFC 7540, RFC 7541.)</span><br><span class="line">  Supported features:</span><br><span class="line">    ** HPACK header compression</span><br><span class="line">    ** Stream multiplexing (client and server)</span><br><span class="line">    ** Flow control</span><br><span class="line">    ** Response push</span><br><span class="line">    ** Message trailers</span><br><span class="line">    ** Expect-continue handshake</span><br><span class="line">    ** Connection validation (ping)</span><br><span class="line">    ** Application-layer protocol negotiation (ALPN)</span><br><span class="line">    ** TLS 1.2 security features</span><br><span class="line">* Improved conformance to requirements and recommendations of the latest HTTP/1.1 protocol</span><br><span class="line">  specification documents (RFC 7230, RFC 7231.)</span><br><span class="line">* New connection pool implementation with lax connection <span class="built_in">limit</span> guarantees and better</span><br><span class="line">  performance under higher concurrency due to absence of a global pool lock.</span><br><span class="line">* Support <span class="keyword">for</span> Reactive Streams API [http://www.reactive-streams.org/]</span><br><span class="line">* Package name space changed to <span class="string">&#x27;org.apache.hc.client5&#x27;</span>.</span><br><span class="line">* Maven group id changed to <span class="string">&#x27;org.apache.httpcomponents.client5&#x27;</span>.</span><br><span class="line"></span><br><span class="line">HttpClient 5.0 releases can be co-located with earlier major versions on the same classpath</span><br><span class="line">due to the change <span class="keyword">in</span> package names and Maven module coordinates.</span><br></pre></td></tr></table></figure>
+
+<p>Apache HttpComponents由Apache HttpComponents由HttpComponentsCore、HttpComponentsClient、HttpComponentsAysyncClient等部分组成。</p>
+<h1 id="基本使用用法"><a href="#基本使用用法" class="headerlink" title="基本使用用法"></a>基本使用用法</h1><h2 id="表单登录获取cookie"><a href="#表单登录获取cookie" class="headerlink" title="表单登录获取cookie"></a>表单登录获取cookie</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> String admin_userName=<span class="string">&quot;admin&quot;</span>;</span><br><span class="line"><span class="keyword">public</span> String admin_userPwd=<span class="string">&quot;admin123&quot;</span>;</span><br><span class="line">String formUserFiledName =<span class="string">&quot;j_username&quot;</span>;</span><br><span class="line">String formPwdFiledName=<span class="string">&quot;j_password&quot;</span>;</span><br><span class="line">BasicCookieStore cookieStore = <span class="keyword">new</span> BasicCookieStore();</span><br><span class="line"></span><br><span class="line"><span class="comment">//调用该方法注意对 CloseableHttpClient 在调用完成后执行 close()方法 || 可以复用</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> CloseableHttpClient <span class="title">buildCookieHttpClient</span><span class="params">(String loginUrl)</span> <span class="keyword">throws</span> IOException, URISyntaxException </span>&#123;</span><br><span class="line">     CloseableHttpClient httpClient = HttpClients.custom()</span><br><span class="line">            .setDefaultCookieStore(cookieStore).build();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//step1~2 cookie and login</span></span><br><span class="line">        initCookie(httpClient, cookieStore,loginUrl);</span><br><span class="line">        <span class="keyword">int</span> statusCode = loginRanger(httpClient, cookieStore, loginUrl);</span><br><span class="line">        <span class="keyword">if</span> (statusCode != <span class="number">200</span>) &#123;</span><br><span class="line">            <span class="comment">// login failed</span></span><br><span class="line">            log.warn(<span class="string">&quot; ranger-admin login failed ,status_code:&#123;&#125;&quot;</span>, statusCode);</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">&quot;login ranger-admin failed.&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">return</span> httpClient;</span><br><span class="line">&#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">loginRanger</span><span class="params">(CloseableHttpClient httpClient,BasicCookieStore cookieStore,String rangerLoginUrl)</span> <span class="keyword">throws</span> URISyntaxException, IOException </span>&#123;</span><br><span class="line">    log.info(<span class="string">&quot;==&gt; loginRanger userName:&#123;&#125;&quot;</span>,admin_userName);</span><br><span class="line">     ClassicHttpRequest login = ClassicRequestBuilder.post()</span><br><span class="line">            .setUri(<span class="keyword">new</span> URI(rangerLoginUrl))</span><br><span class="line">            .addParameter(formUserFiledName, admin_userName)</span><br><span class="line">            .addParameter(formPwdFiledName, admin_userPwd)</span><br><span class="line">            .build();</span><br><span class="line">    <span class="keyword">try</span> (<span class="keyword">final</span> CloseableHttpResponse loginResponse = httpClient.execute(login)) &#123;</span><br><span class="line">        <span class="keyword">final</span> HttpEntity entity = loginResponse.getEntity();</span><br><span class="line">        log.debug(<span class="string">&quot;Login form get: &quot;</span> + loginResponse.getCode() + <span class="string">&quot; &quot;</span> + loginResponse.getReasonPhrase());</span><br><span class="line">        EntityUtils.consume(entity);</span><br><span class="line"></span><br><span class="line">        log.debug(<span class="string">&quot;====&gt; Post login cookies:&quot;</span>);</span><br><span class="line">        <span class="keyword">final</span> List&lt;Cookie&gt; cookies = cookieStore.getCookies();</span><br><span class="line">        <span class="keyword">if</span> (cookies.isEmpty()) &#123;</span><br><span class="line">            log.debug(<span class="string">&quot;===&gt; Cookie None&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; cookies.size(); i++) &#123;</span><br><span class="line">                log.debug(<span class="string">&quot;- &quot;</span> + cookies.get(i).toString());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> loginResponse.getCode();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initCookie</span><span class="params">(CloseableHttpClient httpClient, BasicCookieStore cookieStore,String hostUrl)</span><span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">     HttpGet httpget = <span class="keyword">new</span> HttpGet(hostUrl);</span><br><span class="line">    <span class="keyword">try</span> (<span class="keyword">final</span> CloseableHttpResponse response1 = httpClient.execute(httpget)) &#123;</span><br><span class="line">        <span class="keyword">final</span> HttpEntity entity = response1.getEntity();</span><br><span class="line">        log.debug(<span class="string">&quot;Login form get: &quot;</span> + response1.getCode() + <span class="string">&quot; &quot;</span> + response1.getReasonPhrase());</span><br><span class="line">        EntityUtils.consume(entity);</span><br><span class="line">        log.debug(<span class="string">&quot;Initial set of cookies:&quot;</span>);</span><br><span class="line">        <span class="keyword">final</span> List&lt;Cookie&gt; cookies = cookieStore.getCookies();</span><br><span class="line">        <span class="keyword">if</span> (cookies.isEmpty()) &#123;</span><br><span class="line">            log.warn(<span class="string">&quot; get user cookies is None&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; cookies.size(); i++) &#123;</span><br><span class="line">                log.debug(<span class="string">&quot;get user cookies - &quot;</span> + cookies.get(i).toString());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>官方Demo <a target="_blank" rel="noopener" href="https://hc.apache.org/httpcomponents-client-5.0.x/httpclient5/examples/ClientFormLogin.java">Apache-Client ClientFormLogin.java</a></p>
+<h2 id="POST-request使用示例"><a href="#POST-request使用示例" class="headerlink" title="POST request使用示例"></a><code>POST request</code>使用示例</h2><p><code>POST request</code>使用示例</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">//默认的header</span></span><br><span class="line">List&lt;Header&gt; defaultHeaderArr = Arrays.asList(<span class="keyword">new</span> BasicHeader(<span class="string">&quot;Content-Type&quot;</span>, <span class="string">&quot;application/json&quot;</span>),</span><br><span class="line">            <span class="keyword">new</span> BasicHeader(<span class="string">&quot;Accept-Encoding&quot;</span>, <span class="string">&quot; gzip, deflate&quot;</span>),</span><br><span class="line">            <span class="keyword">new</span> BasicHeader(<span class="string">&quot;Accept&quot;</span>, <span class="string">&quot;application/json, text/javascript, */*; q=0.01&quot;</span>),</span><br><span class="line">            <span class="keyword">new</span> BasicHeader(<span class="string">&quot;Connection&quot;</span>, <span class="string">&quot;keep-alive&quot;</span>),</span><br><span class="line">            <span class="keyword">new</span> BasicHeader(<span class="string">&quot;X-Requested-With&quot;</span>, <span class="string">&quot;XMLHttpRequest&quot;</span>));</span><br><span class="line"></span><br><span class="line">String jsonStr =<span class="string">&quot;&#123;&#125;&quot;</span></span><br><span class="line">HttpPost request = <span class="keyword">new</span> HttpPost(url);</span><br><span class="line">headerList.stream().forEach(request::addHeader);</span><br><span class="line">request.setEntity(jsonStr);</span><br><span class="line">httpClient.execute(request);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="Get-request-使用示例"><a href="#Get-request-使用示例" class="headerlink" title="Get request 使用示例"></a><code>Get request</code> 使用示例</h2><p><code>Get request</code> 使用demo:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//build get request with paramer</span></span><br><span class="line">String url =hostUrl + <span class="string">&quot;/service/plugins/policies/service&quot;</span> + <span class="string">&quot;/&quot;</span> + serviceId;</span><br><span class="line">HttpGet getRequest  = <span class="keyword">new</span> HttpGet(url);</span><br><span class="line">getRequest.addHeader(HttpHeaders.ACCEPT,<span class="string">&quot;application/json, text/javascript, */*; q=0.01&quot;</span>);</span><br><span class="line">URIBuilder uriBuilder = <span class="keyword">new</span> URIBuilder(getRequest.getUri());</span><br><span class="line">URI uri = uriBuilder</span><br><span class="line">        .addParameter(<span class="string">&quot;page&quot;</span>, <span class="string">&quot;0&quot;</span>)</span><br><span class="line">        .addParameter(<span class="string">&quot;pageSize&quot;</span>, <span class="string">&quot;2000&quot;</span>)</span><br><span class="line">        .addParameter(<span class="string">&quot;startIndex&quot;</span>, <span class="string">&quot;0&quot;</span>)</span><br><span class="line">        .build();</span><br><span class="line">getRequest.setUri(uri);</span><br><span class="line">httpClient.execute(getRequest);</span><br></pre></td></tr></table></figure>
+<p>官方Demo <a target="_blank" rel="noopener" href="https://hc.apache.org/httpcomponents-client-5.0.x/httpclient5/examples/QuickStart.java">GetQuickStart.java</a></p>
+<h2 id="拦截器特性"><a href="#拦截器特性" class="headerlink" title="拦截器特性"></a>拦截器特性</h2><p>可以通过给client request增加 interceptor可以增加<code>request id</code>和异常拦截等功能</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(<span class="keyword">final</span> String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> (<span class="keyword">final</span> CloseableHttpClient httpclient = HttpClients.custom()</span><br><span class="line">                <span class="comment">// Add a simple request ID to each outgoing request</span></span><br><span class="line">                .addRequestInterceptorFirst(<span class="keyword">new</span> HttpRequestInterceptor() &#123;</span><br><span class="line">                    <span class="keyword">private</span> <span class="keyword">final</span> AtomicLong count = <span class="keyword">new</span> AtomicLong(<span class="number">0</span>);</span><br><span class="line">                    <span class="meta">@Override</span></span><br><span class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">process</span><span class="params">(<span class="keyword">final</span> HttpRequest request,<span class="keyword">final</span> EntityDetails entity,</span></span></span><br><span class="line"><span class="function"><span class="params">                            <span class="keyword">final</span> HttpContext context)</span> <span class="keyword">throws</span> HttpException, IOException </span>&#123;</span><br><span class="line">                        request.setHeader(<span class="string">&quot;request-id&quot;</span>, Long.toString(count.incrementAndGet()));</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;)</span><br><span class="line">                <span class="comment">// Simulate a 404 response for some requests without passing //the message down to the backend</span></span><br><span class="line">                .addExecInterceptorAfter(ChainElement.PROTOCOL.name(), <span class="string">&quot;custom&quot;</span>, <span class="keyword">new</span> ExecChainHandler() &#123;</span><br><span class="line">                    <span class="meta">@Override</span></span><br><span class="line">                    <span class="function"><span class="keyword">public</span> ClassicHttpResponse <span class="title">execute</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">                            <span class="keyword">final</span> ClassicHttpRequest request,</span></span></span><br><span class="line"><span class="function"><span class="params">                            <span class="keyword">final</span> ExecChain.Scope scope,</span></span></span><br><span class="line"><span class="function"><span class="params">                            <span class="keyword">final</span> ExecChain chain)</span> <span class="keyword">throws</span> IOException, HttpException </span>&#123;</span><br><span class="line">                        <span class="keyword">final</span> Header idHeader = request.getFirstHeader(<span class="string">&quot;request-id&quot;</span>);</span><br><span class="line">                        <span class="keyword">if</span> (idHeader != <span class="keyword">null</span> &amp;&amp; <span class="string">&quot;13&quot;</span>.equalsIgnoreCase(idHeader.getValue())) &#123;</span><br><span class="line">                            <span class="keyword">final</span> ClassicHttpResponse response = <span class="keyword">new</span> BasicClassicHttpResponse(HttpStatus.SC_NOT_FOUND, <span class="string">&quot;Oppsie&quot;</span>);</span><br><span class="line">                            response.setEntity(<span class="keyword">new</span> StringEntity(<span class="string">&quot;bad luck&quot;</span>, ContentType.TEXT_PLAIN));</span><br><span class="line">                            <span class="keyword">return</span> response;</span><br><span class="line">                        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                            <span class="keyword">return</span> chain.proceed(request, scope);</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;)</span><br><span class="line">                .build()) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">20</span>; i++) &#123;</span><br><span class="line">                <span class="keyword">final</span> HttpGet httpget = <span class="keyword">new</span> HttpGet(<span class="string">&quot;http://httpbin.org/get&quot;</span>);</span><br><span class="line">                System.out.println(<span class="string">&quot;Executing request &quot;</span> + httpget.getMethod() + <span class="string">&quot; &quot;</span> + httpget.getUri());</span><br><span class="line">                <span class="keyword">try</span> (<span class="keyword">final</span> CloseableHttpResponse response = httpclient.execute(httpget)) &#123;</span><br><span class="line">                    System.out.println(response.getCode() + <span class="string">&quot; &quot;</span> + response.getReasonPhrase());</span><br><span class="line">                    System.out.println(EntityUtils.toString(response.getEntity()));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>参照官方Demo <a target="_blank" rel="noopener" href="https://hc.apache.org/httpcomponents-client-5.0.x/httpclient5/examples/ClientInterceptors.java">ClientInterceptors.java</a></p>
+<h2 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h2><p>使用<code>PoolingHttpClientConnectionManager</code>可以实现多线程并发访问，在并发场景下推荐使用异步模式。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Create an HttpClient with the PoolingHttpClientConnectionManager.</span></span><br><span class="line"> <span class="comment">// This connection manager must be used if more than one thread will</span></span><br><span class="line"> <span class="comment">// be using the HttpClient.</span></span><br><span class="line"> <span class="keyword">final</span> PoolingHttpClientConnectionManager cm = <span class="keyword">new</span> PoolingHttpClientConnectionManager();</span><br><span class="line"> cm.setMaxTotal(<span class="number">100</span>);</span><br><span class="line"> <span class="keyword">try</span> (<span class="keyword">final</span> CloseableHttpClient httpclient = HttpClients.custom()</span><br><span class="line">         .setConnectionManager(cm)</span><br><span class="line">         .build()) &#123;</span><br><span class="line">     <span class="comment">// create an array of URIs to perform GETs on</span></span><br><span class="line">     <span class="keyword">final</span> String[] urisToGet = &#123;</span><br><span class="line">             <span class="string">&quot;http://hc.apache.org/&quot;</span>,</span><br><span class="line">             <span class="string">&quot;http://hc.apache.org/httpcomponents-core-ga/&quot;</span>,</span><br><span class="line">             <span class="string">&quot;http://hc.apache.org/httpcomponents-client-ga/&quot;</span>,</span><br><span class="line">     &#125;;</span><br><span class="line">     <span class="comment">// create a thread for each URI</span></span><br><span class="line">     <span class="keyword">final</span> GetThread[] threads = <span class="keyword">new</span> GetThread[urisToGet.length];</span><br><span class="line">     <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; threads.length; i++) &#123;</span><br><span class="line">         <span class="keyword">final</span> HttpGet httpget = <span class="keyword">new</span> HttpGet(urisToGet[i]);</span><br><span class="line">         threads[i] = <span class="keyword">new</span> GetThread(httpclient, httpget, i + <span class="number">1</span>);</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="comment">// start the threads</span></span><br><span class="line">     <span class="keyword">for</span> (<span class="keyword">final</span> GetThread thread : threads) &#123;</span><br><span class="line">         thread.start();</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="comment">// join the threads</span></span><br><span class="line">     <span class="keyword">for</span> (<span class="keyword">final</span> GetThread thread : threads) &#123;</span><br><span class="line">         thread.join();</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="发送多个部分的参数"><a href="#发送多个部分的参数" class="headerlink" title="发送多个部分的参数"></a>发送多个部分的参数</h3><p>使用<code>MultipartEntityBuilder</code>可以实现发送多个不同的种类的请求参数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">try (final CloseableHttpClient httpclient &#x3D; HttpClients.createDefault()) &#123;</span><br><span class="line">    final HttpPost httppost &#x3D; new HttpPost(&quot;http:&#x2F;&#x2F;localhost:8080&quot; +</span><br><span class="line">            &quot;&#x2F;servlets-examples&#x2F;servlet&#x2F;RequestInfoExample&quot;);</span><br><span class="line">    final FileBody bin &#x3D; new FileBody(new File(args[0]));</span><br><span class="line">    final StringBody comment &#x3D; new StringBody(&quot;A binary file of some kind&quot;, ContentType.TEXT_PLAIN);</span><br><span class="line">    final HttpEntity reqEntity &#x3D; MultipartEntityBuilder.create()</span><br><span class="line">            .addPart(&quot;bin&quot;, bin)</span><br><span class="line">            .addPart(&quot;comment&quot;, comment)</span><br><span class="line">            .build();</span><br><span class="line">    httppost.setEntity(reqEntity);</span><br><span class="line">    System.out.println(&quot;executing request &quot; + httppost);</span><br><span class="line">    try (final CloseableHttpResponse response &#x3D; httpclient.execute(httppost)) &#123;</span><br><span class="line">        System.out.println(response);</span><br><span class="line">        final HttpEntity resEntity &#x3D; response.getEntity();</span><br><span class="line">        if (resEntity !&#x3D; null) &#123;</span><br><span class="line">            System.out.println(&quot;Response content length: &quot; + resEntity.getContentLength());</span><br><span class="line">        &#125;</span><br><span class="line">        EntityUtils.consume(resEntity);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="异步请求"><a href="#异步请求" class="headerlink" title="异步请求"></a>异步请求</h2><p>基于NIO的<code>HttpAsyncClients</code> 很好的实现了异步请求。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> IOReactorConfig ioReactorConfig = IOReactorConfig.custom()</span><br><span class="line">               .setSoTimeout(Timeout.ofSeconds(<span class="number">5</span>))</span><br><span class="line">               .build();</span><br><span class="line">       <span class="keyword">final</span> CloseableHttpAsyncClient client = HttpAsyncClients.custom()</span><br><span class="line">               .setIOReactorConfig(ioReactorConfig)</span><br><span class="line">               .build();</span><br><span class="line">       client.start();</span><br><span class="line">       <span class="keyword">final</span> String requestUri = <span class="string">&quot;http://httpbin.org/post&quot;</span>;</span><br><span class="line">       <span class="keyword">final</span> AsyncRequestProducer requestProducer = AsyncRequestBuilder.post(requestUri)</span><br><span class="line">               .setEntity(<span class="keyword">new</span> StringAsyncEntityProducer(<span class="string">&quot;some stuff&quot;</span>, ContentType.TEXT_PLAIN))</span><br><span class="line">               .build();</span><br><span class="line">       <span class="keyword">final</span> Future&lt;SimpleHttpResponse&gt; future = client.execute(requestProducer, SimpleResponseConsumer.create(),</span><br><span class="line">               <span class="keyword">new</span> FutureCallback&lt;SimpleHttpResponse&gt;() &#123;</span><br><span class="line">                   <span class="meta">@Override</span></span><br><span class="line">                   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">completed</span><span class="params">(<span class="keyword">final</span> SimpleHttpResponse response)</span> </span>&#123;</span><br><span class="line">                       System.out.println(requestUri + <span class="string">&quot;-&gt;&quot;</span> + response.getCode());</span><br><span class="line">                       System.out.println(response.getBody());</span><br><span class="line">                   &#125;</span><br><span class="line">                   <span class="meta">@Override</span></span><br><span class="line">                   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">failed</span><span class="params">(<span class="keyword">final</span> Exception ex)</span> </span>&#123;</span><br><span class="line">                       System.out.println(requestUri + <span class="string">&quot;-&gt;&quot;</span> + ex);</span><br><span class="line">                   &#125;</span><br><span class="line">                   <span class="meta">@Override</span></span><br><span class="line">                   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">cancelled</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                       System.out.println(requestUri + <span class="string">&quot; cancelled&quot;</span>);</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125;);</span><br><span class="line">       <span class="keyword">try</span> &#123;</span><br><span class="line">           future.get();</span><br><span class="line">       &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">           e.printStackTrace();</span><br><span class="line">       &#125; <span class="keyword">catch</span> (ExecutionException e) &#123;</span><br><span class="line">           e.printStackTrace();</span><br><span class="line">       &#125;</span><br><span class="line">       System.out.println(<span class="string">&quot;Shutting down&quot;</span>);</span><br><span class="line">       client.close(CloseMode.GRACEFUL);</span><br></pre></td></tr></table></figure>
+
+<h3 id="http-client5日志配置"><a href="#http-client5日志配置" class="headerlink" title="http-client5日志配置"></a><code>http-client5</code>日志配置</h3><p><code>http-client5</code>使用了<code>slf4j</code>输出日志，如果需要配置为<code>log4j2</code>需要进行一下配置：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.logging.log4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>log4j-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.13.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.logging.log4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>log4j-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.13.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.logging.log4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>log4j-slf4j-impl<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.13.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><code>log4j2.xml</code>配置：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Appenders</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Console</span> <span class="attr">name</span>=<span class="string">&quot;STDOUT&quot;</span> <span class="attr">target</span>=<span class="string">&quot;SYSTEM_OUT&quot;</span> &gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">PatternLayout</span> <span class="attr">pattern</span>=<span class="string">&quot;%d&#123;HH:mm:ss.SSS&#125; [%thread] %-5level %logger&#123;36&#125;.%M\(%line\) - %msg%n&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">Console</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">Appenders</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Loggers</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Logger</span> <span class="attr">name</span>=<span class="string">&quot;org.apache.hc.client5.http&quot;</span> <span class="attr">level</span>=<span class="string">&quot;INFO&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">AppenderRef</span> <span class="attr">ref</span>=<span class="string">&quot;Console&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">Logger</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Logger</span> <span class="attr">name</span>=<span class="string">&quot;org.apache.hc.client5.http.wire&quot;</span> <span class="attr">level</span>=<span class="string">&quot;DEBUG&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">AppenderRef</span> <span class="attr">ref</span>=<span class="string">&quot;Console&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">Logger</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Root</span> <span class="attr">level</span>=<span class="string">&quot;DEBUG&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">AppenderRef</span> <span class="attr">ref</span>=<span class="string">&quot;STDOUT&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">Root</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">Loggers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>官方配置说明 <a target="_blank" rel="noopener" href="https://hc.apache.org/httpcomponents-client-5.0.x/logging.html">logger guide</a></p>
+<h1 id="HttpComponents的NIO实现——I-O-reactor"><a href="#HttpComponents的NIO实现——I-O-reactor" class="headerlink" title="HttpComponents的NIO实现——I/O reactor"></a>HttpComponents的NIO实现——I/O reactor</h1><p><code>HttpComponents Core</code>包含了2中I/O实现，分别是是BIO和NIO。（参照<a target="_blank" rel="noopener" href="https://hc.apache.org/httpcomponents-core-5.0.x/index.html">官方说明</a>）<br>NIO是基于<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Doug_Lea">Doug Lea</a>原子模型的实现的NIO(netty 已经采用Reactor pattern很多年了)，关于Doug Lea的这篇文章<a target="_blank" rel="noopener" href="http://gee.cs.oswego.edu/dl/cpjslides/nio.pdf">Scalable IO in Java - Doug Lea</a><br>基本原子线程模型（Doug Lea)：<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200713183251.png" alt="images"></p>
+<p>多线程的原子线程模型（Doug Lea)：<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200713183446.png" alt="images"></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://hc.apache.org/httpcomponents-client-5.0.x/quickstart.html">apache HttpComponents</a><br><a target="_blank" rel="noopener" href="https://ok2c.github.io/httpcomponents-jackson/">httpcomponents-jackson </a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/JavaWeb/" rel="tag"># JavaWeb</a>
+              <a href="/tags/Http/" rel="tag"># Http</a>
+              <a href="/tags/Apache/" rel="tag"># Apache</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020-01-01-tls-truststores-md/" rel="prev" title="HTTP2 TLS加密通信理解与应用">
+      <i class="fa fa-chevron-left"></i> HTTP2 TLS加密通信理解与应用
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020-05-python-count/" rel="next" title="python 使用绘制统计图">
+      python 使用绘制统计图 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+  
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Apache-http-client-5-0-%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">Apache http client 5.0 简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E7%94%A8%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">基本使用用法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A8%E5%8D%95%E7%99%BB%E5%BD%95%E8%8E%B7%E5%8F%96cookie"><span class="nav-number">2.1.</span> <span class="nav-text">表单登录获取cookie</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#POST-request%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B"><span class="nav-number">2.2.</span> <span class="nav-text">POST request使用示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Get-request-%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B"><span class="nav-number">2.3.</span> <span class="nav-text">Get request 使用示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8B%A6%E6%88%AA%E5%99%A8%E7%89%B9%E6%80%A7"><span class="nav-number">2.4.</span> <span class="nav-text">拦截器特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0"><span class="nav-number">2.5.</span> <span class="nav-text">线程池</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%91%E9%80%81%E5%A4%9A%E4%B8%AA%E9%83%A8%E5%88%86%E7%9A%84%E5%8F%82%E6%95%B0"><span class="nav-number">2.5.1.</span> <span class="nav-text">发送多个部分的参数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%82%E6%AD%A5%E8%AF%B7%E6%B1%82"><span class="nav-number">2.6.</span> <span class="nav-text">异步请求</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#http-client5%E6%97%A5%E5%BF%97%E9%85%8D%E7%BD%AE"><span class="nav-number">2.6.1.</span> <span class="nav-text">http-client5日志配置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HttpComponents%E7%9A%84NIO%E5%AE%9E%E7%8E%B0%E2%80%94%E2%80%94I-O-reactor"><span class="nav-number">3.</span> <span class="nav-text">HttpComponents的NIO实现——I&#x2F;O reactor</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">3.1.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ordiy"
+      src="/images/apple-touch-icon.png">
+  <p class="site-author-name" itemprop="name">Ordiy</p>
+  <div class="site-description" itemprop="description">Stay hangury.Stay foolish.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ordiychen" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ordiychen" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:ordiymaster@outlook.com" title="E-Mail → mailto:ordiymaster@outlook.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">OrdiyChen</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">72k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">1:06</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '',
+      clientSecret: '',
+      repo        : 'ordiychen.github.io',
+      owner       : '',
+      admin       : [''],
+      id          : '11502317f8364b192bd65a38d3afe72e',
+        language: 'en',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

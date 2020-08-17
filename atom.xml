@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Hexo</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://ordiychen.github.io/ordiychen.github.io/"/>
+  <updated>2020-08-17T08:55:30.555Z</updated>
+  <id>https://ordiychen.github.io/ordiychen.github.io/</id>
+  
+  <author>
+    <name>John Doe</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>TLS握手过程</title>
+    <link href="https://ordiychen.github.io/ordiychen.github.io/2020-01-01-tls-study-md/"/>
+    <id>https://ordiychen.github.io/ordiychen.github.io/2020-01-01-tls-study-md/</id>
+    <published>2020-01-01T22:24:11.000Z</published>
+    <updated>2020-08-17T08:55:30.555Z</updated>
+    
+    <summary type="html">
+    
+      结合RFC5246标准，对TLS握手过程的理解和通信过程分析
+    
+    </summary>
+    
+    
+      <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
+    
+    
+      <category term="Java" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Java/"/>
+    
+      <category term="TLS" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/TLS/"/>
+    
+      <category term="HTTPS" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/HTTPS/"/>
+    
+      <category term="HTTP2" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/HTTP2/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>HTTP2 TLS加密通信理解与应用</title>
+    <link href="https://ordiychen.github.io/ordiychen.github.io/2020-01-01-tls-truststores-md/"/>
+    <id>https://ordiychen.github.io/ordiychen.github.io/2020-01-01-tls-truststores-md/</id>
+    <published>2020-01-01T22:23:54.000Z</published>
+    <updated>2020-08-17T09:00:44.356Z</updated>
+    
+    <summary type="html">
+    
+      通过TLS实现端对端的加密场景的实现过程及原理
+    
+    </summary>
+    
+    
+      <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
+    
+    
+      <category term="Java" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Java/"/>
+    
+      <category term="TLS" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/TLS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Apache Http-Client5 基本使用</title>
+    <link href="https://ordiychen.github.io/ordiychen.github.io/apache-http-client5/"/>
+    <id>https://ordiychen.github.io/ordiychen.github.io/apache-http-client5/</id>
+    <published>2020-01-01T00:00:00.000Z</published>
+    <updated>2020-07-19T13:53:00.006Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Apache HttpComponents项目进行Http API使用及&lt;code&gt;I/O Reactor&lt;/code&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
+    
+    
+      <category term="Java" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Java/"/>
+    
+      <category term="JavaWeb" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/JavaWeb/"/>
+    
+      <category term="Http" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Http/"/>
+    
+      <category term="Apache" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Apache/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>python 使用绘制统计图</title>
+    <link href="https://ordiychen.github.io/ordiychen.github.io/2020-05-python-count/"/>
+    <id>https://ordiychen.github.io/ordiychen.github.io/2020-05-python-count/</id>
+    <published>2019-11-14T15:29:51.000Z</published>
+    <updated>2020-07-22T13:53:18.627Z</updated>
+    
+    <summary type="html">
+    
+      学习python 绘制基本的折线图、对散点图进行拟合、使用快速傅立叶变换对周期性矩形波(方波)信号记性分解（分解出频率、时域图)
+    
+    </summary>
+    
+    
+      <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
+    
+    
+      <category term="python" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/python/"/>
+    
+      <category term="python-plot" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/python-plot/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>在线数据服务网关实践经验总结</title>
+    <link href="https://ordiychen.github.io/ordiychen.github.io/grpc-gateway/"/>
+    <id>https://ordiychen.github.io/ordiychen.github.io/grpc-gateway/</id>
+    <published>2019-10-21T19:04:00.000Z</published>
+    <updated>2020-07-24T06:33:42.824Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在线数据服务网关实践经验分享,一种NIO高性能的存储层网关,高性能统一在线数据平台实践&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
+    
+      <category term="architecture" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/architecture/"/>
+    
+    
+      <category term="Java" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Java/"/>
+    
+      <category term="Gateway" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Gateway/"/>
+    
+      <category term="HighPerformance" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/HighPerformance/"/>
+    
+      <category term="Concurrent" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Concurrent/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>记一次DNS异常导致的`ECONNREFUSED`问题</title>
+    <link href="https://ordiychen.github.io/ordiychen.github.io/nodejs-DNS-error/"/>
+    <id>https://ordiychen.github.io/ordiychen.github.io/nodejs-DNS-error/</id>
+    <published>2019-10-21T19:04:00.000Z</published>
+    <updated>2020-08-17T07:41:29.216Z</updated>
+    
+    <summary type="html">
+    
+      使用工具排查DNS异常
+    
+    </summary>
+    
+    
+      <category term="values" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/values/"/>
+    
+    
+      <category term="DNS" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/DNS/"/>
+    
+      <category term="TCP/IP" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/TCP-IP/"/>
+    
+      <category term="NODEJS" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/NODEJS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>python 计算圆周率(译)</title>
+    <link href="https://ordiychen.github.io/ordiychen.github.io/2019-10-11-python-calc-pi-1/"/>
+    <id>https://ordiychen.github.io/ordiychen.github.io/2019-10-11-python-calc-pi-1/</id>
+    <published>2019-07-22T21:00:37.000Z</published>
+    <updated>2020-07-22T13:51:16.349Z</updated>
+    
+    <summary type="html">
+    
+      使用贝利-波尔温-普劳夫公式、贝拉公式、Chudnovsky算法计算圆周率
+    
+    </summary>
+    
+    
+      <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
+    
+    
+      <category term="python" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用log4j2 jsonLayout自定义JSON格式日志</title>
+    <link href="https://ordiychen.github.io/ordiychen.github.io/2019-01-01-log4j2-json-layout/"/>
+    <id>https://ordiychen.github.io/ordiychen.github.io/2019-01-01-log4j2-json-layout/</id>
+    <published>2019-01-01T00:00:00.000Z</published>
+    <updated>2020-07-16T09:21:24.817Z</updated>
+    
+    <summary type="html">
+    
+      log4j2 使用JsonLayout输出json格式的日志，以及使用lookup、ThreadContext配置出自定义的jsonlog，可以用于对微服务的日志输出或者其它日志分析。
+    
+    </summary>
+    
+    
+      <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
+    
+    
+      <category term="blog" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/blog/"/>
+    
+      <category term="Java" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Java/"/>
+    
+      <category term="Log4j2" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Log4j2/"/>
+    
+      <category term="Logging" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Logging/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Nginx Stream L4 负载均衡</title>
+    <link href="https://ordiychen.github.io/ordiychen.github.io/2018-04-12-nginx-l4-loadblance-md/"/>
+    <id>https://ordiychen.github.io/ordiychen.github.io/2018-04-12-nginx-l4-loadblance-md/</id>
+    <published>2018-04-12T00:00:00.000Z</published>
+    <updated>2020-08-17T05:51:18.906Z</updated>
+    
+    <summary type="html">
+    
+      总结Nginx Stream进行反向代理实现负载均衡，以及配置集群的高可用、A/B测试、SSL/TLS加密和日志排查等场景，总结了使用过程中遇到的一些问题，及改进方面。
+    
+    </summary>
+    
+    
+      <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
+    
+      <category term="Nginx" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/Nginx/"/>
+    
+      <category term="Nginx Stream" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/Nginx/Nginx-Stream/"/>
+    
+    
+      <category term="blog" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/blog/"/>
+    
+      <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/tech/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用log4j2 jsonLayout自定义JSON格式日志</title>
+    <link href="https://ordiychen.github.io/ordiychen.github.io/2017-03-28-mysql-show-table-status/"/>
+    <id>https://ordiychen.github.io/ordiychen.github.io/2017-03-28-mysql-show-table-status/</id>
+    <published>2017-03-28T00:00:00.000Z</published>
+    <updated>2020-08-08T15:31:33.749Z</updated>
+    
+    <summary type="html">
+    
+      MySQL show status 查询表的存储、格式、引擎等信息
+    
+    </summary>
+    
+    
+      <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
+    
+    
+      <category term="blog" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/blog/"/>
+    
+      <category term="Java" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Java/"/>
+    
+      <category term="Log4j2" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Log4j2/"/>
+    
+      <category term="Logging" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Logging/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java DNS解析问题-以Socket Client为例</title>
+    <link href="https://ordiychen.github.io/ordiychen.github.io/java-dns/"/>
+    <id>https://ordiychen.github.io/ordiychen.github.io/java-dns/</id>
+    <published>2017-01-01T00:00:00.000Z</published>
+    <updated>2020-07-14T14:02:59.777Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;JDK 的&lt;code&gt;InetSocketAddress&lt;/code&gt;被设计了为一个不可变的对象，在&lt;code&gt;Socket&lt;/code&gt;等长连接使用时需要注意DNS映射关系更新问题。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
+    
+    
+      <category term="Java" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Java/"/>
+    
+      <category term="CoreJava" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/CoreJava/"/>
+    
+      <category term="Net" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Net/"/>
+    
+      <category term="JDK" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/JDK/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Centos7 设置时间</title>
+    <link href="https://ordiychen.github.io/ordiychen.github.io/centos-ntp/"/>
+    <id>https://ordiychen.github.io/ordiychen.github.io/centos-ntp/</id>
+    <published>2015-02-02T19:04:00.000Z</published>
+    <updated>2020-07-13T07:19:43.486Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Centos7 使用NTP Pool 服务校验时间。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
+    
+    
+      <category term="OS" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/OS/"/>
+    
+      <category term="Centos" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Centos/"/>
+    
+      <category term="NTP" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/NTP/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>IEEE Code of Ethics</title>
+    <link href="https://ordiychen.github.io/ordiychen.github.io/ieee-code-of-ethics/"/>
+    <id>https://ordiychen.github.io/ordiychen.github.io/ieee-code-of-ethics/</id>
+    <published>2014-01-01T11:04:00.000Z</published>
+    <updated>2020-07-13T08:48:41.713Z</updated>
+    
+    <summary type="html">
+    
+      工程师的价值，恪守的行为准则。
+    
+    </summary>
+    
+    
+      <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
+    
+    
+      <category term="Enginner" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Enginner/"/>
+    
+      <category term="IEEE" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/IEEE/"/>
+    
+      <category term="Ethics" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Ethics/"/>
+    
+      <category term="Values" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Values/"/>
+    
+  </entry>
+  
+</feed>
