@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Hexo</title>
+  <title>Ordiy&#39;s Blog</title>
   
   
   <link href="/atom.xml" rel="self"/>
@@ -10,7 +10,7 @@
   <id>https://ordiychen.github.io/ordiychen.github.io/</id>
   
   <author>
-    <name>John Doe</name>
+    <name>Ordiy</name>
     
   </author>
   
@@ -72,8 +72,8 @@
   
   <entry>
     <title>Apache Http-Client5 基本使用</title>
-    <link href="https://ordiychen.github.io/ordiychen.github.io/posts/apache-http-client5/"/>
-    <id>https://ordiychen.github.io/ordiychen.github.io/posts/apache-http-client5/</id>
+    <link href="https://ordiychen.github.io/ordiychen.github.io/posts/2020-01-01-apache-http-client5/"/>
+    <id>https://ordiychen.github.io/ordiychen.github.io/posts/2020-01-01-apache-http-client5/</id>
     <published>2020-01-01T00:00:00.000Z</published>
     <updated>2020-08-18T07:25:28.083Z</updated>
     
@@ -129,7 +129,7 @@
     <link href="https://ordiychen.github.io/ordiychen.github.io/posts/grpc-gateway/"/>
     <id>https://ordiychen.github.io/ordiychen.github.io/posts/grpc-gateway/</id>
     <published>2019-10-21T19:04:00.000Z</published>
-    <updated>2020-08-18T07:26:18.627Z</updated>
+    <updated>2020-12-07T07:14:56.685Z</updated>
     
     <summary type="html">
     
@@ -380,11 +380,11 @@
     <link href="https://ordiychen.github.io/ordiychen.github.io/posts/ieee-code-of-ethics/"/>
     <id>https://ordiychen.github.io/ordiychen.github.io/posts/ieee-code-of-ethics/</id>
     <published>2014-01-01T11:04:00.000Z</published>
-    <updated>2020-08-18T07:26:18.631Z</updated>
+    <updated>2020-12-22T13:23:00.085Z</updated>
     
     <summary type="html">
     
-      工程师的价值，恪守的行为准则。
+      我们正在创造一个新世界，人人都可以进入这个世界，而不必考虑由种族、经济力、武力、出生地而来的特权或偏见。们正在创造一个新世界，人人、处处可以表达他或她的信仰，无论这种信仰是多么古怪，而不再害怕被强制沉默或强制一律。　你们关于财产、表达、身份、迁徙的法律概念及其关联对我们不适用。这些概念建立在物质的基础上，我们这里没有物质。
     
     </summary>
     

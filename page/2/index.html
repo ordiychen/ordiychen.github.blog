@@ -23,35 +23,28 @@
     var CONFIG = {"hostname":"ordiychen.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":false,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
-  <meta name="description" content="Centos7 使用NTP Pool 服务校验时间。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Centos7 设置时间">
-<meta property="og:url" content="https://ordiychen.github.io/ordiychen.github.io/posts/centos-ntp/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Ordiy&#39;s Blog">
+<meta property="og:url" content="https://ordiychen.github.io/ordiychen.github.io/page/2/index.html">
 <meta property="og:site_name" content="Ordiy&#39;s Blog">
-<meta property="og:description" content="Centos7 使用NTP Pool 服务校验时间。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2015-02-02T19:04:00.000Z">
-<meta property="article:modified_time" content="2020-08-18T07:25:39.400Z">
 <meta property="article:author" content="Ordiy">
-<meta property="article:tag" content="OS">
-<meta property="article:tag" content="Centos">
-<meta property="article:tag" content="NTP">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://ordiychen.github.io/ordiychen.github.io/posts/centos-ntp/">
+<link rel="canonical" href="https://ordiychen.github.io/ordiychen.github.io/page/2/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : false,
-    isPost : true,
+    isHome : true,
+    isPost : false,
     lang   : 'zh-cn'
   };
 </script>
 
-  <title>Centos7 设置时间 | Ordiy's Blog</title>
+  <title>Ordiy's Blog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-175654772-1"></script>
     <script>
@@ -174,13 +167,196 @@
         <div class="content-wrap">
           
 
-          <div class="content post posts-expand">
+          <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn,en,default">
+    <link itemprop="mainEntityOfPage" href="https://ordiychen.github.io/ordiychen.github.io/posts/2018-01-01-LRU-algorithms/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/apple-touch-icon.png">
+      <meta itemprop="name" content="Ordiy">
+      <meta itemprop="description" content="Stay Hungry.Stay Foolish.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ordiy's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/2018-01-01-LRU-algorithms/" class="post-title-link" itemprop="url">常用缓存算法——LRU</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-01-01 00:00:00" itemprop="dateCreated datePublished" datetime="2017-01-01T00:00:00Z">2017-01-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tech/" itemprop="url" rel="index"><span itemprop="name">tech</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tech/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>1.7k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>2 mins.</span>
+            </span>
+
+        </div>
+      </header>
 
     
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          LRU是一种常用的缓存算法，可以使用Java LinkedHashMap模拟实现。
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/2018-01-01-LRU-algorithms/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn,en,default">
+    <link itemprop="mainEntityOfPage" href="https://ordiychen.github.io/ordiychen.github.io/posts/java-dns/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/apple-touch-icon.png">
+      <meta itemprop="name" content="Ordiy">
+      <meta itemprop="description" content="Stay Hungry.Stay Foolish.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ordiy's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/java-dns/" class="post-title-link" itemprop="url">Java DNS解析问题-以Socket Client为例</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-01-01 00:00:00" itemprop="dateCreated datePublished" datetime="2017-01-01T00:00:00Z">2017-01-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tech/" itemprop="url" rel="index"><span itemprop="name">tech</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tech/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>3.4k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>3 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>JDK 的<code>InetSocketAddress</code>被设计了为一个不可变的对象，在<code>Socket</code>等长连接使用时需要注意DNS映射关系更新问题。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/java-dns/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn,en,default">
     <link itemprop="mainEntityOfPage" href="https://ordiychen.github.io/ordiychen.github.io/posts/centos-ntp/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -193,9 +369,10 @@
       <meta itemprop="name" content="Ordiy's Blog">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          Centos7 设置时间
-        </h1>
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/centos-ntp/" class="post-title-link" itemprop="url">Centos7 设置时间</a>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -245,49 +422,126 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>Centos7 使用NTP Pool 服务校验时间。</p>
-<a id="more"></a>
-
-<h3 id="设置时间"><a href="#设置时间" class="headerlink" title="设置时间"></a>设置时间</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#查看时区设置 默认是 America&#x2F;NewYork</span><br><span class="line">$ timedatectl</span><br><span class="line"></span><br><span class="line"># 查看所有 支持的时区名</span><br><span class="line">$ timedatectl list-timezones</span><br><span class="line"></span><br><span class="line"># 设置 将硬件时钟调整为与本地时钟一致, 0 为设置为 UTC 时间</span><br><span class="line">$ timedatectl set-local-rtc 1</span><br><span class="line"></span><br><span class="line"># 设置系统时区为HongKong</span><br><span class="line">timedatectl set-timezone Asia&#x2F;Hong_Kong</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="校准时间"><a href="#校准时间" class="headerlink" title="校准时间"></a>校准时间</h3><p>ntp校准时间</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#install ntp</span><br><span class="line">$ sudo yum install ntp -y</span><br><span class="line"></span><br><span class="line">#设置ntp server,NIST Internet Time Servers , NTP Pool Project</span><br><span class="line">$ sudo ntpdate time.nist.gov</span><br><span class="line"></span><br><span class="line">#或者 asia.pool.ntp.org 延迟 0.05ms 左右，推荐使用</span><br><span class="line">$ sudo ntpdate asia.pool.ntp.org</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>推荐使用 NTP Pool Project,部分节点使用GPS信号来设置时间，准确度很高。<br>链接：<a target="_blank" rel="noopener" href="https://www.ntppool.org/">https://www.ntppool.org</a></p>
-<p>PS：<br>NTP 漏洞问题：<br><a target="_blank" rel="noopener" href="https://www.securityfocus.com/bid/94452">https://www.securityfocus.com/bid/94452</a></p>
-
+          <p>Centos7 使用NTP Pool 服务校验时间。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/centos-ntp/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
     </div>
 
     
     
     
-
       <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/OS/" rel="tag"># OS</a>
-              <a href="/tags/Centos/" rel="tag"># Centos</a>
-              <a href="/tags/NTP/" rel="tag"># NTP</a>
-          </div>
-
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/posts/java-dns/" rel="prev" title="Java DNS解析问题-以Socket Client为例">
-      <i class="fa fa-chevron-left"></i> Java DNS解析问题-以Socket Client为例
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/posts/ieee-code-of-ethics/" rel="next" title="IEEE Code of Ethics">
-      IEEE Code of Ethics <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
+        <div class="post-eof"></div>
       </footer>
-    
   </article>
   
   
   
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn,en,default">
+    <link itemprop="mainEntityOfPage" href="https://ordiychen.github.io/ordiychen.github.io/posts/ieee-code-of-ethics/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/apple-touch-icon.png">
+      <meta itemprop="name" content="Ordiy">
+      <meta itemprop="description" content="Stay Hungry.Stay Foolish.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ordiy's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/ieee-code-of-ethics/" class="post-title-link" itemprop="url">IEEE Code of Ethics</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-01-01 11:04:00" itemprop="dateCreated datePublished" datetime="2014-01-01T11:04:00Z">2014-01-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tech/" itemprop="url" rel="index"><span itemprop="name">tech</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tech/values/" itemprop="url" rel="index"><span itemprop="name">values</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>6.5k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>6 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          我们正在创造一个新世界，人人都可以进入这个世界，而不必考虑由种族、经济力、武力、出生地而来的特权或偏见。们正在创造一个新世界，人人、处处可以表达他或她的信仰，无论这种信仰是多么古怪，而不再害怕被强制沉默或强制一律。　你们关于财产、表达、身份、迁徙的法律概念及其关联对我们不适用。这些概念建立在物质的基础上，我们这里没有物质。
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/ieee-code-of-ethics/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  </nav>
 
 
 
@@ -339,7 +593,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E6%97%B6%E9%97%B4"><span class="nav-number">1.</span> <span class="nav-text">设置时间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%A1%E5%87%86%E6%97%B6%E9%97%B4"><span class="nav-number">2.</span> <span class="nav-text">校准时间</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

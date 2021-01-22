@@ -13,22 +13,22 @@
   <meta name="msapplication-config" content="/images/browserconfig.xml">
   <meta name="google-site-verification" content="b_jbnt4bJ9P-9puoWqY9o_Hb_EpuISdU7FSMlvzQ-sw">
 
-<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"ordiychen.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"buttons","active":"gitalk","storage":true,"lazyload":false,"nav":null,"gitalk":{"order":1},"activeClass":"gitalk"},"algolia":{"hits":{"per_page":12},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+    var CONFIG = {"hostname":"ordiychen.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":false,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
   <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
+<meta property="og:title" content="Ordiy&#39;s Blog">
 <meta property="og:url" content="https://ordiychen.github.io/ordiychen.github.io/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="Ordiy&#39;s Blog">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:author" content="John Doe">
+<meta property="article:author" content="Ordiy">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://ordiychen.github.io/ordiychen.github.io/">
@@ -44,7 +44,7 @@
   };
 </script>
 
-  <title>Hexo</title>
+  <title>Ordiy's Blog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-175654772-1"></script>
     <script>
@@ -84,7 +84,7 @@
   </style>
 </noscript>
 
-<link rel="alternate" href="atom.xml" title="Hexo" type="application/atom+xml">
+<link rel="alternate" href="/atom.xml" title="Ordiy's Blog" type="application/atom+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -101,6 +101,20 @@
     </div>
   </div>
 
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Ordiy's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Just do it!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
 </div>
 
 
@@ -110,7 +124,7 @@
   <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="index.html" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
 
   </li>
         <li class="menu-item menu-item-archives">
@@ -128,40 +142,11 @@
     <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
 
   </li>
-        <li class="menu-item menu-item-commonweal">
-
-    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a>
-
-  </li>
-      <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
-        </a>
-      </li>
   </ul>
 </nav>
 
 
 
-  <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container"></div>
-  <span class="popup-btn-close">
-    <i class="fa fa-times-circle"></i>
-  </span>
-</div>
-<div class="algolia-results">
-  <div id="algolia-stats"></div>
-  <div id="algolia-hits"></div>
-  <div id="algolia-pagination" class="algolia-pagination"></div>
-</div>
-
-      
-    </div>
-  </div>
 
 </div>
     </header>
@@ -197,12 +182,12 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="Ordiy's Blog">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="posts/2020-01-01-tls-study-md/" class="post-title-link" itemprop="url">TLS握手过程</a>
+            <a href="/posts/2020-01-01-tls-study-md/" class="post-title-link" itemprop="url">TLS握手过程</a>
         </h2>
 
         <div class="post-meta">
@@ -220,11 +205,11 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="categories/tech/" itemprop="url" rel="index"><span itemprop="name">tech</span></a>
+                  <a href="/categories/tech/" itemprop="url" rel="index"><span itemprop="name">tech</span></a>
                 </span>
                   , 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="categories/tech/TLS/" itemprop="url" rel="index"><span itemprop="name">TLS</span></a>
+                  <a href="/categories/tech/TLS/" itemprop="url" rel="index"><span itemprop="name">TLS</span></a>
                 </span>
             </span>
 
@@ -256,7 +241,7 @@
           结合RFC5246标准，对TLS握手过程的理解和通信过程分析
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="posts/2020-01-01-tls-study-md/#more" rel="contents">
+              <a class="btn" href="/posts/2020-01-01-tls-study-md/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -289,12 +274,12 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="Ordiy's Blog">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="posts/2020-01-01-tls-truststores-md/" class="post-title-link" itemprop="url">HTTP2 TLS加密通信理解与应用</a>
+            <a href="/posts/2020-01-01-tls-truststores-md/" class="post-title-link" itemprop="url">HTTP2 TLS加密通信理解与应用</a>
         </h2>
 
         <div class="post-meta">
@@ -312,11 +297,11 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="categories/tech/" itemprop="url" rel="index"><span itemprop="name">tech</span></a>
+                  <a href="/categories/tech/" itemprop="url" rel="index"><span itemprop="name">tech</span></a>
                 </span>
                   , 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="categories/tech/TLS/" itemprop="url" rel="index"><span itemprop="name">TLS</span></a>
+                  <a href="/categories/tech/TLS/" itemprop="url" rel="index"><span itemprop="name">TLS</span></a>
                 </span>
             </span>
 
@@ -348,7 +333,7 @@
           通过TLS实现端对端的加密场景的实现过程及原理
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="posts/2020-01-01-tls-truststores-md/#more" rel="contents">
+              <a class="btn" href="/posts/2020-01-01-tls-truststores-md/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -372,7 +357,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn,en,default">
-    <link itemprop="mainEntityOfPage" href="https://ordiychen.github.io/ordiychen.github.io/posts/apache-http-client5/">
+    <link itemprop="mainEntityOfPage" href="https://ordiychen.github.io/ordiychen.github.io/posts/2020-01-01-apache-http-client5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/apple-touch-icon.png">
@@ -381,12 +366,12 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="Ordiy's Blog">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="posts/apache-http-client5/" class="post-title-link" itemprop="url">Apache Http-Client5 基本使用</a>
+            <a href="/posts/2020-01-01-apache-http-client5/" class="post-title-link" itemprop="url">Apache Http-Client5 基本使用</a>
         </h2>
 
         <div class="post-meta">
@@ -404,11 +389,11 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="categories/tech/" itemprop="url" rel="index"><span itemprop="name">tech</span></a>
+                  <a href="/categories/tech/" itemprop="url" rel="index"><span itemprop="name">tech</span></a>
                 </span>
                   , 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="categories/tech/web/" itemprop="url" rel="index"><span itemprop="name">web</span></a>
+                  <a href="/categories/tech/web/" itemprop="url" rel="index"><span itemprop="name">web</span></a>
                 </span>
             </span>
 
@@ -440,7 +425,7 @@
           <p>Apache HttpComponents项目进行Http API使用及<code>I/O Reactor</code></p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="posts/apache-http-client5/#more" rel="contents">
+              <a class="btn" href="/posts/2020-01-01-apache-http-client5/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -473,12 +458,12 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="Ordiy's Blog">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="posts/2020-05-python-count/" class="post-title-link" itemprop="url">python 使用绘制统计图</a>
+            <a href="/posts/2020-05-python-count/" class="post-title-link" itemprop="url">python 使用绘制统计图</a>
         </h2>
 
         <div class="post-meta">
@@ -496,11 +481,11 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="categories/tech/" itemprop="url" rel="index"><span itemprop="name">tech</span></a>
+                  <a href="/categories/tech/" itemprop="url" rel="index"><span itemprop="name">tech</span></a>
                 </span>
                   , 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="categories/tech/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+                  <a href="/categories/tech/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
                 </span>
             </span>
 
@@ -532,7 +517,7 @@
           学习python 绘制基本的折线图、对散点图进行拟合、使用快速傅立叶变换对周期性矩形波(方波)信号记性分解（分解出频率、时域图)
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="posts/2020-05-python-count/#more" rel="contents">
+              <a class="btn" href="/posts/2020-05-python-count/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -565,12 +550,12 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="Ordiy's Blog">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="posts/grpc-gateway/" class="post-title-link" itemprop="url">在线数据服务网关实践经验总结</a>
+            <a href="/posts/grpc-gateway/" class="post-title-link" itemprop="url">在线数据服务网关实践经验总结</a>
         </h2>
 
         <div class="post-meta">
@@ -588,7 +573,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="categories/tech/" itemprop="url" rel="index"><span itemprop="name">tech</span></a>
+                  <a href="/categories/tech/" itemprop="url" rel="index"><span itemprop="name">tech</span></a>
                 </span>
             </span>
 
@@ -620,7 +605,7 @@
           <p>在线数据服务网关实践经验分享,一种NIO高性能的存储层网关,高性能统一在线数据平台实践</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="posts/grpc-gateway/#more" rel="contents">
+              <a class="btn" href="/posts/grpc-gateway/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -653,12 +638,12 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="Ordiy's Blog">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="posts/nodejs-DNS-error/" class="post-title-link" itemprop="url">记一次DNS异常导致的`ECONNREFUSED`问题</a>
+            <a href="/posts/nodejs-DNS-error/" class="post-title-link" itemprop="url">记一次DNS异常导致的`ECONNREFUSED`问题</a>
         </h2>
 
         <div class="post-meta">
@@ -676,11 +661,11 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="categories/tech/" itemprop="url" rel="index"><span itemprop="name">tech</span></a>
+                  <a href="/categories/tech/" itemprop="url" rel="index"><span itemprop="name">tech</span></a>
                 </span>
                   , 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="categories/tech/DNS/" itemprop="url" rel="index"><span itemprop="name">DNS</span></a>
+                  <a href="/categories/tech/DNS/" itemprop="url" rel="index"><span itemprop="name">DNS</span></a>
                 </span>
             </span>
 
@@ -712,7 +697,7 @@
           使用工具排查DNS异常
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="posts/nodejs-DNS-error/#more" rel="contents">
+              <a class="btn" href="/posts/nodejs-DNS-error/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -745,12 +730,12 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="Ordiy's Blog">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="posts/2019-10-11-python-calc-pi-1/" class="post-title-link" itemprop="url">python 计算圆周率(译)</a>
+            <a href="/posts/2019-10-11-python-calc-pi-1/" class="post-title-link" itemprop="url">python 计算圆周率(译)</a>
         </h2>
 
         <div class="post-meta">
@@ -768,11 +753,11 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="categories/tech/" itemprop="url" rel="index"><span itemprop="name">tech</span></a>
+                  <a href="/categories/tech/" itemprop="url" rel="index"><span itemprop="name">tech</span></a>
                 </span>
                   , 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="categories/tech/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+                  <a href="/categories/tech/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
                 </span>
             </span>
 
@@ -804,7 +789,7 @@
           使用贝利-波尔温-普劳夫公式、贝拉公式、Chudnovsky算法计算圆周率
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="posts/2019-10-11-python-calc-pi-1/#more" rel="contents">
+              <a class="btn" href="/posts/2019-10-11-python-calc-pi-1/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -837,12 +822,12 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="Ordiy's Blog">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="posts/2019-01-01-log4j2-json-layout/" class="post-title-link" itemprop="url">使用log4j2 jsonLayout自定义JSON格式日志</a>
+            <a href="/posts/2019-01-01-log4j2-json-layout/" class="post-title-link" itemprop="url">使用log4j2 jsonLayout自定义JSON格式日志</a>
         </h2>
 
         <div class="post-meta">
@@ -860,11 +845,11 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="categories/tech/" itemprop="url" rel="index"><span itemprop="name">tech</span></a>
+                  <a href="/categories/tech/" itemprop="url" rel="index"><span itemprop="name">tech</span></a>
                 </span>
                   , 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="categories/tech/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
+                  <a href="/categories/tech/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
                 </span>
             </span>
 
@@ -896,7 +881,7 @@
           log4j2 使用JsonLayout输出json格式的日志，以及使用lookup、ThreadContext配置出自定义的jsonlog，可以用于对微服务的日志输出或者其它日志分析。
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="posts/2019-01-01-log4j2-json-layout/#more" rel="contents">
+              <a class="btn" href="/posts/2019-01-01-log4j2-json-layout/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -929,12 +914,12 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="Ordiy's Blog">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="posts/2018-04-12-nginx-l4-loadblance-md/" class="post-title-link" itemprop="url">Nginx Stream L4 负载均衡</a>
+            <a href="/posts/2018-04-12-nginx-l4-loadblance-md/" class="post-title-link" itemprop="url">Nginx Stream L4 负载均衡</a>
         </h2>
 
         <div class="post-meta">
@@ -952,11 +937,11 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="categories/tech/" itemprop="url" rel="index"><span itemprop="name">tech</span></a>
+                  <a href="/categories/tech/" itemprop="url" rel="index"><span itemprop="name">tech</span></a>
                 </span>
                   , 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="categories/tech/nginx-stream/" itemprop="url" rel="index"><span itemprop="name">nginx stream</span></a>
+                  <a href="/categories/tech/nginx-stream/" itemprop="url" rel="index"><span itemprop="name">nginx stream</span></a>
                 </span>
             </span>
 
@@ -988,7 +973,7 @@
           总结Nginx Stream进行反向代理实现负载均衡，以及配置集群的高可用、A/B测试、SSL/TLS加密和日志排查等场景，总结了使用过程中遇到的一些问题，及改进方面。
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="posts/2018-04-12-nginx-l4-loadblance-md/#more" rel="contents">
+              <a class="btn" href="/posts/2018-04-12-nginx-l4-loadblance-md/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -1021,12 +1006,12 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="Ordiy's Blog">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="posts/2017-03-28-mysql-show-table-status/" class="post-title-link" itemprop="url">MySQL show status 使用指南</a>
+            <a href="/posts/2017-03-28-mysql-show-table-status/" class="post-title-link" itemprop="url">MySQL show status 使用指南</a>
         </h2>
 
         <div class="post-meta">
@@ -1044,11 +1029,11 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="categories/tech/" itemprop="url" rel="index"><span itemprop="name">tech</span></a>
+                  <a href="/categories/tech/" itemprop="url" rel="index"><span itemprop="name">tech</span></a>
                 </span>
                   , 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="categories/tech/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a>
+                  <a href="/categories/tech/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a>
                 </span>
             </span>
 
@@ -1080,375 +1065,7 @@
           MySQL show status 查询表的存储、格式、引擎等信息
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="posts/2017-03-28-mysql-show-table-status/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn,en,default">
-    <link itemprop="mainEntityOfPage" href="https://ordiychen.github.io/ordiychen.github.io/posts/2018-01-01-LRU-algorithms/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/apple-touch-icon.png">
-      <meta itemprop="name" content="Ordiy">
-      <meta itemprop="description" content="Stay Hungry.Stay Foolish.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="posts/2018-01-01-LRU-algorithms/" class="post-title-link" itemprop="url">常用缓存算法——LRU</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2017-01-01 00:00:00" itemprop="dateCreated datePublished" datetime="2017-01-01T00:00:00Z">2017-01-01</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="categories/tech/" itemprop="url" rel="index"><span itemprop="name">tech</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="categories/tech/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>1.7k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>2 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          LRU是一种常用的缓存算法，可以使用Java LinkedHashMap模拟实现。
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="posts/2018-01-01-LRU-algorithms/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn,en,default">
-    <link itemprop="mainEntityOfPage" href="https://ordiychen.github.io/ordiychen.github.io/posts/java-dns/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/apple-touch-icon.png">
-      <meta itemprop="name" content="Ordiy">
-      <meta itemprop="description" content="Stay Hungry.Stay Foolish.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="posts/java-dns/" class="post-title-link" itemprop="url">Java DNS解析问题-以Socket Client为例</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2017-01-01 00:00:00" itemprop="dateCreated datePublished" datetime="2017-01-01T00:00:00Z">2017-01-01</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="categories/tech/" itemprop="url" rel="index"><span itemprop="name">tech</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="categories/tech/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>3.4k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>3 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>JDK 的<code>InetSocketAddress</code>被设计了为一个不可变的对象，在<code>Socket</code>等长连接使用时需要注意DNS映射关系更新问题。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="posts/java-dns/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn,en,default">
-    <link itemprop="mainEntityOfPage" href="https://ordiychen.github.io/ordiychen.github.io/posts/centos-ntp/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/apple-touch-icon.png">
-      <meta itemprop="name" content="Ordiy">
-      <meta itemprop="description" content="Stay Hungry.Stay Foolish.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="posts/centos-ntp/" class="post-title-link" itemprop="url">Centos7 设置时间</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2015-02-02 19:04:00" itemprop="dateCreated datePublished" datetime="2015-02-02T19:04:00Z">2015-02-02</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="categories/tech/" itemprop="url" rel="index"><span itemprop="name">tech</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="categories/tech/OS/" itemprop="url" rel="index"><span itemprop="name">OS</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>543</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>1 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Centos7 使用NTP Pool 服务校验时间。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="posts/centos-ntp/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn,en,default">
-    <link itemprop="mainEntityOfPage" href="https://ordiychen.github.io/ordiychen.github.io/posts/ieee-code-of-ethics/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/apple-touch-icon.png">
-      <meta itemprop="name" content="Ordiy">
-      <meta itemprop="description" content="Stay Hungry.Stay Foolish.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="posts/ieee-code-of-ethics/" class="post-title-link" itemprop="url">IEEE Code of Ethics</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2014-01-01 11:04:00" itemprop="dateCreated datePublished" datetime="2014-01-01T11:04:00Z">2014-01-01</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="categories/tech/" itemprop="url" rel="index"><span itemprop="name">tech</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="categories/tech/values/" itemprop="url" rel="index"><span itemprop="name">values</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>2k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>2 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          工程师的价值，恪守的行为准则。
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="posts/ieee-code-of-ethics/#more" rel="contents">
+              <a class="btn" href="/posts/2017-03-28-mysql-show-table-status/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -1470,12 +1087,14 @@
 
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+  </nav>
 
 
 
           </div>
           
-
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -1585,24 +1204,22 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">OrdiyChen</span>
+  <span class="author" itemprop="copyrightHolder">Ordiy</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">74k</span>
+    <span title="Symbols count total">79k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">1:07</span>
+    <span title="Reading time total">1:11</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
-  </div>
 
         
 
@@ -1618,34 +1235,27 @@
   </div>
 
   
-  <script src="lib/anime.min.js"></script>
-  <script src="lib/velocity/velocity.min.js"></script>
-  <script src="lib/velocity/velocity.ui.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<script src="js/utils.js"></script>
+<script src="/js/utils.js"></script>
 
-<script src="js/motion.js"></script>
-
-
-<script src="js/schemes/pisces.js"></script>
+<script src="/js/motion.js"></script>
 
 
-<script src="js/next-boot.js"></script>
-
-<script src="js/bookmark.js"></script>
+<script src="/js/schemes/pisces.js"></script>
 
 
+<script src="/js/next-boot.js"></script>
 
-
-  
+<script src="/js/bookmark.js"></script>
 
 
 
 
   
-<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
-<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
-<script src="js/algolia-search.js"></script>
+
 
 
 
@@ -1663,7 +1273,6 @@
   
 
   
-
 
 </body>
 </html>

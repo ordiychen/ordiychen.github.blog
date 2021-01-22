@@ -5,29 +5,29 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 5.0.2">
-  <link rel="apple-touch-icon" sizes="180x180" href="../../images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="../../images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="../../images/logo.svg" color="#222">
-  <link rel="manifest" href="../../images/site.webmanifest">
-  <meta name="msapplication-config" content="../../images/browserconfig.xml">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/images/site.webmanifest">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
   <meta name="google-site-verification" content="b_jbnt4bJ9P-9puoWqY9o_Hb_EpuISdU7FSMlvzQ-sw">
 
-<link rel="stylesheet" href="../../css/main.css">
+<link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="../../lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"ordiychen.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"buttons","active":"gitalk","storage":true,"lazyload":false,"nav":null,"gitalk":{"order":1},"activeClass":"gitalk"},"algolia":{"hits":{"per_page":12},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+    var CONFIG = {"hostname":"ordiychen.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":false,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
   <meta name="description" content="在线数据服务网关实践经验分享,一种NIO高性能的存储层网关,高性能统一在线数据平台实践">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在线数据服务网关实践经验总结">
 <meta property="og:url" content="https://ordiychen.github.io/ordiychen.github.io/posts/grpc-gateway/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="Ordiy&#39;s Blog">
 <meta property="og:description" content="在线数据服务网关实践经验分享,一种NIO高性能的存储层网关,高性能统一在线数据平台实践">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/img_20_img_ods_20200519105652.png">
@@ -47,8 +47,8 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200713220032.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200713212836.png">
 <meta property="article:published_time" content="2019-10-21T19:04:00.000Z">
-<meta property="article:modified_time" content="2020-08-18T07:26:18.627Z">
-<meta property="article:author" content="John Doe">
+<meta property="article:modified_time" content="2020-12-07T07:14:56.685Z">
+<meta property="article:author" content="Ordiy">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="Gateway">
 <meta property="article:tag" content="HighPerformance">
@@ -70,7 +70,7 @@
   };
 </script>
 
-  <title>在线数据服务网关实践经验总结 | Hexo</title>
+  <title>在线数据服务网关实践经验总结 | Ordiy's Blog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-175654772-1"></script>
     <script>
@@ -110,7 +110,7 @@
   </style>
 </noscript>
 
-<link rel="alternate" href="atom.xml" title="Hexo" type="application/atom+xml">
+<link rel="alternate" href="/atom.xml" title="Ordiy's Blog" type="application/atom+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -127,6 +127,20 @@
     </div>
   </div>
 
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Ordiy's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Just do it!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
 </div>
 
 
@@ -136,58 +150,29 @@
   <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="../../index.html" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="../../archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="../../categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="../../tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
 
   </li>
-        <li class="menu-item menu-item-commonweal">
-
-    <a href="../../404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a>
-
-  </li>
-      <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
-        </a>
-      </li>
   </ul>
 </nav>
 
 
 
-  <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container"></div>
-  <span class="popup-btn-close">
-    <i class="fa fa-times-circle"></i>
-  </span>
-</div>
-<div class="algolia-results">
-  <div id="algolia-stats"></div>
-  <div id="algolia-hits"></div>
-  <div id="algolia-pagination" class="algolia-pagination"></div>
-</div>
-
-      
-    </div>
-  </div>
 
 </div>
     </header>
@@ -200,7 +185,7 @@
   <div class="reading-progress-bar"></div>
   <a role="button" class="book-mark-link book-mark-link-fixed"></a>
 
-  <a href="../../https:/github.com/ordiychen/ordiychen.github.io" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+  <a href="https://github.com/ordiychen/ordiychen.github.io" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
 
 
     <main class="main">
@@ -218,13 +203,13 @@
     <link itemprop="mainEntityOfPage" href="https://ordiychen.github.io/ordiychen.github.io/posts/grpc-gateway/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="../../images/apple-touch-icon.png">
+      <meta itemprop="image" content="/images/apple-touch-icon.png">
       <meta itemprop="name" content="Ordiy">
       <meta itemprop="description" content="Stay Hungry.Stay Foolish.">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="Ordiy's Blog">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -246,7 +231,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="../../categories/tech/" itemprop="url" rel="index"><span itemprop="name">tech</span></a>
+                  <a href="/categories/tech/" itemprop="url" rel="index"><span itemprop="name">tech</span></a>
                 </span>
             </span>
 
@@ -281,14 +266,14 @@
 <h1 id="业务需求"><a href="#业务需求" class="headerlink" title="业务需求"></a>业务需求</h1><p>实现一个统一在线数据服务，提供对在线数据(目前主要是保存在 HBase，后面再考虑其他存储)的读写功能。支持多语言接入、负载均衡、横向扩展、权限控制、流量(频率)控制、日志审计等功能。</p>
 <p><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/img_20_img_ods_20200519105652.png" alt="image"></p>
 <h1 id="技术方案设计"><a href="#技术方案设计" class="headerlink" title="技术方案设计"></a>技术方案设计</h1><h2 id="整体设计"><a href="#整体设计" class="headerlink" title="整体设计"></a>整体设计</h2><p>按业务数据流及需求，将整个系统划分为网络层、业务接入层、业务服务层、数据存储层。除网络层外，其它层用微服务的方式开发各层的组件。<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/img_20_20200519110709.png" alt="image"></p>
-<h3 id="RPC框架选择"><a href="#RPC框架选择" class="headerlink" title="RPC框架选择"></a>RPC框架选择</h3><p>综合对比<code>grpc</code> <code>thrift</code> <code>restful</code>在扩展性、跨语言兼容、性能、序列化大小等方面进行比对</p>
+<h3 id="RPC框架选择"><a href="#RPC框架选择" class="headerlink" title="RPC框架选择"></a>RPC框架选择</h3><p>综合对比<code>gRPC</code> <code>thrift</code> <code>RESTful</code>在扩展性、跨语言兼容、性能、序列化大小等方面进行比对</p>
 <table>
 <thead>
 <tr>
 <th align="left">参考指标</th>
-<th align="left">grpc</th>
+<th align="left">gRPC(protobuf)</th>
 <th align="left">thrift</th>
-<th align="left">rest</th>
+<th align="left">REST</th>
 </tr>
 </thead>
 <tbody><tr>
@@ -330,7 +315,7 @@
 <tr>
 <td align="left">性能（吞吐）</td>
 <td align="left">√(官方banchmark c++ 单核平均 7w QPS)</td>
-<td align="left">√(与grpc 相差不大，未找到官方资料)</td>
+<td align="left">√(与gRPC 相差不大，未找到官方资料)</td>
 <td align="left">x (     restful使用的 http1.1协议，性能会比http2差1/2 )</td>
 </tr>
 <tr>
@@ -340,13 +325,12 @@
 <td align="left">√ (通常http1.1)</td>
 </tr>
 </tbody></table>
-<p>由于<code>restful</code>协议使用的 http1.1协议，性能会比http2差1/2，所以将其排除。</p>
-<p>综合比对，选择grpc 作为RPC框架。</p>
+<p>综合比对，选择gRPC 作为RPC框架。</p>
 <table>
 <thead>
 <tr>
 <th align="left">参考指标</th>
-<th align="left">grpc</th>
+<th align="left">gRPC</th>
 <th align="left">thrift</th>
 <th align="left">备注</th>
 </tr>
@@ -355,13 +339,13 @@
 <td align="left">性能指标</td>
 <td align="left">XXXX</td>
 <td align="left">XXXX</td>
-<td align="left">在性能上thrift耗时&lt;  grpc 耗时,差距在 0.84s/ 1wQPS,基本可以忽略</td>
+<td align="left">在性能上thrift耗时&lt;  gRPC 耗时,差距在 0.84s/ 1wQPS,基本可以忽略</td>
 </tr>
 <tr>
 <td align="left">成熟度和应用广度</td>
 <td align="left">XXXX</td>
 <td align="left">XXX</td>
-<td align="left">grpc 社区和版本更新上好于thrift,并且google facebook等内部都在用</td>
+<td align="left">gRPC 社区和版本更新上好于thrift,并且google facebook等内部都在用</td>
 </tr>
 <tr>
 <td align="left">服务治理</td>
@@ -383,8 +367,8 @@
 </tr>
 </tbody></table>
 <h3 id="确定软件模块划分"><a href="#确定软件模块划分" class="headerlink" title="确定软件模块划分"></a>确定软件模块划分</h3><p>将整个系统划分为 <code>Gateway</code>,<code>Read Service</code>,<code>Write Service</code>以及周边服务等。<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/img_20_20200519110047.png" alt="image"></p>
-<h3 id="用户portal交互设计"><a href="#用户portal交互设计" class="headerlink" title="用户portal交互设计"></a>用户portal交互设计</h3><p>给用户提供一个可以进行小量数据查询、下载的portal web，以替代使用不便的hbase shell<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200713194645.png" alt="image"></p>
-<h3 id="iportal控制台的设计"><a href="#iportal控制台的设计" class="headerlink" title="iportal控制台的设计"></a>iportal控制台的设计</h3><p>iportal控制台需要实现对用户授权（表权限、API、频次限制)、停止授权、查看用户调用报表等功能。<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200713201819.png" alt="image"></p>
+<h3 id="用户Portal交互设计"><a href="#用户Portal交互设计" class="headerlink" title="用户Portal交互设计"></a>用户Portal交互设计</h3><p>给用户提供一个可以进行小量数据查询、下载的Portal web，以替代使用不便的hbase shell<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200713194645.png" alt="image"></p>
+<h3 id="iPortal控制台的设计"><a href="#iPortal控制台的设计" class="headerlink" title="iPortal控制台的设计"></a>iPortal控制台的设计</h3><p>iPortal控制台需要实现对用户授权（表权限、API、频次限制)、停止授权、查看用户调用报表等功能。<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200713201819.png" alt="image"></p>
 <h2 id="功能实现"><a href="#功能实现" class="headerlink" title="功能实现"></a>功能实现</h2><h3 id="接入层及gateway-service功能实现"><a href="#接入层及gateway-service功能实现" class="headerlink" title="接入层及gateway-service功能实现"></a>接入层及gateway-service功能实现</h3><h4 id="接入层的高可用、横向扩展"><a href="#接入层的高可用、横向扩展" class="headerlink" title="接入层的高可用、横向扩展"></a>接入层的高可用、横向扩展</h4><p>使用keepalived + haproxy 实现高可用和负载均衡。（后期由于运维规划，统一使用nginx stream做tcp4层代理)<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200713192549.png" alt="image"></p>
 <h4 id="用户表级别限流"><a href="#用户表级别限流" class="headerlink" title="用户表级别限流"></a>用户表级别限流</h4><p>底层存储每个库以及表数据容量、机器配置等差一，为保证系统的可用性必须对用户的请求进行限流。<br>根据不同账号的对表的不同操作进行限流，以username + request_table + request_optation 作为key设计令牌桶，可实现按分钟/按秒进行平滑限流。</p>
 <p><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200713192114.png" alt="image"></p>
@@ -393,10 +377,10 @@
 <h4 id="服务熔断与降级"><a href="#服务熔断与降级" class="headerlink" title="服务熔断与降级"></a>服务熔断与降级</h4><p>底层存储故障、后端服务节点遇到异常时无法立即恢复，此时将请求发给后端节点已经没有意义，对于这类场景使用Hystrix进行熔断降级处理，对于异常节点直接进行平滑下线从eureka注册中心下线。</p>
 <h2 id="数据业务层的功能实现"><a href="#数据业务层的功能实现" class="headerlink" title="数据业务层的功能实现"></a>数据业务层的功能实现</h2><h3 id="读写分离实现"><a href="#读写分离实现" class="headerlink" title="读写分离实现"></a>读写分离实现</h3><p>对于大流量的业务，使用Kafka MQ读写分离提高性能、平滑峰值。<br>读写分离设计示意图：<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200713210750.png" alt="image"></p>
 <p> 数据写入过程：<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200713205115.png" alt="image"></p>
-<h2 id="存储层Hbase主备切换"><a href="#存储层Hbase主备切换" class="headerlink" title="存储层Hbase主备切换"></a>存储层Hbase主备切换</h2><p>Hbase异常会出现大量查询超时和相应的Error，当失败达到一定阈值需要进行Hbase主备库切换。<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200713214008.png" alt="image"><br>同时也需要支持手动切换hbase，对于手动切换，采用通过修改apollo 配置中心的对应的配置实现集群的手动切换：<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200713214629.png" alt="image"></p>
+<h2 id="存储层Hbase主备切换"><a href="#存储层Hbase主备切换" class="headerlink" title="存储层Hbase主备切换"></a>存储层Hbase主备切换</h2><p>Hbase异常会出现大量查询超时和相应的Error，当失败达到一定阈值需要进行Hbase主备库切换。<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200713214008.png" alt="image"><br>同时也需要支持手动切换HBase，对于手动切换，采用通过修改apollo 配置中心的对应的配置实现集群的手动切换：<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200713214629.png" alt="image"></p>
 <h2 id="日志审计和统计和报表功能实现"><a href="#日志审计和统计和报表功能实现" class="headerlink" title="日志审计和统计和报表功能实现"></a>日志审计和统计和报表功能实现</h2><p>在<code>gateway-service</code>层增加<code>logInterceptor</code>实现对用户的请求的进站和出站数据的记录，利用ELK来实现整个系统的日志收集和搜索。<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200713215643.png" alt="image"></p>
 <p>使用Kibana进行日志查询：<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200713220032.png" alt="image"></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>在接入层使用负载均衡，在服务层通过微服务的架构方式方式保证整个架构的高可用和可伸缩性，对于gateway-service、hbase-service、writer等微服务使用全异步处理的方式提高了单个节点的性能，减小各节点对于整体耗时的影响。<br>各节点的最大QPS负载：</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>在接入层使用负载均衡，在服务层通过微服务的架构方式方式保证整个架构的高可用和可伸缩性，对于gateway-service、HBase-service、writer等微服务使用全异步处理的方式提高了单个节点的性能，减小各节点对于整体耗时的影响。<br>各节点的最大QPS负载：</p>
 <table>
 <thead>
 <tr>
@@ -423,11 +407,11 @@
 </tbody></table>
 <p>线上生产环境每日流量：<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200713212836.png" alt="image"></p>
 <h2 id="可以继续优化"><a href="#可以继续优化" class="headerlink" title="可以继续优化"></a>可以继续优化</h2><ul>
-<li>grpc 框架自带的loadblance策略与eureka策略整合</li>
-<li>grpc支持stream模式，可以探索基于stream的转发</li>
+<li>gRPC 框架自带的loadblance策略与eureka策略整合</li>
+<li>gRPC支持stream模式，可以探索基于stream的转发</li>
 <li>JVM预热，在高并发场景下数据流量很大，程序刚启动时会出现一些耗时较高的查询</li>
 </ul>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>-<a target="_blank" rel="noopener" href="https://grpc.io/docs/guides/benchmarking/">grpc banchmark</a></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>-<a target="_blank" rel="noopener" href="https://grpc.io/docs/guides/benchmarking/">gRPC banchmark</a></p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/softidea/p/7232035.html">开源RPC（gRPC/Thrift）框架性能评测</a></li>
 <li><a target="_blank" rel="noopener" href="https://colobu.com/2016/09/05/benchmarks-of-popular-rpc-frameworks/">分布式RPC框架性能大比拼</a></li>
@@ -441,11 +425,11 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="../../tags/Java/" rel="tag"># Java</a>
-              <a href="../../tags/Gateway/" rel="tag"># Gateway</a>
-              <a href="../../tags/HighPerformance/" rel="tag"># HighPerformance</a>
-              <a href="../../tags/Concurrent/" rel="tag"># Concurrent</a>
-              <a href="../../tags/Architecture/" rel="tag"># Architecture</a>
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/Gateway/" rel="tag"># Gateway</a>
+              <a href="/tags/HighPerformance/" rel="tag"># HighPerformance</a>
+              <a href="/tags/Concurrent/" rel="tag"># Concurrent</a>
+              <a href="/tags/Architecture/" rel="tag"># Architecture</a>
           </div>
 
         
@@ -454,11 +438,11 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="../2020-05-python-count/" rel="prev" title="python 使用绘制统计图">
+    <a href="/posts/2020-05-python-count/" rel="prev" title="python 使用绘制统计图">
       <i class="fa fa-chevron-left"></i> python 使用绘制统计图
     </a></div>
       <div class="post-nav-item">
-    <a href="../nodejs-DNS-error/" rel="next" title="记一次DNS异常导致的`ECONNREFUSED`问题">
+    <a href="/posts/nodejs-DNS-error/" rel="next" title="记一次DNS异常导致的`ECONNREFUSED`问题">
       记一次DNS异常导致的`ECONNREFUSED`问题 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -473,9 +457,6 @@
 
           </div>
           
-    <div class="comments" id="gitalk-container"></div>
-  
-
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -522,34 +503,34 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%9A%E5%8A%A1%E9%9C%80%E6%B1%82"><span class="nav-number">1.</span> <span class="nav-text">业务需求</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8A%80%E6%9C%AF%E6%96%B9%E6%A1%88%E8%AE%BE%E8%AE%A1"><span class="nav-number">2.</span> <span class="nav-text">技术方案设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B4%E4%BD%93%E8%AE%BE%E8%AE%A1"><span class="nav-number">2.1.</span> <span class="nav-text">整体设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RPC%E6%A1%86%E6%9E%B6%E9%80%89%E6%8B%A9"><span class="nav-number">2.1.1.</span> <span class="nav-text">RPC框架选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A1%AE%E5%AE%9A%E8%BD%AF%E4%BB%B6%E6%A8%A1%E5%9D%97%E5%88%92%E5%88%86"><span class="nav-number">2.1.2.</span> <span class="nav-text">确定软件模块划分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E6%88%B7portal%E4%BA%A4%E4%BA%92%E8%AE%BE%E8%AE%A1"><span class="nav-number">2.1.3.</span> <span class="nav-text">用户portal交互设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iportal%E6%8E%A7%E5%88%B6%E5%8F%B0%E7%9A%84%E8%AE%BE%E8%AE%A1"><span class="nav-number">2.1.4.</span> <span class="nav-text">iportal控制台的设计</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.2.</span> <span class="nav-text">功能实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A5%E5%85%A5%E5%B1%82%E5%8F%8Agateway-service%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.2.1.</span> <span class="nav-text">接入层及gateway-service功能实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%A5%E5%85%A5%E5%B1%82%E7%9A%84%E9%AB%98%E5%8F%AF%E7%94%A8%E3%80%81%E6%A8%AA%E5%90%91%E6%89%A9%E5%B1%95"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">接入层的高可用、横向扩展</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E8%A1%A8%E7%BA%A7%E5%88%AB%E9%99%90%E6%B5%81"><span class="nav-number">2.2.1.2.</span> <span class="nav-text">用户表级别限流</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0%E4%B8%8E%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="nav-number">2.2.1.3.</span> <span class="nav-text">服务发现与负载均衡</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E7%86%94%E6%96%AD%E4%B8%8E%E9%99%8D%E7%BA%A7"><span class="nav-number">2.2.1.4.</span> <span class="nav-text">服务熔断与降级</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E4%B8%9A%E5%8A%A1%E5%B1%82%E7%9A%84%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.3.</span> <span class="nav-text">数据业务层的功能实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.3.1.</span> <span class="nav-text">读写分离实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E5%B1%82Hbase%E4%B8%BB%E5%A4%87%E5%88%87%E6%8D%A2"><span class="nav-number">2.4.</span> <span class="nav-text">存储层Hbase主备切换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%A5%E5%BF%97%E5%AE%A1%E8%AE%A1%E5%92%8C%E7%BB%9F%E8%AE%A1%E5%92%8C%E6%8A%A5%E8%A1%A8%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.5.</span> <span class="nav-text">日志审计和统计和报表功能实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">2.6.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E4%BB%A5%E7%BB%A7%E7%BB%AD%E4%BC%98%E5%8C%96"><span class="nav-number">2.7.</span> <span class="nav-text">可以继续优化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%9A%E5%8A%A1%E9%9C%80%E6%B1%82"><span class="nav-number">1.</span> <span class="nav-text">业务需求</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8A%80%E6%9C%AF%E6%96%B9%E6%A1%88%E8%AE%BE%E8%AE%A1"><span class="nav-number">2.</span> <span class="nav-text">技术方案设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B4%E4%BD%93%E8%AE%BE%E8%AE%A1"><span class="nav-number">2.1.</span> <span class="nav-text">整体设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RPC%E6%A1%86%E6%9E%B6%E9%80%89%E6%8B%A9"><span class="nav-number">2.1.1.</span> <span class="nav-text">RPC框架选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A1%AE%E5%AE%9A%E8%BD%AF%E4%BB%B6%E6%A8%A1%E5%9D%97%E5%88%92%E5%88%86"><span class="nav-number">2.1.2.</span> <span class="nav-text">确定软件模块划分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E6%88%B7Portal%E4%BA%A4%E4%BA%92%E8%AE%BE%E8%AE%A1"><span class="nav-number">2.1.3.</span> <span class="nav-text">用户Portal交互设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iPortal%E6%8E%A7%E5%88%B6%E5%8F%B0%E7%9A%84%E8%AE%BE%E8%AE%A1"><span class="nav-number">2.1.4.</span> <span class="nav-text">iPortal控制台的设计</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.2.</span> <span class="nav-text">功能实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A5%E5%85%A5%E5%B1%82%E5%8F%8Agateway-service%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.2.1.</span> <span class="nav-text">接入层及gateway-service功能实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%A5%E5%85%A5%E5%B1%82%E7%9A%84%E9%AB%98%E5%8F%AF%E7%94%A8%E3%80%81%E6%A8%AA%E5%90%91%E6%89%A9%E5%B1%95"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">接入层的高可用、横向扩展</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E8%A1%A8%E7%BA%A7%E5%88%AB%E9%99%90%E6%B5%81"><span class="nav-number">2.2.1.2.</span> <span class="nav-text">用户表级别限流</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0%E4%B8%8E%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="nav-number">2.2.1.3.</span> <span class="nav-text">服务发现与负载均衡</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E7%86%94%E6%96%AD%E4%B8%8E%E9%99%8D%E7%BA%A7"><span class="nav-number">2.2.1.4.</span> <span class="nav-text">服务熔断与降级</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E4%B8%9A%E5%8A%A1%E5%B1%82%E7%9A%84%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.3.</span> <span class="nav-text">数据业务层的功能实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.3.1.</span> <span class="nav-text">读写分离实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E5%B1%82Hbase%E4%B8%BB%E5%A4%87%E5%88%87%E6%8D%A2"><span class="nav-number">2.4.</span> <span class="nav-text">存储层Hbase主备切换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%A5%E5%BF%97%E5%AE%A1%E8%AE%A1%E5%92%8C%E7%BB%9F%E8%AE%A1%E5%92%8C%E6%8A%A5%E8%A1%A8%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.5.</span> <span class="nav-text">日志审计和统计和报表功能实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">2.6.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E4%BB%A5%E7%BB%A7%E7%BB%AD%E4%BC%98%E5%8C%96"><span class="nav-number">2.7.</span> <span class="nav-text">可以继续优化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="Ordiy"
-      src="../../images/apple-touch-icon.png">
+      src="/images/apple-touch-icon.png">
   <p class="site-author-name" itemprop="name">Ordiy</p>
   <div class="site-description" itemprop="description">Stay Hungry.Stay Foolish.</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="../../archives/">
+          <a href="/archives/">
         
           <span class="site-state-item-count">14</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="../../categories/">
+            <a href="/categories/">
           
         <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="../../tags/">
+            <a href="/tags/">
           
         <span class="site-state-item-count">33</span>
         <span class="site-state-item-name">tags</span></a>
@@ -558,10 +539,10 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="../../https:/github.com/ordiychen" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ordiychen" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <a href="https://github.com/ordiychen" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ordiychen" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="../../mailto:ordiymaster@outlook.com" title="E-Mail → mailto:ordiymaster@outlook.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+        <a href="mailto:ordiymaster@outlook.com" title="E-Mail → mailto:ordiymaster@outlook.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
       </span>
   </div>
 
@@ -586,24 +567,22 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">OrdiyChen</span>
+  <span class="author" itemprop="copyrightHolder">Ordiy</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">74k</span>
+    <span title="Symbols count total">79k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">1:07</span>
+    <span title="Reading time total">1:11</span>
 </div>
-  <div class="powered-by">Powered by <a href="../../https:/hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="../../https:/pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
-  </div>
 
         
 
@@ -619,34 +598,27 @@
   </div>
 
   
-  <script src="../../lib/anime.min.js"></script>
-  <script src="../../lib/velocity/velocity.min.js"></script>
-  <script src="../../lib/velocity/velocity.ui.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<script src="../../js/utils.js"></script>
+<script src="/js/utils.js"></script>
 
-<script src="../../js/motion.js"></script>
-
-
-<script src="../../js/schemes/pisces.js"></script>
+<script src="/js/motion.js"></script>
 
 
-<script src="../../js/next-boot.js"></script>
-
-<script src="../../js/bookmark.js"></script>
+<script src="/js/schemes/pisces.js"></script>
 
 
+<script src="/js/next-boot.js"></script>
 
-
-  
+<script src="/js/bookmark.js"></script>
 
 
 
 
   
-<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
-<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
-<script src="../../js/algolia-search.js"></script>
+
 
 
 
@@ -664,26 +636,6 @@
   
 
   
-
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
-
-<script>
-NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
-    var gitalk = new Gitalk({
-      clientID    : '',
-      clientSecret: '',
-      repo        : 'ordiychen.github.io',
-      owner       : '',
-      admin       : [''],
-      id          : 'd41d8cd98f00b204e9800998ecf8427e',
-        language: 'en',
-      distractionFreeMode: true
-    });
-    gitalk.render('gitalk-container');
-  }, window.Gitalk);
-});
-</script>
 
 </body>
 </html>
