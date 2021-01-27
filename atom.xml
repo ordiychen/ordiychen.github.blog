@@ -224,9 +224,9 @@
       <category term="java" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/java/"/>
     
     
-      <category term="Java" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Java/"/>
-    
       <category term="blog" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/blog/"/>
+    
+      <category term="Java" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Java/"/>
     
       <category term="Log4j2" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Log4j2/"/>
     
@@ -280,9 +280,9 @@
       <category term="mysql" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/mysql/"/>
     
     
-      <category term="Java" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Java/"/>
-    
       <category term="blog" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/blog/"/>
+    
+      <category term="Java" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Java/"/>
     
       <category term="Log4j2" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Log4j2/"/>
     
@@ -309,13 +309,13 @@
       <category term="algorithm" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/algorithm/"/>
     
     
+      <category term="Net" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Net/"/>
+    
       <category term="Java" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Java/"/>
     
       <category term="LRU" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/LRU/"/>
     
       <category term="CoreJava" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/CoreJava/"/>
-    
-      <category term="Net" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Net/"/>
     
   </entry>
   
@@ -338,11 +338,11 @@
       <category term="java" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/java/"/>
     
     
+      <category term="Net" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Net/"/>
+    
       <category term="Java" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Java/"/>
     
       <category term="CoreJava" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/CoreJava/"/>
-    
-      <category term="Net" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Net/"/>
     
       <category term="JDK" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/JDK/"/>
     
