@@ -35,8 +35,8 @@
 <meta property="article:modified_time" content="2020-08-18T09:34:23.127Z">
 <meta property="article:author" content="Ordiy">
 <meta property="article:tag" content="Net">
-<meta property="article:tag" content="Java">
 <meta property="article:tag" content="LRU">
+<meta property="article:tag" content="Java">
 <meta property="article:tag" content="CoreJava">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200602183106.png">
@@ -249,12 +249,12 @@
 
       
         <h3 id="LRU算法"><a href="#LRU算法" class="headerlink" title="LRU算法"></a>LRU算法</h3><p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Cache_replacement_policies#Least_recently_used_(LRU)">Least recently used（LRU）</a>一种常用的缓存算法,通过首先丢弃最近最少使用的记录。LRU算法需要跟踪何时使用了什么，并确保算法始终丢弃最近最少使用的记录。<br>LRU算法及其实现-以LinkedHashMap为例：</p>
-<h3 id="LRU-使用LinkedHashMap代码实现"><a href="#LRU-使用LinkedHashMap代码实现" class="headerlink" title="LRU 使用LinkedHashMap代码实现"></a>LRU 使用<code>LinkedHashMap</code>代码实现</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.github.ordiy.map;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.LinkedHashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 经典的LRU 算法</span></span><br><span class="line"><span class="comment"> *  热点数据缓存</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>:ordiy</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LRUCache</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">extends</span> <span class="title">LinkedHashMap</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> cacheSize;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">LRUCache</span><span class="params">( <span class="keyword">int</span> cacheSize)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(cacheSize,(<span class="keyword">float</span>)<span class="number">0.75</span>,<span class="keyword">true</span>);</span><br><span class="line">        <span class="keyword">this</span>.cacheSize = cacheSize;</span><br><span class="line">    &#125;</span><br><span class="line">     <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">boolean</span> <span class="title">removeEldestEntry</span><span class="params">(Map.Entry&lt;K,V&gt; eldest)</span></span>&#123;</span><br><span class="line">       <span class="comment">// System.out.println(eldest);</span></span><br><span class="line">        <span class="keyword">return</span> size() &gt; cacheSize;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="LRU-使用LinkedHashMap代码实现"><a href="#LRU-使用LinkedHashMap代码实现" class="headerlink" title="LRU 使用LinkedHashMap代码实现"></a>LRU 使用<code>LinkedHashMap</code>代码实现</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.github.ordiy.map;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.LinkedHashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 经典的LRU 算法</span></span><br><span class="line"><span class="comment"> *  热点数据缓存</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>:ordiy</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LRUCache</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">extends</span> <span class="title">LinkedHashMap</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> cacheSize;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">LRUCache</span><span class="params">( <span class="keyword">int</span> cacheSize)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(cacheSize,(<span class="keyword">float</span>)<span class="number">0.75</span>,<span class="keyword">true</span>);</span><br><span class="line">        <span class="keyword">this</span>.cacheSize = cacheSize;</span><br><span class="line">    &#125;</span><br><span class="line">     <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">boolean</span> <span class="title">removeEldestEntry</span><span class="params">(Map.Entry&lt;K,V&gt; eldest)</span></span>&#123;</span><br><span class="line">       <span class="comment">// System.out.println(eldest);</span></span><br><span class="line">        <span class="keyword">return</span> size() &gt; cacheSize;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li><p>测试代码</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testKey</span><span class="params">()</span></span>&#123;</span><br><span class="line">    LRUCache&lt;String,Integer&gt; cache =  <span class="keyword">new</span> LRUCache&lt;&gt;(<span class="number">5</span>);</span><br><span class="line">    <span class="comment">//初始化数据</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">        cache.put(<span class="string">&quot;key&quot;</span>+i,i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 模拟最近使用</span></span><br><span class="line">    String key = <span class="string">&quot;key3&quot;</span>;</span><br><span class="line">    cache.get(key);</span><br><span class="line">    System.out.println(<span class="string">&quot;after get--&gt;:&quot;</span>+ key);</span><br><span class="line">    printMap(cache);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//put data and remove Eldest Entry</span></span><br><span class="line">    cache.put(<span class="string">&quot;key10&quot;</span>,<span class="number">10</span>);</span><br><span class="line">    System.out.println(<span class="string">&quot;after put data and remove Eldest Entry&quot;</span>);</span><br><span class="line">    printMap(cache);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testKey</span><span class="params">()</span></span>&#123;</span><br><span class="line">    LRUCache&lt;String,Integer&gt; cache =  <span class="keyword">new</span> LRUCache&lt;&gt;(<span class="number">5</span>);</span><br><span class="line">    <span class="comment">//初始化数据</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">        cache.put(<span class="string">&quot;key&quot;</span>+i,i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 模拟最近使用</span></span><br><span class="line">    String key = <span class="string">&quot;key3&quot;</span>;</span><br><span class="line">    cache.get(key);</span><br><span class="line">    System.out.println(<span class="string">&quot;after get--&gt;:&quot;</span>+ key);</span><br><span class="line">    printMap(cache);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//put data and remove Eldest Entry</span></span><br><span class="line">    cache.put(<span class="string">&quot;key10&quot;</span>,<span class="number">10</span>);</span><br><span class="line">    System.out.println(<span class="string">&quot;after put data and remove Eldest Entry&quot;</span>);</span><br><span class="line">    printMap(cache);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 <li><p>输出结果</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">after get--&gt;:key3</span><br><span class="line">cache order:</span><br><span class="line">key0=0 hashCode: 3288497 , key1=1 hashCode: 3288499 , key2=2 hashCode: 3288497 , key4=4 hashCode: 3288497 , key3=3 hashCode: 3288503 ,</span><br><span class="line">3288497</span><br><span class="line">after put data and remove Eldest Entry</span><br><span class="line">cache order:</span><br><span class="line">key1=1 hashCode: 3288499 , key2=2 hashCode: 3288497 , key4=4 hashCode: 3288497 , key3=3 hashCode: 3288503 , key10=10 hashCode: 101943476 ,</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">after get--&gt;:key3</span><br><span class="line">cache order:</span><br><span class="line">key0=0 hashCode: 3288497 , key1=1 hashCode: 3288499 , key2=2 hashCode: 3288497 , key4=4 hashCode: 3288497 , key3=3 hashCode: 3288503 ,</span><br><span class="line">3288497</span><br><span class="line">after put data and remove Eldest Entry</span><br><span class="line">cache order:</span><br><span class="line">key1=1 hashCode: 3288499 , key2=2 hashCode: 3288497 , key4=4 hashCode: 3288497 , key3=3 hashCode: 3288503 , key10=10 hashCode: 101943476 ,</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>过程解析<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200602183106.png" alt="images"></p>
 </li>
@@ -272,8 +272,8 @@
       <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/Net/" rel="tag"># Net</a>
-              <a href="/tags/Java/" rel="tag"># Java</a>
               <a href="/tags/LRU/" rel="tag"># LRU</a>
+              <a href="/tags/Java/" rel="tag"># Java</a>
               <a href="/tags/CoreJava/" rel="tag"># CoreJava</a>
           </div>
 
@@ -364,20 +364,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-count">36</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -421,7 +421,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">79k</span>
+    <span title="Symbols count total">78k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
@@ -474,6 +474,26 @@
 
 
 
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
 
 
 

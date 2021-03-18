@@ -227,7 +227,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>3.6k</span>
+              <span>3.5k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -247,10 +247,10 @@
 
       
         <h3 id="mysql-show-status"><a href="#mysql-show-status" class="headerlink" title="mysql show status"></a>mysql show status</h3><p><code>SHOW TABLE STATUS</code> 可以查看表/view的大量信息。 这里简述一下用法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#查询数据表 状态</span><br><span class="line">SHOW TABLE STATUS from dp_report_forms_data like &#39;tb_dp_hera_user_access_statistics&#39; \G</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#查询数据表 状态</span><br><span class="line">SHOW TABLE STATUS from dp_report_forms_data like &#39;tb_dp_hera_user_access_statistics&#39; \G</span><br></pre></td></tr></table></figure>
 
 <p>结果：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Name            | tb_dp_hera_user_access_statistics</span><br><span class="line">Engine          | InnoDB</span><br><span class="line">Version         | 10</span><br><span class="line">Row_format      | Dynamic</span><br><span class="line">Rows            | 9661</span><br><span class="line">Avg_row_length  | 164</span><br><span class="line">Data_length     | 1589248</span><br><span class="line">Max_data_length | 0</span><br><span class="line">Index_length    | 1589248</span><br><span class="line">Data_free       | 2097152</span><br><span class="line">Auto_increment  | 240145</span><br><span class="line">Create_time     | 2020-08-06 10:53:18</span><br><span class="line">Update_time     | &lt;null&gt;</span><br><span class="line">Check_time      | &lt;null&gt;</span><br><span class="line">Collation       | utf8_general_ci</span><br><span class="line">Checksum        | &lt;null&gt;</span><br><span class="line">Create_options  |</span><br><span class="line">Comment         | 用户访问统计表(总表)，按天统计</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">Name            | tb_dp_hera_user_access_statistics</span><br><span class="line">Engine          | InnoDB</span><br><span class="line">Version         | 10</span><br><span class="line">Row_format      | Dynamic</span><br><span class="line">Rows            | 9661</span><br><span class="line">Avg_row_length  | 164</span><br><span class="line">Data_length     | 1589248</span><br><span class="line">Max_data_length | 0</span><br><span class="line">Index_length    | 1589248</span><br><span class="line">Data_free       | 2097152</span><br><span class="line">Auto_increment  | 240145</span><br><span class="line">Create_time     | 2020-08-06 10:53:18</span><br><span class="line">Update_time     | &lt;null&gt;</span><br><span class="line">Check_time      | &lt;null&gt;</span><br><span class="line">Collation       | utf8_general_ci</span><br><span class="line">Checksum        | &lt;null&gt;</span><br><span class="line">Create_options  |</span><br><span class="line">Comment         | 用户访问统计表(总表)，按天统计</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <ul>
 <li><p>Name<br>表名称</p>
@@ -272,7 +272,7 @@
 <li><p>Index_length<br>对于MyISAM，Index_length是索引文件的长度，以字节为单位。<br>对于InnoDB，Index_length是分配给非聚集索引的大约空间量（以字节为单位）。 具体来说，它是非聚集索引大小（以页为单位）的总和乘以InnoDB页面大小。</p>
 </li>
 <li><p>Data_free<br>已分配但未使用的字节数。<br>InnoDB表报告表所属的表空间的可用空间。 对于位于共享表空间中的表，这是共享表空间的可用空间。 如果您使用多个表空间，并且表具有自己的表空间，则可用空间仅用于该表。 可用空间是指完全可用范围中的字节数减去安全裕量。 即使可用空间显示为0，只要不需要分配新的扩展盘区，也可以插入行。<br>对于NDB群集，Data_free显示磁盘上为磁盘数据表或磁盘上的碎片分配但未使用的空间。 （内存中的数据资源使用情况由Data_length列报告。）<br>对于分区表，此值仅是估计值，可能不是绝对正确。 在这种情况下，获取此信息的一种更准确的方法是查询INFORMATION_SCHEMA PARTITIONS表，如本示例所示：</p>
- <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">SUM</span>(DATA_FREE)</span><br><span class="line"> <span class="keyword">FROM</span>  INFORMATION_SCHEMA.PARTITIONS</span><br><span class="line"> <span class="keyword">WHERE</span> TABLE_SCHEMA = <span class="string">&#x27;mydb&#x27;</span></span><br><span class="line"> <span class="keyword">AND</span>   TABLE_NAME   = <span class="string">&#x27;mytable&#x27;</span>;</span><br></pre></td></tr></table></figure>
+ <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">SUM</span>(DATA_FREE)</span><br><span class="line"> <span class="keyword">FROM</span>  INFORMATION_SCHEMA.PARTITIONS</span><br><span class="line"> <span class="keyword">WHERE</span> TABLE_SCHEMA = <span class="string">&#x27;mydb&#x27;</span></span><br><span class="line"> <span class="keyword">AND</span>   TABLE_NAME   = <span class="string">&#x27;mytable&#x27;</span>;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>Auto_increment<br>下一个AUTO_INCREMENT 值</p>
 </li>
@@ -292,9 +292,9 @@
 </li>
 </ul>
 <h2 id="INFORMATION-SCHEMA"><a href="#INFORMATION-SCHEMA" class="headerlink" title="INFORMATION_SCHEMA"></a>INFORMATION_SCHEMA</h2><p>INFORMATION_SCHEMA 与show tables的信息有一些相同，重点是表示<code>information about tables in databases</code>. 用法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">select * from INFORMATION_SCHEMA.TABLES WHERE table_schema &#x3D; &#39;db_name&#39; AND table_name LIKE &#39;tb_dp_hera_user_access_statistics&#39; \G</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">select * from INFORMATION_SCHEMA.TABLES WHERE table_schema &#x3D; &#39;db_name&#39; AND table_name LIKE &#39;tb_dp_hera_user_access_statistics&#39; \G</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>Result:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">TABLE_CATALOG   | def</span><br><span class="line">TABLE_SCHEMA    | dp_report_forms_data</span><br><span class="line">TABLE_NAME      | tb_dp_hera_user_access_statistics</span><br><span class="line">TABLE_TYPE      | BASE TABLE</span><br><span class="line">ENGINE          | InnoDB</span><br><span class="line">VERSION         | 10</span><br><span class="line">ROW_FORMAT      | Dynamic</span><br><span class="line">TABLE_ROWS      | 9661</span><br><span class="line">AVG_ROW_LENGTH  | 164</span><br><span class="line">DATA_LENGTH     | 1589248</span><br><span class="line">MAX_DATA_LENGTH | 0</span><br><span class="line">INDEX_LENGTH    | 1589248</span><br><span class="line">DATA_FREE       | 2097152</span><br><span class="line">AUTO_INCREMENT  | 240145</span><br><span class="line">CREATE_TIME     | 2020-08-06 10:53:18</span><br><span class="line">UPDATE_TIME     | &lt;null&gt;</span><br><span class="line">CHECK_TIME      | &lt;null&gt;</span><br><span class="line">TABLE_COLLATION | utf8_general_ci</span><br><span class="line">CHECKSUM        | &lt;null&gt;</span><br><span class="line">CREATE_OPTIONS  |</span><br><span class="line">TABLE_COMMENT   | 用户访问统计表(总表)，按天统计</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">TABLE_CATALOG   | def</span><br><span class="line">TABLE_SCHEMA    | dp_report_forms_data</span><br><span class="line">TABLE_NAME      | tb_dp_hera_user_access_statistics</span><br><span class="line">TABLE_TYPE      | BASE TABLE</span><br><span class="line">ENGINE          | InnoDB</span><br><span class="line">VERSION         | 10</span><br><span class="line">ROW_FORMAT      | Dynamic</span><br><span class="line">TABLE_ROWS      | 9661</span><br><span class="line">AVG_ROW_LENGTH  | 164</span><br><span class="line">DATA_LENGTH     | 1589248</span><br><span class="line">MAX_DATA_LENGTH | 0</span><br><span class="line">INDEX_LENGTH    | 1589248</span><br><span class="line">DATA_FREE       | 2097152</span><br><span class="line">AUTO_INCREMENT  | 240145</span><br><span class="line">CREATE_TIME     | 2020-08-06 10:53:18</span><br><span class="line">UPDATE_TIME     | &lt;null&gt;</span><br><span class="line">CHECK_TIME      | &lt;null&gt;</span><br><span class="line">TABLE_COLLATION | utf8_general_ci</span><br><span class="line">CHECKSUM        | &lt;null&gt;</span><br><span class="line">CREATE_OPTIONS  |</span><br><span class="line">TABLE_COMMENT   | 用户访问统计表(总表)，按天统计</span><br></pre></td></tr></table></figure>
 <ul>
 <li>TABLE_TYPE<br>表格的BASE TABLE，视图的VIEW或INFORMATION_SCHEMA表的SYSTEM VIEW。 </li>
 </ul>
@@ -401,20 +401,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-count">36</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -458,7 +458,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">79k</span>
+    <span title="Symbols count total">78k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
@@ -511,6 +511,26 @@
 
 
 
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
 
 
 

@@ -226,7 +226,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>543</span>
+              <span>519</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -248,10 +248,10 @@
         <p>Centos7 使用NTP Pool 服务校验时间。</p>
 <a id="more"></a>
 
-<h3 id="设置时间"><a href="#设置时间" class="headerlink" title="设置时间"></a>设置时间</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#查看时区设置 默认是 America&#x2F;NewYork</span><br><span class="line">$ timedatectl</span><br><span class="line"></span><br><span class="line"># 查看所有 支持的时区名</span><br><span class="line">$ timedatectl list-timezones</span><br><span class="line"></span><br><span class="line"># 设置 将硬件时钟调整为与本地时钟一致, 0 为设置为 UTC 时间</span><br><span class="line">$ timedatectl set-local-rtc 1</span><br><span class="line"></span><br><span class="line"># 设置系统时区为HongKong</span><br><span class="line">timedatectl set-timezone Asia&#x2F;Hong_Kong</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="设置时间"><a href="#设置时间" class="headerlink" title="设置时间"></a>设置时间</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#查看时区设置 默认是 America&#x2F;NewYork</span><br><span class="line">$ timedatectl</span><br><span class="line"></span><br><span class="line"># 查看所有 支持的时区名</span><br><span class="line">$ timedatectl list-timezones</span><br><span class="line"></span><br><span class="line"># 设置 将硬件时钟调整为与本地时钟一致, 0 为设置为 UTC 时间</span><br><span class="line">$ timedatectl set-local-rtc 1</span><br><span class="line"></span><br><span class="line"># 设置系统时区为HongKong</span><br><span class="line">timedatectl set-timezone Asia&#x2F;Hong_Kong</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <h3 id="校准时间"><a href="#校准时间" class="headerlink" title="校准时间"></a>校准时间</h3><p>ntp校准时间</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#install ntp</span><br><span class="line">$ sudo yum install ntp -y</span><br><span class="line"></span><br><span class="line">#设置ntp server,NIST Internet Time Servers , NTP Pool Project</span><br><span class="line">$ sudo ntpdate time.nist.gov</span><br><span class="line"></span><br><span class="line">#或者 asia.pool.ntp.org 延迟 0.05ms 左右，推荐使用</span><br><span class="line">$ sudo ntpdate asia.pool.ntp.org</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#install ntp</span><br><span class="line">$ sudo yum install ntp -y</span><br><span class="line"></span><br><span class="line">#设置ntp server,NIST Internet Time Servers , NTP Pool Project</span><br><span class="line">$ sudo ntpdate time.nist.gov</span><br><span class="line"></span><br><span class="line">#或者 asia.pool.ntp.org 延迟 0.05ms 左右，推荐使用</span><br><span class="line">$ sudo ntpdate asia.pool.ntp.org</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>推荐使用 NTP Pool Project,部分节点使用GPS信号来设置时间，准确度很高。<br>链接：<a target="_blank" rel="noopener" href="https://www.ntppool.org/">https://www.ntppool.org</a></p>
 <p>PS：<br>NTP 漏洞问题：<br><a target="_blank" rel="noopener" href="https://www.securityfocus.com/bid/94452">https://www.securityfocus.com/bid/94452</a></p>
 
@@ -355,20 +355,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-count">36</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -412,7 +412,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">79k</span>
+    <span title="Symbols count total">78k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
@@ -465,6 +465,26 @@
 
 
 
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
 
 
 
