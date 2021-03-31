@@ -3,10 +3,10 @@
   <title>Ordiy&#39;s Blog</title>
   
   
-  <link href="/atom.xml" rel="self"/>
+  <link href="https://ordiychen.github.io/ordiychen.github.io/atom.xml" rel="self"/>
   
   <link href="https://ordiychen.github.io/ordiychen.github.io/"/>
-  <updated>2021-03-18T09:31:33.502Z</updated>
+  <updated>2021-03-24T02:35:03.786Z</updated>
   <id>https://ordiychen.github.io/ordiychen.github.io/</id>
   
   <author>
@@ -21,27 +21,77 @@
     <link href="https://ordiychen.github.io/ordiychen.github.io/posts/2021-02-05-hbase-writer-process/"/>
     <id>https://ordiychen.github.io/ordiychen.github.io/posts/2021-02-05-hbase-writer-process/</id>
     <published>2021-02-05T00:00:00.000Z</published>
-    <updated>2021-03-18T09:31:33.502Z</updated>
-    
-    <summary type="html">
-    
-      HBase是一款分布式KV数据库系统，在互联网和传统IT行业都有大量应用，也是大数据领域经常使用的一个组件，本文以HBase写入数据的过程为切入点，说明HBase的数据模型。
-    
-    </summary>
+    <updated>2021-03-24T02:35:03.786Z</updated>
     
     
-      <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
-    
-      <category term="HBase" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/HBase/"/>
+    <summary type="html">HBase是一款分布式KV数据库系统，在互联网和传统IT行业都有大量应用，也是大数据领域经常使用的一个组件，本文以HBase写入数据的过程为切入点，说明HBase的数据模型。</summary>
     
     
-      <category term="blog" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/blog/"/>
     
-      <category term="HBase" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/HBase/"/>
+    <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
     
-      <category term="BigTable" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/BigTable/"/>
+    <category term="HBase" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/HBase/"/>
     
-      <category term="BigData" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/BigData/"/>
+    
+    <category term="blog" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/blog/"/>
+    
+    <category term="HBase" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/HBase/"/>
+    
+    <category term="BigTable" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/BigTable/"/>
+    
+    <category term="BigData" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/BigData/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Apache Ambari Install</title>
+    <link href="https://ordiychen.github.io/ordiychen.github.io/posts/2021-03-09-apache-ambari-p1/"/>
+    <id>https://ordiychen.github.io/ordiychen.github.io/posts/2021-03-09-apache-ambari-p1/</id>
+    <published>2021-02-05T00:00:00.000Z</published>
+    <updated>2021-03-30T06:55:18.585Z</updated>
+    
+    
+    <summary type="html">Apache Ambari build and install</summary>
+    
+    
+    
+    <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
+    
+    <category term="DataPlatform" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/DataPlatform/"/>
+    
+    <category term="DataHub" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/DataPlatform/DataHub/"/>
+    
+    
+    <category term="blog" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/blog/"/>
+    
+    <category term="ApacheAmbari" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/ApacheAmbari/"/>
+    
+    <category term="HDP" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/HDP/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>搭建HTTP内网文件服务器-以NGINX为例</title>
+    <link href="https://ordiychen.github.io/ordiychen.github.io/posts/2021-02-01-nginx-file-server/"/>
+    <id>https://ordiychen.github.io/ordiychen.github.io/posts/2021-02-01-nginx-file-server/</id>
+    <published>2021-02-01T14:14:55.000Z</published>
+    <updated>2021-03-30T08:29:28.863Z</updated>
+    
+    
+    <summary type="html">基于HTTP协议搭建一个简单的内网文件服务器，方便公司的办公和开发测试,减少办公时间段大文件下载对WLAN带宽的消耗。</summary>
+    
+    
+    
+    <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
+    
+    <category term="net" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/net/"/>
+    
+    
+    <category term="blog" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/blog/"/>
+    
+    <category term="Net" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Net/"/>
+    
+    <category term="Nginx" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Nginx/"/>
     
   </entry>
   
@@ -52,25 +102,23 @@
     <published>2020-01-01T22:24:11.000Z</published>
     <updated>2020-08-18T07:23:35.756Z</updated>
     
-    <summary type="html">
     
-      结合RFC5246标准，对TLS握手过程的理解和通信过程分析
-    
-    </summary>
+    <summary type="html">结合RFC5246标准，对TLS握手过程的理解和通信过程分析</summary>
     
     
-      <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
     
-      <category term="TLS" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/TLS/"/>
+    <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
+    
+    <category term="TLS" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/TLS/"/>
     
     
-      <category term="Java" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Java/"/>
+    <category term="Java" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Java/"/>
     
-      <category term="TLS" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/TLS/"/>
+    <category term="TLS" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/TLS/"/>
     
-      <category term="HTTPS" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/HTTPS/"/>
+    <category term="HTTPS" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/HTTPS/"/>
     
-      <category term="HTTP2" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/HTTP2/"/>
+    <category term="HTTP2" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/HTTP2/"/>
     
   </entry>
   
@@ -81,21 +129,19 @@
     <published>2020-01-01T22:23:54.000Z</published>
     <updated>2020-08-18T07:23:30.526Z</updated>
     
-    <summary type="html">
     
-      通过TLS实现端对端的加密场景的实现过程及原理
-    
-    </summary>
+    <summary type="html">通过TLS实现端对端的加密场景的实现过程及原理</summary>
     
     
-      <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
     
-      <category term="TLS" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/TLS/"/>
+    <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
+    
+    <category term="TLS" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/TLS/"/>
     
     
-      <category term="Java" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Java/"/>
+    <category term="Java" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Java/"/>
     
-      <category term="TLS" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/TLS/"/>
+    <category term="TLS" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/TLS/"/>
     
   </entry>
   
@@ -106,25 +152,23 @@
     <published>2020-01-01T00:00:00.000Z</published>
     <updated>2021-01-27T05:52:32.549Z</updated>
     
-    <summary type="html">
     
-      &lt;p&gt;Apache HttpComponents项目进行Http API使用及&lt;code&gt;I/O Reactor&lt;/code&gt;&lt;/p&gt;
-    
-    </summary>
+    <summary type="html">&lt;p&gt;Apache HttpComponents项目进行Http API使用及&lt;code&gt;I/O Reactor&lt;/code&gt;&lt;/p&gt;</summary>
     
     
-      <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
     
-      <category term="web" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/web/"/>
+    <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
+    
+    <category term="web" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/web/"/>
     
     
-      <category term="Java" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Java/"/>
+    <category term="Java" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Java/"/>
     
-      <category term="JavaWeb" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/JavaWeb/"/>
+    <category term="JavaWeb" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/JavaWeb/"/>
     
-      <category term="Apache" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Apache/"/>
+    <category term="Apache" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Apache/"/>
     
-      <category term="HTTP" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/HTTP/"/>
+    <category term="HTTP" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/HTTP/"/>
     
   </entry>
   
@@ -135,21 +179,19 @@
     <published>2019-11-14T15:29:51.000Z</published>
     <updated>2020-08-18T07:23:17.791Z</updated>
     
-    <summary type="html">
     
-      学习python 绘制基本的折线图、对散点图进行拟合、使用快速傅立叶变换对周期性矩形波(方波)信号记性分解（分解出频率、时域图)
-    
-    </summary>
+    <summary type="html">学习python 绘制基本的折线图、对散点图进行拟合、使用快速傅立叶变换对周期性矩形波(方波)信号记性分解（分解出频率、时域图)</summary>
     
     
-      <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
     
-      <category term="python" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/python/"/>
+    <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
+    
+    <category term="python" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/python/"/>
     
     
-      <category term="python" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/python/"/>
+    <category term="python" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/python/"/>
     
-      <category term="python-plot" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/python-plot/"/>
+    <category term="python-plot" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/python-plot/"/>
     
   </entry>
   
@@ -160,25 +202,23 @@
     <published>2019-10-21T19:04:00.000Z</published>
     <updated>2020-12-07T07:14:56.685Z</updated>
     
-    <summary type="html">
     
-      &lt;p&gt;在线数据服务网关实践经验分享,一种NIO高性能的存储层网关,高性能统一在线数据平台实践&lt;/p&gt;
-    
-    </summary>
+    <summary type="html">&lt;p&gt;在线数据服务网关实践经验分享,一种NIO高性能的存储层网关,高性能统一在线数据平台实践&lt;/p&gt;</summary>
     
     
-      <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
+    
+    <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
     
     
-      <category term="Java" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Java/"/>
+    <category term="Java" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Java/"/>
     
-      <category term="Gateway" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Gateway/"/>
+    <category term="Gateway" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Gateway/"/>
     
-      <category term="HighPerformance" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/HighPerformance/"/>
+    <category term="HighPerformance" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/HighPerformance/"/>
     
-      <category term="Concurrent" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Concurrent/"/>
+    <category term="Concurrent" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Concurrent/"/>
     
-      <category term="Architecture" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Architecture/"/>
+    <category term="Architecture" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Architecture/"/>
     
   </entry>
   
@@ -189,23 +229,21 @@
     <published>2019-10-21T19:04:00.000Z</published>
     <updated>2020-08-18T07:23:11.172Z</updated>
     
-    <summary type="html">
     
-      使用工具排查DNS异常
-    
-    </summary>
+    <summary type="html">使用工具排查DNS异常</summary>
     
     
-      <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
     
-      <category term="DNS" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/DNS/"/>
+    <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
+    
+    <category term="DNS" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/DNS/"/>
     
     
-      <category term="DNS" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/DNS/"/>
+    <category term="DNS" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/DNS/"/>
     
-      <category term="TCP/IP" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/TCP-IP/"/>
+    <category term="TCP/IP" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/TCP-IP/"/>
     
-      <category term="NODEJS" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/NODEJS/"/>
+    <category term="NODEJS" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/NODEJS/"/>
     
   </entry>
   
@@ -216,21 +254,19 @@
     <published>2019-07-22T21:00:37.000Z</published>
     <updated>2020-08-18T07:24:01.431Z</updated>
     
-    <summary type="html">
     
-      使用贝利-波尔温-普劳夫公式、贝拉公式、Chudnovsky算法计算圆周率
-    
-    </summary>
+    <summary type="html">使用贝利-波尔温-普劳夫公式、贝拉公式、Chudnovsky算法计算圆周率</summary>
     
     
-      <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
     
-      <category term="python" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/python/"/>
+    <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
+    
+    <category term="python" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/python/"/>
     
     
-      <category term="python" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/python/"/>
+    <category term="python" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/python/"/>
     
-      <category term="Statistics" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Statistics/"/>
+    <category term="Statistics" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Statistics/"/>
     
   </entry>
   
@@ -241,25 +277,23 @@
     <published>2019-01-01T00:00:00.000Z</published>
     <updated>2020-08-18T07:24:37.548Z</updated>
     
-    <summary type="html">
     
-      log4j2 使用JsonLayout输出json格式的日志，以及使用lookup、ThreadContext配置出自定义的jsonlog，可以用于对微服务的日志输出或者其它日志分析。
-    
-    </summary>
+    <summary type="html">log4j2 使用JsonLayout输出json格式的日志，以及使用lookup、ThreadContext配置出自定义的jsonlog，可以用于对微服务的日志输出或者其它日志分析。</summary>
     
     
-      <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
     
-      <category term="java" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/java/"/>
+    <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
+    
+    <category term="java" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/java/"/>
     
     
-      <category term="blog" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/blog/"/>
+    <category term="blog" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/blog/"/>
     
-      <category term="Java" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Java/"/>
+    <category term="Java" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Java/"/>
     
-      <category term="Log4j2" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Log4j2/"/>
+    <category term="Log4j2" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Log4j2/"/>
     
-      <category term="Logging" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Logging/"/>
+    <category term="Logging" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Logging/"/>
     
   </entry>
   
@@ -270,23 +304,21 @@
     <published>2018-04-12T00:00:00.000Z</published>
     <updated>2020-08-18T07:27:12.203Z</updated>
     
-    <summary type="html">
     
-      总结Nginx Stream进行反向代理实现负载均衡，以及配置集群的高可用、A/B测试、SSL/TLS加密和日志排查等场景，总结了使用过程中遇到的一些问题，及改进方面。
-    
-    </summary>
+    <summary type="html">总结Nginx Stream进行反向代理实现负载均衡，以及配置集群的高可用、A/B测试、SSL/TLS加密和日志排查等场景，总结了使用过程中遇到的一些问题，及改进方面。</summary>
     
     
-      <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
     
-      <category term="nginx stream" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/nginx-stream/"/>
+    <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
+    
+    <category term="nginx stream" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/nginx-stream/"/>
     
     
-      <category term="blog" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/blog/"/>
+    <category term="blog" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/blog/"/>
     
-      <category term="Nginx" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Nginx/"/>
+    <category term="Nginx" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Nginx/"/>
     
-      <category term="Nginx Stream" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Nginx-Stream/"/>
+    <category term="Nginx Stream" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Nginx-Stream/"/>
     
   </entry>
   
@@ -297,25 +329,23 @@
     <published>2017-03-28T00:00:00.000Z</published>
     <updated>2020-08-18T08:13:02.737Z</updated>
     
-    <summary type="html">
     
-      MySQL show status 查询表的存储、格式、引擎等信息
-    
-    </summary>
+    <summary type="html">MySQL show status 查询表的存储、格式、引擎等信息</summary>
     
     
-      <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
     
-      <category term="mysql" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/mysql/"/>
+    <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
+    
+    <category term="mysql" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/mysql/"/>
     
     
-      <category term="blog" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/blog/"/>
+    <category term="blog" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/blog/"/>
     
-      <category term="Java" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Java/"/>
+    <category term="Java" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Java/"/>
     
-      <category term="Log4j2" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Log4j2/"/>
+    <category term="Log4j2" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Log4j2/"/>
     
-      <category term="Logging" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Logging/"/>
+    <category term="Logging" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Logging/"/>
     
   </entry>
   
@@ -326,25 +356,23 @@
     <published>2017-01-01T00:00:00.000Z</published>
     <updated>2020-08-18T09:34:23.127Z</updated>
     
-    <summary type="html">
     
-      LRU是一种常用的缓存算法，可以使用Java LinkedHashMap模拟实现。
-    
-    </summary>
+    <summary type="html">LRU是一种常用的缓存算法，可以使用Java LinkedHashMap模拟实现。</summary>
     
     
-      <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
     
-      <category term="algorithm" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/algorithm/"/>
+    <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
+    
+    <category term="algorithm" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/algorithm/"/>
     
     
-      <category term="Net" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Net/"/>
+    <category term="Net" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Net/"/>
     
-      <category term="LRU" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/LRU/"/>
+    <category term="LRU" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/LRU/"/>
     
-      <category term="Java" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Java/"/>
+    <category term="Java" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Java/"/>
     
-      <category term="CoreJava" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/CoreJava/"/>
+    <category term="CoreJava" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/CoreJava/"/>
     
   </entry>
   
@@ -355,25 +383,23 @@
     <published>2017-01-01T00:00:00.000Z</published>
     <updated>2020-08-18T07:26:30.962Z</updated>
     
-    <summary type="html">
     
-      &lt;p&gt;JDK 的&lt;code&gt;InetSocketAddress&lt;/code&gt;被设计了为一个不可变的对象，在&lt;code&gt;Socket&lt;/code&gt;等长连接使用时需要注意DNS映射关系更新问题。&lt;/p&gt;
-    
-    </summary>
+    <summary type="html">&lt;p&gt;JDK 的&lt;code&gt;InetSocketAddress&lt;/code&gt;被设计了为一个不可变的对象，在&lt;code&gt;Socket&lt;/code&gt;等长连接使用时需要注意DNS映射关系更新问题。&lt;/p&gt;</summary>
     
     
-      <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
     
-      <category term="java" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/java/"/>
+    <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
+    
+    <category term="java" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/java/"/>
     
     
-      <category term="Net" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Net/"/>
+    <category term="Net" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Net/"/>
     
-      <category term="Java" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Java/"/>
+    <category term="Java" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Java/"/>
     
-      <category term="CoreJava" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/CoreJava/"/>
+    <category term="CoreJava" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/CoreJava/"/>
     
-      <category term="JDK" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/JDK/"/>
+    <category term="JDK" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/JDK/"/>
     
   </entry>
   
@@ -384,23 +410,21 @@
     <published>2015-02-02T19:04:00.000Z</published>
     <updated>2020-08-18T07:25:39.400Z</updated>
     
-    <summary type="html">
     
-      &lt;p&gt;Centos7 使用NTP Pool 服务校验时间。&lt;/p&gt;
-    
-    </summary>
+    <summary type="html">&lt;p&gt;Centos7 使用NTP Pool 服务校验时间。&lt;/p&gt;</summary>
     
     
-      <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
     
-      <category term="OS" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/OS/"/>
+    <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
+    
+    <category term="OS" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/OS/"/>
     
     
-      <category term="OS" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/OS/"/>
+    <category term="OS" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/OS/"/>
     
-      <category term="Centos" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Centos/"/>
+    <category term="Centos" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Centos/"/>
     
-      <category term="NTP" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/NTP/"/>
+    <category term="NTP" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/NTP/"/>
     
   </entry>
   
@@ -411,25 +435,23 @@
     <published>2014-01-01T11:04:00.000Z</published>
     <updated>2020-12-22T13:23:00.085Z</updated>
     
-    <summary type="html">
     
-      我们正在创造一个新世界，人人都可以进入这个世界，而不必考虑由种族、经济力、武力、出生地而来的特权或偏见。们正在创造一个新世界，人人、处处可以表达他或她的信仰，无论这种信仰是多么古怪，而不再害怕被强制沉默或强制一律。　你们关于财产、表达、身份、迁徙的法律概念及其关联对我们不适用。这些概念建立在物质的基础上，我们这里没有物质。
-    
-    </summary>
+    <summary type="html">我们正在创造一个新世界，人人都可以进入这个世界，而不必考虑由种族、经济力、武力、出生地而来的特权或偏见。们正在创造一个新世界，人人、处处可以表达他或她的信仰，无论这种信仰是多么古怪，而不再害怕被强制沉默或强制一律。　你们关于财产、表达、身份、迁徙的法律概念及其关联对我们不适用。这些概念建立在物质的基础上，我们这里没有物质。</summary>
     
     
-      <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
     
-      <category term="values" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/values/"/>
+    <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
+    
+    <category term="values" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/values/"/>
     
     
-      <category term="Enginner" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Enginner/"/>
+    <category term="Enginner" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Enginner/"/>
     
-      <category term="IEEE" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/IEEE/"/>
+    <category term="IEEE" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/IEEE/"/>
     
-      <category term="Ethics" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Ethics/"/>
+    <category term="Ethics" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Ethics/"/>
     
-      <category term="Values" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Values/"/>
+    <category term="Values" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Values/"/>
     
   </entry>
   
