@@ -46,10 +46,10 @@
     <link href="https://ordiychen.github.io/ordiychen.github.io/posts/2021-02-01-nginx-file-server/"/>
     <id>https://ordiychen.github.io/ordiychen.github.io/posts/2021-02-01-nginx-file-server/</id>
     <published>2021-02-01T14:14:55.000Z</published>
-    <updated>2021-04-08T10:28:02.776Z</updated>
+    <updated>2021-04-08T10:40:38.442Z</updated>
     
     
-    <summary type="html">基于HTTP协议搭建一个简单的内网文件服务器，方便公司的办公和开发测试,减少办公时间段大文件下载对WLAN带宽的消耗，并引入了NGINX AIO用以提升性能。</summary>
+    <summary type="html">基于HTTP协议搭建一个简单的内网文件服务器，方便公司的办公和开发测试,减少办公时间段大文件下载对WLAN带宽的消耗，并引入了NGINX AIO用以提升性能,增加对浏览器预览PDF/TXT等文件的支持。</summary>
     
     
     
