@@ -6,7 +6,7 @@
   <link href="https://ordiychen.github.io/ordiychen.github.io/atom.xml" rel="self"/>
   
   <link href="https://ordiychen.github.io/ordiychen.github.io/"/>
-  <updated>2021-03-24T02:35:03.786Z</updated>
+  <updated>2021-04-01T08:21:15.059Z</updated>
   <id>https://ordiychen.github.io/ordiychen.github.io/</id>
   
   <author>
@@ -17,56 +17,27 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>HBase写入数据的过程</title>
-    <link href="https://ordiychen.github.io/ordiychen.github.io/posts/2021-02-05-hbase-writer-process/"/>
-    <id>https://ordiychen.github.io/ordiychen.github.io/posts/2021-02-05-hbase-writer-process/</id>
-    <published>2021-02-05T00:00:00.000Z</published>
-    <updated>2021-03-24T02:35:03.786Z</updated>
+    <title>HDP3.1.5集群安装</title>
+    <link href="https://ordiychen.github.io/ordiychen.github.io/posts/2021-03-26-HDP-hadoop-install/"/>
+    <id>https://ordiychen.github.io/ordiychen.github.io/posts/2021-03-26-HDP-hadoop-install/</id>
+    <published>2021-04-01T15:56:37.000Z</published>
+    <updated>2021-04-01T08:21:15.059Z</updated>
     
     
-    <summary type="html">HBase是一款分布式KV数据库系统，在互联网和传统IT行业都有大量应用，也是大数据领域经常使用的一个组件，本文以HBase写入数据的过程为切入点，说明HBase的数据模型。</summary>
-    
-    
-    
-    <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
-    
-    <category term="HBase" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/HBase/"/>
-    
-    
-    <category term="blog" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/blog/"/>
-    
-    <category term="HBase" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/HBase/"/>
-    
-    <category term="BigTable" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/BigTable/"/>
-    
-    <category term="BigData" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/BigData/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Apache Ambari Install</title>
-    <link href="https://ordiychen.github.io/ordiychen.github.io/posts/2021-03-09-apache-ambari-p1/"/>
-    <id>https://ordiychen.github.io/ordiychen.github.io/posts/2021-03-09-apache-ambari-p1/</id>
-    <published>2021-02-05T00:00:00.000Z</published>
-    <updated>2021-03-30T06:55:18.585Z</updated>
-    
-    
-    <summary type="html">Apache Ambari build and install</summary>
+    <summary type="html">Raspberrypi 4B 编译和安装Ningx 1.19</summary>
     
     
     
     <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
     
-    <category term="DataPlatform" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/DataPlatform/"/>
-    
-    <category term="DataHub" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/DataPlatform/DataHub/"/>
+    <category term="ARM" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/ARM/"/>
     
     
     <category term="blog" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/blog/"/>
     
-    <category term="ApacheAmbari" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/ApacheAmbari/"/>
+    <category term="NGINX" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/NGINX/"/>
     
-    <category term="HDP" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/HDP/"/>
+    <category term="Raspberrypi" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Raspberrypi/"/>
     
   </entry>
   
@@ -75,10 +46,10 @@
     <link href="https://ordiychen.github.io/ordiychen.github.io/posts/2021-02-01-nginx-file-server/"/>
     <id>https://ordiychen.github.io/ordiychen.github.io/posts/2021-02-01-nginx-file-server/</id>
     <published>2021-02-01T14:14:55.000Z</published>
-    <updated>2021-03-30T08:29:28.863Z</updated>
+    <updated>2021-04-08T10:28:02.776Z</updated>
     
     
-    <summary type="html">基于HTTP协议搭建一个简单的内网文件服务器，方便公司的办公和开发测试,减少办公时间段大文件下载对WLAN带宽的消耗。</summary>
+    <summary type="html">基于HTTP协议搭建一个简单的内网文件服务器，方便公司的办公和开发测试,减少办公时间段大文件下载对WLAN带宽的消耗，并引入了NGINX AIO用以提升性能。</summary>
     
     
     
@@ -92,6 +63,31 @@
     <category term="Net" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Net/"/>
     
     <category term="Nginx" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Nginx/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Raspberrypi compile and install nginx</title>
+    <link href="https://ordiychen.github.io/ordiychen.github.io/posts/2018-03-11-arm-compile-nginx/"/>
+    <id>https://ordiychen.github.io/ordiychen.github.io/posts/2018-03-11-arm-compile-nginx/</id>
+    <published>2020-01-11T11:21:32.000Z</published>
+    <updated>2021-04-01T06:33:34.547Z</updated>
+    
+    
+    <summary type="html">Raspberrypi 4B 编译和安装Ningx 1.19</summary>
+    
+    
+    
+    <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
+    
+    <category term="ARM" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/ARM/"/>
+    
+    
+    <category term="blog" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/blog/"/>
+    
+    <category term="NGINX" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/NGINX/"/>
+    
+    <category term="Raspberrypi" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Raspberrypi/"/>
     
   </entry>
   

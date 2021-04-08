@@ -23,15 +23,22 @@
     var CONFIG = {"hostname":"ordiychen.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":false,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Ordiy&#39;s Blog">
-<meta property="og:url" content="https://ordiychen.github.io/ordiychen.github.io/tags/HDP/index.html">
+  <meta name="description" content="Raspberrypi 4B 编译和安装Ningx 1.19">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Raspberrypi compile and install nginx">
+<meta property="og:url" content="https://ordiychen.github.io/ordiychen.github.io/posts/2018-03-11-arm-compile-nginx/index.html">
 <meta property="og:site_name" content="Ordiy&#39;s Blog">
+<meta property="og:description" content="Raspberrypi 4B 编译和安装Ningx 1.19">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-01-11T11:21:32.000Z">
+<meta property="article:modified_time" content="2021-04-01T06:33:34.547Z">
 <meta property="article:author" content="Ordiy">
+<meta property="article:tag" content="blog">
+<meta property="article:tag" content="NGINX">
+<meta property="article:tag" content="Raspberrypi">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://ordiychen.github.io/ordiychen.github.io/tags/HDP/">
+<link rel="canonical" href="https://ordiychen.github.io/ordiychen.github.io/posts/2018-03-11-arm-compile-nginx/">
 
 
 <script id="page-configurations">
@@ -39,12 +46,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-cn'
   };
 </script>
 
-  <title>Tag: HDP | Ordiy's Blog</title>
+  <title>Raspberrypi compile and install nginx | Ordiy's Blog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-175654772-1"></script>
     <script>
@@ -167,51 +174,160 @@
         <div class="content-wrap">
           
 
-          <div class="content tag">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">HDP
-          <small>Tag</small>
-        </h2>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://ordiychen.github.io/ordiychen.github.io/posts/2018-03-11-arm-compile-nginx/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/apple-touch-icon.png">
+      <meta itemprop="name" content="Ordiy">
+      <meta itemprop="description" content="Stay Hungry.Stay Foolish.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ordiy's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Raspberrypi compile and install nginx
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-01-11 11:21:32" itemprop="dateCreated datePublished" datetime="2020-01-11T11:21:32Z">2020-01-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tech/" itemprop="url" rel="index"><span itemprop="name">tech</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tech/ARM/" itemprop="url" rel="index"><span itemprop="name">ARM</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>1.1k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>1 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2021</span>
+        <h1 id="ARM处理器的集中指令集"><a href="#ARM处理器的集中指令集" class="headerlink" title="ARM处理器的集中指令集"></a>ARM处理器的集中指令集</h1><table>
+<thead>
+<tr>
+<th align="left">移殖</th>
+<th align="left">架构</th>
+<th align="left">简介</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">armel</td>
+<td align="left">EABI ARM</td>
+<td align="left">是arm eabi little endian的缩写。eabi是软浮点二进制接口，这里的e是embeded，是对于嵌入式设备而言。</td>
+</tr>
+<tr>
+<td align="left">armhf</td>
+<td align="left">是arm hard float的缩写。   ARMv7</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">arm64</td>
+<td align="left">64-bit ARM ,ARMV8</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">armel和armhf的区别</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">它们的区别体现在浮点运算上，它们在进行浮点运算时都会使用fpu，但是armel传参数用普通寄存器，而armhf传参数用的是fpu的寄存器，因此armhf的浮点运算性能更高。</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">gcc编译的时候，使用-mfloat-abi选项来指定浮点运算使用的是哪种，soft不使用fpu，armel使用fpu，使用普通寄存器，armhf使用fpu，使用fpu的寄存器。</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<h1 id="ARM-compile-NGINX"><a href="#ARM-compile-NGINX" class="headerlink" title="ARM compile NGINX"></a>ARM compile NGINX</h1><p> 下载软件包，以便我们编译nginx：<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> # init </span><br><span class="line">$ sudo apt-get install -y apt-utils autoconf automake build-essential git libcurl4-openssl-dev libgeoip-dev liblmdb-dev libpcre++-dev libtool libxml2-dev libyajl-dev pkgconf wget zlib1g-dev</span><br><span class="line"></span><br><span class="line"> &#96;&#96;&#96;&#96;</span><br><span class="line"></span><br><span class="line">清理ningx config file ：&#x2F;etc&#x2F;nginx</span><br></pre></td></tr></table></figure><br>$ sudo apt remove nginx<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># download </span><br></pre></td></tr></table></figure><br> $ wget <a target="_blank" rel="noopener" href="https://nginx.org/download/nginx-1.19.9.zip">https://nginx.org/download/nginx-1.19.9.zip</a><br> $ wget <a target="_blank" rel="noopener" href="https://nginx.org/download/nginx-1.19.9.zip.asc">https://nginx.org/download/nginx-1.19.9.zip.asc</a></p>
+<p>$ gpg --verify nginx-1.13.11.tar.gz.asc nginx-1.13.11.tar.gz</p>
+<p>$ tar -zxvf nginx-1.13.11.tar.gz<br>$ cd nginx-1.13.11</p>
+<p>$ ./configure<br>    --sbin-path=/usr/local/nginx/nginx<br>    --conf-path=/usr/local/nginx/nginx.conf<br>    --pid-path=/usr/local/nginx/nginx.pid<br>    --with-http_ssl_module</p>
+<p>$ make<br>$ sudo make install<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- test </span><br></pre></td></tr></table></figure></p>
+<h1 id="nginx-test"><a href="#nginx-test" class="headerlink" title="nginx test"></a>nginx test</h1><p>sudo nginx -t </p>
+<p>nginx version: nginx/1.19.7<br>built by gcc 8.3.0 (Raspbian 8.3.0-6+rpi1)<br>configure arguments:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<p>curl -i -XGET &#39;<a target="_blank" rel="noopener" href="http://127.0.0.1&/#39;">http://127.0.0.1&#39;</a></p>
+<pre><code>
+</code></pre>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-02-05T00:00:00Z"
-              content="2021-02-05">
-          02-05
-        </time>
-      </div>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/blog/" rel="tag"># blog</a>
+              <a href="/tags/NGINX/" rel="tag"># NGINX</a>
+              <a href="/tags/Raspberrypi/" rel="tag"># Raspberrypi</a>
+          </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/posts/2021-03-09-apache-ambari-p1/" itemprop="url">
-            <span itemprop="name">Apache Ambari Install</span>
-          </a>
-      </div>
+        
 
-    </header>
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/2021-02-01-nginx-file-server/" rel="prev" title="搭建HTTP内网文件服务器-以NGINX为例">
+      <i class="fa fa-chevron-left"></i> 搭建HTTP内网文件服务器-以NGINX为例
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/2020-01-01-tls-study-md/" rel="next" title="TLS握手过程">
+      TLS握手过程 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
   </article>
-
-    </div>
-  </div>
   
   
-  
-
   
 
 
@@ -264,6 +380,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ARM%E5%A4%84%E7%90%86%E5%99%A8%E7%9A%84%E9%9B%86%E4%B8%AD%E6%8C%87%E4%BB%A4%E9%9B%86"><span class="nav-number">1.</span> <span class="nav-text">ARM处理器的集中指令集</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ARM-compile-NGINX"><span class="nav-number">2.</span> <span class="nav-text">ARM compile NGINX</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#nginx-test"><span class="nav-number">3.</span> <span class="nav-text">nginx test</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -286,13 +403,13 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">38</span>
+        <span class="site-state-item-count">35</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -336,12 +453,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">89k</span>
+    <span title="Symbols count total">83k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">1:21</span>
+    <span title="Reading time total">1:16</span>
 </div>
 
         
