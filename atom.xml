@@ -6,7 +6,7 @@
   <link href="https://ordiychen.github.io/ordiychen.github.io/atom.xml" rel="self"/>
   
   <link href="https://ordiychen.github.io/ordiychen.github.io/"/>
-  <updated>2021-04-01T08:21:15.059Z</updated>
+  <updated>2021-04-25T06:33:44.876Z</updated>
   <id>https://ordiychen.github.io/ordiychen.github.io/</id>
   
   <author>
@@ -17,11 +17,34 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Zeppelin In Action</title>
+    <link href="https://ordiychen.github.io/ordiychen.github.io/posts/2021-04-22-zeppelin-inaction-1/"/>
+    <id>https://ordiychen.github.io/ordiychen.github.io/posts/2021-04-22-zeppelin-inaction-1/</id>
+    <published>2021-04-22T14:06:36.000Z</published>
+    <updated>2021-04-25T06:33:44.876Z</updated>
+    
+    
+    <summary type="html">Zeppelin Install and config，并使用Zeppelin 对MySQL数据进行可视化分析。</summary>
+    
+    
+    
+    <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
+    
+    <category term="BigData" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/BigData/"/>
+    
+    
+    <category term="blog" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/blog/"/>
+    
+    <category term="ApacheZeppelin" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/ApacheZeppelin/"/>
+    
+  </entry>
+  
+  <entry>
     <title>HDP3.1.5集群安装</title>
     <link href="https://ordiychen.github.io/ordiychen.github.io/posts/2021-03-26-HDP-hadoop-install/"/>
     <id>https://ordiychen.github.io/ordiychen.github.io/posts/2021-03-26-HDP-hadoop-install/</id>
     <published>2021-04-01T15:56:37.000Z</published>
-    <updated>2021-04-01T08:21:15.059Z</updated>
+    <updated>2021-04-20T07:43:01.533Z</updated>
     
     
     <summary type="html">Raspberrypi 4B 编译和安装Ningx 1.19</summary>
@@ -46,7 +69,7 @@
     <link href="https://ordiychen.github.io/ordiychen.github.io/posts/2021-02-01-nginx-file-server/"/>
     <id>https://ordiychen.github.io/ordiychen.github.io/posts/2021-02-01-nginx-file-server/</id>
     <published>2021-02-01T14:14:55.000Z</published>
-    <updated>2021-04-08T10:40:38.442Z</updated>
+    <updated>2021-04-21T03:05:10.431Z</updated>
     
     
     <summary type="html">基于HTTP协议搭建一个简单的内网文件服务器，方便公司的办公和开发测试,减少办公时间段大文件下载对WLAN带宽的消耗，并引入了NGINX AIO用以提升性能,增加对浏览器预览PDF/TXT等文件的支持。</summary>
@@ -63,31 +86,6 @@
     <category term="Net" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Net/"/>
     
     <category term="Nginx" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Nginx/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Raspberrypi compile and install nginx</title>
-    <link href="https://ordiychen.github.io/ordiychen.github.io/posts/2018-03-11-arm-compile-nginx/"/>
-    <id>https://ordiychen.github.io/ordiychen.github.io/posts/2018-03-11-arm-compile-nginx/</id>
-    <published>2020-01-11T11:21:32.000Z</published>
-    <updated>2021-04-01T06:33:34.547Z</updated>
-    
-    
-    <summary type="html">Raspberrypi 4B 编译和安装Ningx 1.19</summary>
-    
-    
-    
-    <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
-    
-    <category term="ARM" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/ARM/"/>
-    
-    
-    <category term="blog" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/blog/"/>
-    
-    <category term="NGINX" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/NGINX/"/>
-    
-    <category term="Raspberrypi" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Raspberrypi/"/>
     
   </entry>
   
@@ -315,6 +313,31 @@
     <category term="Nginx" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Nginx/"/>
     
     <category term="Nginx Stream" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Nginx-Stream/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Raspberrypi compile and install nginx</title>
+    <link href="https://ordiychen.github.io/ordiychen.github.io/posts/2018-03-11-arm-compile-nginx/"/>
+    <id>https://ordiychen.github.io/ordiychen.github.io/posts/2018-03-11-arm-compile-nginx/</id>
+    <published>2018-03-11T11:21:32.000Z</published>
+    <updated>2021-04-25T08:13:24.694Z</updated>
+    
+    
+    <summary type="html">Raspberrypi 4B 编译和安装Ningx 1.19</summary>
+    
+    
+    
+    <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
+    
+    <category term="ARM" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/ARM/"/>
+    
+    
+    <category term="blog" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/blog/"/>
+    
+    <category term="NGINX" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/NGINX/"/>
+    
+    <category term="Raspberrypi" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Raspberrypi/"/>
     
   </entry>
   

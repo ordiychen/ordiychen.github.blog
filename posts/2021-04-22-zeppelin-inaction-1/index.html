@@ -23,23 +23,27 @@
     var CONFIG = {"hostname":"ordiychen.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":false,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
-  <meta name="description" content="MySQL show status 查询表的存储、格式、引擎等信息">
+  <meta name="description" content="Zeppelin Install and config，并使用Zeppelin 对MySQL数据进行可视化分析。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MySQL show status 使用指南">
-<meta property="og:url" content="https://ordiychen.github.io/ordiychen.github.io/posts/2017-03-28-mysql-show-table-status/index.html">
+<meta property="og:title" content="Zeppelin In Action">
+<meta property="og:url" content="https://ordiychen.github.io/ordiychen.github.io/posts/2021-04-22-zeppelin-inaction-1/index.html">
 <meta property="og:site_name" content="Ordiy&#39;s Blog">
-<meta property="og:description" content="MySQL show status 查询表的存储、格式、引擎等信息">
+<meta property="og:description" content="Zeppelin Install and config，并使用Zeppelin 对MySQL数据进行可视化分析。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2017-03-28T00:00:00.000Z">
-<meta property="article:modified_time" content="2020-08-18T08:13:02.737Z">
+<meta property="og:image" content="http://zeppelin.apache.org/docs/0.9.0-preview1/assets/themes/zeppelin/img/docs-img/submarine-architecture.png">
+<meta property="og:image" content="http://zeppelin.apache.org/docs/0.9.0-preview1/assets/themes/zeppelin/img/docs-img/submarine-interpreter.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210425115420.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210425120338.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210425143319.png">
+<meta property="article:published_time" content="2021-04-22T14:06:36.000Z">
+<meta property="article:modified_time" content="2021-04-25T06:33:44.876Z">
 <meta property="article:author" content="Ordiy">
 <meta property="article:tag" content="blog">
-<meta property="article:tag" content="Java">
-<meta property="article:tag" content="Log4j2">
-<meta property="article:tag" content="Logging">
+<meta property="article:tag" content="ApacheZeppelin">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://zeppelin.apache.org/docs/0.9.0-preview1/assets/themes/zeppelin/img/docs-img/submarine-architecture.png">
 
-<link rel="canonical" href="https://ordiychen.github.io/ordiychen.github.io/posts/2017-03-28-mysql-show-table-status/">
+<link rel="canonical" href="https://ordiychen.github.io/ordiychen.github.io/posts/2021-04-22-zeppelin-inaction-1/">
 
 
 <script id="page-configurations">
@@ -52,7 +56,7 @@
   };
 </script>
 
-  <title>MySQL show status 使用指南 | Ordiy's Blog</title>
+  <title>Zeppelin In Action | Ordiy's Blog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-175654772-1"></script>
     <script>
@@ -182,7 +186,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://ordiychen.github.io/ordiychen.github.io/posts/2017-03-28-mysql-show-table-status/">
+    <link itemprop="mainEntityOfPage" href="https://ordiychen.github.io/ordiychen.github.io/posts/2021-04-22-zeppelin-inaction-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/apple-touch-icon.png">
@@ -195,7 +199,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          MySQL show status 使用指南
+          Zeppelin In Action
         </h1>
 
         <div class="post-meta">
@@ -205,7 +209,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2017-03-28 00:00:00" itemprop="dateCreated datePublished" datetime="2017-03-28T00:00:00Z">2017-03-28</time>
+              <time title="Created: 2021-04-22 14:06:36" itemprop="dateCreated datePublished" datetime="2021-04-22T14:06:36Z">2021-04-22</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -217,7 +221,7 @@
                 </span>
                   , 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tech/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a>
+                  <a href="/categories/tech/BigData/" itemprop="url" rel="index"><span itemprop="name">BigData</span></a>
                 </span>
             </span>
 
@@ -227,14 +231,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>3.6k</span>
+              <span>2k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>3 mins.</span>
+              <span>2 mins.</span>
             </span>
 
         </div>
@@ -246,58 +250,32 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="mysql-show-status"><a href="#mysql-show-status" class="headerlink" title="mysql show status"></a>mysql show status</h3><p><code>SHOW TABLE STATUS</code> 可以查看表/view的大量信息。 这里简述一下用法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#查询数据表 状态</span><br><span class="line">SHOW TABLE STATUS from dp_report_forms_data like &#39;tb_dp_hera_user_access_statistics&#39; \G</span><br></pre></td></tr></table></figure>
+        <h1 id="About-Zeppelin"><a href="#About-Zeppelin" class="headerlink" title="About Zeppelin"></a>About Zeppelin</h1><p>基于Web的笔记本，可通过SQL，Scala等实现数据驱动的交互式数据分析和协作文档。</p>
+<blockquote>
+<p>Web-based notebook that enables data-driven,<br>interactive data analytics and collaborative documents with SQL, Scala and more.</p>
+</blockquote>
+<p>Architecture<br><img src="http://zeppelin.apache.org/docs/0.9.0-preview1/assets/themes/zeppelin/img/docs-img/submarine-architecture.png"><br><em>图片@apache zeppelin</em></p>
+<p><img src="http://zeppelin.apache.org/docs/0.9.0-preview1/assets/themes/zeppelin/img/docs-img/submarine-interpreter.png"><br><em>图片@apache zeppelin</em></p>
+<h1 id="Install-and-config"><a href="#Install-and-config" class="headerlink" title="Install and config"></a>Install and config</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">环境：</span><br><span class="line">Centos 7.5</span><br><span class="line">JDK1.8</span><br><span class="line">zeppelin-0.9.0</span><br><span class="line">网络：局域网使用</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p>结果：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Name            | tb_dp_hera_user_access_statistics</span><br><span class="line">Engine          | InnoDB</span><br><span class="line">Version         | 10</span><br><span class="line">Row_format      | Dynamic</span><br><span class="line">Rows            | 9661</span><br><span class="line">Avg_row_length  | 164</span><br><span class="line">Data_length     | 1589248</span><br><span class="line">Max_data_length | 0</span><br><span class="line">Index_length    | 1589248</span><br><span class="line">Data_free       | 2097152</span><br><span class="line">Auto_increment  | 240145</span><br><span class="line">Create_time     | 2020-08-06 10:53:18</span><br><span class="line">Update_time     | &lt;null&gt;</span><br><span class="line">Check_time      | &lt;null&gt;</span><br><span class="line">Collation       | utf8_general_ci</span><br><span class="line">Checksum        | &lt;null&gt;</span><br><span class="line">Create_options  |</span><br><span class="line">Comment         | 用户访问统计表(总表)，按天统计</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>install 过程：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">wget https:&#x2F;&#x2F;mirrors.bfsu.edu.cn&#x2F;apache&#x2F;zeppelin&#x2F;zeppelin-0.9.0&#x2F;zeppelin-0.9.0-bin-all.tgz </span><br><span class="line"># https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;apache&#x2F;zeppelin&#x2F;zeppelin-0.9.0&#x2F;zeppelin-0.9.0-bin-all.tgz </span><br><span class="line"></span><br><span class="line">tar zxvf zeppelin-0.9.0-bin-all.tgz</span><br><span class="line"></span><br><span class="line">#软链</span><br><span class="line">ln -s zeppelin-0.9.0-bin-all zeppeline</span><br><span class="line"></span><br><span class="line"># </span><br><span class="line">cd zeppline </span><br><span class="line"></span><br><span class="line"># 修改配置</span><br><span class="line">cat&lt;&lt; EOF&gt; conf&#x2F;zeppelin-site.xml</span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;zeppelin.server.addr&lt;&#x2F;name&gt;</span><br><span class="line">  &lt;value&gt;0.0.0.0&lt;&#x2F;value&gt;</span><br><span class="line">  &lt;description&gt;Server binding address&lt;&#x2F;description&gt;</span><br><span class="line">&lt;&#x2F;property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;zeppelin.server.port&lt;&#x2F;name&gt;</span><br><span class="line">  &lt;value&gt;8089&lt;&#x2F;value&gt;</span><br><span class="line">  &lt;description&gt;Server port.&lt;&#x2F;description&gt;</span><br><span class="line">&lt;&#x2F;property&gt;</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># start zeppline </span><br><span class="line">.&#x2F;bin&#x2F;zeppelin-daemon.sh start </span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
+
+<h1 id="配置一个interpreter"><a href="#配置一个interpreter" class="headerlink" title="配置一个interpreter"></a>配置一个interpreter</h1><p>备注：建议增加一个内网的maven 私服 repostory 地址，便于jar依赖下载</p>
+<p>interperter增加 interpreter<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210425115420.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">default.url: 	jdbc:mysql:&#x2F;&#x2F;172.17.8.85:3306&#x2F;</span><br><span class="line">default.user	root	</span><br><span class="line">default.password	***	 </span><br><span class="line">default.driver	com.mysql.jdbc.Driver</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Dependencies:</span><br><span class="line">mysql:mysql-connector-java:5.1.49	</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210425120338.png"></p>
 <ul>
-<li><p>Name<br>表名称</p>
-</li>
-<li><p>Engine<br>存储引擎-storage engine</p>
-</li>
-<li><p>Version<br>表的.frm文件的版本号。 </p>
-</li>
-<li><p>Row_format<br> 行的存储格式(Fixed, Dynamic, Compressed, Redundant, Compact)).<br> 对于MyISAM表，Dynamic对应于myisamchk -dvv报告为打包的内容。 使用Antelope文件格式时，InnoDB表格式为Redundant或Compact，而使用Barracuda文件格式时，InnoDB表格式为Compressed或Dynamic。</p>
-</li>
-<li><p>Rows<br> 行数。 某些存储引擎（例如MyISAM）存储准确的计数。 对于其他存储引擎，例如InnoDB，此值是一个近似值，可能与实际值相差40％至50％。 在这种情况下，请使用SELECT COUNT（*）获得准确的计数。</p>
-</li>
-<li><p>Avg_row_length<br> 平均行长</p>
-</li>
-<li><p>Data_length<br>对于MyISAM，Data_length是数据文件的长度，以字节为单位。<br>对于InnoDB，Data_length是为聚簇索引分配的大约空间量（以字节为单位）。 具体来说，它是聚簇索引大小（以页为单位）乘以InnoDB页大小。</p>
-</li>
-<li><p>Max_data_length<br>对于MyISAM，Max_data_length是数据文件的最大长度。 给定使用的数据指针大小，这是表中可以存储的数据字节总数<br>不用于InnoDB</p>
-</li>
-<li><p>Index_length<br>对于MyISAM，Index_length是索引文件的长度，以字节为单位。<br>对于InnoDB，Index_length是分配给非聚集索引的大约空间量（以字节为单位）。 具体来说，它是非聚集索引大小（以页为单位）的总和乘以InnoDB页面大小。</p>
-</li>
-<li><p>Data_free<br>已分配但未使用的字节数。<br>InnoDB表报告表所属的表空间的可用空间。 对于位于共享表空间中的表，这是共享表空间的可用空间。 如果您使用多个表空间，并且表具有自己的表空间，则可用空间仅用于该表。 可用空间是指完全可用范围中的字节数减去安全裕量。 即使可用空间显示为0，只要不需要分配新的扩展盘区，也可以插入行。<br>对于NDB群集，Data_free显示磁盘上为磁盘数据表或磁盘上的碎片分配但未使用的空间。 （内存中的数据资源使用情况由Data_length列报告。）<br>对于分区表，此值仅是估计值，可能不是绝对正确。 在这种情况下，获取此信息的一种更准确的方法是查询INFORMATION_SCHEMA PARTITIONS表，如本示例所示：</p>
- <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">SUM</span>(DATA_FREE)</span><br><span class="line"> <span class="keyword">FROM</span>  INFORMATION_SCHEMA.PARTITIONS</span><br><span class="line"> <span class="keyword">WHERE</span> TABLE_SCHEMA <span class="operator">=</span> <span class="string">&#x27;mydb&#x27;</span></span><br><span class="line"> <span class="keyword">AND</span>   TABLE_NAME   <span class="operator">=</span> <span class="string">&#x27;mytable&#x27;</span>;</span><br></pre></td></tr></table></figure></li>
-<li><p>Auto_increment<br>下一个AUTO_INCREMENT 值</p>
-</li>
-<li><p>Create_time<br>表的创建时间</p>
-</li>
-<li><p>Update_time<br>数据文件的最后更新时间。 对于某些存储引擎，此值为NULL。 例如，InnoDB在其系统表空间中存储多个表，并且数据文件时间戳不适用。 即使在每个InnoDB表都位于单独的.ibd文件中的每表文件模式下，更改缓冲也会延迟对数据文件的写入，因此文件修改时间与上一次插入，更新或删除的时间不同。 对于MyISAM，使用数据文件时间戳。 但是，在Windows上，时间戳不会通过更新进行更新，因此该值不准确。<br>Update_time显示对未分区的InnoDB表执行的最后一次UPDATE，INSERT或DELETE的时间戳记值。 对于MVCC，时间戳记值反映了COMMIT时间，该时间被视为最后更新时间。 重新启动服务器或从InnoDB数据字典高速缓存中清除表时，时间戳记不会保留。<br>Update_time列还显示分区的InnoDB表的此信息。</p>
-</li>
-<li><p>Check_time<br>上次检查表的时间。 并非所有存储引擎这次都更新，在这种情况下，该值始终为NULL。对于分区的InnoDB表，Check_time始终为NULL。<br>对于分区的InnoDB表，Check_time始终为NULL。</p>
-</li>
-<li><p>TABLE_COLLATION<br>该表的默认排序规则。 输出没有显式列出表的默认字符集，但是排序规则名称以字符集名称开头。</p>
-</li>
+<li>interpreter 命令</li>
 </ul>
-<ul>
-<li><p>Create_options<br>与CREATE TABLE一起使用的其他选项,查阅(partition_options)[<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/5.7/en/create-table.html#create-table-partitioning]">https://dev.mysql.com/doc/refman/5.7/en/create-table.html#create-table-partitioning]</a><br>Create_options显示已分区表的分区。<br>Create_options显示在创建或更改每表文件表空间时指定的ENCRYPTION选项。<br>创建禁用了严格模式的表时，如果不支持指定的行格式，则使用存储引擎的默认行格式。 该表的实际行格式在Row_format列中报告。 Create_options显示在CREATE TABLE语句中指定的行格式。<br>更改表的存储引擎时，不适用于新存储引擎的表选项将保留在表定义中，以便在必要时将具有其先前定义的选项的表恢复到原始存储引擎。 Create_options可能显示保留的选项。</p>
-</li>
-<li><p>TABLE_COMMENT<br>表的备注说明信息</p>
-</li>
-</ul>
-<h2 id="INFORMATION-SCHEMA"><a href="#INFORMATION-SCHEMA" class="headerlink" title="INFORMATION_SCHEMA"></a>INFORMATION_SCHEMA</h2><p>INFORMATION_SCHEMA 与show tables的信息有一些相同，重点是表示<code>information about tables in databases</code>. 用法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">select * from INFORMATION_SCHEMA.TABLES WHERE table_schema &#x3D; &#39;db_name&#39; AND table_name LIKE &#39;tb_dp_hera_user_access_statistics&#39; \G</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>Result:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">TABLE_CATALOG   | def</span><br><span class="line">TABLE_SCHEMA    | dp_report_forms_data</span><br><span class="line">TABLE_NAME      | tb_dp_hera_user_access_statistics</span><br><span class="line">TABLE_TYPE      | BASE TABLE</span><br><span class="line">ENGINE          | InnoDB</span><br><span class="line">VERSION         | 10</span><br><span class="line">ROW_FORMAT      | Dynamic</span><br><span class="line">TABLE_ROWS      | 9661</span><br><span class="line">AVG_ROW_LENGTH  | 164</span><br><span class="line">DATA_LENGTH     | 1589248</span><br><span class="line">MAX_DATA_LENGTH | 0</span><br><span class="line">INDEX_LENGTH    | 1589248</span><br><span class="line">DATA_FREE       | 2097152</span><br><span class="line">AUTO_INCREMENT  | 240145</span><br><span class="line">CREATE_TIME     | 2020-08-06 10:53:18</span><br><span class="line">UPDATE_TIME     | &lt;null&gt;</span><br><span class="line">CHECK_TIME      | &lt;null&gt;</span><br><span class="line">TABLE_COLLATION | utf8_general_ci</span><br><span class="line">CHECKSUM        | &lt;null&gt;</span><br><span class="line">CREATE_OPTIONS  |</span><br><span class="line">TABLE_COMMENT   | 用户访问统计表(总表)，按天统计</span><br></pre></td></tr></table></figure>
-<ul>
-<li>TABLE_TYPE<br>表格的BASE TABLE，视图的VIEW或INFORMATION_SCHEMA表的SYSTEM VIEW。 </li>
-</ul>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p>[mysql show table statsu](<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/5.7/en/show-table-status.html%EF%BC%89">https://dev.mysql.com/doc/refman/5.7/en/show-table-status.html）</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#nstall all community managed interpreters</span><br><span class="line">.&#x2F;bin&#x2F;install-interpreter.sh --all</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># You can get full list of community managed interpreters by running</span><br><span class="line">.&#x2F;bin&#x2F;install-interpreter.sh --list</span><br><span class="line"></span><br><span class="line"># add 第三方 interpreter </span><br><span class="line">#rd party interpreters</span><br><span class="line">#http:&#x2F;&#x2F;zeppelin.apache.org&#x2F;docs&#x2F;0.9.0&#x2F;usage&#x2F;interpreter&#x2F;installation.html#3rd-party-interpreters</span><br><span class="line">   </span><br></pre></td></tr></table></figure>
+
+
+<h1 id="zeppline-进行数据可视化分析"><a href="#zeppline-进行数据可视化分析" class="headerlink" title="zeppline 进行数据可视化分析"></a>zeppline 进行数据可视化分析</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">%mysql </span><br><span class="line">select tab2.user_name,count(*) as auth_obj_num from  tb_dp_hero_auth_info as tab1 left join tb_dp_hero_user_info tab2 on tab1.user_id &#x3D; tab2.id  group by tab1.user_id ;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>分析用户的授权对象个数：<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210425143319.png"></p>
+<h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><p><a target="_blank" rel="noopener" href="http://zeppelin.apache.org/docs/0.9.0/usage/interpreter/installation.html">zeppelin interpreter</a><br><a target="_blank" rel="noopener" href="http://zeppelin.apache.org/docs/0.9.0-preview1/interpreter/submarine.html#architecture">zeppelin architecture</a></p>
 
     </div>
 
@@ -308,9 +286,7 @@
       <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/blog/" rel="tag"># blog</a>
-              <a href="/tags/Java/" rel="tag"># Java</a>
-              <a href="/tags/Log4j2/" rel="tag"># Log4j2</a>
-              <a href="/tags/Logging/" rel="tag"># Logging</a>
+              <a href="/tags/ApacheZeppelin/" rel="tag"># ApacheZeppelin</a>
           </div>
 
         
@@ -318,13 +294,10 @@
 
         
     <div class="post-nav">
+      <div class="post-nav-item"></div>
       <div class="post-nav-item">
-    <a href="/posts/2018-03-11-arm-compile-nginx/" rel="prev" title="Raspberrypi compile and install nginx">
-      <i class="fa fa-chevron-left"></i> Raspberrypi compile and install nginx
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/posts/2018-01-01-LRU-algorithms/" rel="next" title="常用缓存算法——LRU">
-      常用缓存算法——LRU <i class="fa fa-chevron-right"></i>
+    <a href="/posts/2021-03-26-HDP-hadoop-install/" rel="next" title="HDP3.1.5集群安装">
+      HDP3.1.5集群安装 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -384,7 +357,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql-show-status"><span class="nav-number">1.</span> <span class="nav-text">mysql show status</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#INFORMATION-SCHEMA"><span class="nav-number"></span> <span class="nav-text">INFORMATION_SCHEMA</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">1.</span> <span class="nav-text">参考</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#About-Zeppelin"><span class="nav-number">1.</span> <span class="nav-text">About Zeppelin</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Install-and-config"><span class="nav-number">2.</span> <span class="nav-text">Install and config</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E4%B8%80%E4%B8%AAinterpreter"><span class="nav-number">3.</span> <span class="nav-text">配置一个interpreter</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#zeppline-%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E5%88%86%E6%9E%90"><span class="nav-number">4.</span> <span class="nav-text">zeppline 进行数据可视化分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0"><span class="nav-number">5.</span> <span class="nav-text">参考文章</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

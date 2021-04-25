@@ -15,7 +15,7 @@
 
 <link rel="stylesheet" href="/css/main.css">
 
-
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab, Noto Serif SC:300,300italic,400,400italic,700,700italic|Times New Roman:300,300italic,400,400italic,700,700italic|Courier New:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
@@ -254,8 +254,7 @@
 <li><p>测试代码</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testKey</span><span class="params">()</span></span>&#123;</span><br><span class="line">    LRUCache&lt;String,Integer&gt; cache =  <span class="keyword">new</span> LRUCache&lt;&gt;(<span class="number">5</span>);</span><br><span class="line">    <span class="comment">//初始化数据</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">        cache.put(<span class="string">&quot;key&quot;</span>+i,i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 模拟最近使用</span></span><br><span class="line">    String key = <span class="string">&quot;key3&quot;</span>;</span><br><span class="line">    cache.get(key);</span><br><span class="line">    System.out.println(<span class="string">&quot;after get--&gt;:&quot;</span>+ key);</span><br><span class="line">    printMap(cache);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//put data and remove Eldest Entry</span></span><br><span class="line">    cache.put(<span class="string">&quot;key10&quot;</span>,<span class="number">10</span>);</span><br><span class="line">    System.out.println(<span class="string">&quot;after put data and remove Eldest Entry&quot;</span>);</span><br><span class="line">    printMap(cache);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 <li><p>输出结果</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">after get--&gt;:key3</span><br><span class="line">cache order:</span><br><span class="line">key0=0 hashCode: 3288497 , key1=1 hashCode: 3288499 , key2=2 hashCode: 3288497 , key4=4 hashCode: 3288497 , key3=3 hashCode: 3288503 ,</span><br><span class="line">3288497</span><br><span class="line">after put data and remove Eldest Entry</span><br><span class="line">cache order:</span><br><span class="line">key1=1 hashCode: 3288499 , key2=2 hashCode: 3288497 , key4=4 hashCode: 3288497 , key3=3 hashCode: 3288503 , key10=10 hashCode: 101943476 ,</span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">after get--&gt;:key3</span><br><span class="line">cache order:</span><br><span class="line">key0=0 hashCode: 3288497 , key1=1 hashCode: 3288499 , key2=2 hashCode: 3288497 , key4=4 hashCode: 3288497 , key3=3 hashCode: 3288503 ,</span><br><span class="line">3288497</span><br><span class="line">after put data and remove Eldest Entry</span><br><span class="line">cache order:</span><br><span class="line">key1=1 hashCode: 3288499 , key2=2 hashCode: 3288497 , key4=4 hashCode: 3288497 , key3=3 hashCode: 3288503 , key10=10 hashCode: 101943476 ,</span><br></pre></td></tr></table></figure></li>
 <li><p>过程解析<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200602183106.png" alt="images"></p>
 </li>
 </ul>
@@ -364,20 +363,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-count">36</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -421,12 +420,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">83k</span>
+    <span title="Symbols count total">86k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">1:16</span>
+    <span title="Reading time total">1:18</span>
 </div>
 
         
