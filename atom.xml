@@ -40,31 +40,6 @@
   </entry>
   
   <entry>
-    <title>HDP3.1.5集群安装</title>
-    <link href="https://ordiychen.github.io/ordiychen.github.io/posts/2021-03-26-HDP-hadoop-install/"/>
-    <id>https://ordiychen.github.io/ordiychen.github.io/posts/2021-03-26-HDP-hadoop-install/</id>
-    <published>2021-04-01T15:56:37.000Z</published>
-    <updated>2021-04-20T07:43:01.533Z</updated>
-    
-    
-    <summary type="html">Raspberrypi 4B 编译和安装Ningx 1.19</summary>
-    
-    
-    
-    <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
-    
-    <category term="ARM" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/ARM/"/>
-    
-    
-    <category term="blog" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/blog/"/>
-    
-    <category term="NGINX" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/NGINX/"/>
-    
-    <category term="Raspberrypi" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Raspberrypi/"/>
-    
-  </entry>
-  
-  <entry>
     <title>搭建HTTP内网文件服务器-以NGINX为例</title>
     <link href="https://ordiychen.github.io/ordiychen.github.io/posts/2021-02-01-nginx-file-server/"/>
     <id>https://ordiychen.github.io/ordiychen.github.io/posts/2021-02-01-nginx-file-server/</id>
