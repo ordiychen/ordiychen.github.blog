@@ -6,7 +6,7 @@
   <link href="https://ordiychen.github.io/ordiychen.github.io/atom.xml" rel="self"/>
   
   <link href="https://ordiychen.github.io/ordiychen.github.io/"/>
-  <updated>2021-05-21T07:37:50.146Z</updated>
+  <updated>2021-05-21T09:37:25.153Z</updated>
   <id>https://ordiychen.github.io/ordiychen.github.io/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>HBase2 YCSB beanchmark test</title>
+    <title>HBase2 YCSB benchmark test</title>
     <link href="https://ordiychen.github.io/ordiychen.github.io/posts/2021-04-11-hbase-ycsb-benchamark-test-1/"/>
     <id>https://ordiychen.github.io/ordiychen.github.io/posts/2021-04-11-hbase-ycsb-benchamark-test-1/</id>
     <published>2021-05-21T11:09:29.000Z</published>
-    <updated>2021-05-21T07:37:50.146Z</updated>
+    <updated>2021-05-21T09:37:25.153Z</updated>
     
     
     <summary type="html">使用 YCSB 对HBase2.1.6进行 benchamark test，测试在不同workload场景下HBase的性能，并进行总结和分析。</summary>
@@ -31,6 +31,8 @@
     <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
     
     <category term="Blog" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/Blog/"/>
+    
+    <category term="BigData" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/Blog/BigData/"/>
     
     
     <category term="HBase" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/HBase/"/>
@@ -44,7 +46,7 @@
     <link href="https://ordiychen.github.io/ordiychen.github.io/posts/2021-04-22-zeppelin-inaction-1/"/>
     <id>https://ordiychen.github.io/ordiychen.github.io/posts/2021-04-22-zeppelin-inaction-1/</id>
     <published>2021-04-22T14:06:36.000Z</published>
-    <updated>2021-04-25T06:33:44.876Z</updated>
+    <updated>2021-05-21T07:49:40.651Z</updated>
     
     
     <summary type="html">Zeppelin Install and config，并使用Zeppelin 对MySQL数据进行可视化分析。</summary>
@@ -79,9 +81,9 @@
     <category term="net" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/net/"/>
     
     
-    <category term="Net" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Net/"/>
-    
     <category term="blog" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/blog/"/>
+    
+    <category term="Net" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Net/"/>
     
     <category term="Nginx" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Nginx/"/>
     
@@ -279,9 +281,9 @@
     <category term="java" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/java/"/>
     
     
-    <category term="Java" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Java/"/>
-    
     <category term="blog" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/blog/"/>
+    
+    <category term="Java" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Java/"/>
     
     <category term="Log4j2" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Log4j2/"/>
     
@@ -356,9 +358,9 @@
     <category term="mysql" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/mysql/"/>
     
     
-    <category term="Java" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Java/"/>
-    
     <category term="blog" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/blog/"/>
+    
+    <category term="Java" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Java/"/>
     
     <category term="Log4j2" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Log4j2/"/>
     
@@ -383,13 +385,13 @@
     <category term="algorithm" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/algorithm/"/>
     
     
+    <category term="Net" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Net/"/>
+    
     <category term="LRU" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/LRU/"/>
     
     <category term="Java" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Java/"/>
     
     <category term="CoreJava" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/CoreJava/"/>
-    
-    <category term="Net" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Net/"/>
     
   </entry>
   
@@ -410,11 +412,11 @@
     <category term="java" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/java/"/>
     
     
+    <category term="Net" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Net/"/>
+    
     <category term="Java" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Java/"/>
     
     <category term="CoreJava" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/CoreJava/"/>
-    
-    <category term="Net" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Net/"/>
     
     <category term="JDK" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/JDK/"/>
     
