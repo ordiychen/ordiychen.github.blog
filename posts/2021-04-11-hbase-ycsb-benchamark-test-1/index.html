@@ -39,7 +39,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210521144127.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210521144838.png">
 <meta property="article:published_time" content="2021-05-21T11:09:29.000Z">
-<meta property="article:modified_time" content="2021-05-21T10:14:07.575Z">
+<meta property="article:modified_time" content="2021-05-21T11:48:29.817Z">
 <meta property="article:author" content="Ordiy">
 <meta property="article:tag" content="HBase">
 <meta property="article:tag" content="YCSB">
@@ -346,13 +346,13 @@
 <h1 id="benchmarkTest-测试数据汇总"><a href="#benchmarkTest-测试数据汇总" class="headerlink" title="benchmarkTest 测试数据汇总"></a>benchmarkTest 测试数据汇总</h1><p>测试结果-汇总表：<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210521140743.png"></p>
 <p>图表表示(不包含 uniform分布)：<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210521140842.png"></p>
 <h2 id="测试总结"><a href="#测试总结" class="headerlink" title="测试总结"></a>测试总结</h2><ul>
-<li>从上图可以看出 HBase的GET 读操作是主要的性能瓶颈，分析其原因主要是由于BlockCache Hit Ratio、Disk IO 的影响：</li>
+<li>从上图可以看出 HBase的GET 读操作是主要的性能瓶颈，主要是收到<code>BlockCache Hit </code>Ratio和<code>Disk IOPS</code> 的影响：</li>
 </ul>
-<p>RegionServer Hit Ratio :<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210521142441.png"><br>一个机器的最大内存是64G，分配给RegionServer 的BlockCache L1 总量是12G，集群RegionServer L1 Cache总共35G(12G * 3节点)<br>50%左右的BlockCache Hit Ratio ，还有50% 的 RPC 请求需要HDFS 存储中访问数据，导致latency较大，限制了QPS提升。</p>
-<p>Disk IO ，磁盘最大OPS：1K OPS左右,如图：<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210521145029.png"></p>
+<p>RegionServer Hit Ratio :<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210521142441.png"><br>一个机器的最大内存是64G，分配给RegionServer 的BlockCache L1 总量是12G，集群RegionServer L1 Cache总共35G(12G * 3节点), 能够缓存的数据量有限。<br>测试中 GET RPC 的BlockCache Hit Ratio 一直在50%左右（和生产环境接近)，还有50% 的 RPC 请求需要到HDFS存储中访问数据，导致latency较大，限制了QPS提升。</p>
+<p>关于Disk IO ，磁盘最大OPS：<code>1K OPS</code>左右,如图：<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210521145029.png"></p>
 <p>机器最大IOPS： 机器有10个挂载，单个HDD盘的读写 <code>150IOPS</code>左右，所以<code>10挂载 * 150 IOPS = 1.5K OPS</code></p>
 <ul>
-<li>相对与zipfian分布的测试，uniform分布下，Hbase 读取性能还要下降2/3 。<br>这是由于zipfian分布下存在热数据,zipfian与uniform对比见:<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210521144127.png"></li>
+<li>相对与zipfian分布的测试，uniform分布下，Hbase 读取性能还要下降2/3 。<br>这是由于zipfian分布下存在热数据,<code>YCSB paper</code> 中zipfian与uniform对比见:<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210521144127.png"></li>
 </ul>
 <p>*注意：图片涞源,<a target="_blank" rel="noopener" href="https://labs.yahoo.com/news/yahoo-cloud-serving-benchmark/">https://labs.yahoo.com/news/yahoo-cloud-serving-benchmark/</a></p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>在机器环境不变的情况下，通过提前表的StoreFileSize,可以有效提高表的吞吐量：</p>

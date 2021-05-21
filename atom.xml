@@ -6,7 +6,7 @@
   <link href="https://ordiychen.github.io/ordiychen.github.io/atom.xml" rel="self"/>
   
   <link href="https://ordiychen.github.io/ordiychen.github.io/"/>
-  <updated>2021-05-21T10:14:07.575Z</updated>
+  <updated>2021-05-21T11:48:29.817Z</updated>
   <id>https://ordiychen.github.io/ordiychen.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://ordiychen.github.io/ordiychen.github.io/posts/2021-04-11-hbase-ycsb-benchamark-test-1/"/>
     <id>https://ordiychen.github.io/ordiychen.github.io/posts/2021-04-11-hbase-ycsb-benchamark-test-1/</id>
     <published>2021-05-21T11:09:29.000Z</published>
-    <updated>2021-05-21T10:14:07.575Z</updated>
+    <updated>2021-05-21T11:48:29.817Z</updated>
     
     
     <summary type="html">使用 YCSB 对HBase2.1.6进行 benchamark test，测试在不同workload场景下HBase的性能，并进行总结和分析。</summary>
