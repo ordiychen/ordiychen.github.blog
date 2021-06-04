@@ -349,7 +349,7 @@ ARM 处理器目前有多种CPU架构，编译时需要注意。
       </tags>
   </entry>
   <entry>
-    <title>python 计算圆周率(译)</title>
+    <title>Python 计算圆周率(译)</title>
     <url>/posts/2019-10-11-python-calc-pi-1/</url>
     <content><![CDATA[<p>翻译自<a href="http://blog.recursiveprocess.com/2013/03/14/calculate-pi-with-python/">calculate-pi-with-python</a></p>
 <h1 id="计算圆周率"><a href="#计算圆周率" class="headerlink" title="计算圆周率"></a>计算圆周率</h1><h2 id="贝利-波尔温-普劳夫公式-Bailey–Borwein–Plouffe-formula-方法"><a href="#贝利-波尔温-普劳夫公式-Bailey–Borwein–Plouffe-formula-方法" class="headerlink" title="贝利-波尔温-普劳夫公式(Bailey–Borwein–Plouffe formula)方法"></a>贝利-波尔温-普劳夫公式(Bailey–Borwein–Plouffe formula)方法</h2><p><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200722214711.png" alt="images"></p>
@@ -503,7 +503,7 @@ ARM 处理器目前有多种CPU架构，编译时需要注意。
       </tags>
   </entry>
   <entry>
-    <title>python 使用绘制统计图</title>
+    <title>Python 使用绘制统计图</title>
     <url>/posts/2020-05-python-count/</url>
     <content><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p><a href="https://matplotlib.org/">Matplotlib is a comprehensive library for creating static, animated, and interactive visualizations in Python. </a><br><code>Matplotlib</code>是常用的数据可视化工具之一(灵活、功能强大)</p>
 <p>安装包：</p>
@@ -751,8 +751,8 @@ ARM 处理器目前有多种CPU架构，编译时需要注意。
 <h2 id="测试总结"><a href="#测试总结" class="headerlink" title="测试总结"></a>测试总结</h2><ul>
 <li>从上图可以看出 HBase的GET 读操作是主要的性能瓶颈，主要是收到<code>BlockCache Hit </code>Ratio和<code>Disk IOPS</code> 的影响：</li>
 </ul>
-<p>RegionServer Hit Ratio :<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210521142441.png"><br>一个机器的最大内存是64G，分配给RegionServer 的BlockCache L1 总量是12G，集群RegionServer L1 Cache总共35G(12G * 3节点), 能够缓存的数据量有限。<br>测试中 GET RPC 的BlockCache Hit Ratio 一直在50%左右（和生产环境接近)，还有50% 的 RPC 请求需要到HDFS存储中访问数据，导致latency较大，成为限制QPS提升的瓶颈。</p>
-<p>关于Disk IO ，磁盘最大OPS：<code>1K OPS</code>左右,如图：<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210521145029.png"><br>机器最大IOPS： 机器有10个挂载，单个HDD盘的读写 <code>150IOPS</code>左右，所以<code>10挂载 * 150 IOPS = 1.5K OPS</code></p>
+<p>RegionServer Hit Ratio :<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210521142441.png"><br>一个机器的最大内存是64G，分配给RegionServer 的BlockCache L1 总量是12G，集群RegionServer L1 Cache总共35G(12G * 3节点), 能够缓存的数据量有限。<br>测试中 GET RPC 的BlockCache Hit Ratio 一直在50%左右（和生产环境接近)，还有50% 的 RPC 请求需要到HDFS存储中访问数据(需要读磁盘），导致latency较大，成为限制QPS提升的瓶颈。</p>
+<p>关于Disk IO ，磁盘最大OPS：<code>1K OPS</code>左右,如图：<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210521145029.png"><br>机器最大IOPS： 机器有10个挂载，单个HDD盘的读写 <code>150IOPS</code>左右，所以<code>10挂载 * 150 IOPS = 1.5K OPS</code>,从监控看磁盘OPS基本已经达到上限。</p>
 <ul>
 <li>相对与zipfian分布的测试，uniform分布下，Hbase 读取性能还要下降2/3 。<br>这是由于zipfian分布下存在热数据,<code>YCSB paper</code> 中zipfian与uniform对比见:<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210521144127.png"></li>
 </ul>

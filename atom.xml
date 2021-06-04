@@ -6,7 +6,7 @@
   <link href="https://ordiychen.github.io/ordiychen.github.io/atom.xml" rel="self"/>
   
   <link href="https://ordiychen.github.io/ordiychen.github.io/"/>
-  <updated>2021-05-24T08:28:35.922Z</updated>
+  <updated>2021-05-24T08:56:33.576Z</updated>
   <id>https://ordiychen.github.io/ordiychen.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://ordiychen.github.io/ordiychen.github.io/posts/2021-04-11-hbase-ycsb-benchamark-test-1/"/>
     <id>https://ordiychen.github.io/ordiychen.github.io/posts/2021-04-11-hbase-ycsb-benchamark-test-1/</id>
     <published>2021-05-21T11:09:29.000Z</published>
-    <updated>2021-05-24T08:28:35.922Z</updated>
+    <updated>2021-05-24T08:56:33.576Z</updated>
     
     
     <summary type="html">使用 YCSB 对HBase2.1.6进行 benchamark test，测试在不同workload场景下HBase的性能，并进行总结和分析。</summary>
@@ -165,11 +165,11 @@
   </entry>
   
   <entry>
-    <title>python 使用绘制统计图</title>
+    <title>Python 使用绘制统计图</title>
     <link href="https://ordiychen.github.io/ordiychen.github.io/posts/2020-05-python-count/"/>
     <id>https://ordiychen.github.io/ordiychen.github.io/posts/2020-05-python-count/</id>
     <published>2019-11-14T15:29:51.000Z</published>
-    <updated>2020-08-18T07:23:17.791Z</updated>
+    <updated>2021-05-24T08:43:45.828Z</updated>
     
     
     <summary type="html">学习python 绘制基本的折线图、对散点图进行拟合、使用快速傅立叶变换对周期性矩形波(方波)信号记性分解（分解出频率、时域图)</summary>
@@ -240,11 +240,11 @@
   </entry>
   
   <entry>
-    <title>python 计算圆周率(译)</title>
+    <title>Python 计算圆周率(译)</title>
     <link href="https://ordiychen.github.io/ordiychen.github.io/posts/2019-10-11-python-calc-pi-1/"/>
     <id>https://ordiychen.github.io/ordiychen.github.io/posts/2019-10-11-python-calc-pi-1/</id>
     <published>2019-07-22T21:00:37.000Z</published>
-    <updated>2020-08-18T07:24:01.431Z</updated>
+    <updated>2021-05-24T08:43:45.824Z</updated>
     
     
     <summary type="html">使用贝利-波尔温-普劳夫公式、贝拉公式、Chudnovsky算法计算圆周率</summary>
