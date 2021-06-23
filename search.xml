@@ -61,8 +61,8 @@
         <category>mysql</category>
       </categories>
       <tags>
-        <tag>blog</tag>
         <tag>Java</tag>
+        <tag>blog</tag>
         <tag>Log4j2</tag>
         <tag>Logging</tag>
       </tags>
@@ -89,80 +89,10 @@
         <category>algorithm</category>
       </categories>
       <tags>
-        <tag>Net</tag>
         <tag>LRU</tag>
         <tag>Java</tag>
         <tag>CoreJava</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Raspberrypi compile and install nginx</title>
-    <url>/posts/2018-03-11-arm-compile-nginx/</url>
-    <content><![CDATA[<h1 id="ARM处理器的集中指令集"><a href="#ARM处理器的集中指令集" class="headerlink" title="ARM处理器的集中指令集"></a>ARM处理器的集中指令集</h1><table>
-<thead>
-<tr>
-<th align="left">移殖</th>
-<th align="left">架构</th>
-<th align="left">简介</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">armel</td>
-<td align="left">EABI ARM</td>
-<td align="left">是arm eabi little endian的缩写。eabi是软浮点二进制接口，这里的e是embeded，是对于嵌入式设备而言。</td>
-</tr>
-<tr>
-<td align="left">armhf</td>
-<td align="left">是arm hard float的缩写。   ARMv7</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left">arm64</td>
-<td align="left">64-bit ARM ,ARMV8</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left">armel和armhf的区别</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left">它们的区别体现在浮点运算上，它们在进行浮点运算时都会使用fpu，但是armel传参数用普通寄存器，而armhf传参数用的是fpu的寄存器，因此armhf的浮点运算性能更高。</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left">gcc编译的时候，使用-mfloat-abi选项来指定浮点运算使用的是哪种，soft不使用fpu，armel使用fpu，使用普通寄存器，armhf使用fpu，使用fpu的寄存器。</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-</tbody></table>
-<h1 id="ARM-compile-NGINX"><a href="#ARM-compile-NGINX" class="headerlink" title="ARM compile NGINX"></a>ARM compile NGINX</h1><p> 下载软件包，以便我们编译nginx：<br> <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> # init </span><br><span class="line">$ sudo apt-get install -y apt-utils autoconf automake build-essential git libcurl4-openssl-dev libgeoip-dev liblmdb-dev libpcre++-dev libtool libxml2-dev libyajl-dev pkgconf wget zlib1g-dev</span><br><span class="line"></span><br><span class="line"> &#96;&#96;&#96;&#96;</span><br><span class="line"></span><br><span class="line">清理ningx config file ：&#x2F;etc&#x2F;nginx</span><br></pre></td></tr></table></figure><br>$ sudo apt remove nginx<br> <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"># download </span><br></pre></td></tr></table></figure><br> $ wget <a href="https://nginx.org/download/nginx-1.19.9.zip">https://nginx.org/download/nginx-1.19.9.zip</a><br> $ wget <a href="https://nginx.org/download/nginx-1.19.9.zip.asc">https://nginx.org/download/nginx-1.19.9.zip.asc</a></p>
-<p>$ gpg --verify nginx-1.13.11.tar.gz.asc nginx-1.13.11.tar.gz</p>
-<p>$ tar -zxvf nginx-1.13.11.tar.gz<br>$ cd nginx-1.13.11</p>
-<p>$ ./configure<br>    --sbin-path=/usr/local/nginx/nginx<br>    --conf-path=/usr/local/nginx/nginx.conf<br>    --pid-path=/usr/local/nginx/nginx.pid<br>    --with-http_ssl_module</p>
-<p>$ make<br>$ sudo make install<br> <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">- test </span><br></pre></td></tr></table></figure></p>
-<h1 id="nginx-test"><a href="#nginx-test" class="headerlink" title="nginx test"></a>nginx test</h1><p>sudo nginx -t </p>
-<p>nginx version: nginx/1.19.7<br>built by gcc 8.3.0 (Raspbian 8.3.0-6+rpi1)<br>configure arguments:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
-<p>curl -i -XGET &#39;<a href="http://127.0.0.1&/#39;">http://127.0.0.1&#39;</a></p>
-<pre><code>
-# 总结
-ARM 处理器目前有多种CPU架构，编译时需要注意。
-
-# 参考
-
-[ARM Cortex A78](https://developer.arm.com/ip-products/processors/cortex-a/cortex-a78?_ga=2.96347861.810840481.1619338199-1241787852.1619338199)
-</code></pre>
-]]></content>
-      <categories>
-        <category>tech</category>
-        <category>ARM</category>
-      </categories>
-      <tags>
-        <tag>blog</tag>
-        <tag>NGINX</tag>
-        <tag>Raspberrypi</tag>
+        <tag>Net</tag>
       </tags>
   </entry>
   <entry>
@@ -342,10 +272,80 @@ ARM 处理器目前有多种CPU架构，编译时需要注意。
         <category>java</category>
       </categories>
       <tags>
-        <tag>blog</tag>
         <tag>Java</tag>
+        <tag>blog</tag>
         <tag>Log4j2</tag>
         <tag>Logging</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Raspberrypi compile and install nginx</title>
+    <url>/posts/2018-03-11-arm-compile-nginx/</url>
+    <content><![CDATA[<h1 id="ARM处理器的集中指令集"><a href="#ARM处理器的集中指令集" class="headerlink" title="ARM处理器的集中指令集"></a>ARM处理器的集中指令集</h1><table>
+<thead>
+<tr>
+<th align="left">移殖</th>
+<th align="left">架构</th>
+<th align="left">简介</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">armel</td>
+<td align="left">EABI ARM</td>
+<td align="left">是arm eabi little endian的缩写。eabi是软浮点二进制接口，这里的e是embeded，是对于嵌入式设备而言。</td>
+</tr>
+<tr>
+<td align="left">armhf</td>
+<td align="left">是arm hard float的缩写。   ARMv7</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">arm64</td>
+<td align="left">64-bit ARM ,ARMV8</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">armel和armhf的区别</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">它们的区别体现在浮点运算上，它们在进行浮点运算时都会使用fpu，但是armel传参数用普通寄存器，而armhf传参数用的是fpu的寄存器，因此armhf的浮点运算性能更高。</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">gcc编译的时候，使用-mfloat-abi选项来指定浮点运算使用的是哪种，soft不使用fpu，armel使用fpu，使用普通寄存器，armhf使用fpu，使用fpu的寄存器。</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<h1 id="ARM-compile-NGINX"><a href="#ARM-compile-NGINX" class="headerlink" title="ARM compile NGINX"></a>ARM compile NGINX</h1><p> 下载软件包，以便我们编译nginx：<br> <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> # init </span><br><span class="line">$ sudo apt-get install -y apt-utils autoconf automake build-essential git libcurl4-openssl-dev libgeoip-dev liblmdb-dev libpcre++-dev libtool libxml2-dev libyajl-dev pkgconf wget zlib1g-dev</span><br><span class="line"></span><br><span class="line"> &#96;&#96;&#96;&#96;</span><br><span class="line"></span><br><span class="line">清理ningx config file ：&#x2F;etc&#x2F;nginx</span><br></pre></td></tr></table></figure><br>$ sudo apt remove nginx<br> <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"># download </span><br></pre></td></tr></table></figure><br> $ wget <a href="https://nginx.org/download/nginx-1.19.9.zip">https://nginx.org/download/nginx-1.19.9.zip</a><br> $ wget <a href="https://nginx.org/download/nginx-1.19.9.zip.asc">https://nginx.org/download/nginx-1.19.9.zip.asc</a></p>
+<p>$ gpg --verify nginx-1.13.11.tar.gz.asc nginx-1.13.11.tar.gz</p>
+<p>$ tar -zxvf nginx-1.13.11.tar.gz<br>$ cd nginx-1.13.11</p>
+<p>$ ./configure<br>    --sbin-path=/usr/local/nginx/nginx<br>    --conf-path=/usr/local/nginx/nginx.conf<br>    --pid-path=/usr/local/nginx/nginx.pid<br>    --with-http_ssl_module</p>
+<p>$ make<br>$ sudo make install<br> <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">- test </span><br></pre></td></tr></table></figure></p>
+<h1 id="nginx-test"><a href="#nginx-test" class="headerlink" title="nginx test"></a>nginx test</h1><p>sudo nginx -t </p>
+<p>nginx version: nginx/1.19.7<br>built by gcc 8.3.0 (Raspbian 8.3.0-6+rpi1)<br>configure arguments:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<p>curl -i -XGET &#39;<a href="http://127.0.0.1&/#39;">http://127.0.0.1&#39;</a></p>
+<pre><code>
+# 总结
+ARM 处理器目前有多种CPU架构，编译时需要注意。
+
+# 参考
+
+[ARM Cortex A78](https://developer.arm.com/ip-products/processors/cortex-a/cortex-a78?_ga=2.96347861.810840481.1619338199-1241787852.1619338199)
+</code></pre>
+]]></content>
+      <categories>
+        <category>tech</category>
+        <category>ARM</category>
+      </categories>
+      <tags>
+        <tag>blog</tag>
+        <tag>NGINX</tag>
+        <tag>Raspberrypi</tag>
       </tags>
   </entry>
   <entry>
@@ -503,31 +503,6 @@ ARM 处理器目前有多种CPU架构，编译时需要注意。
       </tags>
   </entry>
   <entry>
-    <title>Python 使用绘制统计图</title>
-    <url>/posts/2020-05-python-count/</url>
-    <content><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p><a href="https://matplotlib.org/">Matplotlib is a comprehensive library for creating static, animated, and interactive visualizations in Python. </a><br><code>Matplotlib</code>是常用的数据可视化工具之一(灵活、功能强大)</p>
-<p>安装包：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#url 国内下载速度较慢 可以使用proxychain + 梯</span></span><br><span class="line">pip install matplotlib</span><br><span class="line">pip install scipy</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h1 id="python-绘图统计"><a href="#python-绘图统计" class="headerlink" title="python 绘图统计"></a>python 绘图统计</h1><h3 id="折线图"><a href="#折线图" class="headerlink" title="折线图"></a>折线图</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#python3</span></span><br><span class="line"><span class="comment">#coding:utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> matplotlib.font_manager</span><br><span class="line"></span><br><span class="line">x1=[<span class="number">20</span>,<span class="number">33</span>,<span class="number">51</span>,<span class="number">79</span>,<span class="number">101</span>,<span class="number">121</span>,<span class="number">132</span>,<span class="number">145</span>,<span class="number">162</span>,<span class="number">182</span>,<span class="number">203</span>,<span class="number">219</span>,<span class="number">232</span>,<span class="number">243</span>,<span class="number">256</span>,<span class="number">270</span>,<span class="number">287</span>,<span class="number">310</span>,<span class="number">325</span>]</span><br><span class="line">y1=[<span class="number">49</span>,<span class="number">48</span>,<span class="number">48</span>,<span class="number">48</span>,<span class="number">48</span>,<span class="number">87</span>,<span class="number">106</span>,<span class="number">123</span>,<span class="number">155</span>,<span class="number">191</span>,<span class="number">233</span>,<span class="number">261</span>,<span class="number">278</span>,<span class="number">284</span>,<span class="number">297</span>,<span class="number">307</span>,<span class="number">341</span>,<span class="number">319</span>,<span class="number">341</span>]</span><br><span class="line">x2=[<span class="number">31</span>,<span class="number">52</span>,<span class="number">73</span>,<span class="number">92</span>,<span class="number">101</span>,<span class="number">112</span>,<span class="number">126</span>,<span class="number">140</span>,<span class="number">153</span>,<span class="number">175</span>,<span class="number">186</span>,<span class="number">196</span>,<span class="number">215</span>,<span class="number">230</span>,<span class="number">240</span>,<span class="number">270</span>,<span class="number">288</span>,<span class="number">300</span>]</span><br><span class="line">y2=[<span class="number">48</span>,<span class="number">48</span>,<span class="number">48</span>,<span class="number">48</span>,<span class="number">49</span>,<span class="number">89</span>,<span class="number">162</span>,<span class="number">237</span>,<span class="number">302</span>,<span class="number">378</span>,<span class="number">443</span>,<span class="number">472</span>,<span class="number">522</span>,<span class="number">597</span>,<span class="number">628</span>,<span class="number">661</span>,<span class="number">690</span>,<span class="number">702</span>]</span><br><span class="line">x3=[<span class="number">30</span>,<span class="number">50</span>,<span class="number">70</span>,<span class="number">90</span>,<span class="number">105</span>,<span class="number">114</span>,<span class="number">128</span>,<span class="number">137</span>,<span class="number">147</span>,<span class="number">159</span>,<span class="number">170</span>,<span class="number">180</span>,<span class="number">190</span>,<span class="number">200</span>,<span class="number">210</span>,<span class="number">230</span>,<span class="number">243</span>,<span class="number">259</span>,<span class="number">284</span>,<span class="number">297</span>,<span class="number">311</span>]</span><br><span class="line">y3=[<span class="number">48</span>,<span class="number">48</span>,<span class="number">48</span>,<span class="number">48</span>,<span class="number">66</span>,<span class="number">173</span>,<span class="number">351</span>,<span class="number">472</span>,<span class="number">586</span>,<span class="number">712</span>,<span class="number">804</span>,<span class="number">899</span>,<span class="number">994</span>,<span class="number">1094</span>,<span class="number">1198</span>,<span class="number">1360</span>,<span class="number">1458</span>,<span class="number">1578</span>,<span class="number">1734</span>,<span class="number">1797</span>,<span class="number">1892</span>]</span><br><span class="line"></span><br><span class="line">l1=plt.plot(x1,y1,<span class="string">&#x27;r--&#x27;</span>,label=<span class="string">&#x27;type1&#x27;</span>)</span><br><span class="line">l2=plt.plot(x2,y2,<span class="string">&#x27;g--&#x27;</span>,label=<span class="string">&#x27;type2&#x27;</span>)</span><br><span class="line">l3=plt.plot(x3,y3,<span class="string">&#x27;b--&#x27;</span>,label=<span class="string">&#x27;type3&#x27;</span>)</span><br><span class="line"></span><br><span class="line">plt.plot(x1,y1,<span class="string">&#x27;ro-&#x27;</span>,x2,y2,<span class="string">&#x27;g+-&#x27;</span>,x3,y3,<span class="string">&#x27;b^-&#x27;</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;X-Y-Z&#x27;</span>)</span><br><span class="line">plt.xlabel(<span class="string">&#x27;row&#x27;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;column&#x27;</span>)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="python-拟合"><a href="#python-拟合" class="headerlink" title="python 拟合"></a>python 拟合</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#python3</span></span><br><span class="line"><span class="comment">#coding:utf-8</span></span><br><span class="line"><span class="keyword">import</span> matplotlib.font_manager</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">x = np.arange(<span class="number">1</span>, <span class="number">17</span>, <span class="number">1</span>)</span><br><span class="line">y = np.array([<span class="number">4.00</span>, <span class="number">6.40</span>, <span class="number">8.00</span>, <span class="number">8.80</span>, <span class="number">9.22</span>, <span class="number">9.50</span>, <span class="number">9.70</span>, <span class="number">9.86</span>, <span class="number">10.00</span>, <span class="number">10.20</span>, <span class="number">10.32</span>, <span class="number">10.42</span>, <span class="number">10.50</span>, <span class="number">10.55</span>, <span class="number">10.58</span>, <span class="number">10.60</span>])</span><br><span class="line">z1 = np.polyfit(x, y, <span class="number">4</span>) <span class="comment"># 用4次多项式拟合</span></span><br><span class="line">p1 = np.poly1d(z1)</span><br><span class="line"><span class="built_in">print</span>(p1) <span class="comment">#print log </span></span><br><span class="line">yvals=p1(x) <span class="comment"># 也可以使用yvals=np.polyval(z1,x)</span></span><br><span class="line">plot1=plt.plot(x, y, <span class="string">&#x27;*&#x27;</span>,label=<span class="string">&#x27;original values&#x27;</span>)</span><br><span class="line">plot2=plt.plot(x, yvals, <span class="string">&#x27;r&#x27;</span>,label=<span class="string">&#x27;polyfit values&#x27;</span>)</span><br><span class="line">plt.xlabel(<span class="string">&#x27;x axis&#x27;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;y axis&#x27;</span>)</span><br><span class="line">plt.legend(loc=<span class="number">4</span>) <span class="comment">#</span></span><br><span class="line">plt.title(<span class="string">&#x27;polyfitting&#x27;</span>)</span><br><span class="line">plt.show()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="傅立叶变换"><a href="#傅立叶变换" class="headerlink" title="傅立叶变换"></a>傅立叶变换</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#python3</span></span><br><span class="line"><span class="comment">#coding:utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.font_manager</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> fftpack,signal</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">b = <span class="number">30</span></span><br><span class="line">f_s = <span class="number">80</span></span><br><span class="line">N = <span class="number">8000</span></span><br><span class="line">t = np.linspace(<span class="number">0</span>, <span class="number">10</span>, N, endpoint=<span class="literal">False</span>)</span><br><span class="line">sq = signal.square(<span class="number">2</span> * np.pi * <span class="number">5</span> * t)</span><br><span class="line"></span><br><span class="line">F = fftpack.fft(sq)</span><br><span class="line">f = fftpack.fftfreq(N, <span class="number">1.0</span>/f_s)</span><br><span class="line"></span><br><span class="line">F_filtered = F * (<span class="built_in">abs</span>(f) &lt; <span class="number">5</span>)</span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;F_filtered&quot;</span>, F_filtered</span><br><span class="line">ift = fftpack.ifft(F_filtered)</span><br><span class="line">mask = np.where(f &gt;= <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">fig, axes = plt.subplots(<span class="number">4</span>,<span class="number">1</span>)</span><br><span class="line">axes[<span class="number">0</span>].plot(t, sq)</span><br><span class="line">axes[<span class="number">0</span>].set_ylim(-<span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line">axes[<span class="number">1</span>].plot(f[mask], <span class="built_in">abs</span>(F[mask])/N, label=<span class="string">&quot;freq&quot;</span>)</span><br><span class="line">axes[<span class="number">2</span>].plot(t,ift.real, label=<span class="string">&quot;all&quot;</span>)</span><br><span class="line">axes[<span class="number">3</span>].plot(t,ift.real, label=<span class="string">&quot;zoom&quot;</span>)</span><br><span class="line">axes[<span class="number">3</span>].set_xlim(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<p>绘图效果<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200714163112.png" alt="images"></p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="http://liao.cpython.org/scipytutorial18/">Scipy Tutorial- 方波傅里叶分解与合成</a></p>
-]]></content>
-      <categories>
-        <category>tech</category>
-        <category>python</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-        <tag>python-plot</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>HTTP2 TLS加密通信理解与应用</title>
     <url>/posts/2020-01-01-tls-truststores-md/</url>
     <content><![CDATA[<h2 id="需求场景"><a href="#需求场景" class="headerlink" title="需求场景"></a>需求场景</h2><p>一个HTTP2通信加密加密需求。</p>
@@ -622,6 +597,31 @@ ARM 处理器目前有多种CPU架构，编译时需要注意。
       </tags>
   </entry>
   <entry>
+    <title>Python 使用绘制统计图</title>
+    <url>/posts/2020-05-python-count/</url>
+    <content><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p><a href="https://matplotlib.org/">Matplotlib is a comprehensive library for creating static, animated, and interactive visualizations in Python. </a><br><code>Matplotlib</code>是常用的数据可视化工具之一(灵活、功能强大)</p>
+<p>安装包：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#url 国内下载速度较慢 可以使用proxychain + 梯</span></span><br><span class="line">pip install matplotlib</span><br><span class="line">pip install scipy</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="python-绘图统计"><a href="#python-绘图统计" class="headerlink" title="python 绘图统计"></a>python 绘图统计</h1><h3 id="折线图"><a href="#折线图" class="headerlink" title="折线图"></a>折线图</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#python3</span></span><br><span class="line"><span class="comment">#coding:utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> matplotlib.font_manager</span><br><span class="line"></span><br><span class="line">x1=[<span class="number">20</span>,<span class="number">33</span>,<span class="number">51</span>,<span class="number">79</span>,<span class="number">101</span>,<span class="number">121</span>,<span class="number">132</span>,<span class="number">145</span>,<span class="number">162</span>,<span class="number">182</span>,<span class="number">203</span>,<span class="number">219</span>,<span class="number">232</span>,<span class="number">243</span>,<span class="number">256</span>,<span class="number">270</span>,<span class="number">287</span>,<span class="number">310</span>,<span class="number">325</span>]</span><br><span class="line">y1=[<span class="number">49</span>,<span class="number">48</span>,<span class="number">48</span>,<span class="number">48</span>,<span class="number">48</span>,<span class="number">87</span>,<span class="number">106</span>,<span class="number">123</span>,<span class="number">155</span>,<span class="number">191</span>,<span class="number">233</span>,<span class="number">261</span>,<span class="number">278</span>,<span class="number">284</span>,<span class="number">297</span>,<span class="number">307</span>,<span class="number">341</span>,<span class="number">319</span>,<span class="number">341</span>]</span><br><span class="line">x2=[<span class="number">31</span>,<span class="number">52</span>,<span class="number">73</span>,<span class="number">92</span>,<span class="number">101</span>,<span class="number">112</span>,<span class="number">126</span>,<span class="number">140</span>,<span class="number">153</span>,<span class="number">175</span>,<span class="number">186</span>,<span class="number">196</span>,<span class="number">215</span>,<span class="number">230</span>,<span class="number">240</span>,<span class="number">270</span>,<span class="number">288</span>,<span class="number">300</span>]</span><br><span class="line">y2=[<span class="number">48</span>,<span class="number">48</span>,<span class="number">48</span>,<span class="number">48</span>,<span class="number">49</span>,<span class="number">89</span>,<span class="number">162</span>,<span class="number">237</span>,<span class="number">302</span>,<span class="number">378</span>,<span class="number">443</span>,<span class="number">472</span>,<span class="number">522</span>,<span class="number">597</span>,<span class="number">628</span>,<span class="number">661</span>,<span class="number">690</span>,<span class="number">702</span>]</span><br><span class="line">x3=[<span class="number">30</span>,<span class="number">50</span>,<span class="number">70</span>,<span class="number">90</span>,<span class="number">105</span>,<span class="number">114</span>,<span class="number">128</span>,<span class="number">137</span>,<span class="number">147</span>,<span class="number">159</span>,<span class="number">170</span>,<span class="number">180</span>,<span class="number">190</span>,<span class="number">200</span>,<span class="number">210</span>,<span class="number">230</span>,<span class="number">243</span>,<span class="number">259</span>,<span class="number">284</span>,<span class="number">297</span>,<span class="number">311</span>]</span><br><span class="line">y3=[<span class="number">48</span>,<span class="number">48</span>,<span class="number">48</span>,<span class="number">48</span>,<span class="number">66</span>,<span class="number">173</span>,<span class="number">351</span>,<span class="number">472</span>,<span class="number">586</span>,<span class="number">712</span>,<span class="number">804</span>,<span class="number">899</span>,<span class="number">994</span>,<span class="number">1094</span>,<span class="number">1198</span>,<span class="number">1360</span>,<span class="number">1458</span>,<span class="number">1578</span>,<span class="number">1734</span>,<span class="number">1797</span>,<span class="number">1892</span>]</span><br><span class="line"></span><br><span class="line">l1=plt.plot(x1,y1,<span class="string">&#x27;r--&#x27;</span>,label=<span class="string">&#x27;type1&#x27;</span>)</span><br><span class="line">l2=plt.plot(x2,y2,<span class="string">&#x27;g--&#x27;</span>,label=<span class="string">&#x27;type2&#x27;</span>)</span><br><span class="line">l3=plt.plot(x3,y3,<span class="string">&#x27;b--&#x27;</span>,label=<span class="string">&#x27;type3&#x27;</span>)</span><br><span class="line"></span><br><span class="line">plt.plot(x1,y1,<span class="string">&#x27;ro-&#x27;</span>,x2,y2,<span class="string">&#x27;g+-&#x27;</span>,x3,y3,<span class="string">&#x27;b^-&#x27;</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;X-Y-Z&#x27;</span>)</span><br><span class="line">plt.xlabel(<span class="string">&#x27;row&#x27;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;column&#x27;</span>)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="python-拟合"><a href="#python-拟合" class="headerlink" title="python 拟合"></a>python 拟合</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#python3</span></span><br><span class="line"><span class="comment">#coding:utf-8</span></span><br><span class="line"><span class="keyword">import</span> matplotlib.font_manager</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">x = np.arange(<span class="number">1</span>, <span class="number">17</span>, <span class="number">1</span>)</span><br><span class="line">y = np.array([<span class="number">4.00</span>, <span class="number">6.40</span>, <span class="number">8.00</span>, <span class="number">8.80</span>, <span class="number">9.22</span>, <span class="number">9.50</span>, <span class="number">9.70</span>, <span class="number">9.86</span>, <span class="number">10.00</span>, <span class="number">10.20</span>, <span class="number">10.32</span>, <span class="number">10.42</span>, <span class="number">10.50</span>, <span class="number">10.55</span>, <span class="number">10.58</span>, <span class="number">10.60</span>])</span><br><span class="line">z1 = np.polyfit(x, y, <span class="number">4</span>) <span class="comment"># 用4次多项式拟合</span></span><br><span class="line">p1 = np.poly1d(z1)</span><br><span class="line"><span class="built_in">print</span>(p1) <span class="comment">#print log </span></span><br><span class="line">yvals=p1(x) <span class="comment"># 也可以使用yvals=np.polyval(z1,x)</span></span><br><span class="line">plot1=plt.plot(x, y, <span class="string">&#x27;*&#x27;</span>,label=<span class="string">&#x27;original values&#x27;</span>)</span><br><span class="line">plot2=plt.plot(x, yvals, <span class="string">&#x27;r&#x27;</span>,label=<span class="string">&#x27;polyfit values&#x27;</span>)</span><br><span class="line">plt.xlabel(<span class="string">&#x27;x axis&#x27;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;y axis&#x27;</span>)</span><br><span class="line">plt.legend(loc=<span class="number">4</span>) <span class="comment">#</span></span><br><span class="line">plt.title(<span class="string">&#x27;polyfitting&#x27;</span>)</span><br><span class="line">plt.show()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="傅立叶变换"><a href="#傅立叶变换" class="headerlink" title="傅立叶变换"></a>傅立叶变换</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#python3</span></span><br><span class="line"><span class="comment">#coding:utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.font_manager</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> fftpack,signal</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">b = <span class="number">30</span></span><br><span class="line">f_s = <span class="number">80</span></span><br><span class="line">N = <span class="number">8000</span></span><br><span class="line">t = np.linspace(<span class="number">0</span>, <span class="number">10</span>, N, endpoint=<span class="literal">False</span>)</span><br><span class="line">sq = signal.square(<span class="number">2</span> * np.pi * <span class="number">5</span> * t)</span><br><span class="line"></span><br><span class="line">F = fftpack.fft(sq)</span><br><span class="line">f = fftpack.fftfreq(N, <span class="number">1.0</span>/f_s)</span><br><span class="line"></span><br><span class="line">F_filtered = F * (<span class="built_in">abs</span>(f) &lt; <span class="number">5</span>)</span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;F_filtered&quot;</span>, F_filtered</span><br><span class="line">ift = fftpack.ifft(F_filtered)</span><br><span class="line">mask = np.where(f &gt;= <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">fig, axes = plt.subplots(<span class="number">4</span>,<span class="number">1</span>)</span><br><span class="line">axes[<span class="number">0</span>].plot(t, sq)</span><br><span class="line">axes[<span class="number">0</span>].set_ylim(-<span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line">axes[<span class="number">1</span>].plot(f[mask], <span class="built_in">abs</span>(F[mask])/N, label=<span class="string">&quot;freq&quot;</span>)</span><br><span class="line">axes[<span class="number">2</span>].plot(t,ift.real, label=<span class="string">&quot;all&quot;</span>)</span><br><span class="line">axes[<span class="number">3</span>].plot(t,ift.real, label=<span class="string">&quot;zoom&quot;</span>)</span><br><span class="line">axes[<span class="number">3</span>].set_xlim(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p>绘图效果<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200714163112.png" alt="images"></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="http://liao.cpython.org/scipytutorial18/">Scipy Tutorial- 方波傅里叶分解与合成</a></p>
+]]></content>
+      <categories>
+        <category>tech</category>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>python-plot</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>搭建HTTP内网文件服务器-以NGINX为例</title>
     <url>/posts/2021-02-01-nginx-file-server/</url>
     <content><![CDATA[<h1 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h1><p>在内网建一个文件服务器，需要示意图如下：<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210329185845.png"></p>
@@ -679,8 +679,8 @@ ARM 处理器目前有多种CPU架构，编译时需要注意。
         <category>net</category>
       </categories>
       <tags>
-        <tag>blog</tag>
         <tag>Net</tag>
+        <tag>blog</tag>
         <tag>Nginx</tag>
       </tags>
   </entry>
@@ -1180,9 +1180,9 @@ ARM 处理器目前有多种CPU架构，编译时需要注意。
         <category>java</category>
       </categories>
       <tags>
-        <tag>Net</tag>
         <tag>Java</tag>
         <tag>CoreJava</tag>
+        <tag>Net</tag>
         <tag>JDK</tag>
       </tags>
   </entry>

@@ -26,13 +26,13 @@
 
   <meta property="og:type" content="website">
 <meta property="og:title" content="Ordiy&#39;s Blog">
-<meta property="og:url" content="https://ordiychen.github.io/ordiychen.github.io/tags/Nginx/index.html">
+<meta property="og:url" content="https://ordiychen.github.io/ordiychen.github.io/tags/NGINX/index.html">
 <meta property="og:site_name" content="Ordiy&#39;s Blog">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="Ordiy">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://ordiychen.github.io/ordiychen.github.io/tags/Nginx/">
+<link rel="canonical" href="https://ordiychen.github.io/ordiychen.github.io/tags/NGINX/">
 
 
 <script id="page-configurations">
@@ -45,7 +45,7 @@
   };
 </script>
 
-  <title>Tag: Nginx | Ordiy's Blog</title>
+  <title>Tag: NGINX | Ordiy's Blog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-175654772-1"></script>
     <script>
@@ -182,35 +182,12 @@
   <div class="post-block">
     <div class="posts-collapse">
       <div class="collection-title">
-        <h2 class="collection-header">Nginx
+        <h2 class="collection-header">NGINX
           <small>Tag</small>
         </h2>
       </div>
 
       
-    <div class="collection-year">
-      <span class="collection-header">2021</span>
-    </div>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-02-01T14:14:55Z"
-              content="2021-02-01">
-          02-01
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/posts/2021-02-01-nginx-file-server/" itemprop="url">
-            <span itemprop="name">搭建HTTP内网文件服务器-以NGINX为例</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
     <div class="collection-year">
       <span class="collection-header">2018</span>
     </div>
@@ -220,15 +197,15 @@
 
       <div class="post-meta">
         <time itemprop="dateCreated"
-              datetime="2018-04-12T00:00:00Z"
-              content="2018-04-12">
-          04-12
+              datetime="2018-03-11T11:21:32Z"
+              content="2018-03-11">
+          03-11
         </time>
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/posts/2018-04-12-nginx-l4-loadblance-md/" itemprop="url">
-            <span itemprop="name">Nginx Stream L4 负载均衡</span>
+          <a class="post-title-link" href="/posts/2018-03-11-arm-compile-nginx/" itemprop="url">
+            <span itemprop="name">Raspberrypi compile and install nginx</span>
           </a>
       </div>
 
@@ -435,6 +412,33 @@ document.querySelectorAll('.pdfobject-container').forEach(element => {
 
   if (NexT.utils.supportsPDFs()) {
     element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://ordiytech-blog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+
+</body>
+</html>
+HTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
   } else {
     element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
   }
