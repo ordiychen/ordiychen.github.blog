@@ -6,7 +6,7 @@
   <link href="https://ordiychen.github.io/ordiychen.github.io/atom.xml" rel="self"/>
   
   <link href="https://ordiychen.github.io/ordiychen.github.io/"/>
-  <updated>2021-06-04T11:12:37.259Z</updated>
+  <updated>2021-06-23T10:22:57.193Z</updated>
   <id>https://ordiychen.github.io/ordiychen.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>HBase Region Move 批量操作</title>
+    <link href="https://ordiychen.github.io/ordiychen.github.io/posts/2021-06-11-hbase-region-move-md/"/>
+    <id>https://ordiychen.github.io/ordiychen.github.io/posts/2021-06-11-hbase-region-move-md/</id>
+    <published>2021-06-23T17:15:58.000Z</published>
+    <updated>2021-06-23T10:22:57.193Z</updated>
+    
+    
+    <summary type="html">对一个PB级的hbase进行RegionServer和DataNode的滚动重启，使用将RegionServer的Region move到一个空闲的RegionServer上，再执行对RegionServer的重启，有效控制在重启过程中对业务的RPC 调用造成影响的问题。</summary>
+    
+    
+    
+    <category term="tech" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/"/>
+    
+    <category term="BigData" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/BigData/"/>
+    
+    <category term="Hadoop" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/BigData/Hadoop/"/>
+    
+    <category term="HBase" scheme="https://ordiychen.github.io/ordiychen.github.io/categories/tech/BigData/Hadoop/HBase/"/>
+    
+    
+    <category term="HBase" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/HBase/"/>
+    
+    <category term="Hadoop" scheme="https://ordiychen.github.io/ordiychen.github.io/tags/Hadoop/"/>
+    
+  </entry>
   
   <entry>
     <title>HBase2 YCSB benchmark test</title>
