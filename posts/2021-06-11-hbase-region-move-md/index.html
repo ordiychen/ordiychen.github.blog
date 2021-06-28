@@ -27,21 +27,21 @@
   <meta name="description" content="对一个PB级的hbase进行RegionServer和DataNode的滚动重启，使用将RegionServer的Region move到一个空闲的RegionServer上，再执行对RegionServer的重启，有效控制在重启过程中对业务的RPC 调用造成影响的问题。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HBase Region Move 批量操作">
-<meta property="og:url" content="https://ordiychen.github.io/ordiychen.github.io/posts/2021-06-11-hbase-region-move-md/index.html">
+<meta property="og:url" content="https://ordiychen.github.io/posts/2021-06-11-hbase-region-move-md/index.html">
 <meta property="og:site_name" content="Ordiy&#39;s Blog">
 <meta property="og:description" content="对一个PB级的hbase进行RegionServer和DataNode的滚动重启，使用将RegionServer的Region move到一个空闲的RegionServer上，再执行对RegionServer的重启，有效控制在重启过程中对业务的RPC 调用造成影响的问题。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210623181233.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210623180933.png">
 <meta property="article:published_time" content="2021-06-23T17:15:58.000Z">
-<meta property="article:modified_time" content="2021-06-23T10:24:07.170Z">
+<meta property="article:modified_time" content="2021-06-24T02:55:41.261Z">
 <meta property="article:author" content="Ordiy">
 <meta property="article:tag" content="HBase">
 <meta property="article:tag" content="Hadoop">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210623181233.png">
 
-<link rel="canonical" href="https://ordiychen.github.io/ordiychen.github.io/posts/2021-06-11-hbase-region-move-md/">
+<link rel="canonical" href="https://ordiychen.github.io/posts/2021-06-11-hbase-region-move-md/">
 
 
 <script id="page-configurations">
@@ -189,7 +189,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://ordiychen.github.io/ordiychen.github.io/posts/2021-06-11-hbase-region-move-md/">
+    <link itemprop="mainEntityOfPage" href="https://ordiychen.github.io/posts/2021-06-11-hbase-region-move-md/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/apple-touch-icon.png">
@@ -557,7 +557,7 @@ document.querySelectorAll('.pdfobject-container').forEach(element => {
 </script>
 <script>
   var disqus_config = function() {
-    this.page.url = "https://ordiychen.github.io/ordiychen.github.io/posts/2021-06-11-hbase-region-move-md/";
+    this.page.url = "https://ordiychen.github.io/posts/2021-06-11-hbase-region-move-md/";
     this.page.identifier = "posts/2021-06-11-hbase-region-move-md/";
     this.page.title = "HBase Region Move 批量操作";
     };
