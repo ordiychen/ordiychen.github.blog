@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="zh-cn,en,default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="STAcFkvSF49fRv3p9O9gm962auBfI64EX85Z7NIb3j4">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Helvetica, Georgia, Tahoma:300,300italic,400,400italic,700,700italic|Roboto Slab, Noto Serif SC:300,300italic,400,400italic,700,700italic|Arial, Garamond:300,300italic,400,400italic,700,700italic|PT Mono, Courier New:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"ordiychen.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":false,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":{"disqus":{"text":"Load Disqus","order":-1},"gitalk":{"order":-2}},"activeClass":"disqus"},"algolia":{"hits":{"per_page":12},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="通过TLS实现端对端的加密场景的实现过程及原理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTP2 TLS加密通信理解与应用">
+<meta property="og:url" content="https://ordiychen.github.io/posts/2020-01-01-tls-truststores-md/index.html">
+<meta property="og:site_name" content="Ordiy&#39;s Blog">
+<meta property="og:description" content="通过TLS实现端对端的加密场景的实现过程及原理">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200731154733.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200805114352.png">
+<meta property="article:published_time" content="2020-01-01T22:23:54.000Z">
+<meta property="article:modified_time" content="2020-08-18T07:23:30.526Z">
+<meta property="article:author" content="Ordiy">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="TLS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200731154733.png">
+
+<link rel="canonical" href="https://ordiychen.github.io/posts/2020-01-01-tls-truststores-md/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-cn'
+  };
+</script>
+
+  <title>HTTP2 TLS加密通信理解与应用 | Ordiy's Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-175654772-1"></script>
+    <script data-pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-175654772-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Ordiy's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Ordiy's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Just do it!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+      
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/ordiychen/ordiychen.github.io" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://ordiychen.github.io/posts/2020-01-01-tls-truststores-md/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/apple-touch-icon.png">
+      <meta itemprop="name" content="Ordiy">
+      <meta itemprop="description" content="Stay Hungry.Stay Foolish.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ordiy's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          HTTP2 TLS加密通信理解与应用
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-01-01 22:23:54" itemprop="dateCreated datePublished" datetime="2020-01-01T22:23:54Z">2020-01-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tech/" itemprop="url" rel="index"><span itemprop="name">tech</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tech/TLS/" itemprop="url" rel="index"><span itemprop="name">TLS</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/posts/2020-01-01-tls-truststores-md/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="posts/2020-01-01-tls-truststores-md/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>12k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>11 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="需求场景"><a href="#需求场景" class="headerlink" title="需求场景"></a>需求场景</h2><p>一个HTTP2通信加密加密需求。</p>
+<ul>
+<li><p>网络场景：<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200731154733.png" alt="images"></p>
+</li>
+<li><p>通信协议：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HTTP&#x2F;2 + TLS1.3&#x2F;TLS1.2(同时支持)</span><br></pre></td></tr></table></figure></li>
+<li><p>CA证书签发及TLS握手过程示意图：<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200805114352.png" alt="images"></p>
+</li>
+</ul>
+<h2 id="CA证书的签署和自签署"><a href="#CA证书的签署和自签署" class="headerlink" title="CA证书的签署和自签署"></a>CA证书的签署和自签署</h2><p>自签署一份Root-CA用于开发和测试</p>
+<h3 id="TLS加密算法选择"><a href="#TLS加密算法选择" class="headerlink" title="TLS加密算法选择"></a>TLS加密算法选择</h3><p>TLS1.3支持的加密算法较少，需要提前查看兼容性：</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> openssl version</span></span><br></pre></td></tr></table></figure>
+<p>result print:</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">OpenSSL 1.1.1g  21 Apr 2020</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>筛选openssl 支持的TLS加密算法：</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl ciphers -v &#x27;kEECDH+ECDSA kEDH +RSA !aNULL !eNULL !LOW !3DES !DES !RC2 !RC4 !EXP !DSS !IDEA !SRP !kECDH !MD5 !SEED !PSK !CAMELLIA&#x27;</span><br></pre></td></tr></table></figure>
+<p>result print:</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">TLS_AES_256_GCM_SHA384  TLSv1.3 Kx=any      Au=any  Enc=AESGCM(256) Mac=AEAD</span><br><span class="line">TLS_CHACHA20_POLY1305_SHA256 TLSv1.3 Kx=any      Au=any  Enc=CHACHA20/POLY1305(256) Mac=AEAD</span><br><span class="line">TLS_AES_128_GCM_SHA256  TLSv1.3 Kx=any      Au=any  Enc=AESGCM(128) Mac=AEAD</span><br><span class="line">ECDHE-ECDSA-AES256-GCM-SHA384 TLSv1.2 Kx=ECDH     Au=ECDSA Enc=AESGCM(256) Mac=AEAD</span><br><span class="line">ECDHE-ECDSA-CHACHA20-POLY1305 TLSv1.2 Kx=ECDH     Au=ECDSA Enc=CHACHA20/POLY1305(256) Mac=AEAD</span><br><span class="line">ECDHE-ECDSA-AES256-CCM8 TLSv1.2 Kx=ECDH     Au=ECDSA Enc=AESCCM8(256) Mac=AEAD</span><br><span class="line">ECDHE-ECDSA-AES256-CCM  TLSv1.2 Kx=ECDH     Au=ECDSA Enc=AESCCM(256) Mac=AEAD</span><br><span class="line">ECDHE-ECDSA-ARIA256-GCM-SHA384 TLSv1.2 Kx=ECDH     Au=ECDSA Enc=ARIAGCM(256) Mac=AEAD</span><br><span class="line">ECDHE-ECDSA-AES128-GCM-SHA256 TLSv1.2 Kx=ECDH     Au=ECDSA Enc=AESGCM(128) Mac=AEAD</span><br><span class="line">ECDHE-ECDSA-AES128-CCM8 TLSv1.2 Kx=ECDH     Au=ECDSA Enc=AESCCM8(128) Mac=AEAD</span><br><span class="line">ECDHE-ECDSA-AES128-CCM  TLSv1.2 Kx=ECDH     Au=ECDSA Enc=AESCCM(128) Mac=AEAD</span><br><span class="line">ECDHE-ECDSA-ARIA128-GCM-SHA256 TLSv1.2 Kx=ECDH     Au=ECDSA Enc=ARIAGCM(128) Mac=AEAD</span><br><span class="line">ECDHE-ECDSA-AES256-SHA384 TLSv1.2 Kx=ECDH     Au=ECDSA Enc=AES(256)  Mac=SHA384</span><br><span class="line">ECDHE-ECDSA-AES128-SHA256 TLSv1.2 Kx=ECDH     Au=ECDSA Enc=AES(128)  Mac=SHA256</span><br><span class="line">ECDHE-ECDSA-AES256-SHA  TLSv1 Kx=ECDH     Au=ECDSA Enc=AES(256)  Mac=SHA1</span><br><span class="line">ECDHE-ECDSA-AES128-SHA  TLSv1 Kx=ECDH     Au=ECDSA Enc=AES(128)  Mac=SHA1</span><br><span class="line">DHE-RSA-AES256-GCM-SHA384 TLSv1.2 Kx=DH       Au=RSA  Enc=AESGCM(256) Mac=AEAD</span><br><span class="line">DHE-RSA-CHACHA20-POLY1305 TLSv1.2 Kx=DH       Au=RSA  Enc=CHACHA20/POLY1305(256) Mac=AEAD</span><br><span class="line">DHE-RSA-AES256-CCM8     TLSv1.2 Kx=DH       Au=RSA  Enc=AESCCM8(256) Mac=AEAD</span><br><span class="line">DHE-RSA-AES256-CCM      TLSv1.2 Kx=DH       Au=RSA  Enc=AESCCM(256) Mac=AEAD</span><br><span class="line">DHE-RSA-ARIA256-GCM-SHA384 TLSv1.2 Kx=DH       Au=RSA  Enc=ARIAGCM(256) Mac=AEAD</span><br><span class="line">DHE-RSA-AES128-GCM-SHA256 TLSv1.2 Kx=DH       Au=RSA  Enc=AESGCM(128) Mac=AEAD</span><br><span class="line">DHE-RSA-AES128-CCM8     TLSv1.2 Kx=DH       Au=RSA  Enc=AESCCM8(128) Mac=AEAD</span><br><span class="line">DHE-RSA-AES128-CCM      TLSv1.2 Kx=DH       Au=RSA  Enc=AESCCM(128) Mac=AEAD</span><br><span class="line">DHE-RSA-ARIA128-GCM-SHA256 TLSv1.2 Kx=DH       Au=RSA  Enc=ARIAGCM(128) Mac=AEAD</span><br><span class="line">DHE-RSA-AES256-SHA256   TLSv1.2 Kx=DH       Au=RSA  Enc=AES(256)  Mac=SHA256</span><br><span class="line">DHE-RSA-AES128-SHA256   TLSv1.2 Kx=DH       Au=RSA  Enc=AES(128)  Mac=SHA256</span><br><span class="line">DHE-RSA-AES256-SHA      SSLv3 Kx=DH       Au=RSA  Enc=AES(256)  Mac=SHA1</span><br><span class="line">DHE-RSA-AES128-SHA      SSLv3 Kx=DH       Au=RSA  Enc=AES(128)  Mac=SHA1</span><br></pre></td></tr></table></figure></li>
+<li><p>名称映射关系说明：<br>OpenSSL的加密算法与IANA的映射关系，可参照<a target="_blank" rel="noopener" href="https://testssl.sh/openssl-iana.mapping.html">OPENSSL-IANA.MAPPING</a>，以下是一个部分示例：</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Cipher Suite	Name (OpenSSL)	KeyExch.	Encryption	Bits	Cipher Suite Name (IANA)</span><br><span class="line">[0x1301]	TLS_AES_128_GCM_SHA256	ECDH	AESGCM	128	TLS_AES_128_GCM_SHA256</span><br><span class="line">[0x1303]	TLS_CHACHA20_POLY1305_SHA256	ECDH	ChaCha20-Poly1305	256	TLS_CHACHA20_POLY1305_SHA256</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="OpenSSL-生成Root-CA-根证书"><a href="#OpenSSL-生成Root-CA-根证书" class="headerlink" title="OpenSSL 生成Root-CA 根证书"></a>OpenSSL 生成Root-CA 根证书</h3><p>生成一个长期有效的<code>Root-CA</code>用于签发其它证书。</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 生成CA 私钥</span></span><br><span class="line"> openssl genrsa -out root-ca.key.pem 4096</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 生成  CA 自签名证书,需要输入各类信息 有效期10年～～～</span></span><br><span class="line">openssl req -new -x509 -key  root-ca.key.pem -out root-ca.cert.pem -days 3650</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="使用Root-CA签署其它证书"><a href="#使用Root-CA签署其它证书" class="headerlink" title="使用Root-CA签署其它证书"></a>使用Root-CA签署其它证书</h3><p>因<code>TLS_CHACHA20_POLY1305_SHA256</code>使用的加密技术是<code>ECDH</code>,需要使用<code>Openssl ecparam</code>获取其支持的curves</p>
+<ul>
+<li><p>查看Openssl 支持的曲线生成方法：</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl ecparam -list_curves</span><br></pre></td></tr></table></figure>
+<p>Openssl支持的曲线：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">secp112r1 : SECG&#x2F;WTLS curve over a 112 bit prime field</span><br><span class="line"> secp112r2 : SECG curve over a 112 bit prime field</span><br><span class="line"> secp128r1 : SECG curve over a 128 bit prime field</span><br><span class="line"> secp128r2 : SECG curve over a 128 bit prime field</span><br><span class="line"> secp160k1 : SECG curve over a 160 bit prime field</span><br><span class="line"> secp160r1 : SECG curve over a 160 bit prime field</span><br><span class="line"> secp160r2 : SECG&#x2F;WTLS curve over a 160 bit prime field</span><br><span class="line"> secp192k1 : SECG curve over a 192 bit prime field</span><br><span class="line"> secp224k1 : SECG curve over a 224 bit prime field</span><br><span class="line"> secp224r1 : NIST&#x2F;SECG curve over a 224 bit prime field</span><br><span class="line"> secp256k1 : SECG curve over a 256 bit prime field</span><br><span class="line"> secp384r1 : NIST&#x2F;SECG curve over a 384 bit prime field</span><br><span class="line"> secp521r1 : NIST&#x2F;SECG curve over a 521 bit prime field</span><br><span class="line"> prime192v1: NIST&#x2F;X9.62&#x2F;SECG curve over a 192 bit prime field</span><br><span class="line"> prime192v2: X9.62 curve over a 192 bit prime field</span><br><span class="line"> prime192v3: X9.62 curve over a 192 bit prime field</span><br><span class="line"> prime239v1: X9.62 curve over a 239 bit prime field</span><br><span class="line"> prime239v2: X9.62 curve over a 239 bit prime field</span><br><span class="line"> prime239v3: X9.62 curve over a 239 bit prime field</span><br><span class="line"> prime256v1: X9.62&#x2F;SECG curve over a 256 bit prime field</span><br><span class="line"> .....</span><br></pre></td></tr></table></figure>
+<p>注：本例使用 prime256v1</p>
+</li>
+<li><p>生成<code>ECDH</code>密钥交换的证书</p>
+</li>
+</ul>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 生成 ECDH 的私钥</span></span><br><span class="line">openssl ecparam -out ecparam.pem -name prime256v1</span><br><span class="line">openssl genpkey -paramfile ecparam.pem -out ecdhkey.pem</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">  生成 ECDH 的公钥（public key）</span></span><br><span class="line">openssl pkey -in ecdhkey.pem -pubout -out ecdhpubkey.pem</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">生成 CSR（Certificate Request）文件，CSR 是需要自签名的，不能使用 ECDH 算法，因为 ECDH 不是签名算法，本例使用RSA算法生成。</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> openssl genrsa  -out rsakey.pem 4096</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 需要输入一个</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> openssl req -new -key rsakey.pem -out ecdhrsacsr.pem</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 使用上面的 roor-ca CA证书签署证书请求，并添加用户证书扩展名</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> openssl x509 -req -<span class="keyword">in</span> ecdhrsacsr.pem -CAkey root-ca.key.pem -CA root-ca.cert.pem -force_pubkey ecdhpubkey.pem -out dev-ecdh-cert.pem -CAcreateserial</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">目前生成的证书列表如下：</span></span><br><span class="line"> dev-ecdh-cert.pem  # ECDH certificate(RSA算法的)</span><br><span class="line"> ecdhkey.pem         # ECDH private key</span><br><span class="line"> ecdhpubkey.pem       # ECDH public key</span><br><span class="line"> ecdhrsacsr.pem       # RSA 的 CSR文件</span><br><span class="line"> ecparam.pem         # EC Parameters</span><br><span class="line"> root-ca.cert.pem     # Root CA certificate</span><br><span class="line"> root-ca.cert.srl     </span><br><span class="line"> root-ca.key.pem      # Root CA private key(RSA算法的)</span><br><span class="line"> rsakey.pem           # RSA private key(用于请求证书的)</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="证书检查"><a href="#证书检查" class="headerlink" title="证书检查"></a>证书检查</h3><h4 id="根证书"><a href="#根证书" class="headerlink" title="根证书"></a>根证书</h4><ul>
+<li><p>查看根证书 :</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> openssl x509 -<span class="keyword">in</span> root-ca.cert.pem -noout -text</span></span><br></pre></td></tr></table></figure></li>
+<li><p>证书内容</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">Certificate:</span><br><span class="line">    Data:</span><br><span class="line">        Version: 3 (0x2)</span><br><span class="line">        Serial Number:</span><br><span class="line">            50:5c:0f:62:ef:d9:22:47:c9:ee:5c:08:11:50:40:74:41:24:88:d0</span><br><span class="line">        Signature Algorithm: sha256WithRSAEncryption</span><br><span class="line">        Issuer: C = SG, ST = SG, L = SG, O = Sg 17xyx Tech.Ltd, OU = Ltd, CN = 17xyx.app, emailAddress = it@17xyx.app</span><br><span class="line">        Validity</span><br><span class="line">            Not Before: Jul 31 05:52:08 2020 GMT</span><br><span class="line">            Not After : Jul 29 05:52:08 2030 GMT</span><br><span class="line">        Subject: C = SG, ST = SG, L = SG, O = Sg 17xyx Tech.Ltd, OU = Ltd, CN = 17xyx.app, emailAddress = it@17xyx.app</span><br><span class="line">        Subject Public Key Info:</span><br><span class="line">            Public Key Algorithm: rsaEncryption</span><br><span class="line">                RSA Public-Key: (4096 bit)</span><br><span class="line">                Modulus:</span><br><span class="line">                    00:a6:3e:cd:08:ea:9e:ea:6f:22:e0:7a:7d:03:dd:</span><br><span class="line">                    ...</span><br><span class="line">                    a5:c2:90:54:11:0b:48:49:55:b2:51:ab:78:35:75:</span><br><span class="line">                    17:65:d3</span><br><span class="line">                Exponent: 65537 (0x10001)</span><br><span class="line">        X509v3 extensions:</span><br><span class="line">            X509v3 Subject Key Identifier: </span><br><span class="line">                CD:1D:8B:DE:1A:E3:3D:03:E5:3D:87:E0:28:9C:9C:30:77:4B:BD:05</span><br><span class="line">            X509v3 Authority Key Identifier: </span><br><span class="line">                keyid:CD:1D:8B:DE:1A:E3:3D:03:E5:3D:87:E0:28:9C:9C:30:77:4B:BD:05</span><br><span class="line"></span><br><span class="line">            X509v3 Basic Constraints: critical</span><br><span class="line">                CA:TRUE</span><br><span class="line">    Signature Algorithm: sha256WithRSAEncryption</span><br><span class="line">         8f:fa:4f:76:b8:98:6c:e1:18:d1:29:75:c0:51:ae:19:49:e1:</span><br><span class="line">         .....</span><br><span class="line">         6a:85:fa:67:f9:6a:f6:23:ff:80:59:b4:fd:fe:95:2c:4a:a3:</span><br><span class="line">         3e:89:24:0a:e0:44:17:84</span><br></pre></td></tr></table></figure></li>
+<li><p>证书的 RFC2253 信息:</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> openssl x509 -<span class="keyword">in</span> cacert.pem -noout -subject -nameopt RFC2253</span></span><br></pre></td></tr></table></figure>
+<p>输出内容：</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">subject=emailAddress=ordiymaster@hotmail.com,CN=ZiBoMonten,OU=section,O=ShenZhen ZiBoMonten Tech.Ltd,L=ShenZhen,ST=GuangDong,C=CN</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="查看签署的证书"><a href="#查看签署的证书" class="headerlink" title="查看签署的证书"></a>查看签署的证书</h4><figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -in  dev-ecdh-cert.pem -noout --text</span><br></pre></td></tr></table></figure>
+<p>证书内容：</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">Certificate:</span><br><span class="line">    Data:</span><br><span class="line">        Version: 1 (0x0)</span><br><span class="line">        Serial Number:</span><br><span class="line">            70:59:08:36:95:fc:34:35:8b:55:11:db:27:2c:4c:46:6a:eb:c7:70</span><br><span class="line">        Signature Algorithm: sha256WithRSAEncryption</span><br><span class="line">        Issuer: C = SG, ST = SG, L = SG, O = Sg 17xyx Tech.Ltd, OU = Ltd, CN = 17xyx.app, emailAddress = it@17xyx.app</span><br><span class="line">        Validity</span><br><span class="line">            Not Before: Jul 31 06:00:02 2020 GMT</span><br><span class="line">            Not After : Aug 30 06:00:02 2020 GMT</span><br><span class="line">        Subject: C = SG, ST = SG, L = SG, O = Singapoe Dev ltd, OU = Ltd, CN = dev-local.17xyx.app, emailAddress = it@17xyx.app</span><br><span class="line">        Subject Public Key Info:</span><br><span class="line">            Public Key Algorithm: id-ecPublicKey</span><br><span class="line">                Public-Key: (256 bit)</span><br><span class="line">                pub:</span><br><span class="line">                    04:52:36:25:ca:e7:5c:84:f4:44:d5:b4:a8:58:21:</span><br><span class="line">                    ....</span><br><span class="line">                    c2:73:b0:2e:34:eb:01:b1:27:03:62:52:28:5a:0f:</span><br><span class="line">                    e2:9b:da:01:a8</span><br><span class="line">                ASN1 OID: prime256v1</span><br><span class="line">                NIST CURVE: P-256</span><br><span class="line">    Signature Algorithm: sha256WithRSAEncryption</span><br><span class="line">         8a:e0:43:dd:52:55:e9:c0:de:98:bf:04:ed:70:eb:39:6b:37:</span><br><span class="line">         .....</span><br><span class="line">         99:c5:47:5b:d4:d4:d3:60:2d:20:c5:6a:32:f9:0a:44:f4:05:</span><br><span class="line">         bc:60:00:f1:9b:a3:a8:9e</span><br></pre></td></tr></table></figure>
+
+<h2 id="证书应用"><a href="#证书应用" class="headerlink" title="证书应用"></a>证书应用</h2><p>注意：生产环境使用的是中间证书，原理一样，这里直接使用Root-CA证书做示例:</p>
+<h3 id="导入root-ca-导入到JVM信任库"><a href="#导入root-ca-导入到JVM信任库" class="headerlink" title="导入root-ca 导入到JVM信任库"></a>导入root-ca 导入到JVM信任库</h3><p>TLS协议证书验证时需要使用根证书对Server的证书进行验证，Java JKS(java KeyStore)会读取本地配置Root-CA证书。<br>-方法1 使用JVM System Properties</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">java -Djavax.net.ssl.trustStore&#x3D;samplecacerts \</span><br><span class="line">     -Djavax.net.ssl.trustStorePassword&#x3D;changeit Application</span><br></pre></td></tr></table></figure>
+<p>使用<code>JVM System Properties</code>设置JKS比较灵活</p>
+<ul>
+<li>方法2 将Root-CA导入到JVM信任库：<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">macOS 为例</span></span><br><span class="line">keytool -importcert -alias startssl -keystore &quot;$JAVA_HOME/lib/security/cacerts&quot; -storepass changeit -file root-ca.der</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">查看root ca( 也可导入&lt;java-home&gt;/lib/security/jssecacerts,或使用启动参数导入)</span></span><br><span class="line">keytool -keystore &quot;$JAVA_HOME/lib/security/cacerts&quot; -storepass changeit -list | grep startssl</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="导入根证书到系统证书目录"><a href="#导入根证书到系统证书目录" class="headerlink" title="导入根证书到系统证书目录"></a>导入根证书到系统证书目录</h3><p>使用浏览器或者PostMan测试，程序无法读取到JKS中证书信息，所以需要将Root-CA导入到系统的证书目录下。<br>在开发阶段为方便调试，如果遇到证书验证失败，调试时可以直接将Root-CA导入到系统的证书目录下（生产上实际不要这个操作)：</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">macos 操作命令：</span></span><br><span class="line">sudo sudo security add-trusted-cert -d -r trustRoot -k &quot;/Library/Keychains/System.keychain&quot; root-ca.cert.pem</span><br></pre></td></tr></table></figure>
+
+<h3 id="Java应用程序使用-签署的CA证书"><a href="#Java应用程序使用-签署的CA证书" class="headerlink" title="Java应用程序使用 签署的CA证书"></a>Java应用程序使用 签署的CA证书</h3><p>JKS(java KeyStore)用于为SSL/TLS配置的组件之间的通信加密,JKS支持导入<code>.jks</code>格式的文件。需要将CA 证书进行格式转换：<br>Openssl PEM格式转换为JKS格式，转换过程：</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Openssl PEM format --&gt; pkcs12 format  --&gt; jks format</span><br></pre></td></tr></table></figure>
+<p>执行命令：</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> opensll pem --&lt; pkcs12 （需要设置密码)</span></span><br><span class="line">openssl pkcs12 -export -in dev-ecdh-cert.pem -inkey ecdhkey.pem  -CAfile ../root_ca/root-ca.cert.pem -out dev-17xyx-app.ca.p12</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> pkcs12 --&gt; jks （需要输入 上一步设置的密码)</span></span><br><span class="line">keytool -importkeystore -srckeystore dev-17xyx-app.ca.p12 -srcstoretype pkcs12 -destkeystore dev-17xyx-app.ca.jks</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看文件目录</span></span><br><span class="line">dev-17xyx-app.ca.jks   # jks 文件</span><br><span class="line">dev-17xyx-app.ca.p12   </span><br><span class="line">dev-ecdh-cert.der</span><br><span class="line">dev-ecdh-cert.pem</span><br><span class="line">ecdhkey.pem</span><br><span class="line">ecdhpubkey.pem</span><br><span class="line">ecdhrsacsr.pem</span><br><span class="line">ecparam.pem</span><br><span class="line">rsakey.pem</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="程序实现示例"><a href="#程序实现示例" class="headerlink" title="程序实现示例"></a>程序实现示例</h4><p>以<code>netty</code>示例信息，如需获取源代码(<a target="_blank" rel="noopener" href="https://github.com/ordiychen/demo-project/tree/master/test-http2-tls">https://github.com/ordiychen/demo-project/tree/master/test-http2-tls</a>)</p>
+<ul>
+<li>server http2<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> &#123;</span><br><span class="line">    <span class="comment">//load root-ca</span></span><br><span class="line">    System.setProperty(<span class="string">&quot;javax.net.ssl.trustStore&quot;</span>,<span class="string">&quot;./security-ca/root-ca/root-ca.jks&quot;</span>);</span><br><span class="line">    System.setProperty(<span class="string">&quot;javax.net.ssl.trustStorePassword&quot;</span>,<span class="string">&quot;hello@2020&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> String host = <span class="string">&quot;127.0.0.1&quot;</span>;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> port = <span class="number">9443</span>;</span><br><span class="line"></span><br><span class="line">KeyManagerFactory keyManagerFactory ;</span><br><span class="line">Http2Client http2Client ;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Before</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">beforeTest</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">final</span> Path path = Paths.get(<span class="string">&quot;.&quot;</span>);</span><br><span class="line">    System.out.println(<span class="string">&quot;current directory:&quot;</span>+ path.toAbsolutePath().toString());</span><br><span class="line">    String serverPrivateKey=<span class="string">&quot;server@2020&quot;</span>;</span><br><span class="line">    String serverCertificateFile=<span class="string">&quot;security-ca/server-ca/server-ca.jks&quot;</span>;</span><br><span class="line">    keyManagerFactory = jksLoad(serverPrivateKey,serverCertificateFile);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testServer</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">new</span> Http2Server().startServer(host,port,keyManagerFactory);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (SSLException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span>   KeyManagerFactory <span class="title">jksLoad</span><span class="params">(String privatePassword, String jksFile)</span></span>&#123;</span><br><span class="line">    <span class="keyword">try</span>(FileInputStream fileInputStream = <span class="keyword">new</span> FileInputStream(jksFile)) &#123;</span><br><span class="line">        <span class="keyword">char</span>[] passphrase = privatePassword.toCharArray();</span><br><span class="line">        KeyManagerFactory kmf = KeyManagerFactory.getInstance(<span class="string">&quot;SunX509&quot;</span>);</span><br><span class="line">        KeyStore ks = KeyStore.getInstance(<span class="string">&quot;JKS&quot;</span>);</span><br><span class="line">        ks.load(fileInputStream, passphrase);</span><br><span class="line">        kmf.init(ks, passphrase);</span><br><span class="line">        <span class="keyword">return</span> kmf;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (NoSuchAlgorithmException | KeyStoreException | CertificateException | UnrecoverableKeyException | IOException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>client <code>SSLSocketFactory</code><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> &#123;</span><br><span class="line">    <span class="comment">//load root-ca</span></span><br><span class="line">    System.setProperty(<span class="string">&quot;javax.net.ssl.trustStore&quot;</span>,<span class="string">&quot;./security-ca/root-ca/root-ca.jks&quot;</span>);</span><br><span class="line">    System.setProperty(<span class="string">&quot;javax.net.ssl.trustStorePassword&quot;</span>,<span class="string">&quot;hello@2020&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line">KeyManagerFactory keyManagerFactory =<span class="keyword">null</span>; <span class="comment">//读取 System properties 中的配置</span></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">    <span class="comment">//load root-ca</span></span><br><span class="line">    System.setProperty(<span class="string">&quot;javax.net.ssl.trustStore&quot;</span>,<span class="string">&quot;./security-ca/root-ca/root-ca.jks&quot;</span>);</span><br><span class="line">    System.setProperty(<span class="string">&quot;javax.net.ssl.trustStorePassword&quot;</span>,<span class="string">&quot;hello@2020&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line">KeyManagerFactory keyManagerFactory =<span class="keyword">null</span>; <span class="comment">//读取 System properties 中的配置</span></span><br><span class="line">Http2Client http2Client ;</span><br><span class="line"><span class="meta">@Before</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">beforeTest</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    http2Client = <span class="keyword">new</span> Http2Client();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startHttp2Client</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    String host =HelloWorldServerTest.host;</span><br><span class="line">    <span class="keyword">int</span> port = HelloWorldServerTest.port;</span><br><span class="line">    Map&lt;String,String&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">    map.put(<span class="string">&quot;/whatever&quot;</span>,<span class="string">&quot;/whatever&quot;</span>);</span><br><span class="line">    map.put(<span class="string">&quot;/url2&quot;</span>,<span class="string">&quot;test data&quot;</span>);</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        http2Client.startHttp2Server(host,port,keyManagerFactory,map);</span><br><span class="line">        System.out.println(<span class="string">&quot;=====&gt; start ...&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (SSLException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<ul>
+<li>此部分的代码细节是一个实现的Demo,非项目本身代码(项目涉及甲方知识产权wuwu~)</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Java8对TLSv1.3的支持有些问题，可能会遇到只支持TLSv1.2的情况，可以安装JDK11在尝试。采用Netty作为通信框架，是因为Netty是一个优秀的NIO通信框架，并且底层通信过程透明，方便理解整个通信过程。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Transport_Layer_Security#TLS_1.3">wiki Transport_Layer_Security#TLS_1.3</a><br><a target="_blank" rel="noopener" href="https://wiki.openssl.org/index.php/TLS1.3">openssl tlsv1.3</a><br><a target="_blank" rel="noopener" href="https://testssl.sh/openssl-iana.mapping.html">openssl-iana.mapping</a><br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/5938432e2130">TLS 证书生成和使用</a><br><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Transport_Layer_Security#TLS_1.3">TLS1.3</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/f-ck-need-u/p/6090885.html">openssl x509(签署和自签署)</a><br><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/10/security/sample-truststores.htm#JSSEC-GUID-51A0A134-F222-4B69-ACCA-C5542AA7D9C8">sample-truststores</a>   </p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/TLS/" rel="tag"># TLS</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/2020-01-01-tls-study-md/" rel="prev" title="TLS握手过程">
+      <i class="fa fa-chevron-left"></i> TLS握手过程
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/2020-01-01-apache-http-client5/" rel="next" title="Apache Http-Client5 基本使用">
+      Apache Http-Client5 基本使用 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9C%80%E6%B1%82%E5%9C%BA%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">需求场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CA%E8%AF%81%E4%B9%A6%E7%9A%84%E7%AD%BE%E7%BD%B2%E5%92%8C%E8%87%AA%E7%AD%BE%E7%BD%B2"><span class="nav-number">2.</span> <span class="nav-text">CA证书的签署和自签署</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#TLS%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E9%80%89%E6%8B%A9"><span class="nav-number">2.1.</span> <span class="nav-text">TLS加密算法选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OpenSSL-%E7%94%9F%E6%88%90Root-CA-%E6%A0%B9%E8%AF%81%E4%B9%A6"><span class="nav-number">2.2.</span> <span class="nav-text">OpenSSL 生成Root-CA 根证书</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8Root-CA%E7%AD%BE%E7%BD%B2%E5%85%B6%E5%AE%83%E8%AF%81%E4%B9%A6"><span class="nav-number">2.3.</span> <span class="nav-text">使用Root-CA签署其它证书</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%81%E4%B9%A6%E6%A3%80%E6%9F%A5"><span class="nav-number">2.4.</span> <span class="nav-text">证书检查</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%B9%E8%AF%81%E4%B9%A6"><span class="nav-number">2.4.1.</span> <span class="nav-text">根证书</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E7%AD%BE%E7%BD%B2%E7%9A%84%E8%AF%81%E4%B9%A6"><span class="nav-number">2.4.2.</span> <span class="nav-text">查看签署的证书</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%81%E4%B9%A6%E5%BA%94%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">证书应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%BC%E5%85%A5root-ca-%E5%AF%BC%E5%85%A5%E5%88%B0JVM%E4%BF%A1%E4%BB%BB%E5%BA%93"><span class="nav-number">3.1.</span> <span class="nav-text">导入root-ca 导入到JVM信任库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%BC%E5%85%A5%E6%A0%B9%E8%AF%81%E4%B9%A6%E5%88%B0%E7%B3%BB%E7%BB%9F%E8%AF%81%E4%B9%A6%E7%9B%AE%E5%BD%95"><span class="nav-number">3.2.</span> <span class="nav-text">导入根证书到系统证书目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%BD%BF%E7%94%A8-%E7%AD%BE%E7%BD%B2%E7%9A%84CA%E8%AF%81%E4%B9%A6"><span class="nav-number">3.3.</span> <span class="nav-text">Java应用程序使用 签署的CA证书</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E5%AE%9E%E7%8E%B0%E7%A4%BA%E4%BE%8B"><span class="nav-number">3.3.1.</span> <span class="nav-text">程序实现示例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ordiy"
+      src="/images/apple-touch-icon.png">
+  <p class="site-author-name" itemprop="name">Ordiy</p>
+  <div class="site-description" itemprop="description">Stay Hungry.Stay Foolish.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ordiychen" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ordiychen" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:ordiymaster_outlook.com" title="E-Mail → mailto:ordiymaster_outlook.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">blog.isun.app</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">106k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">1:36</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://ordiytech-blog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://ordiychen.github.io/posts/2020-01-01-tls-truststores-md/";
+    this.page.identifier = "posts/2020-01-01-tls-truststores-md/";
+    this.page.title = "HTTP2 TLS加密通信理解与应用";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://ordiytech-blog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="zh-cn,en,default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="STAcFkvSF49fRv3p9O9gm962auBfI64EX85Z7NIb3j4">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Helvetica, Georgia, Tahoma:300,300italic,400,400italic,700,700italic|Roboto Slab, Noto Serif SC:300,300italic,400,400italic,700,700italic|Arial, Garamond:300,300italic,400,400italic,700,700italic|PT Mono, Courier New:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"ordiychen.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":false,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":{"disqus":{"text":"Load Disqus","order":-1},"gitalk":{"order":-2}},"activeClass":"disqus"},"algolia":{"hits":{"per_page":12},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="使用 YCSB 对HBase2.1.6进行 benchamark test，测试在不同workload场景下HBase的性能，并进行总结和分析。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HBase2 YCSB benchmark test">
+<meta property="og:url" content="https://ordiychen.github.io/posts/2021-04-11-hbase-ycsb-benchamark-test-1/index.html">
+<meta property="og:site_name" content="Ordiy&#39;s Blog">
+<meta property="og:description" content="使用 YCSB 对HBase2.1.6进行 benchamark test，测试在不同workload场景下HBase的性能，并进行总结和分析。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210521135955.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210521140105.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210521140743.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210521140842.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210521142441.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210521145029.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210521144127.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210521144838.png">
+<meta property="article:published_time" content="2021-05-21T11:09:29.000Z">
+<meta property="article:modified_time" content="2021-06-04T11:12:37.259Z">
+<meta property="article:author" content="Ordiy">
+<meta property="article:tag" content="HBase">
+<meta property="article:tag" content="YCSB">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210521135955.png">
+
+<link rel="canonical" href="https://ordiychen.github.io/posts/2021-04-11-hbase-ycsb-benchamark-test-1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-cn'
+  };
+</script>
+
+  <title>HBase2 YCSB benchmark test | Ordiy's Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-175654772-1"></script>
+    <script data-pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-175654772-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Ordiy's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Ordiy's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Just do it!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+      
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/ordiychen/ordiychen.github.io" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://ordiychen.github.io/posts/2021-04-11-hbase-ycsb-benchamark-test-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/apple-touch-icon.png">
+      <meta itemprop="name" content="Ordiy">
+      <meta itemprop="description" content="Stay Hungry.Stay Foolish.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ordiy's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          HBase2 YCSB benchmark test
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-05-21 11:09:29" itemprop="dateCreated datePublished" datetime="2021-05-21T11:09:29Z">2021-05-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tech/" itemprop="url" rel="index"><span itemprop="name">tech</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tech/BigData/" itemprop="url" rel="index"><span itemprop="name">BigData</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/posts/2021-04-11-hbase-ycsb-benchamark-test-1/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="posts/2021-04-11-hbase-ycsb-benchamark-test-1/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>12k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>10 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="测试环境说明"><a href="#测试环境说明" class="headerlink" title="测试环境说明"></a>测试环境说明</h1><hr>
+<p>机器/网络 环境:</p>
+<table>
+<thead>
+<tr>
+<th align="left">-</th>
+<th align="left">配置说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">物理机器配置信息</td>
+<td align="left">CPU32C , 64G Memory , 3T 磁盘 （10个挂载) ,万兆网卡</td>
+</tr>
+<tr>
+<td align="left">虚拟化</td>
+<td align="left">无 (物理机器运行)</td>
+</tr>
+<tr>
+<td align="left">网络</td>
+<td align="left">万兆网卡/100G交换机</td>
+</tr>
+<tr>
+<td align="left">机柜/机架情况</td>
+<td align="left">所有节点在同机架</td>
+</tr>
+<tr>
+<td align="left">OS 版本</td>
+<td align="left">Centos 7.5</td>
+</tr>
+</tbody></table>
+<p>软件版本:       </p>
+<table>
+<thead>
+<tr>
+<th align="left">-</th>
+<th align="left">配置说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">HBase</td>
+<td align="left">2.1.6-CDH3.1.5</td>
+</tr>
+<tr>
+<td align="left">HDFS</td>
+<td align="left">3.1.1-CDH3.1.5</td>
+</tr>
+<tr>
+<td align="left">ambari</td>
+<td align="left">2.7.4-CDH3.1.5</td>
+</tr>
+<tr>
+<td align="left">JDK</td>
+<td align="left">1.8_u181</td>
+</tr>
+<tr>
+<td align="left">YCSB</td>
+<td align="left">0.18.0-SNAPHOT</td>
+</tr>
+</tbody></table>
+<h1 id="测试方案"><a href="#测试方案" class="headerlink" title="测试方案"></a>测试方案</h1><hr>
+<p>测试说明:</p>
+<table>
+<thead>
+<tr>
+<th align="left">-</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">目的</td>
+<td align="left">测试HBase在生产环境的下的基准性能</td>
+</tr>
+<tr>
+<td align="left">数据量</td>
+<td align="left">4T（按照生产环境 预估）,1000+ Region .YCSB 一次写入1kb，4T数据约需要43亿行（4 * 1024 * 1024 * 1024 ）</td>
+</tr>
+</tbody></table>
+<h2 id="场景设计"><a href="#场景设计" class="headerlink" title="场景设计"></a>场景设计</h2><table>
+<thead>
+<tr>
+<th align="left">场景</th>
+<th align="left">ycsb workload name</th>
+<th align="left">desc</th>
+<th align="left">分布</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">读0% / 写100%</td>
+<td align="left">workload_g</td>
+<td align="left">单写入场景/SYNC_WAL</td>
+<td align="left">Zipfian：随机选择记录，存在热记录</td>
+</tr>
+<tr>
+<td align="left">读20% / 写80%</td>
+<td align="left">workload_h</td>
+<td align="left">读少些多场景</td>
+<td align="left">Zipfian：随机选择记录，存在热记录</td>
+</tr>
+<tr>
+<td align="left">读20%/ 写80%</td>
+<td align="left">workload_j</td>
+<td align="left">读多写少场景</td>
+<td align="left">Zipfian：随机选择记录，存在热记录</td>
+</tr>
+<tr>
+<td align="left">读100%/写0%</td>
+<td align="left">workload_m</td>
+<td align="left">全读取</td>
+<td align="left">Zipfian：随机选择记录，存在热记录</td>
+</tr>
+<tr>
+<td align="left">补充测试场景-读100%/写0%</td>
+<td align="left">workload_m</td>
+<td align="left">全读取</td>
+<td align="left">uniform：全随机选择记录，不存在热记录</td>
+</tr>
+</tbody></table>
+<h2 id="工具准备"><a href="#工具准备" class="headerlink" title="工具准备"></a>工具准备</h2><p>YCSB 工具当前的Release版本是1.7，对应的Hbase client 版本是<code>2.0.0</code>,最新master分支的代码使用client是<code>2.3.6</code>,这里选用master分支上的最新代码自行编译和构建。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">$ git clone https:&#x2F;&#x2F;github.com&#x2F;brianfrankcooper&#x2F;YCSB.git</span><br><span class="line">$ cd YCSB </span><br><span class="line"></span><br><span class="line"># build </span><br><span class="line">$ mvn -pl site.ycsb:mongodb-binding -am clean package</span><br><span class="line"></span><br><span class="line"># jar 包打包位置</span><br><span class="line">$ ll &#x2F;hbase2&#x2F;target&#x2F;ycsb-hbase2-binding-0.18.0-SNAPSHOT.tar.gz</span><br><span class="line"></span><br><span class="line">#copy </span><br><span class="line">$ cp .&#x2F;&#x2F;hbase2&#x2F;target&#x2F;ycsb-hbase2-binding-0.18.0-SNAPSHOT.tar.gz &#x2F;opt&#x2F;app</span><br><span class="line">$ cd &#x2F;opt&#x2F;app</span><br><span class="line">$ tar -zxvf ycsb-hbase2-binding-0.18.0-SNAPSHOT.tar.gz</span><br><span class="line">$ ln -s ycsb-hbase2-binding-0.18.0-SNAPSHOT ycsb-hbase2</span><br><span class="line"></span><br><span class="line"># 配置</span><br><span class="line">export YCSB_HOME&#x3D;&#x2F;opt&#x2F;app&#x2F;ycsb-hbase2</span><br><span class="line">export PATH&#x3D;$PATH:$YCSB_HOME&#x2F;bin</span><br><span class="line"></span><br><span class="line"># 配置hbase config</span><br><span class="line">$ mkdir conf </span><br><span class="line"></span><br><span class="line"># 将hbase hase-site.xml文件拷贝到 conf</span><br><span class="line">$ cp &#x2F;etc&#x2F;hbase&#x2F;conf&#x2F;hbase-site.xml .&#x2F;conf</span><br></pre></td></tr></table></figure>
+
+<h1 id="进行测试"><a href="#进行测试" class="headerlink" title="进行测试"></a>进行测试</h1><hr>
+<h2 id="准备-测试数据"><a href="#准备-测试数据" class="headerlink" title="准备-测试数据"></a>准备-测试数据</h2><p>hbase 创建测试表</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 用的机器是HDD的磁盘</span><br><span class="line"># regionNum = RegionServer * 350 </span><br><span class="line"># 我这边有3个Region</span><br><span class="line"># region后续也可以通过split 进行自动调整</span><br><span class="line">hbase(main):001:0&gt; n_splits = 1050 # HBase recommends (10 * number of regionservers)</span><br><span class="line">hbase(main):<span class="number">002</span>:<span class="number">0</span>&gt; create <span class="string">&#x27;user_table2&#x27;</span>, <span class="string">&#x27;cf&#x27;</span>, &#123;<span class="function"><span class="params">SPLITS</span> =&gt;</span> (<span class="number">1.</span>.n_splits).map &#123;|i| <span class="string">&quot;user#&#123;10000+i*(99999-10000)/n_splits&#125;&quot;</span>&#125;&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>准备写入数据:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 这一步耗时很长，我这边用了24H 多写入了</span><br><span class="line"># 使用2个客户端并行写入 42亿</span><br><span class="line"></span><br><span class="line">#insertstart <span class="number">0</span> ~ <span class="number">2100000000</span></span><br><span class="line">$ nohup  ycsb load hbase2 -P workloads/workloada -jvm-args=<span class="string">&#x27;-XX:+UseG1GC -Xms10g -Xmx20g&#x27;</span> -cp /opt/app/ycsb-<span class="number">0.17</span><span class="number">.0</span>/hbase20-binding/conf -p table=user_table2 -p columnfamily=cf -p durability=ASYNC_WAL -p insertstart=<span class="number">0</span> -p recordcount=<span class="number">2100000000</span> -p operationcount=<span class="number">2100000000</span> -threads <span class="number">64</span> -s  &gt; workloada_load_1.log <span class="number">2</span>&gt;&amp;<span class="number">1</span> &amp; </span><br><span class="line"></span><br><span class="line">#insertstart <span class="number">0</span> ~ <span class="number">2100000000</span> </span><br><span class="line">nohup  ycsb load hbase20 -P workloads/workloada -jvm-args=<span class="string">&#x27;-XX:+UseG1GC -Xms10g -Xmx20g&#x27;</span> -cp /opt/app/ycsb-<span class="number">0.17</span><span class="number">.0</span>/hbase20-binding/conf -p table=user_table2 -p columnfamily=cf -p durability=ASYNC_WAL -p insertstart=<span class="number">2100000000</span> -p recordcount=<span class="number">2100000000</span> -p operationcount=<span class="number">2100000000</span> -threads <span class="number">64</span> -s  &gt; workloada_load_2.log <span class="number">2</span>&gt;&amp;<span class="number">1</span> &amp; </span><br></pre></td></tr></table></figure>
+
+<h2 id="执行测试场景A-读0-写100"><a href="#执行测试场景A-读0-写100" class="headerlink" title="执行测试场景A 读0%/写100%"></a>执行测试场景A <code>读0%/写100%</code></h2><p>写入数据完成，执行测试场景A：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ cat &lt;&lt; EOF &gt; workloads/workloadm</span><br><span class="line">readallfields=<span class="literal">true</span></span><br><span class="line">readproportion=<span class="number">0.00</span></span><br><span class="line">updateproportion=<span class="number">0</span></span><br><span class="line">scanproportion=<span class="number">0</span></span><br><span class="line">insertproportion=<span class="number">1.0</span></span><br><span class="line">requestdistribution=zipfian</span><br><span class="line">EOF</span><br><span class="line"> </span><br><span class="line">$ nohup ./bin/ycsb run hbase2 -P workloads/workloadm -jvm-args=<span class="string">&#x27;-XX:+UseG1GC -Xms2g -Xmx20g&#x27;</span> -cp /opt/app/ycsb-<span class="number">0.17</span><span class="number">.0</span>/hbase20-binding/conf -p table=user_table2 -p columnfamily=cf -p recordcount=<span class="number">1000000000</span> -p operationcount=<span class="number">1000000000</span> -threads <span class="number">64</span> -s &gt; workloada_m.log <span class="number">2</span>&gt;&amp;<span class="number">1</span> &amp; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>测试结果：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">#ycsb 测试结果</span><br><span class="line">[OVERALL], RunTime(ms), <span class="number">54185529</span></span><br><span class="line">[OVERALL], Throughput(ops/sec), <span class="number">36910.22376103406</span></span><br><span class="line">[TOTAL_GCS_G1_Young_Generation], Count, <span class="number">6289</span></span><br><span class="line">[TOTAL_GC_TIME_G1_Young_Generation], Time(ms), <span class="number">87444</span></span><br><span class="line">[TOTAL_GC_TIME_%_G1_Young_Generation], Time(%), <span class="number">0.1613788803279931</span></span><br><span class="line">[TOTAL_GCS_G1_Old_Generation], Count, <span class="number">0</span></span><br><span class="line">[TOTAL_GC_TIME_G1_Old_Generation], Time(ms), <span class="number">0</span></span><br><span class="line">[TOTAL_GC_TIME_%_G1_Old_Generation], Time(%), <span class="number">0.0</span></span><br><span class="line">[TOTAL_GCs], Count, <span class="number">6289</span></span><br><span class="line">[TOTAL_GC_TIME], Time(ms), <span class="number">87444</span></span><br><span class="line">[TOTAL_GC_TIME_%], Time(%), <span class="number">0.1613788803279931</span></span><br><span class="line">[CLEANUP], Operations, <span class="number">128</span></span><br><span class="line">[CLEANUP], AverageLatency(us), <span class="number">43.140625</span></span><br><span class="line">[CLEANUP], MinLatency(us), <span class="number">1</span></span><br><span class="line">[CLEANUP], MaxLatency(us), <span class="number">3591</span></span><br><span class="line">[CLEANUP], 95thPercentileLatency(us), <span class="number">36</span></span><br><span class="line">[CLEANUP], 99thPercentileLatency(us), <span class="number">566</span></span><br><span class="line">[INSERT], Operations, <span class="number">2000000000</span></span><br><span class="line">[INSERT], AverageLatency(us), <span class="number">1730.6711586995</span></span><br><span class="line">[INSERT], MinLatency(us), <span class="number">119</span></span><br><span class="line">[INSERT], MaxLatency(us), <span class="number">7602175</span></span><br><span class="line">[INSERT], 95thPercentileLatency(us), <span class="number">1453</span></span><br><span class="line">[INSERT], 99thPercentileLatency(us), <span class="number">4195</span></span><br><span class="line">[INSERT], Return=OK, <span class="number">2000000000</span></span><br></pre></td></tr></table></figure>
+
+<p>测试机器负载：<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210521135955.png"></p>
+<p>QPS 监控:<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210521140105.png"></p>
+<h2 id="执行测试B-读20-写80"><a href="#执行测试B-读20-写80" class="headerlink" title="执行测试B-读20%写80%"></a>执行测试B-读20%写80%</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ cat &lt;&lt; EOF &gt; workloads/workloadg</span><br><span class="line">readallfields=<span class="literal">true</span></span><br><span class="line">readproportion=<span class="number">0.20</span></span><br><span class="line">updateproportion=<span class="number">0</span></span><br><span class="line">scanproportion=<span class="number">0</span></span><br><span class="line">insertproportion=<span class="number">0.80</span></span><br><span class="line">requestdistribution=zipfian</span><br><span class="line">EOF</span><br><span class="line"> </span><br><span class="line">$ $ nohup ./bin/ycsb load hbase2 -P workloads/workloadg -jvm-args=<span class="string">&#x27;-XX:+UseG1GC -Xms2g -Xmx20g&#x27;</span> -cp /opt/dp/ycsb-<span class="number">0.17</span><span class="number">.0</span>/hbase20-binding/conf -p table=user_table2 -p columnfamily=cf -p recordcount=<span class="number">1000000000</span> -p operationcount=<span class="number">1000000000</span> -threads <span class="number">64</span> -s &gt; workloada_g.log <span class="number">2</span>&gt;&amp;<span class="number">1</span> &amp; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>YCSB 测试结果：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">[OVERALL], RunTime(ms), <span class="number">8444494</span></span><br><span class="line">[OVERALL], Throughput(ops/sec), <span class="number">11842.035769105882</span></span><br><span class="line">[TOTAL_GCS_G1_Young_Generation], Count, <span class="number">316</span></span><br><span class="line">[TOTAL_GC_TIME_G1_Young_Generation], Time(ms), <span class="number">4594</span></span><br><span class="line">[TOTAL_GC_TIME_%_G1_Young_Generation], Time(%), <span class="number">0.05440231232327242</span></span><br><span class="line">[TOTAL_GCS_G1_Old_Generation], Count, <span class="number">0</span></span><br><span class="line">[TOTAL_GC_TIME_G1_Old_Generation], Time(ms), <span class="number">0</span></span><br><span class="line">[TOTAL_GC_TIME_%_G1_Old_Generation], Time(%), <span class="number">0.0</span></span><br><span class="line">[TOTAL_GCs], Count, <span class="number">316</span></span><br><span class="line">[TOTAL_GC_TIME], Time(ms), <span class="number">4594</span></span><br><span class="line">[TOTAL_GC_TIME_%], Time(%), <span class="number">0.05440231232327242</span></span><br><span class="line">[READ], Operations, <span class="number">19995388</span></span><br><span class="line">[READ], AverageLatency(us), <span class="number">23096.382339317446</span></span><br><span class="line">[READ], MinLatency(us), <span class="number">138</span></span><br><span class="line">[READ], MaxLatency(us), <span class="number">41287679</span></span><br><span class="line">[READ], 95thPercentileLatency(us), <span class="number">66879</span></span><br><span class="line">[READ], 99thPercentileLatency(us), <span class="number">218239</span></span><br><span class="line">[READ], Return=OK, <span class="number">19995388</span></span><br><span class="line">[CLEANUP], Operations, <span class="number">168</span></span><br><span class="line">[CLEANUP], AverageLatency(us), <span class="number">28.136904761904763</span></span><br><span class="line">[CLEANUP], MinLatency(us), <span class="number">0</span></span><br><span class="line">[CLEANUP], MaxLatency(us), <span class="number">2683</span></span><br><span class="line">[CLEANUP], 95thPercentileLatency(us), <span class="number">24</span></span><br><span class="line">[CLEANUP], 99thPercentileLatency(us), <span class="number">51</span></span><br><span class="line">[INSERT], Operations, <span class="number">80004612</span></span><br><span class="line">[INSERT], AverageLatency(us), <span class="number">3044.945812198927</span></span><br><span class="line">[INSERT], MinLatency(us), <span class="number">240</span></span><br><span class="line">[INSERT], MaxLatency(us), <span class="number">40861695</span></span><br><span class="line">[INSERT], 95thPercentileLatency(us), <span class="number">736</span></span><br><span class="line">[INSERT], 99thPercentileLatency(us), <span class="number">2967</span></span><br><span class="line">[INSERT], Return=OK, <span class="number">80004612</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="执行测试C-读80-写20"><a href="#执行测试C-读80-写20" class="headerlink" title="执行测试C-读80%写20%"></a>执行测试C-读80%写20%</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ cat &lt;&lt; EOF &gt; workloads/workloadh</span><br><span class="line">recordcount=<span class="number">100000000</span></span><br><span class="line">operationcount=<span class="number">100000000</span></span><br><span class="line">workload=site.ycsb.workloads.CoreWorkload</span><br><span class="line">readallfields=<span class="literal">true</span></span><br><span class="line">readproportion=<span class="number">0.8</span></span><br><span class="line">updateproportion=<span class="number">0</span></span><br><span class="line">scanproportion=<span class="number">0</span></span><br><span class="line">insertproportion=<span class="number">0.20</span></span><br><span class="line">requestdistribution=zipfian</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">$ nohup ./bin/ycsb run hbase2 -P workloads/workloadh -jvm-args=<span class="string">&#x27;-XX:+UseG1GC -Xms10g -Xmx10g &#x27;</span> -cp /opt/dp/ycsb-hbase2/conf -p table=user_table2 -p columnfamily=cf -p recordcount=<span class="number">100000000</span> -p operationcount=<span class="number">100000000</span> -threads <span class="number">84</span> -s &gt; workload_h_log.log <span class="number">2</span>&gt;&amp;<span class="number">1</span> </span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+<p>测试结果：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">[OVERALL], RunTime(ms), <span class="number">1622208</span></span><br><span class="line">[OVERALL], Throughput(ops/sec), <span class="number">6164.437606028327</span></span><br><span class="line">[TOTAL_GCS_G1_Young_Generation], Count, <span class="number">34</span></span><br><span class="line">[TOTAL_GC_TIME_G1_Young_Generation], Time(ms), <span class="number">582</span></span><br><span class="line">[TOTAL_GC_TIME_%_G1_Young_Generation], Time(%), <span class="number">0.03587702686708486</span></span><br><span class="line">[TOTAL_GCS_G1_Old_Generation], Count, <span class="number">0</span></span><br><span class="line">[TOTAL_GC_TIME_G1_Old_Generation], Time(ms), <span class="number">0</span></span><br><span class="line">[TOTAL_GC_TIME_%_G1_Old_Generation], Time(%), <span class="number">0.0</span></span><br><span class="line">[TOTAL_GCs], Count, <span class="number">34</span></span><br><span class="line">[TOTAL_GC_TIME], Time(ms), <span class="number">582</span></span><br><span class="line">[TOTAL_GC_TIME_%], Time(%), <span class="number">0.03587702686708486</span></span><br><span class="line">[READ], Operations, <span class="number">7999801</span></span><br><span class="line">[READ], AverageLatency(us), <span class="number">16489.358773674496</span></span><br><span class="line">[READ], MinLatency(us), <span class="number">120</span></span><br><span class="line">[READ], MaxLatency(us), <span class="number">18448383</span></span><br><span class="line">[READ], 95thPercentileLatency(us), <span class="number">61855</span></span><br><span class="line">[READ], 99thPercentileLatency(us), <span class="number">222207</span></span><br><span class="line">[READ], Return=OK, <span class="number">7999801</span></span><br><span class="line">[CLEANUP], Operations, <span class="number">168</span></span><br><span class="line">[CLEANUP], AverageLatency(us), <span class="number">22.125</span></span><br><span class="line">[CLEANUP], MinLatency(us), <span class="number">1</span></span><br><span class="line">[CLEANUP], MaxLatency(us), <span class="number">2257</span></span><br><span class="line">[CLEANUP], 95thPercentileLatency(us), <span class="number">12</span></span><br><span class="line">[CLEANUP], 99thPercentileLatency(us), <span class="number">71</span></span><br><span class="line">[INSERT], Operations, <span class="number">2000199</span></span><br><span class="line">[INSERT], AverageLatency(us), <span class="number">1431.605406762027</span></span><br><span class="line">[INSERT], MinLatency(us), <span class="number">241</span></span><br><span class="line">[INSERT], MaxLatency(us), <span class="number">18120703</span></span><br><span class="line">[INSERT], 95thPercentileLatency(us), <span class="number">542</span></span><br><span class="line">[INSERT], 99thPercentileLatency(us), <span class="number">4099</span></span><br><span class="line">[INSERT], Return=OK, <span class="number">2000199</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="测试场景D-读100-写0"><a href="#测试场景D-读100-写0" class="headerlink" title="测试场景D - 读100% / 写0%"></a>测试场景D - 读100% / 写0%</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">$ cat &gt;&gt; EOF &gt; workloads&#x2F;workloadj</span><br><span class="line">recordcount&#x3D;100000000</span><br><span class="line">operationcount&#x3D;100000000</span><br><span class="line">workload&#x3D;site.ycsb.workloads.CoreWorkload</span><br><span class="line">readallfields&#x3D;true</span><br><span class="line">readproportion&#x3D;1.0</span><br><span class="line">updateproportion&#x3D;0.0</span><br><span class="line">scanproportion&#x3D;0.0</span><br><span class="line">insertproportion&#x3D;0.0</span><br><span class="line">requestdistribution&#x3D;zipfian</span><br><span class="line"></span><br><span class="line">EOF</span><br><span class="line"> </span><br><span class="line">$ nohup .&#x2F;bin&#x2F;ycsb run hbase2 -P workloads&#x2F;workloadj -jvm-args&#x3D;&#39;-XX:+UseG1GC -Xms10g -Xmx10g &#39;  -cp &#x2F;opt&#x2F;dp&#x2F;ycsb-hbase2&#x2F;conf -p table&#x3D;user_table2 -p columnfamily&#x3D;cf  -p recordcount&#x3D;100000000 -p operationcount&#x3D;100000000 -threads 84 -s &gt; workload_j.log 2&gt;&amp;1 &amp;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>测试结果：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">[OVERALL], RunTime(ms), <span class="number">31251027</span></span><br><span class="line">[OVERALL], Throughput(ops/sec), <span class="number">3199.8948386560223</span></span><br><span class="line">[TOTAL_GCS_G1_Young_Generation], Count, <span class="number">307</span></span><br><span class="line">[TOTAL_GC_TIME_G1_Young_Generation], Time(ms), <span class="number">4354</span></span><br><span class="line">[TOTAL_GC_TIME_%_G1_Young_Generation], Time(%), <span class="number">0.013932342127508322</span></span><br><span class="line">[TOTAL_GCS_G1_Old_Generation], Count, <span class="number">0</span></span><br><span class="line">[TOTAL_GC_TIME_G1_Old_Generation], Time(ms), <span class="number">0</span></span><br><span class="line">[TOTAL_GC_TIME_%_G1_Old_Generation], Time(%), <span class="number">0.0</span></span><br><span class="line">[TOTAL_GCs], Count, <span class="number">307</span></span><br><span class="line">[TOTAL_GC_TIME], Time(ms), <span class="number">4354</span></span><br><span class="line">[TOTAL_GC_TIME_%], Time(%), <span class="number">0.013932342127508322</span></span><br><span class="line">[READ], Operations, <span class="number">100000000</span></span><br><span class="line">[READ], AverageLatency(us), <span class="number">26169.73705328</span></span><br><span class="line">[READ], MinLatency(us), <span class="number">105</span></span><br><span class="line">[READ], MaxLatency(us), <span class="number">46170111</span></span><br><span class="line">[READ], 95thPercentileLatency(us), <span class="number">55967</span></span><br><span class="line">[READ], 99thPercentileLatency(us), <span class="number">208895</span></span><br><span class="line">[READ], Return=OK, <span class="number">100000000</span></span><br><span class="line">[CLEANUP], Operations, <span class="number">168</span></span><br><span class="line">[CLEANUP], AverageLatency(us), <span class="number">22.458333333333332</span></span><br><span class="line">[CLEANUP], MinLatency(us), <span class="number">1</span></span><br><span class="line">[CLEANUP], MaxLatency(us), <span class="number">2121</span></span><br><span class="line">[CLEANUP], 95thPercentileLatency(us), <span class="number">16</span></span><br><span class="line">[CLEANUP], 99thPercentileLatency(us), <span class="number">57</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="测试场景E-uniform-读100-写0"><a href="#测试场景E-uniform-读100-写0" class="headerlink" title="测试场景E-uniform 读100%/写0%"></a>测试场景E-uniform 读100%/写0%</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ cat &lt;&lt; EOF &gt; workloads&#x2F;workloadj_uniform</span><br><span class="line">recordcount&#x3D;100000000</span><br><span class="line">operationcount&#x3D;100000000</span><br><span class="line">workload&#x3D;site.ycsb.workloads.CoreWorkload</span><br><span class="line">readallfields&#x3D;true</span><br><span class="line">readproportion&#x3D;1.0</span><br><span class="line">updateproportion&#x3D;0.0</span><br><span class="line">scanproportion&#x3D;0.0</span><br><span class="line">insertproportion&#x3D;0.0</span><br><span class="line">requestdistribution&#x3D;uniform</span><br><span class="line">EOF </span><br><span class="line"></span><br><span class="line">$ nohup .&#x2F;bin&#x2F;ycsb run hbase2 -P workloads&#x2F;workloadj_uniform -jvm-args&#x3D;&#39;-XX:+UseG1GC -Xms10g -Xmx10g &#39;  -cp &#x2F;opt&#x2F;dp&#x2F;ycsb-hbase2&#x2F;conf -p table&#x3D;user_table2 -p columnfamily&#x3D;cf  -p recordcount&#x3D;10000000 -p operationcount&#x3D;10000000 -threads 84 -s &gt; workload_uniform.log 2&gt;&amp;1 &amp;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>测试结果：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">[OVERALL], RunTime(ms), <span class="number">10907660</span></span><br><span class="line">[OVERALL], Throughput(ops/sec), <span class="number">916.7869185508166</span></span><br><span class="line">[TOTAL_GCS_G1_Young_Generation], Count, <span class="number">34</span></span><br><span class="line">[TOTAL_GC_TIME_G1_Young_Generation], Time(ms), <span class="number">577</span></span><br><span class="line">[TOTAL_GC_TIME_%_G1_Young_Generation], Time(%), <span class="number">0.005289860520038212</span></span><br><span class="line">[TOTAL_GCS_G1_Old_Generation], Count, <span class="number">0</span></span><br><span class="line">[TOTAL_GC_TIME_G1_Old_Generation], Time(ms), <span class="number">0</span></span><br><span class="line">[TOTAL_GC_TIME_%_G1_Old_Generation], Time(%), <span class="number">0.0</span></span><br><span class="line">[TOTAL_GCs], Count, <span class="number">34</span></span><br><span class="line">[TOTAL_GC_TIME], Time(ms), <span class="number">577</span></span><br><span class="line">[TOTAL_GC_TIME_%], Time(%), <span class="number">0.005289860520038212</span></span><br><span class="line">[READ], Operations, <span class="number">10000000</span></span><br><span class="line">[READ], AverageLatency(us), <span class="number">91175.9869907</span></span><br><span class="line">[READ], MinLatency(us), <span class="number">160</span></span><br><span class="line">[READ], MaxLatency(us), <span class="number">18235391</span></span><br><span class="line">[READ], 95thPercentileLatency(us), <span class="number">138495</span></span><br><span class="line">[READ], 99thPercentileLatency(us), <span class="number">560127</span></span><br><span class="line">[READ], Return=OK, <span class="number">10000000</span></span><br><span class="line">[CLEANUP], Operations, <span class="number">168</span></span><br><span class="line">[CLEANUP], AverageLatency(us), <span class="number">22.44047619047619</span></span><br><span class="line">[CLEANUP], MinLatency(us), <span class="number">1</span></span><br><span class="line">[CLEANUP], MaxLatency(us), <span class="number">2099</span></span><br><span class="line">[CLEANUP], 95thPercentileLatency(us), <span class="number">20</span></span><br><span class="line">[CLEANUP], 99thPercentileLatency(us), <span class="number">69</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="测试数据汇总"><a href="#测试数据汇总" class="headerlink" title="测试数据汇总"></a>测试数据汇总</h1><hr>
+<p> 测试结果-汇总表：<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210521140743.png"></p>
+<p><br> 图表表示(不包含 uniform分布)：<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210521140842.png"></p>
+<h2 id="测试总结"><a href="#测试总结" class="headerlink" title="测试总结"></a>测试总结</h2><ul>
+<li>从上图可以看出 HBase的GET 读操作是主要的性能瓶颈，主要是收到<code>BlockCache Hit </code>Ratio和<code>Disk IOPS</code> 的影响：</li>
+</ul>
+<p>RegionServer Hit Ratio :<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210521142441.png"><br>一个机器的最大内存是64G，分配给RegionServer 的BlockCache L1 总量是12G，集群RegionServer L1 Cache总共35G(12G * 3节点), 能够缓存的数据量有限。<br>测试中 GET RPC 的BlockCache Hit Ratio 一直在50%左右（和生产环境接近)，还有50% 的 RPC 请求需要到HDFS存储中访问数据(需要读磁盘），导致latency较大，成为限制QPS提升的瓶颈。</p>
+<p>关于Disk IO ，磁盘最大OPS：<code>1K OPS</code>左右,如图：<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210521145029.png"><br>机器最大IOPS： 机器有10个挂载，单个HDD盘的读写 <code>150IOPS</code>左右，所以<code>10挂载 * 150 IOPS = 1.5K OPS</code>,从监控看磁盘OPS基本已经达到上限。</p>
+<ul>
+<li>相对与zipfian分布的测试，uniform分布下，Hbase 读取性能还要下降2/3 。<br>这是由于zipfian分布下存在热数据,<code>YCSB paper</code> 中zipfian与uniform对比见:<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210521144127.png"></li>
+</ul>
+<p>*注意：图片涞源,<a target="_blank" rel="noopener" href="https://labs.yahoo.com/news/yahoo-cloud-serving-benchmark/">https://labs.yahoo.com/news/yahoo-cloud-serving-benchmark/</a></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>在机器环境不变的情况下，通过提前表的StoreFileSize,可以有效提高表的吞吐量：</p>
+<p><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210521144838.png"><br>*图片涞源：Surbhi Kochhar,<a target="_blank" rel="noopener" href="https://blog.cloudera.com/hbase-performance-testing-using-ycsb/">https://blog.cloudera.com/hbase-performance-testing-using-ycsb/</a><br>这个图展示了：缓存命中率接近99％(40G数据，cache 命中率100%），并且大多数工作负载数据在缓存中可用，因此延迟要低得多。相比之下，对于1TB数据集，由于必须从HDFS存储访问HFile数据，因此缓存命中率约为85％。</p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><hr>
+<ul>
+<li><p>YCSB project<br><a target="_blank" rel="noopener" href="https://labs.yahoo.com/news/yahoo-cloud-serving-benchmark/">https://labs.yahoo.com/news/yahoo-cloud-serving-benchmark/</a></p>
+</li>
+<li><p>hbase-performance-testing-using-ycsb<br><a target="_blank" rel="noopener" href="https://blog.cloudera.com/hbase-performance-testing-using-ycsb/">https://blog.cloudera.com/hbase-performance-testing-using-ycsb/</a></p>
+</li>
+<li><p>HBase测试|HBase 2.2.1随机读写性能测试<br><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/V53IHclunWsEMjgxYrbQdQ">https://mp.weixin.qq.com/s/V53IHclunWsEMjgxYrbQdQ</a></p>
+</li>
+<li><p>Hbase SSD<br><a target="_blank" rel="noopener" href="https://blogs.apache.org/hbase/?page=1">https://blogs.apache.org/hbase/?page=1</a></p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/HBase/" rel="tag"># HBase</a>
+              <a href="/tags/YCSB/" rel="tag"># YCSB</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/2021-06-11-hbase-region-move-md/" rel="prev" title="HBase Region Move 批量操作">
+      <i class="fa fa-chevron-left"></i> HBase Region Move 批量操作
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/2021-04-22-zeppelin-inaction-1/" rel="next" title="Zeppelin In Action">
+      Zeppelin In Action <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E7%8E%AF%E5%A2%83%E8%AF%B4%E6%98%8E"><span class="nav-number">1.</span> <span class="nav-text">测试环境说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E6%96%B9%E6%A1%88"><span class="nav-number">2.</span> <span class="nav-text">测试方案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%BA%E6%99%AF%E8%AE%BE%E8%AE%A1"><span class="nav-number">2.1.</span> <span class="nav-text">场景设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E5%85%B7%E5%87%86%E5%A4%87"><span class="nav-number">2.2.</span> <span class="nav-text">工具准备</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%9B%E8%A1%8C%E6%B5%8B%E8%AF%95"><span class="nav-number">3.</span> <span class="nav-text">进行测试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%86%E5%A4%87-%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE"><span class="nav-number">3.1.</span> <span class="nav-text">准备-测试数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E6%B5%8B%E8%AF%95%E5%9C%BA%E6%99%AFA-%E8%AF%BB0-%E5%86%99100"><span class="nav-number">3.2.</span> <span class="nav-text">执行测试场景A 读0%&#x2F;写100%</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E6%B5%8B%E8%AF%95B-%E8%AF%BB20-%E5%86%9980"><span class="nav-number">3.3.</span> <span class="nav-text">执行测试B-读20%写80%</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E6%B5%8B%E8%AF%95C-%E8%AF%BB80-%E5%86%9920"><span class="nav-number">3.4.</span> <span class="nav-text">执行测试C-读80%写20%</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E5%9C%BA%E6%99%AFD-%E8%AF%BB100-%E5%86%990"><span class="nav-number">3.5.</span> <span class="nav-text">测试场景D - 读100% &#x2F; 写0%</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E5%9C%BA%E6%99%AFE-uniform-%E8%AF%BB100-%E5%86%990"><span class="nav-number">3.5.1.</span> <span class="nav-text">测试场景E-uniform 读100%&#x2F;写0%</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE%E6%B1%87%E6%80%BB"><span class="nav-number">4.</span> <span class="nav-text">测试数据汇总</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E6%80%BB%E7%BB%93"><span class="nav-number">4.1.</span> <span class="nav-text">测试总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">6.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ordiy"
+      src="/images/apple-touch-icon.png">
+  <p class="site-author-name" itemprop="name">Ordiy</p>
+  <div class="site-description" itemprop="description">Stay Hungry.Stay Foolish.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ordiychen" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ordiychen" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:ordiymaster_outlook.com" title="E-Mail → mailto:ordiymaster_outlook.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">blog.isun.app</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">106k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">1:36</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://ordiytech-blog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://ordiychen.github.io/posts/2021-04-11-hbase-ycsb-benchamark-test-1/";
+    this.page.identifier = "posts/2021-04-11-hbase-ycsb-benchamark-test-1/";
+    this.page.title = "HBase2 YCSB benchmark test";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://ordiytech-blog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+    </div>
+</body>
+</html>
