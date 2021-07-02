@@ -6,7 +6,7 @@
   <link href="https://ordiychen.github.io/atom.xml" rel="self"/>
   
   <link href="https://ordiychen.github.io/"/>
-  <updated>2021-06-24T02:55:41.261Z</updated>
+  <updated>2021-07-02T07:18:27.267Z</updated>
   <id>https://ordiychen.github.io/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>macOs install GitBook serve install error</title>
+    <link href="https://ordiychen.github.io/posts/2021-02-01-gitbook-macos-cl-error/"/>
+    <id>https://ordiychen.github.io/posts/2021-02-01-gitbook-macos-cl-error/</id>
+    <published>2021-07-01T18:18:45.000Z</published>
+    <updated>2021-07-02T07:18:27.267Z</updated>
+    
+    
+    <summary type="html">MacOS 上安装GitBook遇到的各种问题，最终没有正常安装，选择使用`honkit`的悲伤故事</summary>
+    
+    
+    
+    <category term="tech" scheme="https://ordiychen.github.io/categories/tech/"/>
+    
+    
+    <category term="tool" scheme="https://ordiychen.github.io/tags/tool/"/>
+    
+  </entry>
   
   <entry>
     <title>HBase Region Move 批量操作</title>
