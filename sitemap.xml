@@ -361,34 +361,6 @@
   </url>
   
   <url>
-    <loc>https://ordiychen.github.io/tags/Gateway/</loc>
-    <lastmod>2021-07-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://ordiychen.github.io/tags/HighPerformance/</loc>
-    <lastmod>2021-07-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://ordiychen.github.io/tags/Concurrent/</loc>
-    <lastmod>2021-07-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://ordiychen.github.io/tags/Architecture/</loc>
-    <lastmod>2021-07-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://ordiychen.github.io/tags/Enginner/</loc>
     <lastmod>2021-07-02</lastmod>
     <changefreq>daily</changefreq>
@@ -411,6 +383,34 @@
   
   <url>
     <loc>https://ordiychen.github.io/tags/Values/</loc>
+    <lastmod>2021-07-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://ordiychen.github.io/tags/Gateway/</loc>
+    <lastmod>2021-07-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://ordiychen.github.io/tags/HighPerformance/</loc>
+    <lastmod>2021-07-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://ordiychen.github.io/tags/Concurrent/</loc>
+    <lastmod>2021-07-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://ordiychen.github.io/tags/Architecture/</loc>
     <lastmod>2021-07-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -524,14 +524,14 @@
   </url>
   
   <url>
-    <loc>https://ordiychen.github.io/categories/tech/net/</loc>
+    <loc>https://ordiychen.github.io/categories/tech/BigData/</loc>
     <lastmod>2021-07-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://ordiychen.github.io/categories/tech/BigData/</loc>
+    <loc>https://ordiychen.github.io/categories/tech/net/</loc>
     <lastmod>2021-07-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
