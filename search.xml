@@ -89,10 +89,10 @@
         <category>algorithm</category>
       </categories>
       <tags>
-        <tag>Java</tag>
-        <tag>LRU</tag>
-        <tag>CoreJava</tag>
         <tag>Net</tag>
+        <tag>LRU</tag>
+        <tag>Java</tag>
+        <tag>CoreJava</tag>
       </tags>
   </entry>
   <entry>
@@ -349,27 +349,6 @@ ARM 处理器目前有多种CPU架构，编译时需要注意。
       </tags>
   </entry>
   <entry>
-    <title>Python 计算圆周率(译)</title>
-    <url>/posts/2019-10-11-python-calc-pi-1/</url>
-    <content><![CDATA[<p>翻译自<a href="http://blog.recursiveprocess.com/2013/03/14/calculate-pi-with-python/">calculate-pi-with-python</a></p>
-<h1 id="计算圆周率"><a href="#计算圆周率" class="headerlink" title="计算圆周率"></a>计算圆周率</h1><h2 id="贝利-波尔温-普劳夫公式-Bailey–Borwein–Plouffe-formula-方法"><a href="#贝利-波尔温-普劳夫公式-Bailey–Borwein–Plouffe-formula-方法" class="headerlink" title="贝利-波尔温-普劳夫公式(Bailey–Borwein–Plouffe formula)方法"></a>贝利-波尔温-普劳夫公式(Bailey–Borwein–Plouffe formula)方法</h2><p><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200722214711.png" alt="images"></p>
-<h2 id="Bellard’s-formula-公式"><a href="#Bellard’s-formula-公式" class="headerlink" title="Bellard’s formula 公式"></a><a href="http://en.wikipedia.org/wiki/Bellard%27s_formula">Bellard’s formula 公式</a></h2><p><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200722214538.png" alt="images"></p>
-<h2 id="Chudnovsky-algorithm-算法"><a href="#Chudnovsky-algorithm-算法" class="headerlink" title="Chudnovsky algorithm 算法"></a><a href="http://en.wikipedia.org/wiki/Chudnovsky_algorithm">Chudnovsky algorithm 算法</a></h2><p><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200722214555.png" alt="images"></p>
-<h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> decimal <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="comment">#Sets decimal to 25 digits of precision</span></span><br><span class="line">getcontext().prec = <span class="number">25</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">factorial</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="keyword">if</span> n&lt;<span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> n * factorial(n-<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">plouffBig</span>(<span class="params">n</span>):</span> <span class="comment">#http://en.wikipedia.org/wiki/Bailey%E2%80%93Borwein%E2%80%93Plouffe_formula</span></span><br><span class="line">    pi = Decimal(<span class="number">0</span>)</span><br><span class="line">    k = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> k &lt; n:</span><br><span class="line">        pi += (Decimal(<span class="number">1</span>)/(<span class="number">16</span>**k))*((Decimal(<span class="number">4</span>)/(<span class="number">8</span>*k+<span class="number">1</span>))-(Decimal(<span class="number">2</span>)/(<span class="number">8</span>*k+<span class="number">4</span>))-(Decimal(<span class="number">1</span>)/(<span class="number">8</span>*k+<span class="number">5</span>))-(Decimal(<span class="number">1</span>)/(<span class="number">8</span>*k+<span class="number">6</span>)))</span><br><span class="line">        k += <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> pi</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bellardBig</span>(<span class="params">n</span>):</span> <span class="comment">#http://en.wikipedia.org/wiki/Bellard%27s_formula</span></span><br><span class="line">    pi = Decimal(<span class="number">0</span>)</span><br><span class="line">    k = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> k &lt; n:</span><br><span class="line">        pi += (Decimal(-<span class="number">1</span>)**k/(<span class="number">1024</span>**k))*( Decimal(<span class="number">256</span>)/(<span class="number">10</span>*k+<span class="number">1</span>) + Decimal(<span class="number">1</span>)/(<span class="number">10</span>*k+<span class="number">9</span>) - Decimal(<span class="number">64</span>)/(<span class="number">10</span>*k+<span class="number">3</span>) - Decimal(<span class="number">32</span>)/(<span class="number">4</span>*k+<span class="number">1</span>) - Decimal(<span class="number">4</span>)/(<span class="number">10</span>*k+<span class="number">5</span>) - Decimal(<span class="number">4</span>)/(<span class="number">10</span>*k+<span class="number">7</span>) -Decimal(<span class="number">1</span>)/(<span class="number">4</span>*k+<span class="number">3</span>))</span><br><span class="line">        k += <span class="number">1</span></span><br><span class="line">    pi = pi * <span class="number">1</span>/(<span class="number">2</span>**<span class="number">6</span>)</span><br><span class="line">    <span class="keyword">return</span> pi</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">chudnovskyBig</span>(<span class="params">n</span>):</span> <span class="comment">#http://en.wikipedia.org/wiki/Chudnovsky_algorithm</span></span><br><span class="line">    pi = Decimal(<span class="number">0</span>)</span><br><span class="line">    k = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> k &lt; n:</span><br><span class="line">        pi += (Decimal(-<span class="number">1</span>)**k)*(Decimal(factorial(<span class="number">6</span>*k))/((factorial(k)**<span class="number">3</span>)*(factorial(<span class="number">3</span>*k)))* (<span class="number">13591409</span>+<span class="number">545140134</span>*k)/(<span class="number">640320</span>**(<span class="number">3</span>*k)))</span><br><span class="line">        k += <span class="number">1</span></span><br><span class="line">    pi = pi * Decimal(<span class="number">10005</span>).sqrt()/<span class="number">4270934400</span></span><br><span class="line">    pi = pi**(-<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> pi</span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;\t\t\t Plouff \t\t Bellard \t\t\t Chudnovsky&quot;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> xrange(<span class="number">1</span>,<span class="number">20</span>):</span><br><span class="line">    <span class="built_in">print</span> <span class="string">&quot;Iteration number &quot;</span>,i, <span class="string">&quot; &quot;</span>, plouffBig(i), <span class="string">&quot; &quot;</span> , bellardBig(i),<span class="string">&quot; &quot;</span>, chudnovskyBig(i)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h1 id="树莓派p4-计算结果"><a href="#树莓派p4-计算结果" class="headerlink" title="树莓派p4 计算结果"></a>树莓派p4 计算结果</h1><p>循环20 次 <code>Chudnovsky algorithm</code>最快</p>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">                      Plouff                  Bellard                         Chudnovsky</span><br><span class="line">Iteration number  1   3.133333333333333333333333   3.141765873015873015873017   3.141592653589734207668453</span><br><span class="line">Iteration number  2   3.141422466422466422466422   3.141592571868390306374053   3.141592653589793238462642</span><br><span class="line">Iteration number  3   3.141587390346581523052111   3.141592653642050769944284   3.141592653589793238462642</span><br><span class="line">Iteration number  4   3.141592457567435381837004   3.141592653589755368080514   3.141592653589793238462642</span><br><span class="line">Iteration number  5   3.141592645460336319557021   3.141592653589793267843377   3.141592653589793238462642</span><br><span class="line">Iteration number  6   3.141592653228087534734378   3.141592653589793238438852   3.141592653589793238462642</span><br><span class="line">Iteration number  7   3.141592653572880827785241   3.141592653589793238462664   3.141592653589793238462642</span><br><span class="line">Iteration number  8   3.141592653588972704940778   3.141592653589793238462644   3.141592653589793238462642</span><br><span class="line">Iteration number  9   3.141592653589752275236178   3.141592653589793238462644   3.141592653589793238462642</span><br><span class="line">Iteration number  10   3.141592653589791146388777   3.141592653589793238462644   3.141592653589793238462642</span><br><span class="line">Iteration number  11   3.141592653589793129614171   3.141592653589793238462644   3.141592653589793238462642</span><br><span class="line">Iteration number  12   3.141592653589793232711293   3.141592653589793238462644   3.141592653589793238462642</span><br><span class="line">Iteration number  13   3.141592653589793238154767   3.141592653589793238462644   3.141592653589793238462642</span><br><span class="line">Iteration number  14   3.141592653589793238445978   3.141592653589793238462644   3.141592653589793238462642</span><br><span class="line">Iteration number  15   3.141592653589793238461733   3.141592653589793238462644   3.141592653589793238462642</span><br><span class="line">Iteration number  16   3.141592653589793238462594   3.141592653589793238462644   3.141592653589793238462642</span><br><span class="line">Iteration number  17   3.141592653589793238462641   3.141592653589793238462644   3.141592653589793238462642</span><br><span class="line">Iteration number  18   3.141592653589793238462644   3.141592653589793238462644   3.141592653589793238462642</span><br><span class="line">Iteration number  19   3.141592653589793238462644   3.141592653589793238462644   3.141592653589793238462642</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>tech</category>
-        <category>python</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-        <tag>Statistics</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Apache Http-Client5 基本使用</title>
     <url>/posts/2020-01-01-apache-http-client5/</url>
     <content><![CDATA[<p>Apache HttpComponents项目进行Http API使用及<code>I/O Reactor</code></p>
@@ -417,8 +396,8 @@ ARM 处理器目前有多种CPU架构，编译时需要注意。
       <tags>
         <tag>Java</tag>
         <tag>JavaWeb</tag>
-        <tag>HTTP</tag>
         <tag>Apache</tag>
+        <tag>HTTP</tag>
       </tags>
   </entry>
   <entry>
@@ -503,6 +482,27 @@ ARM 处理器目前有多种CPU架构，编译时需要注意。
       </tags>
   </entry>
   <entry>
+    <title>Python 计算圆周率(译)</title>
+    <url>/posts/2019-10-11-python-calc-pi-1/</url>
+    <content><![CDATA[<p>翻译自<a href="http://blog.recursiveprocess.com/2013/03/14/calculate-pi-with-python/">calculate-pi-with-python</a></p>
+<h1 id="计算圆周率"><a href="#计算圆周率" class="headerlink" title="计算圆周率"></a>计算圆周率</h1><h2 id="贝利-波尔温-普劳夫公式-Bailey–Borwein–Plouffe-formula-方法"><a href="#贝利-波尔温-普劳夫公式-Bailey–Borwein–Plouffe-formula-方法" class="headerlink" title="贝利-波尔温-普劳夫公式(Bailey–Borwein–Plouffe formula)方法"></a>贝利-波尔温-普劳夫公式(Bailey–Borwein–Plouffe formula)方法</h2><p><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200722214711.png" alt="images"></p>
+<h2 id="Bellard’s-formula-公式"><a href="#Bellard’s-formula-公式" class="headerlink" title="Bellard’s formula 公式"></a><a href="http://en.wikipedia.org/wiki/Bellard%27s_formula">Bellard’s formula 公式</a></h2><p><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200722214538.png" alt="images"></p>
+<h2 id="Chudnovsky-algorithm-算法"><a href="#Chudnovsky-algorithm-算法" class="headerlink" title="Chudnovsky algorithm 算法"></a><a href="http://en.wikipedia.org/wiki/Chudnovsky_algorithm">Chudnovsky algorithm 算法</a></h2><p><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200722214555.png" alt="images"></p>
+<h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> decimal <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="comment">#Sets decimal to 25 digits of precision</span></span><br><span class="line">getcontext().prec = <span class="number">25</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">factorial</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="keyword">if</span> n&lt;<span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> n * factorial(n-<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">plouffBig</span>(<span class="params">n</span>):</span> <span class="comment">#http://en.wikipedia.org/wiki/Bailey%E2%80%93Borwein%E2%80%93Plouffe_formula</span></span><br><span class="line">    pi = Decimal(<span class="number">0</span>)</span><br><span class="line">    k = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> k &lt; n:</span><br><span class="line">        pi += (Decimal(<span class="number">1</span>)/(<span class="number">16</span>**k))*((Decimal(<span class="number">4</span>)/(<span class="number">8</span>*k+<span class="number">1</span>))-(Decimal(<span class="number">2</span>)/(<span class="number">8</span>*k+<span class="number">4</span>))-(Decimal(<span class="number">1</span>)/(<span class="number">8</span>*k+<span class="number">5</span>))-(Decimal(<span class="number">1</span>)/(<span class="number">8</span>*k+<span class="number">6</span>)))</span><br><span class="line">        k += <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> pi</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bellardBig</span>(<span class="params">n</span>):</span> <span class="comment">#http://en.wikipedia.org/wiki/Bellard%27s_formula</span></span><br><span class="line">    pi = Decimal(<span class="number">0</span>)</span><br><span class="line">    k = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> k &lt; n:</span><br><span class="line">        pi += (Decimal(-<span class="number">1</span>)**k/(<span class="number">1024</span>**k))*( Decimal(<span class="number">256</span>)/(<span class="number">10</span>*k+<span class="number">1</span>) + Decimal(<span class="number">1</span>)/(<span class="number">10</span>*k+<span class="number">9</span>) - Decimal(<span class="number">64</span>)/(<span class="number">10</span>*k+<span class="number">3</span>) - Decimal(<span class="number">32</span>)/(<span class="number">4</span>*k+<span class="number">1</span>) - Decimal(<span class="number">4</span>)/(<span class="number">10</span>*k+<span class="number">5</span>) - Decimal(<span class="number">4</span>)/(<span class="number">10</span>*k+<span class="number">7</span>) -Decimal(<span class="number">1</span>)/(<span class="number">4</span>*k+<span class="number">3</span>))</span><br><span class="line">        k += <span class="number">1</span></span><br><span class="line">    pi = pi * <span class="number">1</span>/(<span class="number">2</span>**<span class="number">6</span>)</span><br><span class="line">    <span class="keyword">return</span> pi</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">chudnovskyBig</span>(<span class="params">n</span>):</span> <span class="comment">#http://en.wikipedia.org/wiki/Chudnovsky_algorithm</span></span><br><span class="line">    pi = Decimal(<span class="number">0</span>)</span><br><span class="line">    k = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> k &lt; n:</span><br><span class="line">        pi += (Decimal(-<span class="number">1</span>)**k)*(Decimal(factorial(<span class="number">6</span>*k))/((factorial(k)**<span class="number">3</span>)*(factorial(<span class="number">3</span>*k)))* (<span class="number">13591409</span>+<span class="number">545140134</span>*k)/(<span class="number">640320</span>**(<span class="number">3</span>*k)))</span><br><span class="line">        k += <span class="number">1</span></span><br><span class="line">    pi = pi * Decimal(<span class="number">10005</span>).sqrt()/<span class="number">4270934400</span></span><br><span class="line">    pi = pi**(-<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> pi</span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;\t\t\t Plouff \t\t Bellard \t\t\t Chudnovsky&quot;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> xrange(<span class="number">1</span>,<span class="number">20</span>):</span><br><span class="line">    <span class="built_in">print</span> <span class="string">&quot;Iteration number &quot;</span>,i, <span class="string">&quot; &quot;</span>, plouffBig(i), <span class="string">&quot; &quot;</span> , bellardBig(i),<span class="string">&quot; &quot;</span>, chudnovskyBig(i)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="树莓派p4-计算结果"><a href="#树莓派p4-计算结果" class="headerlink" title="树莓派p4 计算结果"></a>树莓派p4 计算结果</h1><p>循环20 次 <code>Chudnovsky algorithm</code>最快</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">                      Plouff                  Bellard                         Chudnovsky</span><br><span class="line">Iteration number  1   3.133333333333333333333333   3.141765873015873015873017   3.141592653589734207668453</span><br><span class="line">Iteration number  2   3.141422466422466422466422   3.141592571868390306374053   3.141592653589793238462642</span><br><span class="line">Iteration number  3   3.141587390346581523052111   3.141592653642050769944284   3.141592653589793238462642</span><br><span class="line">Iteration number  4   3.141592457567435381837004   3.141592653589755368080514   3.141592653589793238462642</span><br><span class="line">Iteration number  5   3.141592645460336319557021   3.141592653589793267843377   3.141592653589793238462642</span><br><span class="line">Iteration number  6   3.141592653228087534734378   3.141592653589793238438852   3.141592653589793238462642</span><br><span class="line">Iteration number  7   3.141592653572880827785241   3.141592653589793238462664   3.141592653589793238462642</span><br><span class="line">Iteration number  8   3.141592653588972704940778   3.141592653589793238462644   3.141592653589793238462642</span><br><span class="line">Iteration number  9   3.141592653589752275236178   3.141592653589793238462644   3.141592653589793238462642</span><br><span class="line">Iteration number  10   3.141592653589791146388777   3.141592653589793238462644   3.141592653589793238462642</span><br><span class="line">Iteration number  11   3.141592653589793129614171   3.141592653589793238462644   3.141592653589793238462642</span><br><span class="line">Iteration number  12   3.141592653589793232711293   3.141592653589793238462644   3.141592653589793238462642</span><br><span class="line">Iteration number  13   3.141592653589793238154767   3.141592653589793238462644   3.141592653589793238462642</span><br><span class="line">Iteration number  14   3.141592653589793238445978   3.141592653589793238462644   3.141592653589793238462642</span><br><span class="line">Iteration number  15   3.141592653589793238461733   3.141592653589793238462644   3.141592653589793238462642</span><br><span class="line">Iteration number  16   3.141592653589793238462594   3.141592653589793238462644   3.141592653589793238462642</span><br><span class="line">Iteration number  17   3.141592653589793238462641   3.141592653589793238462644   3.141592653589793238462642</span><br><span class="line">Iteration number  18   3.141592653589793238462644   3.141592653589793238462644   3.141592653589793238462642</span><br><span class="line">Iteration number  19   3.141592653589793238462644   3.141592653589793238462644   3.141592653589793238462642</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>tech</category>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>Statistics</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Python 使用绘制统计图</title>
     <url>/posts/2020-05-python-count/</url>
     <content><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p><a href="https://matplotlib.org/">Matplotlib is a comprehensive library for creating static, animated, and interactive visualizations in Python. </a><br><code>Matplotlib</code>是常用的数据可视化工具之一(灵活、功能强大)</p>
@@ -525,6 +525,69 @@ ARM 处理器目前有多种CPU架构，编译时需要注意。
       <tags>
         <tag>python</tag>
         <tag>python-plot</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>搭建HTTP内网文件服务器-以NGINX为例</title>
+    <url>/posts/2021-02-01-nginx-file-server/</url>
+    <content><![CDATA[<h1 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h1><p>在内网建一个文件服务器，需要示意图如下：<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210329185845.png"></p>
+<p>实现需求，可行的组件:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">apache http</span><br><span class="line">tomcat&#x2F;jetty</span><br><span class="line">nginx </span><br><span class="line">.....</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>为方续架构扩展（如做反向代理等）、扩展功能的丰富性和个人对组件的熟悉程度，最终选择了Nginx.</p>
+<h1 id="nginx-搭建文件服务"><a href="#nginx-搭建文件服务" class="headerlink" title="nginx 搭建文件服务"></a>nginx 搭建文件服务</h1><p>这里需要使用到Nginx的<code>autoindex</code> 特性（<code>ngx_http_autoindex_module</code>  模块），以及其它几个module。由于本文涉及到Nginx的多个版本的不同feature ，建议nginx安装版本为： 1.18.0 +  ,详情参照<a href="http://nginx.org/en/CHANGES">Nginx Changes</a></p>
+<h2 id="nginx-install"><a href="#nginx-install" class="headerlink" title="nginx install"></a>nginx install</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">wget http:&#x2F;&#x2F;nginx.org&#x2F;packages&#x2F;rhel&#x2F;7&#x2F;x86_64&#x2F;RPMS&#x2F;nginx-1.18.0-2.el7.ngx.x86_64.rpm</span><br><span class="line"></span><br><span class="line">sudo yum install nginx-1.18.0-2.el7.ngx.x86_64.rpm -y</span><br><span class="line"></span><br><span class="line">nginx -V</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="修改配置"><a href="#修改配置" class="headerlink" title="修改配置"></a>修改配置</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">vim &#x2F;etc&#x2F;nginx&#x2F;conf.d&#x2F;default.conf</span><br><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    server_name  localhost;</span><br><span class="line"></span><br><span class="line">    #charset koi8-r;</span><br><span class="line">    #access_log  &#x2F;var&#x2F;log&#x2F;nginx&#x2F;host.access.log  main;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    #location &#x2F; &#123;</span><br><span class="line">    #    root   &#x2F;usr&#x2F;share&#x2F;nginx&#x2F;html;</span><br><span class="line">    #    index  index.html index.htm;</span><br><span class="line">    #&#125;</span><br><span class="line"></span><br><span class="line">    # file index</span><br><span class="line">    location &#x2F; &#123;</span><br><span class="line">        root &#x2F;opt&#x2F;data&#x2F;hdp_dir&#x2F;;</span><br><span class="line">        charset utf-8;</span><br><span class="line"></span><br><span class="line">        autoindex on;</span><br><span class="line">        autoindex_exact_size off;</span><br><span class="line">        autoindex_format html;</span><br><span class="line">        autoindex_localtime on;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置文件目录权限"><a href="#配置文件目录权限" class="headerlink" title="配置文件目录权限"></a>配置文件目录权限</h2><p> 设置文件目录权限</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chown -R nginx:users  &#x2F;opt&#x2F;data&#x2F;hdp_dir&#x2F;</span><br><span class="line">chmow -R 775 &#x2F;opt&#x2F;data&#x2F;hdp_dir&#x2F;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>nginx 重启</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#开机启动</span><br><span class="line">systemctl enable nginx</span><br><span class="line"></span><br><span class="line"># 启动</span><br><span class="line">systemctl restart nginx</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li><p>测试</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">curl -XGET &quot;http:&#x2F;&#x2F;127.0.0.1:80&#39;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>文件服务搭建完毕。如下图：<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210329191803.png"></p>
+</li>
+</ul>
+<h2 id="提升IO性能"><a href="#提升IO性能" class="headerlink" title="提升IO性能"></a>提升IO性能</h2><p>由于大并发的大文件下载，磁盘IO会最先成为瓶颈。所以这里对IO进行优化，增加<code>aio</code> 和 <code>sendfile</code> <code>tcp_nopush</code> <code>tcp_nodelay</code> 用以提升IO性能，全部配置如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">user  nginx;</span><br><span class="line">worker_processes  2;</span><br><span class="line"></span><br><span class="line">error_log  &#x2F;var&#x2F;log&#x2F;nginx&#x2F;error.log warn;</span><br><span class="line">pid        &#x2F;var&#x2F;run&#x2F;nginx.pid;</span><br><span class="line"></span><br><span class="line">thread_pool default threads&#x3D;8 max_queue&#x3D;5096;</span><br><span class="line"></span><br><span class="line">events &#123;</span><br><span class="line">    worker_connections  1024;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">http &#123;</span><br><span class="line">    include       &#x2F;etc&#x2F;nginx&#x2F;mime.types;</span><br><span class="line">    default_type  application&#x2F;octet-stream;</span><br><span class="line"></span><br><span class="line">    log_format  main  &#39;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &#39;</span><br><span class="line">                      &#39;$status $body_bytes_sent &quot;$http_referer&quot; &#39;</span><br><span class="line">                      &#39;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#39;;</span><br><span class="line"></span><br><span class="line">    access_log  &#x2F;var&#x2F;log&#x2F;nginx&#x2F;access.log  main;</span><br><span class="line"></span><br><span class="line">    sendfile        on;</span><br><span class="line">    #tcp_nopush     on;</span><br><span class="line">    #tcp_nodelay    on;</span><br><span class="line">    sendfile_max_chunk 512k;</span><br><span class="line"></span><br><span class="line">    #keep connection keep alive</span><br><span class="line">    keepalive_timeout  300s;</span><br><span class="line"></span><br><span class="line">    gzip  on;</span><br><span class="line"></span><br><span class="line">      server &#123;</span><br><span class="line">        listen       80;</span><br><span class="line">        server_name  localhost;</span><br><span class="line"></span><br><span class="line">        access_log  &#x2F;var&#x2F;log&#x2F;nginx&#x2F;host.access.log  main;</span><br><span class="line"></span><br><span class="line">        # file index</span><br><span class="line">        autoindex on;</span><br><span class="line">        location &#x2F; &#123;</span><br><span class="line">            sendfile       on;</span><br><span class="line">            aio            threads&#x3D;default;</span><br><span class="line"></span><br><span class="line">            root &#x2F;home&#x2F;chenpx&#x2F;hdp_dir&#x2F;;</span><br><span class="line">            #index index.html;</span><br><span class="line">            charset utf-8;</span><br><span class="line"></span><br><span class="line">            autoindex on;</span><br><span class="line">            autoindex_exact_size off;</span><br><span class="line">            autoindex_format html;</span><br><span class="line">            autoindex_localtime on;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        #error_page  404              &#x2F;404.html;</span><br><span class="line"></span><br><span class="line">        # redirect server error pages to the static page &#x2F;50x.html</span><br><span class="line">        #</span><br><span class="line">        error_page   500 502 503 504  &#x2F;50x.html;</span><br><span class="line">        location &#x3D; &#x2F;50x.html &#123;</span><br><span class="line">            root   &#x2F;usr&#x2F;share&#x2F;nginx&#x2F;html;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以下载一个10G文件为例子，从实际测试效果对比看，磁盘的IO压力的下降了很多，如下图：<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210330180829.png"></p>
+<p>按照官网的<a href="https://www.nginx.com/blog/thread-pools-boost-performance-9x/">Thread Pools in NGINX Boost Performance 9x!</a>,性能可以提升9倍。<br>AIO配置说明，参照 <a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#aio">nginx aio </a>.</p>
+<h2 id="增加文件预览"><a href="#增加文件预览" class="headerlink" title="增加文件预览"></a>增加文件预览</h2><p>实现对配置允许的文件格式后缀，文件可以打开，可以下载。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">location &#x2F; &#123;</span><br><span class="line">    charset utf-8;</span><br><span class="line">    autoindex on;</span><br><span class="line">    autoindex_exact_size off;</span><br><span class="line">    autoindex_format html;</span><br><span class="line">    autoindex_localtime on;</span><br><span class="line"></span><br><span class="line">    #file  shows   </span><br><span class="line">    if ($request_filename ~* ^.*?\.(txt|doc|pdf|rar|gz|zip|docx|exe|xlsx|ppt|pptx)$)&#123;</span><br><span class="line">        add_header Content-Disposition: &#39;p_w_upload;&#39;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li><p>index.html文件冲突<br>Nginx <code>autoindex</code> 可能会遇到目录下有 index.html 文件，出现401<code>Error Object</code>问题，可以采用下面的方法解决：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 对目录下的 index.html文件进行重命名</span><br><span class="line">find .&#x2F; -type f -name &quot;index.html&quot; -exec  mv &#123;&#125; &#123;&#125;-bak \;</span><br></pre></td></tr></table></figure>
+<p>修改完成后可能需要nginx 服务。</p>
+</li>
+<li><p>权限控制<br>如果需要设置权限控制，可以使用<a href="http://nginx.org/en/docs/http/ngx_http_access_module.html"><code>ngx_http_access_module</code></a>, 需要用户鉴权还可用设置<a href="https://docs.nginx.com/nginx/admin-guide/security-controls/configuring-http-basic-authentication/"><code>HTTP Basic Authentication</code></a>. 对于需要多租户的场景，可以配置 Basic HTTP authentication，参考<a href="http://www.ttlsa.com/nginx/nginx-basic-http-authentication/">nginx用户认证配置（ Basic HTTP authentication</a></p>
+</li>
+<li><p>文件搜索<br>对于需要使用搜索功能，可以使用 <a href="https://github.com/aperezdc/ngx-fancyindex"><code>ngx-fancyindex)</code></a> 插件，实现效果如下图：<br><img src="https://perso.crans.org/besson/publis/Nginx-Fancyindex-Theme/Nginx-Fancyindex-Theme__example1.png"></p>
+</li>
+<li><p>传输安全<br>如果涉及敏感数据传输，建议增加TLS1.2+协议进行加密传输</p>
+</li>
+<li><p>为什么不用FTP实现<br>FTP不是一项安全的协议，并且具有许多安全漏洞。比如存在暴力破解、FTP反弹攻击。在加上FTP使用的端口是21，一般会被防火墙屏蔽。（yum 等repository 仓库默认使用的都是HTTP协议）</p>
+</li>
+</ul>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="http://nginx.org/en/docs/http/ngx_http_autoindex_module.html#example">Module ngx_http_autoindex_module</a></li>
+<li><a href="https://aiopsclub.com/nginx/nginx_static_file/">Nginx系列之nginx静态文件服务</a></li>
+<li><a href="https://blog8.flyky.org/20191128/nginx-autoindex-conf/">Nginx目录列表(autoindex)配置相关以及页面美化</a></li>
+<li><a href="https://www.nginx.com/resources/wiki/start/topics/tutorials/install/">Nginx install</a></li>
+<li><a href="https://lanjingling.github.io/2016/06/11/nginx-https-keepalived-youhua/">nginx优化——包括https、keepalive等</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>tech</category>
+        <category>net</category>
+      </categories>
+      <tags>
+        <tag>blog</tag>
+        <tag>Net</tag>
+        <tag>Nginx</tag>
       </tags>
   </entry>
   <entry>
@@ -718,69 +781,6 @@ ARM 处理器目前有多种CPU架构，编译时需要注意。
       </tags>
   </entry>
   <entry>
-    <title>搭建HTTP内网文件服务器-以NGINX为例</title>
-    <url>/posts/2021-02-01-nginx-file-server/</url>
-    <content><![CDATA[<h1 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h1><p>在内网建一个文件服务器，需要示意图如下：<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210329185845.png"></p>
-<p>实现需求，可行的组件:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">apache http</span><br><span class="line">tomcat&#x2F;jetty</span><br><span class="line">nginx </span><br><span class="line">.....</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>为方续架构扩展（如做反向代理等）、扩展功能的丰富性和个人对组件的熟悉程度，最终选择了Nginx.</p>
-<h1 id="nginx-搭建文件服务"><a href="#nginx-搭建文件服务" class="headerlink" title="nginx 搭建文件服务"></a>nginx 搭建文件服务</h1><p>这里需要使用到Nginx的<code>autoindex</code> 特性（<code>ngx_http_autoindex_module</code>  模块），以及其它几个module。由于本文涉及到Nginx的多个版本的不同feature ，建议nginx安装版本为： 1.18.0 +  ,详情参照<a href="http://nginx.org/en/CHANGES">Nginx Changes</a></p>
-<h2 id="nginx-install"><a href="#nginx-install" class="headerlink" title="nginx install"></a>nginx install</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">wget http:&#x2F;&#x2F;nginx.org&#x2F;packages&#x2F;rhel&#x2F;7&#x2F;x86_64&#x2F;RPMS&#x2F;nginx-1.18.0-2.el7.ngx.x86_64.rpm</span><br><span class="line"></span><br><span class="line">sudo yum install nginx-1.18.0-2.el7.ngx.x86_64.rpm -y</span><br><span class="line"></span><br><span class="line">nginx -V</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="修改配置"><a href="#修改配置" class="headerlink" title="修改配置"></a>修改配置</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">vim &#x2F;etc&#x2F;nginx&#x2F;conf.d&#x2F;default.conf</span><br><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    server_name  localhost;</span><br><span class="line"></span><br><span class="line">    #charset koi8-r;</span><br><span class="line">    #access_log  &#x2F;var&#x2F;log&#x2F;nginx&#x2F;host.access.log  main;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    #location &#x2F; &#123;</span><br><span class="line">    #    root   &#x2F;usr&#x2F;share&#x2F;nginx&#x2F;html;</span><br><span class="line">    #    index  index.html index.htm;</span><br><span class="line">    #&#125;</span><br><span class="line"></span><br><span class="line">    # file index</span><br><span class="line">    location &#x2F; &#123;</span><br><span class="line">        root &#x2F;opt&#x2F;data&#x2F;hdp_dir&#x2F;;</span><br><span class="line">        charset utf-8;</span><br><span class="line"></span><br><span class="line">        autoindex on;</span><br><span class="line">        autoindex_exact_size off;</span><br><span class="line">        autoindex_format html;</span><br><span class="line">        autoindex_localtime on;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="配置文件目录权限"><a href="#配置文件目录权限" class="headerlink" title="配置文件目录权限"></a>配置文件目录权限</h2><p> 设置文件目录权限</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chown -R nginx:users  &#x2F;opt&#x2F;data&#x2F;hdp_dir&#x2F;</span><br><span class="line">chmow -R 775 &#x2F;opt&#x2F;data&#x2F;hdp_dir&#x2F;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>nginx 重启</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#开机启动</span><br><span class="line">systemctl enable nginx</span><br><span class="line"></span><br><span class="line"># 启动</span><br><span class="line">systemctl restart nginx</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-<li><p>测试</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">curl -XGET &quot;http:&#x2F;&#x2F;127.0.0.1:80&#39;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>文件服务搭建完毕。如下图：<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210329191803.png"></p>
-</li>
-</ul>
-<h2 id="提升IO性能"><a href="#提升IO性能" class="headerlink" title="提升IO性能"></a>提升IO性能</h2><p>由于大并发的大文件下载，磁盘IO会最先成为瓶颈。所以这里对IO进行优化，增加<code>aio</code> 和 <code>sendfile</code> <code>tcp_nopush</code> <code>tcp_nodelay</code> 用以提升IO性能，全部配置如下：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">user  nginx;</span><br><span class="line">worker_processes  2;</span><br><span class="line"></span><br><span class="line">error_log  &#x2F;var&#x2F;log&#x2F;nginx&#x2F;error.log warn;</span><br><span class="line">pid        &#x2F;var&#x2F;run&#x2F;nginx.pid;</span><br><span class="line"></span><br><span class="line">thread_pool default threads&#x3D;8 max_queue&#x3D;5096;</span><br><span class="line"></span><br><span class="line">events &#123;</span><br><span class="line">    worker_connections  1024;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">http &#123;</span><br><span class="line">    include       &#x2F;etc&#x2F;nginx&#x2F;mime.types;</span><br><span class="line">    default_type  application&#x2F;octet-stream;</span><br><span class="line"></span><br><span class="line">    log_format  main  &#39;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &#39;</span><br><span class="line">                      &#39;$status $body_bytes_sent &quot;$http_referer&quot; &#39;</span><br><span class="line">                      &#39;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#39;;</span><br><span class="line"></span><br><span class="line">    access_log  &#x2F;var&#x2F;log&#x2F;nginx&#x2F;access.log  main;</span><br><span class="line"></span><br><span class="line">    sendfile        on;</span><br><span class="line">    #tcp_nopush     on;</span><br><span class="line">    #tcp_nodelay    on;</span><br><span class="line">    sendfile_max_chunk 512k;</span><br><span class="line"></span><br><span class="line">    #keep connection keep alive</span><br><span class="line">    keepalive_timeout  300s;</span><br><span class="line"></span><br><span class="line">    gzip  on;</span><br><span class="line"></span><br><span class="line">      server &#123;</span><br><span class="line">        listen       80;</span><br><span class="line">        server_name  localhost;</span><br><span class="line"></span><br><span class="line">        access_log  &#x2F;var&#x2F;log&#x2F;nginx&#x2F;host.access.log  main;</span><br><span class="line"></span><br><span class="line">        # file index</span><br><span class="line">        autoindex on;</span><br><span class="line">        location &#x2F; &#123;</span><br><span class="line">            sendfile       on;</span><br><span class="line">            aio            threads&#x3D;default;</span><br><span class="line"></span><br><span class="line">            root &#x2F;home&#x2F;chenpx&#x2F;hdp_dir&#x2F;;</span><br><span class="line">            #index index.html;</span><br><span class="line">            charset utf-8;</span><br><span class="line"></span><br><span class="line">            autoindex on;</span><br><span class="line">            autoindex_exact_size off;</span><br><span class="line">            autoindex_format html;</span><br><span class="line">            autoindex_localtime on;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        #error_page  404              &#x2F;404.html;</span><br><span class="line"></span><br><span class="line">        # redirect server error pages to the static page &#x2F;50x.html</span><br><span class="line">        #</span><br><span class="line">        error_page   500 502 503 504  &#x2F;50x.html;</span><br><span class="line">        location &#x3D; &#x2F;50x.html &#123;</span><br><span class="line">            root   &#x2F;usr&#x2F;share&#x2F;nginx&#x2F;html;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>以下载一个10G文件为例子，从实际测试效果对比看，磁盘的IO压力的下降了很多，如下图：<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210330180829.png"></p>
-<p>按照官网的<a href="https://www.nginx.com/blog/thread-pools-boost-performance-9x/">Thread Pools in NGINX Boost Performance 9x!</a>,性能可以提升9倍。<br>AIO配置说明，参照 <a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#aio">nginx aio </a>.</p>
-<h2 id="增加文件预览"><a href="#增加文件预览" class="headerlink" title="增加文件预览"></a>增加文件预览</h2><p>实现对配置允许的文件格式后缀，文件可以打开，可以下载。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">location &#x2F; &#123;</span><br><span class="line">    charset utf-8;</span><br><span class="line">    autoindex on;</span><br><span class="line">    autoindex_exact_size off;</span><br><span class="line">    autoindex_format html;</span><br><span class="line">    autoindex_localtime on;</span><br><span class="line"></span><br><span class="line">    #file  shows   </span><br><span class="line">    if ($request_filename ~* ^.*?\.(txt|doc|pdf|rar|gz|zip|docx|exe|xlsx|ppt|pptx)$)&#123;</span><br><span class="line">        add_header Content-Disposition: &#39;p_w_upload;&#39;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
-<li><p>index.html文件冲突<br>Nginx <code>autoindex</code> 可能会遇到目录下有 index.html 文件，出现401<code>Error Object</code>问题，可以采用下面的方法解决：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 对目录下的 index.html文件进行重命名</span><br><span class="line">find .&#x2F; -type f -name &quot;index.html&quot; -exec  mv &#123;&#125; &#123;&#125;-bak \;</span><br></pre></td></tr></table></figure>
-<p>修改完成后可能需要nginx 服务。</p>
-</li>
-<li><p>权限控制<br>如果需要设置权限控制，可以使用<a href="http://nginx.org/en/docs/http/ngx_http_access_module.html"><code>ngx_http_access_module</code></a>, 需要用户鉴权还可用设置<a href="https://docs.nginx.com/nginx/admin-guide/security-controls/configuring-http-basic-authentication/"><code>HTTP Basic Authentication</code></a>. 对于需要多租户的场景，可以配置 Basic HTTP authentication，参考<a href="http://www.ttlsa.com/nginx/nginx-basic-http-authentication/">nginx用户认证配置（ Basic HTTP authentication</a></p>
-</li>
-<li><p>文件搜索<br>对于需要使用搜索功能，可以使用 <a href="https://github.com/aperezdc/ngx-fancyindex"><code>ngx-fancyindex)</code></a> 插件，实现效果如下图：<br><img src="https://perso.crans.org/besson/publis/Nginx-Fancyindex-Theme/Nginx-Fancyindex-Theme__example1.png"></p>
-</li>
-<li><p>传输安全<br>如果涉及敏感数据传输，建议增加TLS1.2+协议进行加密传输</p>
-</li>
-<li><p>为什么不用FTP实现<br>FTP不是一项安全的协议，并且具有许多安全漏洞。比如存在暴力破解、FTP反弹攻击。在加上FTP使用的端口是21，一般会被防火墙屏蔽。（yum 等repository 仓库默认使用的都是HTTP协议）</p>
-</li>
-</ul>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
-<li><a href="http://nginx.org/en/docs/http/ngx_http_autoindex_module.html#example">Module ngx_http_autoindex_module</a></li>
-<li><a href="https://aiopsclub.com/nginx/nginx_static_file/">Nginx系列之nginx静态文件服务</a></li>
-<li><a href="https://blog8.flyky.org/20191128/nginx-autoindex-conf/">Nginx目录列表(autoindex)配置相关以及页面美化</a></li>
-<li><a href="https://www.nginx.com/resources/wiki/start/topics/tutorials/install/">Nginx install</a></li>
-<li><a href="https://lanjingling.github.io/2016/06/11/nginx-https-keepalived-youhua/">nginx优化——包括https、keepalive等</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>tech</category>
-        <category>net</category>
-      </categories>
-      <tags>
-        <tag>blog</tag>
-        <tag>Net</tag>
-        <tag>Nginx</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Zeppelin In Action</title>
     <url>/posts/2021-04-22-zeppelin-inaction-1/</url>
     <content><![CDATA[<h1 id="About-Zeppelin"><a href="#About-Zeppelin" class="headerlink" title="About Zeppelin"></a>About Zeppelin</h1><p>基于Web的笔记本，可通过SQL，Scala等实现数据驱动的交互式数据分析和协作文档。</p>
@@ -840,46 +840,6 @@ ARM 处理器目前有多种CPU架构，编译时需要注意。
         <tag>OS</tag>
         <tag>Centos</tag>
         <tag>NTP</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>IEEE Code of Ethics</title>
-    <url>/posts/ieee-code-of-ethics/</url>
-    <content><![CDATA[<h1 id="IEEE-Code-of-Ethics"><a href="#IEEE-Code-of-Ethics" class="headerlink" title="IEEE Code of Ethics"></a>IEEE Code of Ethics</h1><p>We, the members of the IEEE, in recognition of the importance of our technologies in affecting the quality of life throughout the world, and in accepting a personal obligation to our profession, its members, and the communities we serve, do hereby commit ourselves to the highest ethical and professional conduct and agree:</p>
-<ul>
-<li>to hold paramount the safety, health, and welfare of the public, to strive to comply with ethical design and sustainable development practices, and to disclose promptly factors that might endanger the public or the environment;</li>
-<li>to avoid real or perceived conflicts of interest whenever possible, and to disclose them to affected parties when they do exist;</li>
-<li>to be honest and realistic in stating claims or estimates based on available data;</li>
-<li>to reject bribery in all its forms;</li>
-<li>to improve the understanding by individuals and society of the capabilities and societal implications of conventional and emerging technologies, including intelligent systems;</li>
-<li>to maintain and improve our technical competence and to undertake technological tasks for others only if qualified by training or experience, or after full disclosure of pertinent limitations;</li>
-<li>to seek, accept, and offer honest criticism of technical work, to acknowledge and correct errors, and to credit properly the contributions of others;</li>
-<li>to treat fairly all persons and to not engage in acts of discrimination based on race, religion, gender, disability, age, national origin, sexual orientation, gender identity, or gender expression;</li>
-<li>to avoid injuring others, their property, reputation, or employment by false or malicious action;</li>
-<li>to assist colleagues and co-workers in their professional development and to support them in following this code of ethics.</li>
-</ul>
-<p>Changes to the IEEE Code of Ethics will be made only after the following conditions are met:</p>
-<ul>
-<li>Proposed changes shall have been published in THE INSTITUTE at least three (3) months in advance of final consideration by the Board of Directors, with a request for comment, and</li>
-<li>All IEEE Major Boards shall have the opportunity to discuss proposed changes prior to final action by the Board of Directors, and</li>
-<li>An affirmative vote of two-thirds of the votes of the members of the Board of Directors present at the time of the vote, provided a quorum is present, shall be required for changes to be made.</li>
-</ul>
-<p><strong>From IEEE</strong>: <a href="https://www.ieee.org/about/corporate/governance/p7-8.html">https://www.ieee.org</a></p>
-<h1 id="Cyberspace-Independence"><a href="#Cyberspace-Independence" class="headerlink" title="Cyberspace Independence"></a>Cyberspace Independence</h1><p>A Declaration of the Independence of Cyberspace:</p>
-<p>by John Perry Barlow<br>Governments of the Industrial World, you weary giants of flesh and steel, I come from Cyberspace, the new home of Mind. On behalf of the future, I ask you of the past to leave us alone. You are not welcome among us. You have no sovereignty where we gather.<br>We have no elected government, nor are we likely to have one, so I address you with no greater authority than that with which liberty itself always speaks. I declare the global social space we are building to be naturally independent of the tyrannies you seek to impose on us. You have no moral right to rule us nor do you possess any methods of enforcement we have true reason to fear.<br>Governments derive their just powers from the consent of the governed. You have neither solicited nor received ours. We did not invite you. You do not know us, nor do you know our world. Cyberspace does not lie within your borders. Do not think that you can build it, as though it were a public construction project. You cannot. It is an act of nature and it grows itself through our collective actions.<br>You have not engaged in our great and gathering conversation, nor did you create the wealth of our marketplaces. You do not know our culture, our ethics, or the unwritten codes that already provide our society more order than could be obtained by any of your impositions.<br>You claim there are problems among us that you need to solve. You use this claim as an excuse to invade our precincts. Many of these problems don&#39;t exist. Where there are real conflicts, where there are wrongs, we will identify them and address them by our means. We are forming our own Social Contract. This governance will arise according to the conditions of our world, not yours. Our world is different.<br>Cyberspace consists of transactions, relationships, and thought itself, arrayed like a standing wave in the web of our communications. Ours is a world that is both everywhere and nowhere, but it is not where bodies live.<br>We are creating a world that all may enter without privilege or prejudice accorded by race, economic power, military force, or station of birth.<br>We are creating a world where anyone, anywhere may express his or her beliefs, no matter how singular, without fear of being coerced into silence or conformity.<br>Your legal concepts of property, expression, identity, movement, and context do not apply to us. They are all based on matter, and there is no matter here.<br>Our identities have no bodies, so, unlike you, we cannot obtain order by physical coercion. We believe that from ethics, enlightened self-interest, and the commonweal, our governance will emerge. Our identities may be distributed across many of your jurisdictions. The only law that all our constituent cultures would generally recognize is the Golden Rule. We hope we will be able to build our particular solutions on that basis. But we cannot accept the solutions you are attempting to impose.<br>In the United States, you have today created a law, the Telecommunications Reform Act, which repudiates your own Constitution and insults the dreams of Jefferson, Washington, Mill, Madison, DeToqueville, and Brandeis. These dreams must now be born anew in us.<br>You are terrified of your own children, since they are natives in a world where you will always be immigrants. Because you fear them, you entrust your bureaucracies with the parental responsibilities you are too cowardly to confront yourselves. In our world, all the sentiments and expressions of humanity, from the debasing to the angelic, are parts of a seamless whole, the global conversation of bits. We cannot separate the air that chokes from the air upon which wings beat.<br>In China, Germany, France, Russia, Singapore, Italy and the United States, you are trying to ward off the virus of liberty by erecting guard posts at the frontiers of Cyberspace. These may keep out the contagion for a small time, but they will not work in a world that will soon be blanketed in bit-bearing media.<br>Your increasingly obsolete information industries would perpetuate themselves by proposing laws, in America and elsewhere, that claim to own speech itself throughout the world. These laws would declare ideas to be another industrial product, no more noble than pig iron. In our world, whatever the human mind may create can be reproduced and distributed infinitely at no cost. The global conveyance of thought no longer requires your factories to accomplish.<br>These increasingly hostile and colonial measures place us in the same position as those previous lovers of freedom and self-determination who had to reject the authorities of distant, uninformed powers. We must declare our virtual selves immune to your sovereignty, even as we continue to consent to your rule over our bodies. We will spread ourselves across the Planet so that no one can arrest our thoughts.<br>We will create a civilization of the Mind in Cyberspace. May it be more humane and fair than the world your governments have made before.</p>
-<p>Davos, Switzerland<br>February 8, 1996</p>
-<h2 id="keynote"><a href="#keynote" class="headerlink" title="keynote"></a>keynote</h2><p>中文翻译节选：<br>赛博空间由交易、关系和思想本身构成，它们像一道永恒的波浪，在我们的交流之网上部署着。我们的世界无处不在，又无处可寻，我们的世界不是肉体存在的世界。<br>我们正在创造一个新世界，人人都可以进入这个世界，而不必考虑由种族、经济力、武力、出生地而来的特权或偏见。<br>我们正在创造一个新世界，人人、处处可以表达他或她的信仰，无论这种信仰是多么古怪，而不再害怕被强制沉默或强制一律。<br>你们关于财产、表达、身份、迁徙的法律概念及其关联对我们不适用。这些概念建立在物质的基础上，我们这里没有物质。</p>
-<h1 id="About"><a href="#About" class="headerlink" title="About"></a>About</h1><p><a href="https://www.ieee.org/communities/ieee-resource-centers/find-your-ieee-resource-center.html">IEEE 资源中心</a><br><a href="https://en.wikipedia.org/wiki/Institute_of_Electrical_and_Electronics_Engineers">IEEE</a><br><a href="https://www.eff.org/cyberspace-independence">cyberspace-independence</a></p>
-]]></content>
-      <categories>
-        <category>tech</category>
-        <category>values</category>
-      </categories>
-      <tags>
-        <tag>Enginner</tag>
-        <tag>IEEE</tag>
-        <tag>Ethics</tag>
-        <tag>Values</tag>
       </tags>
   </entry>
   <entry>
@@ -1054,6 +1014,46 @@ ARM 处理器目前有多种CPU架构，编译时需要注意。
       </tags>
   </entry>
   <entry>
+    <title>IEEE Code of Ethics</title>
+    <url>/posts/ieee-code-of-ethics/</url>
+    <content><![CDATA[<h1 id="IEEE-Code-of-Ethics"><a href="#IEEE-Code-of-Ethics" class="headerlink" title="IEEE Code of Ethics"></a>IEEE Code of Ethics</h1><p>We, the members of the IEEE, in recognition of the importance of our technologies in affecting the quality of life throughout the world, and in accepting a personal obligation to our profession, its members, and the communities we serve, do hereby commit ourselves to the highest ethical and professional conduct and agree:</p>
+<ul>
+<li>to hold paramount the safety, health, and welfare of the public, to strive to comply with ethical design and sustainable development practices, and to disclose promptly factors that might endanger the public or the environment;</li>
+<li>to avoid real or perceived conflicts of interest whenever possible, and to disclose them to affected parties when they do exist;</li>
+<li>to be honest and realistic in stating claims or estimates based on available data;</li>
+<li>to reject bribery in all its forms;</li>
+<li>to improve the understanding by individuals and society of the capabilities and societal implications of conventional and emerging technologies, including intelligent systems;</li>
+<li>to maintain and improve our technical competence and to undertake technological tasks for others only if qualified by training or experience, or after full disclosure of pertinent limitations;</li>
+<li>to seek, accept, and offer honest criticism of technical work, to acknowledge and correct errors, and to credit properly the contributions of others;</li>
+<li>to treat fairly all persons and to not engage in acts of discrimination based on race, religion, gender, disability, age, national origin, sexual orientation, gender identity, or gender expression;</li>
+<li>to avoid injuring others, their property, reputation, or employment by false or malicious action;</li>
+<li>to assist colleagues and co-workers in their professional development and to support them in following this code of ethics.</li>
+</ul>
+<p>Changes to the IEEE Code of Ethics will be made only after the following conditions are met:</p>
+<ul>
+<li>Proposed changes shall have been published in THE INSTITUTE at least three (3) months in advance of final consideration by the Board of Directors, with a request for comment, and</li>
+<li>All IEEE Major Boards shall have the opportunity to discuss proposed changes prior to final action by the Board of Directors, and</li>
+<li>An affirmative vote of two-thirds of the votes of the members of the Board of Directors present at the time of the vote, provided a quorum is present, shall be required for changes to be made.</li>
+</ul>
+<p><strong>From IEEE</strong>: <a href="https://www.ieee.org/about/corporate/governance/p7-8.html">https://www.ieee.org</a></p>
+<h1 id="Cyberspace-Independence"><a href="#Cyberspace-Independence" class="headerlink" title="Cyberspace Independence"></a>Cyberspace Independence</h1><p>A Declaration of the Independence of Cyberspace:</p>
+<p>by John Perry Barlow<br>Governments of the Industrial World, you weary giants of flesh and steel, I come from Cyberspace, the new home of Mind. On behalf of the future, I ask you of the past to leave us alone. You are not welcome among us. You have no sovereignty where we gather.<br>We have no elected government, nor are we likely to have one, so I address you with no greater authority than that with which liberty itself always speaks. I declare the global social space we are building to be naturally independent of the tyrannies you seek to impose on us. You have no moral right to rule us nor do you possess any methods of enforcement we have true reason to fear.<br>Governments derive their just powers from the consent of the governed. You have neither solicited nor received ours. We did not invite you. You do not know us, nor do you know our world. Cyberspace does not lie within your borders. Do not think that you can build it, as though it were a public construction project. You cannot. It is an act of nature and it grows itself through our collective actions.<br>You have not engaged in our great and gathering conversation, nor did you create the wealth of our marketplaces. You do not know our culture, our ethics, or the unwritten codes that already provide our society more order than could be obtained by any of your impositions.<br>You claim there are problems among us that you need to solve. You use this claim as an excuse to invade our precincts. Many of these problems don&#39;t exist. Where there are real conflicts, where there are wrongs, we will identify them and address them by our means. We are forming our own Social Contract. This governance will arise according to the conditions of our world, not yours. Our world is different.<br>Cyberspace consists of transactions, relationships, and thought itself, arrayed like a standing wave in the web of our communications. Ours is a world that is both everywhere and nowhere, but it is not where bodies live.<br>We are creating a world that all may enter without privilege or prejudice accorded by race, economic power, military force, or station of birth.<br>We are creating a world where anyone, anywhere may express his or her beliefs, no matter how singular, without fear of being coerced into silence or conformity.<br>Your legal concepts of property, expression, identity, movement, and context do not apply to us. They are all based on matter, and there is no matter here.<br>Our identities have no bodies, so, unlike you, we cannot obtain order by physical coercion. We believe that from ethics, enlightened self-interest, and the commonweal, our governance will emerge. Our identities may be distributed across many of your jurisdictions. The only law that all our constituent cultures would generally recognize is the Golden Rule. We hope we will be able to build our particular solutions on that basis. But we cannot accept the solutions you are attempting to impose.<br>In the United States, you have today created a law, the Telecommunications Reform Act, which repudiates your own Constitution and insults the dreams of Jefferson, Washington, Mill, Madison, DeToqueville, and Brandeis. These dreams must now be born anew in us.<br>You are terrified of your own children, since they are natives in a world where you will always be immigrants. Because you fear them, you entrust your bureaucracies with the parental responsibilities you are too cowardly to confront yourselves. In our world, all the sentiments and expressions of humanity, from the debasing to the angelic, are parts of a seamless whole, the global conversation of bits. We cannot separate the air that chokes from the air upon which wings beat.<br>In China, Germany, France, Russia, Singapore, Italy and the United States, you are trying to ward off the virus of liberty by erecting guard posts at the frontiers of Cyberspace. These may keep out the contagion for a small time, but they will not work in a world that will soon be blanketed in bit-bearing media.<br>Your increasingly obsolete information industries would perpetuate themselves by proposing laws, in America and elsewhere, that claim to own speech itself throughout the world. These laws would declare ideas to be another industrial product, no more noble than pig iron. In our world, whatever the human mind may create can be reproduced and distributed infinitely at no cost. The global conveyance of thought no longer requires your factories to accomplish.<br>These increasingly hostile and colonial measures place us in the same position as those previous lovers of freedom and self-determination who had to reject the authorities of distant, uninformed powers. We must declare our virtual selves immune to your sovereignty, even as we continue to consent to your rule over our bodies. We will spread ourselves across the Planet so that no one can arrest our thoughts.<br>We will create a civilization of the Mind in Cyberspace. May it be more humane and fair than the world your governments have made before.</p>
+<p>Davos, Switzerland<br>February 8, 1996</p>
+<h2 id="keynote"><a href="#keynote" class="headerlink" title="keynote"></a>keynote</h2><p>中文翻译节选：<br>赛博空间由交易、关系和思想本身构成，它们像一道永恒的波浪，在我们的交流之网上部署着。我们的世界无处不在，又无处可寻，我们的世界不是肉体存在的世界。<br>我们正在创造一个新世界，人人都可以进入这个世界，而不必考虑由种族、经济力、武力、出生地而来的特权或偏见。<br>我们正在创造一个新世界，人人、处处可以表达他或她的信仰，无论这种信仰是多么古怪，而不再害怕被强制沉默或强制一律。<br>你们关于财产、表达、身份、迁徙的法律概念及其关联对我们不适用。这些概念建立在物质的基础上，我们这里没有物质。</p>
+<h1 id="About"><a href="#About" class="headerlink" title="About"></a>About</h1><p><a href="https://www.ieee.org/communities/ieee-resource-centers/find-your-ieee-resource-center.html">IEEE 资源中心</a><br><a href="https://en.wikipedia.org/wiki/Institute_of_Electrical_and_Electronics_Engineers">IEEE</a><br><a href="https://www.eff.org/cyberspace-independence">cyberspace-independence</a></p>
+]]></content>
+      <categories>
+        <category>tech</category>
+        <category>values</category>
+      </categories>
+      <tags>
+        <tag>Enginner</tag>
+        <tag>IEEE</tag>
+        <tag>Ethics</tag>
+        <tag>Values</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Java DNS解析问题-以Socket Client为例</title>
     <url>/posts/java-dns/</url>
     <content><![CDATA[<p>JDK 的<code>InetSocketAddress</code>被设计了为一个不可变的对象，在<code>Socket</code>等长连接使用时需要注意DNS映射关系更新问题。</p>
@@ -1086,9 +1086,9 @@ ARM 处理器目前有多种CPU架构，编译时需要注意。
         <category>java</category>
       </categories>
       <tags>
+        <tag>Net</tag>
         <tag>Java</tag>
         <tag>CoreJava</tag>
-        <tag>Net</tag>
         <tag>JDK</tag>
       </tags>
   </entry>
@@ -1205,9 +1205,10 @@ ARM 处理器目前有多种CPU架构，编译时需要注意。
 ]]></content>
       <categories>
         <category>tech</category>
+        <category>tools</category>
       </categories>
       <tags>
-        <tag>tool</tag>
+        <tag>tools</tag>
       </tags>
   </entry>
   <entry>
