@@ -68,34 +68,6 @@
       </tags>
   </entry>
   <entry>
-    <title>常用缓存算法——LRU</title>
-    <url>/posts/2018-01-01-LRU-algorithms/</url>
-    <content><![CDATA[<h3 id="LRU算法"><a href="#LRU算法" class="headerlink" title="LRU算法"></a>LRU算法</h3><p><a href="https://en.wikipedia.org/wiki/Cache_replacement_policies#Least_recently_used_(LRU)">Least recently used（LRU）</a>一种常用的缓存算法,通过首先丢弃最近最少使用的记录。LRU算法需要跟踪何时使用了什么，并确保算法始终丢弃最近最少使用的记录。<br>LRU算法及其实现-以LinkedHashMap为例：</p>
-<h3 id="LRU-使用LinkedHashMap代码实现"><a href="#LRU-使用LinkedHashMap代码实现" class="headerlink" title="LRU 使用LinkedHashMap代码实现"></a>LRU 使用<code>LinkedHashMap</code>代码实现</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.github.ordiy.map;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.LinkedHashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 经典的LRU 算法</span></span><br><span class="line"><span class="comment"> *  热点数据缓存</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>:ordiy</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LRUCache</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">extends</span> <span class="title">LinkedHashMap</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> cacheSize;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">LRUCache</span><span class="params">( <span class="keyword">int</span> cacheSize)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(cacheSize,(<span class="keyword">float</span>)<span class="number">0.75</span>,<span class="keyword">true</span>);</span><br><span class="line">        <span class="keyword">this</span>.cacheSize = cacheSize;</span><br><span class="line">    &#125;</span><br><span class="line">     <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">boolean</span> <span class="title">removeEldestEntry</span><span class="params">(Map.Entry&lt;K,V&gt; eldest)</span></span>&#123;</span><br><span class="line">       <span class="comment">// System.out.println(eldest);</span></span><br><span class="line">        <span class="keyword">return</span> size() &gt; cacheSize;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>测试代码</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testKey</span><span class="params">()</span></span>&#123;</span><br><span class="line">    LRUCache&lt;String,Integer&gt; cache =  <span class="keyword">new</span> LRUCache&lt;&gt;(<span class="number">5</span>);</span><br><span class="line">    <span class="comment">//初始化数据</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">        cache.put(<span class="string">&quot;key&quot;</span>+i,i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 模拟最近使用</span></span><br><span class="line">    String key = <span class="string">&quot;key3&quot;</span>;</span><br><span class="line">    cache.get(key);</span><br><span class="line">    System.out.println(<span class="string">&quot;after get--&gt;:&quot;</span>+ key);</span><br><span class="line">    printMap(cache);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//put data and remove Eldest Entry</span></span><br><span class="line">    cache.put(<span class="string">&quot;key10&quot;</span>,<span class="number">10</span>);</span><br><span class="line">    System.out.println(<span class="string">&quot;after put data and remove Eldest Entry&quot;</span>);</span><br><span class="line">    printMap(cache);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>输出结果</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">after get--&gt;:key3</span><br><span class="line">cache order:</span><br><span class="line">key0=0 hashCode: 3288497 , key1=1 hashCode: 3288499 , key2=2 hashCode: 3288497 , key4=4 hashCode: 3288497 , key3=3 hashCode: 3288503 ,</span><br><span class="line">3288497</span><br><span class="line">after put data and remove Eldest Entry</span><br><span class="line">cache order:</span><br><span class="line">key1=1 hashCode: 3288499 , key2=2 hashCode: 3288497 , key4=4 hashCode: 3288497 , key3=3 hashCode: 3288503 , key10=10 hashCode: 101943476 ,</span><br></pre></td></tr></table></figure></li>
-<li><p>过程解析<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200602183106.png" alt="images"></p>
-</li>
-</ul>
-<p>使用<code>LinkedHashMap</code>的记录数据顺序、accessOrder、removeEldestEntry特性实现了一个简单的LRU。在分布式场景下，需要使用类似redis,pika等软件进行实现。<br><strong>注意 因为<code>LinkedHashMap</code>并非线程安全的，多线程场景需要使用<code>Collections.synchronizedMap</code>进行包装</strong><br>**分布式场景可以用 Redis 等组件实现 **</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>LRU缓存有其局限性，在类似于双11这样的场景，流量/活跃用户突然大增时会出现缓存击穿问题。</p>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考:"></a>参考:</h3><p><a href="https://juejin.im/post/5a4b433b6fb9a0451705916f">https://juejin.im/post/5a4b433b6fb9a0451705916f</a><br><a href="https://segmentfault.com/a/1190000012964859">LinkedHashMap 源码详细分</a><br><a href="https://docs.oracle.com/javase/8/docs/api/java/util/LinkedHashMap.html">oracle doc LinkedHashMap</a><br><a href="https://juejin.im/post/5a4b433b6fb9a0451705916f">Java集合类 LinkedHashMap</a></p>
-]]></content>
-      <categories>
-        <category>tech</category>
-        <category>algorithm</category>
-      </categories>
-      <tags>
-        <tag>Net</tag>
-        <tag>LRU</tag>
-        <tag>Java</tag>
-        <tag>CoreJava</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Raspberrypi compile and install nginx</title>
     <url>/posts/2018-03-11-arm-compile-nginx/</url>
     <content><![CDATA[<h1 id="ARM处理器的集中指令集"><a href="#ARM处理器的集中指令集" class="headerlink" title="ARM处理器的集中指令集"></a>ARM处理器的集中指令集</h1><table>
@@ -163,6 +135,34 @@ ARM 处理器目前有多种CPU架构，编译时需要注意。
         <tag>blog</tag>
         <tag>NGINX</tag>
         <tag>Raspberrypi</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>常用缓存算法——LRU</title>
+    <url>/posts/2018-01-01-LRU-algorithms/</url>
+    <content><![CDATA[<h3 id="LRU算法"><a href="#LRU算法" class="headerlink" title="LRU算法"></a>LRU算法</h3><p><a href="https://en.wikipedia.org/wiki/Cache_replacement_policies#Least_recently_used_(LRU)">Least recently used（LRU）</a>一种常用的缓存算法,通过首先丢弃最近最少使用的记录。LRU算法需要跟踪何时使用了什么，并确保算法始终丢弃最近最少使用的记录。<br>LRU算法及其实现-以LinkedHashMap为例：</p>
+<h3 id="LRU-使用LinkedHashMap代码实现"><a href="#LRU-使用LinkedHashMap代码实现" class="headerlink" title="LRU 使用LinkedHashMap代码实现"></a>LRU 使用<code>LinkedHashMap</code>代码实现</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.github.ordiy.map;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.LinkedHashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 经典的LRU 算法</span></span><br><span class="line"><span class="comment"> *  热点数据缓存</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>:ordiy</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LRUCache</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">extends</span> <span class="title">LinkedHashMap</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> cacheSize;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">LRUCache</span><span class="params">( <span class="keyword">int</span> cacheSize)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(cacheSize,(<span class="keyword">float</span>)<span class="number">0.75</span>,<span class="keyword">true</span>);</span><br><span class="line">        <span class="keyword">this</span>.cacheSize = cacheSize;</span><br><span class="line">    &#125;</span><br><span class="line">     <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">boolean</span> <span class="title">removeEldestEntry</span><span class="params">(Map.Entry&lt;K,V&gt; eldest)</span></span>&#123;</span><br><span class="line">       <span class="comment">// System.out.println(eldest);</span></span><br><span class="line">        <span class="keyword">return</span> size() &gt; cacheSize;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>测试代码</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testKey</span><span class="params">()</span></span>&#123;</span><br><span class="line">    LRUCache&lt;String,Integer&gt; cache =  <span class="keyword">new</span> LRUCache&lt;&gt;(<span class="number">5</span>);</span><br><span class="line">    <span class="comment">//初始化数据</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">        cache.put(<span class="string">&quot;key&quot;</span>+i,i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 模拟最近使用</span></span><br><span class="line">    String key = <span class="string">&quot;key3&quot;</span>;</span><br><span class="line">    cache.get(key);</span><br><span class="line">    System.out.println(<span class="string">&quot;after get--&gt;:&quot;</span>+ key);</span><br><span class="line">    printMap(cache);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//put data and remove Eldest Entry</span></span><br><span class="line">    cache.put(<span class="string">&quot;key10&quot;</span>,<span class="number">10</span>);</span><br><span class="line">    System.out.println(<span class="string">&quot;after put data and remove Eldest Entry&quot;</span>);</span><br><span class="line">    printMap(cache);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>输出结果</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">after get--&gt;:key3</span><br><span class="line">cache order:</span><br><span class="line">key0=0 hashCode: 3288497 , key1=1 hashCode: 3288499 , key2=2 hashCode: 3288497 , key4=4 hashCode: 3288497 , key3=3 hashCode: 3288503 ,</span><br><span class="line">3288497</span><br><span class="line">after put data and remove Eldest Entry</span><br><span class="line">cache order:</span><br><span class="line">key1=1 hashCode: 3288499 , key2=2 hashCode: 3288497 , key4=4 hashCode: 3288497 , key3=3 hashCode: 3288503 , key10=10 hashCode: 101943476 ,</span><br></pre></td></tr></table></figure></li>
+<li><p>过程解析<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200602183106.png" alt="images"></p>
+</li>
+</ul>
+<p>使用<code>LinkedHashMap</code>的记录数据顺序、accessOrder、removeEldestEntry特性实现了一个简单的LRU。在分布式场景下，需要使用类似redis,pika等软件进行实现。<br><strong>注意 因为<code>LinkedHashMap</code>并非线程安全的，多线程场景需要使用<code>Collections.synchronizedMap</code>进行包装</strong><br>**分布式场景可以用 Redis 等组件实现 **</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>LRU缓存有其局限性，在类似于双11这样的场景，流量/活跃用户突然大增时会出现缓存击穿问题。</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考:"></a>参考:</h3><p><a href="https://juejin.im/post/5a4b433b6fb9a0451705916f">https://juejin.im/post/5a4b433b6fb9a0451705916f</a><br><a href="https://segmentfault.com/a/1190000012964859">LinkedHashMap 源码详细分</a><br><a href="https://docs.oracle.com/javase/8/docs/api/java/util/LinkedHashMap.html">oracle doc LinkedHashMap</a><br><a href="https://juejin.im/post/5a4b433b6fb9a0451705916f">Java集合类 LinkedHashMap</a></p>
+]]></content>
+      <categories>
+        <category>tech</category>
+        <category>algorithm</category>
+      </categories>
+      <tags>
+        <tag>Net</tag>
+        <tag>LRU</tag>
+        <tag>Java</tag>
+        <tag>CoreJava</tag>
       </tags>
   </entry>
   <entry>
@@ -528,6 +528,45 @@ ARM 处理器目前有多种CPU架构，编译时需要注意。
       </tags>
   </entry>
   <entry>
+    <title>Zeppelin In Action</title>
+    <url>/posts/2021-04-22-zeppelin-inaction-1/</url>
+    <content><![CDATA[<h1 id="About-Zeppelin"><a href="#About-Zeppelin" class="headerlink" title="About Zeppelin"></a>About Zeppelin</h1><p>基于Web的笔记本，可通过SQL，Scala等实现数据驱动的交互式数据分析和协作文档。</p>
+<blockquote>
+<p>Web-based notebook that enables data-driven,<br>interactive data analytics and collaborative documents with SQL, Scala and more.</p>
+</blockquote>
+<p>Architecture<br><img src="http://zeppelin.apache.org/docs/0.9.0-preview1/assets/themes/zeppelin/img/docs-img/submarine-architecture.png"><br><em>图片@apache zeppelin</em></p>
+<p><img src="http://zeppelin.apache.org/docs/0.9.0-preview1/assets/themes/zeppelin/img/docs-img/submarine-interpreter.png"><br><em>图片@apache zeppelin</em></p>
+<h1 id="Install-and-config"><a href="#Install-and-config" class="headerlink" title="Install and config"></a>Install and config</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">环境：</span><br><span class="line">Centos 7.5</span><br><span class="line">JDK1.8</span><br><span class="line">zeppelin-0.9.0</span><br><span class="line">网络：局域网使用</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>install 过程：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">wget https:&#x2F;&#x2F;mirrors.bfsu.edu.cn&#x2F;apache&#x2F;zeppelin&#x2F;zeppelin-0.9.0&#x2F;zeppelin-0.9.0-bin-all.tgz </span><br><span class="line"># https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;apache&#x2F;zeppelin&#x2F;zeppelin-0.9.0&#x2F;zeppelin-0.9.0-bin-all.tgz </span><br><span class="line"></span><br><span class="line">tar zxvf zeppelin-0.9.0-bin-all.tgz</span><br><span class="line"></span><br><span class="line">#软链</span><br><span class="line">ln -s zeppelin-0.9.0-bin-all zeppeline</span><br><span class="line"></span><br><span class="line"># </span><br><span class="line">cd zeppline </span><br><span class="line"></span><br><span class="line"># 修改配置</span><br><span class="line">cat&lt;&lt; EOF&gt; conf&#x2F;zeppelin-site.xml</span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;zeppelin.server.addr&lt;&#x2F;name&gt;</span><br><span class="line">  &lt;value&gt;0.0.0.0&lt;&#x2F;value&gt;</span><br><span class="line">  &lt;description&gt;Server binding address&lt;&#x2F;description&gt;</span><br><span class="line">&lt;&#x2F;property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;zeppelin.server.port&lt;&#x2F;name&gt;</span><br><span class="line">  &lt;value&gt;8089&lt;&#x2F;value&gt;</span><br><span class="line">  &lt;description&gt;Server port.&lt;&#x2F;description&gt;</span><br><span class="line">&lt;&#x2F;property&gt;</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># start zeppline </span><br><span class="line">.&#x2F;bin&#x2F;zeppelin-daemon.sh start </span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h1 id="配置一个interpreter"><a href="#配置一个interpreter" class="headerlink" title="配置一个interpreter"></a>配置一个interpreter</h1><p>备注：建议增加一个内网的maven 私服 repostory 地址，便于jar依赖下载</p>
+<p>interperter增加 interpreter<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210425115420.png"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">default.url: 	jdbc:mysql:&#x2F;&#x2F;172.17.8.85:3306&#x2F;</span><br><span class="line">default.user	root	</span><br><span class="line">default.password	***	 </span><br><span class="line">default.driver	com.mysql.jdbc.Driver</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Dependencies:</span><br><span class="line">mysql:mysql-connector-java:5.1.49	</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210425120338.png"></p>
+<ul>
+<li>interpreter 命令</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#nstall all community managed interpreters</span><br><span class="line">.&#x2F;bin&#x2F;install-interpreter.sh --all</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># You can get full list of community managed interpreters by running</span><br><span class="line">.&#x2F;bin&#x2F;install-interpreter.sh --list</span><br><span class="line"></span><br><span class="line"># add 第三方 interpreter </span><br><span class="line">#rd party interpreters</span><br><span class="line">#http:&#x2F;&#x2F;zeppelin.apache.org&#x2F;docs&#x2F;0.9.0&#x2F;usage&#x2F;interpreter&#x2F;installation.html#3rd-party-interpreters</span><br><span class="line">   </span><br></pre></td></tr></table></figure>
+
+
+<h1 id="zeppline-进行数据可视化分析"><a href="#zeppline-进行数据可视化分析" class="headerlink" title="zeppline 进行数据可视化分析"></a>zeppline 进行数据可视化分析</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">%mysql </span><br><span class="line">select tab2.user_name,count(*) as auth_obj_num from  tb_dp_hero_auth_info as tab1 left join tb_dp_hero_user_info tab2 on tab1.user_id &#x3D; tab2.id  group by tab1.user_id ;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>分析用户的授权对象个数：<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210425143319.png"></p>
+<h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><p><a href="http://zeppelin.apache.org/docs/0.9.0/usage/interpreter/installation.html">zeppelin interpreter</a><br><a href="http://zeppelin.apache.org/docs/0.9.0-preview1/interpreter/submarine.html#architecture">zeppelin architecture</a></p>
+]]></content>
+      <categories>
+        <category>tech</category>
+        <category>BigData</category>
+      </categories>
+      <tags>
+        <tag>blog</tag>
+        <tag>ApacheZeppelin</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>搭建HTTP内网文件服务器-以NGINX为例</title>
     <url>/posts/2021-02-01-nginx-file-server/</url>
     <content><![CDATA[<h1 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h1><p>在内网建一个文件服务器，需要示意图如下：<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210329185845.png"></p>
@@ -781,45 +820,6 @@ ARM 处理器目前有多种CPU架构，编译时需要注意。
       </tags>
   </entry>
   <entry>
-    <title>Zeppelin In Action</title>
-    <url>/posts/2021-04-22-zeppelin-inaction-1/</url>
-    <content><![CDATA[<h1 id="About-Zeppelin"><a href="#About-Zeppelin" class="headerlink" title="About Zeppelin"></a>About Zeppelin</h1><p>基于Web的笔记本，可通过SQL，Scala等实现数据驱动的交互式数据分析和协作文档。</p>
-<blockquote>
-<p>Web-based notebook that enables data-driven,<br>interactive data analytics and collaborative documents with SQL, Scala and more.</p>
-</blockquote>
-<p>Architecture<br><img src="http://zeppelin.apache.org/docs/0.9.0-preview1/assets/themes/zeppelin/img/docs-img/submarine-architecture.png"><br><em>图片@apache zeppelin</em></p>
-<p><img src="http://zeppelin.apache.org/docs/0.9.0-preview1/assets/themes/zeppelin/img/docs-img/submarine-interpreter.png"><br><em>图片@apache zeppelin</em></p>
-<h1 id="Install-and-config"><a href="#Install-and-config" class="headerlink" title="Install and config"></a>Install and config</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">环境：</span><br><span class="line">Centos 7.5</span><br><span class="line">JDK1.8</span><br><span class="line">zeppelin-0.9.0</span><br><span class="line">网络：局域网使用</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>install 过程：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">wget https:&#x2F;&#x2F;mirrors.bfsu.edu.cn&#x2F;apache&#x2F;zeppelin&#x2F;zeppelin-0.9.0&#x2F;zeppelin-0.9.0-bin-all.tgz </span><br><span class="line"># https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;apache&#x2F;zeppelin&#x2F;zeppelin-0.9.0&#x2F;zeppelin-0.9.0-bin-all.tgz </span><br><span class="line"></span><br><span class="line">tar zxvf zeppelin-0.9.0-bin-all.tgz</span><br><span class="line"></span><br><span class="line">#软链</span><br><span class="line">ln -s zeppelin-0.9.0-bin-all zeppeline</span><br><span class="line"></span><br><span class="line"># </span><br><span class="line">cd zeppline </span><br><span class="line"></span><br><span class="line"># 修改配置</span><br><span class="line">cat&lt;&lt; EOF&gt; conf&#x2F;zeppelin-site.xml</span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;zeppelin.server.addr&lt;&#x2F;name&gt;</span><br><span class="line">  &lt;value&gt;0.0.0.0&lt;&#x2F;value&gt;</span><br><span class="line">  &lt;description&gt;Server binding address&lt;&#x2F;description&gt;</span><br><span class="line">&lt;&#x2F;property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;zeppelin.server.port&lt;&#x2F;name&gt;</span><br><span class="line">  &lt;value&gt;8089&lt;&#x2F;value&gt;</span><br><span class="line">  &lt;description&gt;Server port.&lt;&#x2F;description&gt;</span><br><span class="line">&lt;&#x2F;property&gt;</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># start zeppline </span><br><span class="line">.&#x2F;bin&#x2F;zeppelin-daemon.sh start </span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-<h1 id="配置一个interpreter"><a href="#配置一个interpreter" class="headerlink" title="配置一个interpreter"></a>配置一个interpreter</h1><p>备注：建议增加一个内网的maven 私服 repostory 地址，便于jar依赖下载</p>
-<p>interperter增加 interpreter<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210425115420.png"></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">default.url: 	jdbc:mysql:&#x2F;&#x2F;172.17.8.85:3306&#x2F;</span><br><span class="line">default.user	root	</span><br><span class="line">default.password	***	 </span><br><span class="line">default.driver	com.mysql.jdbc.Driver</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Dependencies:</span><br><span class="line">mysql:mysql-connector-java:5.1.49	</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210425120338.png"></p>
-<ul>
-<li>interpreter 命令</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#nstall all community managed interpreters</span><br><span class="line">.&#x2F;bin&#x2F;install-interpreter.sh --all</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># You can get full list of community managed interpreters by running</span><br><span class="line">.&#x2F;bin&#x2F;install-interpreter.sh --list</span><br><span class="line"></span><br><span class="line"># add 第三方 interpreter </span><br><span class="line">#rd party interpreters</span><br><span class="line">#http:&#x2F;&#x2F;zeppelin.apache.org&#x2F;docs&#x2F;0.9.0&#x2F;usage&#x2F;interpreter&#x2F;installation.html#3rd-party-interpreters</span><br><span class="line">   </span><br></pre></td></tr></table></figure>
-
-
-<h1 id="zeppline-进行数据可视化分析"><a href="#zeppline-进行数据可视化分析" class="headerlink" title="zeppline 进行数据可视化分析"></a>zeppline 进行数据可视化分析</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">%mysql </span><br><span class="line">select tab2.user_name,count(*) as auth_obj_num from  tb_dp_hero_auth_info as tab1 left join tb_dp_hero_user_info tab2 on tab1.user_id &#x3D; tab2.id  group by tab1.user_id ;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>分析用户的授权对象个数：<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210425143319.png"></p>
-<h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><p><a href="http://zeppelin.apache.org/docs/0.9.0/usage/interpreter/installation.html">zeppelin interpreter</a><br><a href="http://zeppelin.apache.org/docs/0.9.0-preview1/interpreter/submarine.html#architecture">zeppelin architecture</a></p>
-]]></content>
-      <categories>
-        <category>tech</category>
-        <category>BigData</category>
-      </categories>
-      <tags>
-        <tag>blog</tag>
-        <tag>ApacheZeppelin</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Centos7 设置时间</title>
     <url>/posts/centos-ntp/</url>
     <content><![CDATA[<p>Centos7 使用NTP Pool 服务校验时间。</p>
@@ -840,177 +840,6 @@ ARM 处理器目前有多种CPU架构，编译时需要注意。
         <tag>OS</tag>
         <tag>Centos</tag>
         <tag>NTP</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>在线数据服务网关实践经验总结</title>
-    <url>/posts/grpc-gateway/</url>
-    <content><![CDATA[<p>在线数据服务网关实践经验分享,一种NIO高性能的存储层网关,高性能统一在线数据平台实践</p>
-<span id="more"></span>
-
-<h1 id="业务需求"><a href="#业务需求" class="headerlink" title="业务需求"></a>业务需求</h1><p>实现一个统一在线数据服务，提供对在线数据(目前主要是保存在 HBase，后面再考虑其他存储)的读写功能。支持多语言接入、负载均衡、横向扩展、权限控制、流量(频率)控制、日志审计等功能。</p>
-<p><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/img_20_img_ods_20200519105652.png" alt="image"></p>
-<h1 id="技术方案设计"><a href="#技术方案设计" class="headerlink" title="技术方案设计"></a>技术方案设计</h1><h2 id="整体设计"><a href="#整体设计" class="headerlink" title="整体设计"></a>整体设计</h2><p>按业务数据流及需求，将整个系统划分为网络层、业务接入层、业务服务层、数据存储层。除网络层外，其它层用微服务的方式开发各层的组件。<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/img_20_20200519110709.png" alt="image"></p>
-<h3 id="RPC框架选择"><a href="#RPC框架选择" class="headerlink" title="RPC框架选择"></a>RPC框架选择</h3><p>综合对比<code>gRPC</code> <code>thrift</code> <code>RESTful</code>在扩展性、跨语言兼容、性能、序列化大小等方面进行比对</p>
-<table>
-<thead>
-<tr>
-<th align="left">参考指标</th>
-<th align="left">gRPC(protobuf)</th>
-<th align="left">thrift</th>
-<th align="left">REST</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">开发语言</td>
-<td align="left">跨语言</td>
-<td align="left">跨语言</td>
-<td align="left">跨语言</td>
-</tr>
-<tr>
-<td align="left">分布式(服务治理)</td>
-<td align="left">×（自己集成service mesh,spring cloud)</td>
-<td align="left">× （自己集成service mesh,spring cloud)</td>
-<td align="left">√ （spring cloud）</td>
-</tr>
-<tr>
-<td align="left">多序列化框架支持</td>
-<td align="left">(只支持protobuf)</td>
-<td align="left">× (thrift格式)</td>
-<td align="left">× （json)</td>
-</tr>
-<tr>
-<td align="left">多种注册中心</td>
-<td align="left">×</td>
-<td align="left">×</td>
-<td align="left">√</td>
-</tr>
-<tr>
-<td align="left">管理中心</td>
-<td align="left">×</td>
-<td align="left">×</td>
-<td align="left">x</td>
-</tr>
-<tr>
-<td align="left">跨编程语言</td>
-<td align="left">√</td>
-<td align="left">√</td>
-<td align="left">√</td>
-</tr>
-<tr>
-<td align="left">性能（吞吐）</td>
-<td align="left">√(官方banchmark c++ 单核平均 7w QPS)</td>
-<td align="left">√(与gRPC 相差不大，未找到官方资料)</td>
-<td align="left">x (     restful使用的 http1.1协议，性能会比http2差1/2 )</td>
-</tr>
-<tr>
-<td align="left">底层通信协议(应用层)兼容性</td>
-<td align="left">√(http2)</td>
-<td align="left">x(socket)</td>
-<td align="left">√ (通常http1.1)</td>
-</tr>
-</tbody></table>
-<p>综合比对，选择gRPC 作为RPC框架。</p>
-<table>
-<thead>
-<tr>
-<th align="left">参考指标</th>
-<th align="left">gRPC</th>
-<th align="left">thrift</th>
-<th align="left">备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">性能指标</td>
-<td align="left">XXXX</td>
-<td align="left">XXXX</td>
-<td align="left">在性能上thrift耗时&lt;  gRPC 耗时,差距在 0.84s/ 1wQPS,基本可以忽略</td>
-</tr>
-<tr>
-<td align="left">成熟度和应用广度</td>
-<td align="left">XXXX</td>
-<td align="left">XXX</td>
-<td align="left">gRPC 社区和版本更新上好于thrift,并且google facebook等内部都在用</td>
-</tr>
-<tr>
-<td align="left">服务治理</td>
-<td align="left">XXXX</td>
-<td align="left">XXXX</td>
-<td align="left">使用 haproxy 4层代理转发</td>
-</tr>
-<tr>
-<td align="left">通信</td>
-<td align="left">XXXX</td>
-<td align="left">XXX</td>
-<td align="left">https2 全双工，由于thrift 通过socket + TFramedTransport的传输方式</td>
-</tr>
-<tr>
-<td align="left">异步/非阻塞</td>
-<td align="left">XXXX</td>
-<td align="left">XXX</td>
-<td align="left">grp 使用了基于channel 的异步非阻塞NIO ,thrift TFramedTransport python等未能支持异步</td>
-</tr>
-</tbody></table>
-<h3 id="确定软件模块划分"><a href="#确定软件模块划分" class="headerlink" title="确定软件模块划分"></a>确定软件模块划分</h3><p>将整个系统划分为 <code>Gateway</code>,<code>Read Service</code>,<code>Write Service</code>以及周边服务等。<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/img_20_20200519110047.png" alt="image"></p>
-<h3 id="用户Portal交互设计"><a href="#用户Portal交互设计" class="headerlink" title="用户Portal交互设计"></a>用户Portal交互设计</h3><p>给用户提供一个可以进行小量数据查询、下载的Portal web，以替代使用不便的hbase shell<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200713194645.png" alt="image"></p>
-<h3 id="iPortal控制台的设计"><a href="#iPortal控制台的设计" class="headerlink" title="iPortal控制台的设计"></a>iPortal控制台的设计</h3><p>iPortal控制台需要实现对用户授权（表权限、API、频次限制)、停止授权、查看用户调用报表等功能。<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200713201819.png" alt="image"></p>
-<h2 id="功能实现"><a href="#功能实现" class="headerlink" title="功能实现"></a>功能实现</h2><h3 id="接入层及gateway-service功能实现"><a href="#接入层及gateway-service功能实现" class="headerlink" title="接入层及gateway-service功能实现"></a>接入层及gateway-service功能实现</h3><h4 id="接入层的高可用、横向扩展"><a href="#接入层的高可用、横向扩展" class="headerlink" title="接入层的高可用、横向扩展"></a>接入层的高可用、横向扩展</h4><p>使用keepalived + haproxy 实现高可用和负载均衡。（后期由于运维规划，统一使用nginx stream做tcp4层代理)<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200713192549.png" alt="image"></p>
-<h4 id="用户表级别限流"><a href="#用户表级别限流" class="headerlink" title="用户表级别限流"></a>用户表级别限流</h4><p>底层存储每个库以及表数据容量、机器配置等差一，为保证系统的可用性必须对用户的请求进行限流。<br>根据不同账号的对表的不同操作进行限流，以username + request_table + request_optation 作为key设计令牌桶，可实现按分钟/按秒进行平滑限流。</p>
-<p><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200713192114.png" alt="image"></p>
-<h4 id="服务发现与负载均衡"><a href="#服务发现与负载均衡" class="headerlink" title="服务发现与负载均衡"></a>服务发现与负载均衡</h4><p>综合比对了eureka,envovy方式后，基于易用性和团队技术储备选择了使用<code>eureka</code>。并结合极光自研发的微服务管理平台可以实现对服务的自动监控、告警、节点平滑上下线等功能。<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200713192905.png" alt="image"></p>
-<p>gateway进行请求转发的过程示意图：<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200713195602.png" alt="image"></p>
-<h4 id="服务熔断与降级"><a href="#服务熔断与降级" class="headerlink" title="服务熔断与降级"></a>服务熔断与降级</h4><p>底层存储故障、后端服务节点遇到异常时无法立即恢复，此时将请求发给后端节点已经没有意义，对于这类场景使用Hystrix进行熔断降级处理，对于异常节点直接进行平滑下线从eureka注册中心下线。</p>
-<h2 id="数据业务层的功能实现"><a href="#数据业务层的功能实现" class="headerlink" title="数据业务层的功能实现"></a>数据业务层的功能实现</h2><h3 id="读写分离实现"><a href="#读写分离实现" class="headerlink" title="读写分离实现"></a>读写分离实现</h3><p>对于大流量的业务，使用Kafka MQ读写分离提高性能、平滑峰值。<br>读写分离设计示意图：<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200713210750.png" alt="image"></p>
-<p> 数据写入过程：<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200713205115.png" alt="image"></p>
-<h2 id="存储层Hbase主备切换"><a href="#存储层Hbase主备切换" class="headerlink" title="存储层Hbase主备切换"></a>存储层Hbase主备切换</h2><p>Hbase异常会出现大量查询超时和相应的Error，当失败达到一定阈值需要进行Hbase主备库切换。<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200713214008.png" alt="image"><br>同时也需要支持手动切换HBase，对于手动切换，采用通过修改apollo 配置中心的对应的配置实现集群的手动切换：<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200713214629.png" alt="image"></p>
-<h2 id="日志审计和统计和报表功能实现"><a href="#日志审计和统计和报表功能实现" class="headerlink" title="日志审计和统计和报表功能实现"></a>日志审计和统计和报表功能实现</h2><p>在<code>gateway-service</code>层增加<code>logInterceptor</code>实现对用户的请求的进站和出站数据的记录，利用ELK来实现整个系统的日志收集和搜索。<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200713215643.png" alt="image"></p>
-<p>使用Kibana进行日志查询：<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200713220032.png" alt="image"></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>在接入层使用负载均衡，在服务层通过微服务的架构方式方式保证整个架构的高可用和可伸缩性，对于gateway-service、HBase-service、writer等微服务使用全异步处理的方式提高了单个节点的性能，减小各节点对于整体耗时的影响。<br>各节点的最大QPS负载：</p>
-<table>
-<thead>
-<tr>
-<th align="left">组件</th>
-<th align="left">单节点(8C16G)测试实际QPS</th>
-<th align="left">GC状况</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">gateway</td>
-<td align="left">15K</td>
-<td align="left">当流量上升到12K+ 每分钟GC次数&gt;20 ,每分钟GC总耗时&gt;5s 需要优化</td>
-</tr>
-<tr>
-<td align="left">writer-pre</td>
-<td align="left">33K+</td>
-<td align="left">当流量上升到33K+ 每分钟GC次数&gt;4,每分钟GC总耗时&gt;0.05s 正常</td>
-</tr>
-<tr>
-<td align="left">writer</td>
-<td align="left">20K+</td>
-<td align="left">当流量上升到20K+ 每分钟GC次数&gt;14 ,每分钟GC总耗时&gt;0.42s 正常</td>
-</tr>
-</tbody></table>
-<p>线上生产环境每日流量：<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20200713212836.png" alt="image"></p>
-<h2 id="可以继续优化"><a href="#可以继续优化" class="headerlink" title="可以继续优化"></a>可以继续优化</h2><ul>
-<li>gRPC 框架自带的loadblance策略与eureka策略整合</li>
-<li>gRPC支持stream模式，可以探索基于stream的转发</li>
-<li>JVM预热，在高并发场景下数据流量很大，程序刚启动时会出现一些耗时较高的查询</li>
-</ul>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>-<a href="https://grpc.io/docs/guides/benchmarking/">gRPC banchmark</a></p>
-<ul>
-<li><a href="https://www.cnblogs.com/softidea/p/7232035.html">开源RPC（gRPC/Thrift）框架性能评测</a></li>
-<li><a href="https://colobu.com/2016/09/05/benchmarks-of-popular-rpc-frameworks/">分布式RPC框架性能大比拼</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>Gateway</tag>
-        <tag>HighPerformance</tag>
-        <tag>Concurrent</tag>
-        <tag>Architecture</tag>
       </tags>
   </entry>
   <entry>
