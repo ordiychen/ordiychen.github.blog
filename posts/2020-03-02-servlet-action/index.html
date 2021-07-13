@@ -21,35 +21,37 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"ordiychen.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.6.1","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":{"disqus":{"text":"Load Disqus","order":-1}},"activeClass":"disqus"},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
-<meta name="description" content="Zeppelin Install and config，并使用Zeppelin 对MySQL数据进行可视化分析。">
+<meta name="description" content="对于日新月异的Web技术来说，Servlet可以说是一个诞生历史非常悠久的技术了。2020-08-13 Java Servlet 从4.0.3之后正式更名为Jakarta Servlet（PS：Oracle拒绝出让Java商标给Eclipse基金会)，这里重新学习一下Servlet的知识。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Zeppelin In Action">
-<meta property="og:url" content="https://ordiychen.github.io/posts/2021-04-22-zeppelin-inaction-1/index.html">
+<meta property="og:title" content="Servlet In Action">
+<meta property="og:url" content="https://ordiychen.github.io/posts/2020-03-02-servlet-action/index.html">
 <meta property="og:site_name" content="Ordiy&#39;s Blog">
-<meta property="og:description" content="Zeppelin Install and config，并使用Zeppelin 对MySQL数据进行可视化分析。">
+<meta property="og:description" content="对于日新月异的Web技术来说，Servlet可以说是一个诞生历史非常悠久的技术了。2020-08-13 Java Servlet 从4.0.3之后正式更名为Jakarta Servlet（PS：Oracle拒绝出让Java商标给Eclipse基金会)，这里重新学习一下Servlet的知识。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://zeppelin.apache.org/docs/0.9.0-preview1/assets/themes/zeppelin/img/docs-img/submarine-architecture.png">
-<meta property="og:image" content="http://zeppelin.apache.org/docs/0.9.0-preview1/assets/themes/zeppelin/img/docs-img/submarine-interpreter.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210425115420.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210425120338.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210425143319.png">
-<meta property="article:published_time" content="2021-04-22T14:06:36.000Z">
-<meta property="article:modified_time" content="2021-05-21T07:49:40.651Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210712213022.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210712212516.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210712205335.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210712205423.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210712211431.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210712213309.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210712210858.png">
+<meta property="article:published_time" content="2020-03-02T20:12:13.000Z">
+<meta property="article:modified_time" content="2021-07-13T02:51:01.927Z">
 <meta property="article:author" content="Ordiy">
-<meta property="article:tag" content="blog">
-<meta property="article:tag" content="ApacheZeppelin">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="servlet">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://zeppelin.apache.org/docs/0.9.0-preview1/assets/themes/zeppelin/img/docs-img/submarine-architecture.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210712213022.png">
 
 
-<link rel="canonical" href="https://ordiychen.github.io/posts/2021-04-22-zeppelin-inaction-1/">
+<link rel="canonical" href="https://ordiychen.github.io/posts/2020-03-02-servlet-action/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://ordiychen.github.io/posts/2021-04-22-zeppelin-inaction-1/","path":"posts/2021-04-22-zeppelin-inaction-1/","title":"Zeppelin In Action"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://ordiychen.github.io/posts/2020-03-02-servlet-action/","path":"posts/2020-03-02-servlet-action/","title":"Servlet In Action"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Zeppelin In Action | Ordiy's Blog</title>
+<title>Servlet In Action | Ordiy's Blog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-175654772-1"></script>
   <script class="next-config" data-name="google_analytics" type="application/json">{"enable":true,"tracking_id":"UA-175654772-1","only_pageview":false}</script>
@@ -138,7 +140,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#About-Zeppelin"><span class="nav-number">1.</span> <span class="nav-text">About Zeppelin</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Install-and-config"><span class="nav-number">2.</span> <span class="nav-text">Install and config</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E4%B8%80%E4%B8%AAinterpreter"><span class="nav-number">3.</span> <span class="nav-text">配置一个interpreter</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#zeppline-%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E5%88%86%E6%9E%90"><span class="nav-number">4.</span> <span class="nav-text">zeppline 进行数据可视化分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0"><span class="nav-number">5.</span> <span class="nav-text">参考文章</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Instroduction"><span class="nav-number">1.</span> <span class="nav-text">Instroduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Abount-Servlet"><span class="nav-number">2.</span> <span class="nav-text">Abount Servlet</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Servlet-%E7%BB%84%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">Servlet 组件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Session-Tracking-session"><span class="nav-number">3.1.</span> <span class="nav-text">Session Tracking(session)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-Web-MVC"><span class="nav-number">3.2.</span> <span class="nav-text">Spring Web MVC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ServletContext"><span class="nav-number">3.2.1.</span> <span class="nav-text">ServletContext</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -219,7 +221,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://ordiychen.github.io/posts/2021-04-22-zeppelin-inaction-1/">
+    <link itemprop="mainEntityOfPage" href="https://ordiychen.github.io/posts/2020-03-02-servlet-action/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/apple-touch-icon.png">
@@ -232,7 +234,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Zeppelin In Action
+          Servlet In Action
         </h1>
 
         <div class="post-meta-container">
@@ -243,14 +245,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2021-04-22 14:06:36" itemprop="dateCreated datePublished" datetime="2021-04-22T14:06:36Z">2021-04-22</time>
+      <time title="Created: 2020-03-02 20:12:13" itemprop="dateCreated datePublished" datetime="2020-03-02T20:12:13Z">2020-03-02</time>
     </span>
       <span class="post-meta-item">
         <span class="post-meta-item-icon">
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-05-21 07:49:40" itemprop="dateModified" datetime="2021-05-21T07:49:40Z">2021-05-21</time>
+        <time title="Modified: 2021-07-13 02:51:01" itemprop="dateModified" datetime="2021-07-13T02:51:01Z">2021-07-13</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -262,7 +264,7 @@
         </span>
           , 
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/tech/BigData/" itemprop="url" rel="index"><span itemprop="name">BigData</span></a>
+          <a href="/categories/tech/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
         </span>
     </span>
 
@@ -275,8 +277,8 @@
       </span>
       <span class="post-meta-item-text">Disqus: </span>
     
-    <a title="disqus" href="/posts/2021-04-22-zeppelin-inaction-1/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="posts/2021-04-22-zeppelin-inaction-1/" itemprop="commentCount"></span>
+    <a title="disqus" href="/posts/2020-03-02-servlet-action/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="posts/2020-03-02-servlet-action/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -288,7 +290,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>2k</span>
+      <span>1.7k</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
@@ -306,32 +308,52 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="About-Zeppelin"><a href="#About-Zeppelin" class="headerlink" title="About Zeppelin"></a>About Zeppelin</h1><p>基于Web的笔记本，可通过SQL，Scala等实现数据驱动的交互式数据分析和协作文档。</p>
-<blockquote>
-<p>Web-based notebook that enables data-driven,<br>interactive data analytics and collaborative documents with SQL, Scala and more.</p>
-</blockquote>
-<p>Architecture<br><img src="http://zeppelin.apache.org/docs/0.9.0-preview1/assets/themes/zeppelin/img/docs-img/submarine-architecture.png"><br><em>图片@apache zeppelin</em></p>
-<p><img src="http://zeppelin.apache.org/docs/0.9.0-preview1/assets/themes/zeppelin/img/docs-img/submarine-interpreter.png"><br><em>图片@apache zeppelin</em></p>
-<h1 id="Install-and-config"><a href="#Install-and-config" class="headerlink" title="Install and config"></a>Install and config</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">环境：</span><br><span class="line">Centos 7.5</span><br><span class="line">JDK1.8</span><br><span class="line">zeppelin-0.9.0</span><br><span class="line">网络：局域网使用</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>install 过程：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">wget https:&#x2F;&#x2F;mirrors.bfsu.edu.cn&#x2F;apache&#x2F;zeppelin&#x2F;zeppelin-0.9.0&#x2F;zeppelin-0.9.0-bin-all.tgz </span><br><span class="line"># https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;apache&#x2F;zeppelin&#x2F;zeppelin-0.9.0&#x2F;zeppelin-0.9.0-bin-all.tgz </span><br><span class="line"></span><br><span class="line">tar zxvf zeppelin-0.9.0-bin-all.tgz</span><br><span class="line"></span><br><span class="line">#软链</span><br><span class="line">ln -s zeppelin-0.9.0-bin-all zeppeline</span><br><span class="line"></span><br><span class="line"># </span><br><span class="line">cd zeppline </span><br><span class="line"></span><br><span class="line"># 修改配置</span><br><span class="line">cat&lt;&lt; EOF&gt; conf&#x2F;zeppelin-site.xml</span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;zeppelin.server.addr&lt;&#x2F;name&gt;</span><br><span class="line">  &lt;value&gt;0.0.0.0&lt;&#x2F;value&gt;</span><br><span class="line">  &lt;description&gt;Server binding address&lt;&#x2F;description&gt;</span><br><span class="line">&lt;&#x2F;property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;zeppelin.server.port&lt;&#x2F;name&gt;</span><br><span class="line">  &lt;value&gt;8089&lt;&#x2F;value&gt;</span><br><span class="line">  &lt;description&gt;Server port.&lt;&#x2F;description&gt;</span><br><span class="line">&lt;&#x2F;property&gt;</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># start zeppline </span><br><span class="line">.&#x2F;bin&#x2F;zeppelin-daemon.sh start </span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-<h1 id="配置一个interpreter"><a href="#配置一个interpreter" class="headerlink" title="配置一个interpreter"></a>配置一个interpreter</h1><p>备注：建议增加一个内网的maven 私服 repostory 地址，便于jar依赖下载</p>
-<p>interperter增加 interpreter<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210425115420.png"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">default.url: 	jdbc:mysql:&#x2F;&#x2F;172.17.8.85:3306&#x2F;</span><br><span class="line">default.user	root	</span><br><span class="line">default.password	***	 </span><br><span class="line">default.driver	com.mysql.jdbc.Driver</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Dependencies:</span><br><span class="line">mysql:mysql-connector-java:5.1.49	</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210425120338.png"></p>
+        <h1 id="Instroduction"><a href="#Instroduction" class="headerlink" title="Instroduction"></a>Instroduction</h1><p>在早期，Web服务器提供对用户请求无动于衷的静态内容。 Java servlet是服务器端程序（在Web服务器内运行），用于处理客户端的请求并返回每个请求的自定义或动态响应。 动态响应可以基于用户的输入（例如，搜索，在线购物，在线交易），其中数据库或其他应用程序或时间敏感数据（例如新闻和股票价格）。<br>Java Servlet通常在HTTP协议上运行。HTTP是一种不对称的请求 - 响应协议。 客户端向服务器发送请求消息，服务器返回如图所示的响应消息。<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210712213022.png"></p>
 <ul>
-<li>interpreter 命令</li>
+<li>Server-Side Technologies<br>有许多（竞争）服务器端技术可用：基于Java（Servlet，JSP，JSF，Struts，Spring，Hibernate），ASP，PHP，CGI脚本和许多其他技术。<br>Java Servlet是Java服务器端技术的基础，JSP（JavaServer Pages），JSF（JavaServer Faces），Struts，Spring，Hibernate等，是Servlet技术的扩展。</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#nstall all community managed interpreters</span><br><span class="line">.&#x2F;bin&#x2F;install-interpreter.sh --all</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># You can get full list of community managed interpreters by running</span><br><span class="line">.&#x2F;bin&#x2F;install-interpreter.sh --list</span><br><span class="line"></span><br><span class="line"># add 第三方 interpreter </span><br><span class="line">#rd party interpreters</span><br><span class="line">#http:&#x2F;&#x2F;zeppelin.apache.org&#x2F;docs&#x2F;0.9.0&#x2F;usage&#x2F;interpreter&#x2F;installation.html#3rd-party-interpreters</span><br><span class="line">   </span><br></pre></td></tr></table></figure>
+<h1 id="Abount-Servlet"><a href="#Abount-Servlet" class="headerlink" title="Abount Servlet"></a>Abount Servlet</h1><p>Servlet 定义了一个服务器端API，用于处理HTTP请求和响应。（So Servlet也称为Servlet API)<br>Containers, 有时称为servlet引擎，是提供servlet功能的WebServer扩展。<br>Servlet通过Servlet Containers 实现的 Request/Response 范型与Web客户端交互.</p>
+<ul>
+<li><p>Servlet 的版本历史<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210712212516.png"></p>
+</li>
+<li><p>Servlet 过程<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210712205335.png" alt="image"></p>
+</li>
+</ul>
+<ul>
+<li><p>Servlet Containers Life Cycle<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210712205423.png" alt="image"></p>
+</li>
+<li><p>Servlet init/service/destroy 过程<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210712211431.png" alt="image"></p>
+</li>
+</ul>
+<h1 id="Servlet-组件"><a href="#Servlet-组件" class="headerlink" title="Servlet 组件"></a>Servlet 组件</h1><h2 id="Session-Tracking-session"><a href="#Session-Tracking-session" class="headerlink" title="Session Tracking(session)"></a>Session Tracking(session)</h2><p>HTTP是一个无状态协议，换句话说，当前请求不知道在先前请求中已经完成了什么。这为运行多种请求的应用程序创造了问题，例如在线购物（或购物车）。 您需要维护所谓的会话以在多个请求之间传递数据。</p>
+<p>维护session的几种机制：</p>
+<ul>
+<li>Cookie: cookie是存储在客户端计算机中的小文本文件，将在每个请求上发送到服务器。 您可以将您的会话数据放在cookie内。 使用cookie的最大问题是客户端可能会禁用cookie。</li>
+<li>URL重写：通过在每个URL的末尾附加短文本字符串来传递数据，例如，http：//host/path/file.html; jsessionid = 123456。 您需要重写所有URL（例如，“action”<form>的“action”属性以包含会话数据。</li>
+<li>隐藏字段以HTML表单：通过使用隐藏的字段标记传递数据（&lt;输入类型=“hidden”名称=“session”值=“....”/&gt;）。 同样，您需要在所有页面中包含隐藏的字段。</li>
+</ul>
+<p>Java Servlet API通过名为javax.servlet.http.httpsession的界面提供会话跟踪工具。 它允许servlet：</p>
+<ul>
+<li>查看和操作关于会话的信息，例如会话标识符，创建时间和上次访问时间。</li>
+<li>将对象绑定到会话，允许用户信息持续跨多个用户请求。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HttpSession session = request.getSession(<span class="keyword">true</span>);</span><br></pre></td></tr></table></figure>
 
-
-<h1 id="zeppline-进行数据可视化分析"><a href="#zeppline-进行数据可视化分析" class="headerlink" title="zeppline 进行数据可视化分析"></a>zeppline 进行数据可视化分析</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">%mysql </span><br><span class="line">select tab2.user_name,count(*) as auth_obj_num from  tb_dp_hero_auth_info as tab1 left join tb_dp_hero_user_info tab2 on tab1.user_id &#x3D; tab2.id  group by tab1.user_id ;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>分析用户的授权对象个数：<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210425143319.png"></p>
-<h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><p><a target="_blank" rel="noopener" href="http://zeppelin.apache.org/docs/0.9.0/usage/interpreter/installation.html">zeppelin interpreter</a><br><a target="_blank" rel="noopener" href="http://zeppelin.apache.org/docs/0.9.0-preview1/interpreter/submarine.html#architecture">zeppelin architecture</a></p>
+<ul>
+<li>Session 过程：<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210712213309.png"></li>
+</ul>
+<h2 id="Spring-Web-MVC"><a href="#Spring-Web-MVC" class="headerlink" title="Spring Web MVC"></a>Spring Web MVC</h2><p>Spring Web MVC 是Servlet API上构建的原始Web框架. 主要特性：DispatcherServlet、Filters、Annotated Controllers、Function Endpoints、Web Security、CORS</p>
+<h3 id="ServletContext"><a href="#ServletContext" class="headerlink" title="ServletContext"></a>ServletContext</h3><p>ServletContext对象的创建是在服务器启动时完成的<br>ServletContext对象的销毁是在服务器关闭时完成的</p>
+<ul>
+<li>ServletContext 与Tomcat Servlet容器的初始化和Request/Response过程<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210712210858.png" alt="image"></li>
+</ul>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://projects.eclipse.org/projects/ee4j.servlet">Servlet Projects </a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/eclipse-ee4j/servlet-api">Servlet API</a></li>
+<li><a target="_blank" rel="noopener" href="https://www3.ntu.edu.sg/home/ehchua/programming/java/JavaServlets.html">Servlet </a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.spring.io/spring-framework/docs/current/reference/html/web.html">Spring web MVC </a></li>
+<li><a target="_blank" rel="noopener" href="https://www3.ntu.edu.sg/home/ehchua/programming/java/JavaServlets.html">JavaServlet</a></li>
+</ul>
 
     </div>
 
@@ -341,21 +363,21 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/blog/" rel="tag"><i class="fa fa-tag"></i> blog</a>
-              <a href="/tags/ApacheZeppelin/" rel="tag"><i class="fa fa-tag"></i> ApacheZeppelin</a>
+              <a href="/tags/java/" rel="tag"><i class="fa fa-tag"></i> java</a>
+              <a href="/tags/servlet/" rel="tag"><i class="fa fa-tag"></i> servlet</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/posts/2021-04-11-hbase-ycsb-benchamark-test-1/" rel="prev" title="HBase2 YCSB benchmark test">
-                  <i class="fa fa-chevron-left"></i> HBase2 YCSB benchmark test
+                <a href="/posts/2021-02-01-nginx-file-server/" rel="prev" title="搭建HTTP内网文件服务器-以NGINX为例">
+                  <i class="fa fa-chevron-left"></i> 搭建HTTP内网文件服务器-以NGINX为例
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/posts/2021-02-01-nginx-file-server/" rel="next" title="搭建HTTP内网文件服务器-以NGINX为例">
-                  搭建HTTP内网文件服务器-以NGINX为例 <i class="fa fa-chevron-right"></i>
+                <a href="/posts/2020-01-01-tls-study-md/" rel="next" title="TLS握手过程">
+                  TLS握手过程 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>

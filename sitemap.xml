@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://ordiychen.github.io/posts/2020-03-02-servlet-action/</loc>
+    
+    <lastmod>2021-07-13</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://ordiychen.github.io/posts/2019-01-01-log4j2-json-layout/</loc>
+    
+    <lastmod>2021-07-12</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://ordiychen.github.io/docs/arts-books/index.html</loc>
     
     <lastmod>2021-07-09</lastmod>
@@ -149,13 +163,6 @@
   </url>
   
   <url>
-    <loc>https://ordiychen.github.io/posts/2019-01-01-log4j2-json-layout/</loc>
-    
-    <lastmod>2020-08-18</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://ordiychen.github.io/posts/2020-01-01-tls-study-md/</loc>
     
     <lastmod>2020-08-18</lastmod>
@@ -193,260 +200,274 @@
 
   <url>
     <loc>https://ordiychen.github.io/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   
   <url>
+    <loc>https://ordiychen.github.io/tags/java/</loc>
+    <lastmod>2021-07-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://ordiychen.github.io/tags/blog/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ordiychen.github.io/tags/Net/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ordiychen.github.io/tags/LRU/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ordiychen.github.io/tags/Java/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ordiychen.github.io/tags/CoreJava/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ordiychen.github.io/tags/HBase/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ordiychen.github.io/tags/Hadoop/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ordiychen.github.io/tags/tools/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ordiychen.github.io/tags/JavaWeb/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ordiychen.github.io/tags/Apache/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ordiychen.github.io/tags/Log4j2/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ordiychen.github.io/tags/Logging/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ordiychen.github.io/tags/NGINX/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ordiychen.github.io/tags/Raspberrypi/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ordiychen.github.io/tags/Nginx/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ordiychen.github.io/tags/Nginx-Stream/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ordiychen.github.io/tags/python/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ordiychen.github.io/tags/Statistics/</loc>
-    <lastmod>2021-07-09</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://ordiychen.github.io/tags/python-plot/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ordiychen.github.io/tags/HTTP/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ordiychen.github.io/tags/TLS/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ordiychen.github.io/tags/HTTPS/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ordiychen.github.io/tags/HTTP2/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://ordiychen.github.io/tags/python-plot/</loc>
+    <lastmod>2021-07-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ordiychen.github.io/tags/YCSB/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ordiychen.github.io/tags/ApacheZeppelin/</loc>
-    <lastmod>2021-07-09</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://ordiychen.github.io/tags/Enginner/</loc>
-    <lastmod>2021-07-09</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://ordiychen.github.io/tags/IEEE/</loc>
-    <lastmod>2021-07-09</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://ordiychen.github.io/tags/Ethics/</loc>
-    <lastmod>2021-07-09</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://ordiychen.github.io/tags/Values/</loc>
-    <lastmod>2021-07-09</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://ordiychen.github.io/tags/JDK/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ordiychen.github.io/tags/OS/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ordiychen.github.io/tags/Centos/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ordiychen.github.io/tags/NTP/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://ordiychen.github.io/tags/Enginner/</loc>
+    <lastmod>2021-07-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://ordiychen.github.io/tags/IEEE/</loc>
+    <lastmod>2021-07-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://ordiychen.github.io/tags/Ethics/</loc>
+    <lastmod>2021-07-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://ordiychen.github.io/tags/Values/</loc>
+    <lastmod>2021-07-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://ordiychen.github.io/tags/JDK/</loc>
+    <lastmod>2021-07-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ordiychen.github.io/tags/DNS/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ordiychen.github.io/tags/TCP-IP/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ordiychen.github.io/tags/NODEJS/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://ordiychen.github.io/tags/servlet/</loc>
+    <lastmod>2021-07-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -455,119 +476,119 @@
   
   <url>
     <loc>https://ordiychen.github.io/categories/tech/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ordiychen.github.io/categories/tech/algorithm/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ordiychen.github.io/categories/tech/BigData/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ordiychen.github.io/categories/tech/java/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ordiychen.github.io/categories/tech/tools/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ordiychen.github.io/categories/tech/mysql/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ordiychen.github.io/categories/tech/ARM/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ordiychen.github.io/categories/tech/nginx-stream/</loc>
-    <lastmod>2021-07-09</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://ordiychen.github.io/categories/tech/python/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ordiychen.github.io/categories/tech/BigData/Hadoop/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://ordiychen.github.io/categories/tech/python/</loc>
+    <lastmod>2021-07-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ordiychen.github.io/categories/tech/web/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ordiychen.github.io/categories/tech/TLS/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ordiychen.github.io/categories/tech/net/</loc>
-    <lastmod>2021-07-09</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://ordiychen.github.io/categories/tech/values/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ordiychen.github.io/categories/tech/OS/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://ordiychen.github.io/categories/tech/values/</loc>
+    <lastmod>2021-07-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ordiychen.github.io/categories/tech/DNS/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ordiychen.github.io/categories/tech/BigData/Hadoop/HBase/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
