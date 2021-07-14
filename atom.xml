@@ -150,9 +150,9 @@
     <link href="https://ordiychen.github.io/posts/2020-03-02-servlet-action/"/>
     <id>https://ordiychen.github.io/posts/2020-03-02-servlet-action/</id>
     <published>2020-03-02T20:12:13.000Z</published>
-    <updated>2021-07-13T02:51:01.927Z</updated>
+    <updated>2021-07-13T02:53:02.785Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="Instroduction"><a href="#Instroduction" class="headerlink" title="Instroduction"></a>Instroduction</h1><p>在早期，Web服务器提供对用户请求无动于衷的静态内容。 Java servlet是服务器端程序（在Web服务器内运行），用于处理客户端的请求并返回每个请求的自定义或动态响应。 动态响应可以基于用户的输入（例如，搜索，在线购物，在线交易），其中数据库或其他应用程序或时间敏感数据（例如新闻和股票价格）。<br>Java Servlet通常在HTTP协议上运行。HTTP是一种不对称的请求 - 响应协议。 客户端向服务器发送请求消息，服务器返回如图所示的响应消息。<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210712213022.png"></p><ul><li>Server-Side Technologies<br>有许多（竞争）服务器端技术可用：基于Java（Servlet，JSP，JSF，Struts，Spring，Hibernate），ASP，PHP，CGI脚本和许多其他技术。<br>Java Servlet是Java服务器端技术的基础，JSP（JavaServer Pages），JSF（JavaServer Faces），Struts，Spring，Hibernate等，是Servlet技术的扩展。</li></ul><h1 id="Abount-Servlet"><a href="#Abount-Servlet" class="headerlink" title="Abount Servlet"></a>Abount Servlet</h1><p>Servlet 定义了一个服务器端API，用于处理HTTP请求和响应。（So Servlet也称为Servlet API)<br>Containers, 有时称为servlet引擎，是提供servlet功能的WebServer扩展。<br>Servlet通过Servlet Containers 实现的 Request/Response 范型与Web客户端交互.</p><ul><li><p>Servlet 的版本历史<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210712212516.png"></p></li><li><p>Servlet 过程<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210712205335.png" alt="image"></p></li></ul><ul><li><p>Servlet Containers Life Cycle<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210712205423.png" alt="image"></p></li><li><p>Servlet init/service/destroy 过程<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210712211431.png" alt="image"></p></li></ul><h1 id="Servlet-组件"><a href="#Servlet-组件" class="headerlink" title="Servlet 组件"></a>Servlet 组件</h1><h2 id="Session-Tracking-session"><a href="#Session-Tracking-session" class="headerlink" title="Session Tracking(session)"></a>Session Tracking(session)</h2><p>HTTP是一个无状态协议，换句话说，当前请求不知道在先前请求中已经完成了什么。这为运行多种请求的应用程序创造了问题，例如在线购物（或购物车）。 您需要维护所谓的会话以在多个请求之间传递数据。</p><p>维护session的几种机制：</p><ul><li>Cookie: cookie是存储在客户端计算机中的小文本文件，将在每个请求上发送到服务器。 您可以将您的会话数据放在cookie内。 使用cookie的最大问题是客户端可能会禁用cookie。</li><li>URL重写：通过在每个URL的末尾附加短文本字符串来传递数据，例如，http：//host/path/file.html; jsessionid = 123456。 您需要重写所有URL（例如，“action”<form>的“action”属性以包含会话数据。</li><li>隐藏字段以HTML表单：通过使用隐藏的字段标记传递数据（&lt;输入类型=“hidden”名称=“session”值=“....”/&gt;）。 同样，您需要在所有页面中包含隐藏的字段。</li></ul><p>Java Servlet API通过名为javax.servlet.http.httpsession的界面提供会话跟踪工具。 它允许servlet：</p><ul><li>查看和操作关于会话的信息，例如会话标识符，创建时间和上次访问时间。</li><li>将对象绑定到会话，允许用户信息持续跨多个用户请求。</li></ul><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HttpSession session = request.getSession(<span class="keyword">true</span>);</span><br></pre></td></tr></table></figure><ul><li>Session 过程：<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210712213309.png"></li></ul><h2 id="Spring-Web-MVC"><a href="#Spring-Web-MVC" class="headerlink" title="Spring Web MVC"></a>Spring Web MVC</h2><p>Spring Web MVC 是Servlet API上构建的原始Web框架. 主要特性：DispatcherServlet、Filters、Annotated Controllers、Function Endpoints、Web Security、CORS</p><h3 id="ServletContext"><a href="#ServletContext" class="headerlink" title="ServletContext"></a>ServletContext</h3><p>ServletContext对象的创建是在服务器启动时完成的<br>ServletContext对象的销毁是在服务器关闭时完成的</p><ul><li>ServletContext 与Tomcat Servlet容器的初始化和Request/Response过程<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210712210858.png" alt="image"></li></ul><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul><li><a href="https://projects.eclipse.org/projects/ee4j.servlet">Servlet Projects </a></li><li><a href="https://github.com/eclipse-ee4j/servlet-api">Servlet API</a></li><li><a href="https://www3.ntu.edu.sg/home/ehchua/programming/java/JavaServlets.html">Servlet </a></li><li><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/web.html">Spring web MVC </a></li><li><a href="https://www3.ntu.edu.sg/home/ehchua/programming/java/JavaServlets.html">JavaServlet</a></li></ul>]]></content>
+    <content type="html"><![CDATA[<h1 id="Instroduction"><a href="#Instroduction" class="headerlink" title="Instroduction"></a>Instroduction</h1><p>在早期，Web服务器提供对用户请求无动于衷的静态内容。 Java servlet是服务器端程序（在Web服务器内运行），用于处理客户端的请求并返回每个请求的自定义或动态响应。 动态响应可以基于用户的输入（例如，搜索，在线购物，在线交易），其中数据库或其他应用程序或时间敏感数据（例如新闻和股票价格）。<br>Java Servlet通常在HTTP协议上运行。HTTP是一种不对称的请求 - 响应协议。 客户端向服务器发送请求消息，服务器返回如图所示的响应消息。<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210712213022.png"></p><ul><li>Server-Side Technologies<br>有许多（竞争）服务器端技术可用：基于Java（Servlet，JSP，JSF，Struts，Spring，Hibernate），ASP，PHP，CGI脚本和许多其他技术。<br>Java Servlet是Java服务器端技术的基础，JSP（JavaServer Pages），JSF（JavaServer Faces），Struts，Spring，Hibernate、WebSocket，是Servlet技术的扩展。</li></ul><h1 id="Abount-Servlet"><a href="#Abount-Servlet" class="headerlink" title="Abount Servlet"></a>Abount Servlet</h1><p>Servlet 定义了一个服务器端API，用于处理HTTP请求和响应。（So Servlet也称为Servlet API)<br>Containers, 有时称为servlet引擎，是提供servlet功能的WebServer扩展。<br>Servlet通过Servlet Containers 实现的 Request/Response 范型与Web客户端交互.</p><ul><li><p>Servlet 的版本历史<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210712212516.png"></p></li><li><p>Servlet 过程<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210712205335.png" alt="image"></p></li></ul><ul><li><p>Servlet Containers Life Cycle<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210712205423.png" alt="image"></p></li><li><p>Servlet init/service/destroy 过程<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210712211431.png" alt="image"></p></li></ul><h1 id="Servlet-组件"><a href="#Servlet-组件" class="headerlink" title="Servlet 组件"></a>Servlet 组件</h1><h2 id="Session-Tracking-session"><a href="#Session-Tracking-session" class="headerlink" title="Session Tracking(session)"></a>Session Tracking(session)</h2><p>HTTP是一个无状态协议，换句话说，当前请求不知道在先前请求中已经完成了什么。这为运行多种请求的应用程序创造了问题，例如在线购物（或购物车）。 您需要维护所谓的会话以在多个请求之间传递数据。</p><p>维护session的几种机制：</p><ul><li>Cookie: cookie是存储在客户端计算机中的小文本文件，将在每个请求上发送到服务器。 您可以将您的会话数据放在cookie内。 使用cookie的最大问题是客户端可能会禁用cookie。</li><li>URL重写：通过在每个URL的末尾附加短文本字符串来传递数据，例如，http：//host/path/file.html; jsessionid = 123456。 您需要重写所有URL（例如，“action”<form>的“action”属性以包含会话数据。</li><li>隐藏字段以HTML表单：通过使用隐藏的字段标记传递数据（&lt;输入类型=“hidden”名称=“session”值=“....”/&gt;）。 同样，您需要在所有页面中包含隐藏的字段。</li></ul><p>Java Servlet API通过名为javax.servlet.http.httpsession的界面提供会话跟踪工具。 它允许servlet：</p><ul><li>查看和操作关于会话的信息，例如会话标识符，创建时间和上次访问时间。</li><li>将对象绑定到会话，允许用户信息持续跨多个用户请求。</li></ul><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HttpSession session = request.getSession(<span class="keyword">true</span>);</span><br></pre></td></tr></table></figure><ul><li>Session 过程：<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210712213309.png"></li></ul><h2 id="Spring-Web-MVC"><a href="#Spring-Web-MVC" class="headerlink" title="Spring Web MVC"></a>Spring Web MVC</h2><p>Spring Web MVC 是Servlet API上构建的原始Web框架. 主要特性：DispatcherServlet、Filters、Annotated Controllers、Function Endpoints、Web Security、CORS</p><h3 id="ServletContext"><a href="#ServletContext" class="headerlink" title="ServletContext"></a>ServletContext</h3><p>ServletContext对象的创建是在服务器启动时完成的<br>ServletContext对象的销毁是在服务器关闭时完成的</p><ul><li>ServletContext 与Tomcat Servlet容器的初始化和Request/Response过程<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210712210858.png" alt="image"></li></ul><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul><li><a href="https://projects.eclipse.org/projects/ee4j.servlet">Servlet Projects </a></li><li><a href="https://github.com/eclipse-ee4j/servlet-api">Servlet API</a></li><li><a href="https://www3.ntu.edu.sg/home/ehchua/programming/java/JavaServlets.html">Servlet </a></li><li><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/web.html">Spring web MVC </a></li><li><a href="https://www3.ntu.edu.sg/home/ehchua/programming/java/JavaServlets.html">JavaServlet</a></li></ul>]]></content>
     
     
     <summary type="html">对于日新月异的Web技术来说，Servlet可以说是一个诞生历史非常悠久的技术了。2020-08-13 Java Servlet 从4.0.3之后正式更名为Jakarta Servlet（PS：Oracle拒绝出让Java商标给Eclipse基金会)，这里重新学习一下Servlet的知识。</summary>
@@ -247,9 +247,9 @@
     
     <category term="JavaWeb" scheme="https://ordiychen.github.io/tags/JavaWeb/"/>
     
-    <category term="Apache" scheme="https://ordiychen.github.io/tags/Apache/"/>
-    
     <category term="HTTP" scheme="https://ordiychen.github.io/tags/HTTP/"/>
+    
+    <category term="Apache" scheme="https://ordiychen.github.io/tags/Apache/"/>
     
   </entry>
   
@@ -461,13 +461,13 @@
     <category term="algorithm" scheme="https://ordiychen.github.io/categories/tech/algorithm/"/>
     
     
-    <category term="Net" scheme="https://ordiychen.github.io/tags/Net/"/>
+    <category term="Java" scheme="https://ordiychen.github.io/tags/Java/"/>
     
     <category term="LRU" scheme="https://ordiychen.github.io/tags/LRU/"/>
     
-    <category term="Java" scheme="https://ordiychen.github.io/tags/Java/"/>
-    
     <category term="CoreJava" scheme="https://ordiychen.github.io/tags/CoreJava/"/>
+    
+    <category term="Net" scheme="https://ordiychen.github.io/tags/Net/"/>
     
   </entry>
   
@@ -490,11 +490,11 @@
     <category term="java" scheme="https://ordiychen.github.io/categories/tech/java/"/>
     
     
-    <category term="Net" scheme="https://ordiychen.github.io/tags/Net/"/>
-    
     <category term="Java" scheme="https://ordiychen.github.io/tags/Java/"/>
     
     <category term="CoreJava" scheme="https://ordiychen.github.io/tags/CoreJava/"/>
+    
+    <category term="Net" scheme="https://ordiychen.github.io/tags/Net/"/>
     
     <category term="JDK" scheme="https://ordiychen.github.io/tags/JDK/"/>
     

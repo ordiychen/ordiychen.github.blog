@@ -7,10 +7,7 @@
 <meta name="generator" content="Hexo 5.4.0">
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="icon" type="image/png" sizes="16x16" href="/function%20()%20%7B%0A%20%20%20%20%20%20for%20(var%20_len2%20=%20arguments.length,%20args%20=%20new%20Array(_len2),%20_key2%20=%200;%20_key2%20%3C%20_len2;%20_key2++)%20%7B%0A%20%20%20%20%20%20%20%20args%5B_key2%5D%20=%20arguments%5B_key2%5D;%0A%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20return%20obj%5Bval%5D.apply(obj,%20args);%0A%20%20%20%20%7D">
   <meta name="google-site-verification" content="STAcFkvSF49fRv3p9O9gm962auBfI64EX85Z7NIb3j4">
 
 <link rel="stylesheet" href="/css/main.css">
@@ -36,7 +33,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210712213309.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210712210858.png">
 <meta property="article:published_time" content="2020-03-02T20:12:13.000Z">
-<meta property="article:modified_time" content="2021-07-13T02:51:01.927Z">
+<meta property="article:modified_time" content="2021-07-13T02:53:02.785Z">
 <meta property="article:author" content="Ordiy">
 <meta property="article:tag" content="java">
 <meta property="article:tag" content="servlet">
@@ -252,7 +249,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-07-13 02:51:01" itemprop="dateModified" datetime="2021-07-13T02:51:01Z">2021-07-13</time>
+        <time title="Modified: 2021-07-13 02:53:02" itemprop="dateModified" datetime="2021-07-13T02:53:02Z">2021-07-13</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -310,7 +307,7 @@
     <div class="post-body" itemprop="articleBody">
         <h1 id="Instroduction"><a href="#Instroduction" class="headerlink" title="Instroduction"></a>Instroduction</h1><p>在早期，Web服务器提供对用户请求无动于衷的静态内容。 Java servlet是服务器端程序（在Web服务器内运行），用于处理客户端的请求并返回每个请求的自定义或动态响应。 动态响应可以基于用户的输入（例如，搜索，在线购物，在线交易），其中数据库或其他应用程序或时间敏感数据（例如新闻和股票价格）。<br>Java Servlet通常在HTTP协议上运行。HTTP是一种不对称的请求 - 响应协议。 客户端向服务器发送请求消息，服务器返回如图所示的响应消息。<br><img src="https://raw.githubusercontent.com/ordiychen/study_notes/master/res/image/node_image/blog_20210712213022.png"></p>
 <ul>
-<li>Server-Side Technologies<br>有许多（竞争）服务器端技术可用：基于Java（Servlet，JSP，JSF，Struts，Spring，Hibernate），ASP，PHP，CGI脚本和许多其他技术。<br>Java Servlet是Java服务器端技术的基础，JSP（JavaServer Pages），JSF（JavaServer Faces），Struts，Spring，Hibernate等，是Servlet技术的扩展。</li>
+<li>Server-Side Technologies<br>有许多（竞争）服务器端技术可用：基于Java（Servlet，JSP，JSF，Struts，Spring，Hibernate），ASP，PHP，CGI脚本和许多其他技术。<br>Java Servlet是Java服务器端技术的基础，JSP（JavaServer Pages），JSF（JavaServer Faces），Struts，Spring，Hibernate、WebSocket，是Servlet技术的扩展。</li>
 </ul>
 <h1 id="Abount-Servlet"><a href="#Abount-Servlet" class="headerlink" title="Abount Servlet"></a>Abount Servlet</h1><p>Servlet 定义了一个服务器端API，用于处理HTTP请求和响应。（So Servlet也称为Servlet API)<br>Containers, 有时称为servlet引擎，是提供servlet功能的WebServer扩展。<br>Servlet通过Servlet Containers 实现的 Request/Response 范型与Web客户端交互.</p>
 <ul>
